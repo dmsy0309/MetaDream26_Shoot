@@ -1,0 +1,36 @@
+{
+    "id": "rounds_trickster",
+    "title": "트릭스터",
+    "subtitle": "TRICKSTER",
+    "description": "탄이 튕길 때마다 피해가 80% 늘어난다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.8,
+        "dmgMOnBounce": 1.8,
+        "reloadTimeAdd": 0.5,
+        "reflects": 2
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "Bullet bounces",
+            "amount": "+2",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-20%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

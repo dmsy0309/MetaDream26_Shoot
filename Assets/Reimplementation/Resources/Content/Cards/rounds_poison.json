@@ -1,0 +1,41 @@
+{
+    "id": "rounds_poison",
+    "title": "독",
+    "subtitle": "POISON",
+    "description": "탄 피해의 대부분이 3초 동안 독 피해로 들어간다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.3,
+        "reloadTimeMultiplier": 0.7,
+        "ammo": -1
+    },
+    "effects": [
+        {
+            "type": "poison_on_hit",
+            "damage": 26,
+            "duration": 3
+        }
+    ],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "+70%",
+            "positive": true
+        },
+        {
+            "label": "재장전 속도",
+            "amount": "+30%",
+            "positive": true
+        },
+        {
+            "label": "탄",
+            "amount": "-1",
+            "positive": false
+        }
+    ]
+}

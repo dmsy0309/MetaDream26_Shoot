@@ -1,0 +1,47 @@
+{
+    "id": "rounds_parasite",
+    "title": "기생충",
+    "subtitle": "PARASITE",
+    "description": "흡혈 50%. 탄 피해 일부가 5초 동안 독 피해로 들어간다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.4,
+        "reloadTimeAdd": 0.25,
+        "health": 1.25,
+        "lifeSteal": 0.5
+    },
+    "effects": [
+        {
+            "type": "poison_on_hit",
+            "damage": 13,
+            "duration": 5
+        }
+    ],
+    "lines": [
+        {
+            "label": "흡혈",
+            "amount": "+50%",
+            "positive": true
+        },
+        {
+            "label": "체력",
+            "amount": "+25%",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "+25%",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

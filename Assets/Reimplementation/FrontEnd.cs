@@ -635,7 +635,7 @@ namespace Metadream.Shoot
                     Fill(r, new Color(1, 1, 1, 0.1f));
                     Fill(new Rect(r.x, r.y, 8, r.height), Palette.SlotColor(i));
                     var kind = host.KindOf(i);
-                    string label = kind == SlotKind.Host ? host.NameOf(i) : kind == SlotKind.Remote ? host.NameOf(i) + " (참가함)" : "빈 자리 → 시작 시 CPU";
+                    string label = kind == SlotKind.Host ? host.NameOf(i) + " (호스트)" : kind == SlotKind.Remote ? host.NameOf(i) + " (참가함)" : kind == SlotKind.Disconnected ? host.NameOf(i) + " (나감 · 같은 PC로 재접속 가능)" : "빈 자리 → 시작 시 CPU";
                     Text(new Rect(r.x + 24, r.y, r.width - 30, r.height), label, new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft, fontSize = 28 }, kind == SlotKind.Empty ? new Color(1, 1, 1, 0.45f) : Color.white);
                     row++;
                 }
@@ -679,7 +679,7 @@ namespace Metadream.Shoot
                     Fill(r, me ? new Color(1, 1, 1, 0.25f) : new Color(1, 1, 1, 0.1f));
                     Fill(new Rect(r.x, r.y, 8, r.height), Palette.SlotColor(i));
                     string empty = lobby.FillWithCpu ? "빈 자리 → 시작 시 CPU" : "빈 자리";
-                    string label = s.Kind == SlotKind.Empty ? empty : s.Name + (i == lobby.LeaderSlot && lobby.Dedicated ? " ★방장" : "") + (me ? "  ← 나" : "");
+                    string label = s.Kind == SlotKind.Empty ? empty : s.Kind == SlotKind.Disconnected ? s.Name + " (나감)" : s.Name + (i == lobby.LeaderSlot && lobby.Dedicated ? " ★방장" : "") + (me ? "  ← 나" : "");
                     Text(new Rect(r.x + 24, r.y, r.width - 30, r.height), label, new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft, fontSize = 28 }, s.Kind == SlotKind.Empty ? new Color(1, 1, 1, 0.45f) : Color.white);
                     row++;
                 }

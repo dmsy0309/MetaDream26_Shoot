@@ -1,0 +1,29 @@
+{
+    "id": "rounds_leech",
+    "title": "거머리",
+    "subtitle": "LEECH",
+    "description": "흡혈 75%.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.3,
+        "lifeSteal": 0.75
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "흡혈",
+            "amount": "+75%",
+            "positive": true
+        },
+        {
+            "label": "체력",
+            "amount": "+30%",
+            "positive": true
+        }
+    ]
+}

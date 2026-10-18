@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &126278956
+--- !u!1 &372725342
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,8 +127,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 126278958}
-  - component: {fileID: 126278957}
+  - component: {fileID: 372725344}
+  - component: {fileID: 372725343}
   m_Layer: 0
   m_Name: GameBootstrap
   m_TagString: Untagged
@@ -136,26 +136,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &126278957
+--- !u!114 &372725343
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126278956}
+  m_GameObject: {fileID: 372725342}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520508aaf47e54b0ba2bf2bbc7182290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metadream.Shoot::Metadream.Shoot.GameBootstrap
   spriteMaterial: {fileID: 2100000, guid: f17d5014645e9487c8e9ab48ad104b31, type: 2}
---- !u!4 &126278958
+--- !u!4 &372725344
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 126278956}
+  m_GameObject: {fileID: 372725342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -164,7 +164,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1665290737
+--- !u!1 &1158322026
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,10 +172,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1665290741}
-  - component: {fileID: 1665290740}
-  - component: {fileID: 1665290739}
-  - component: {fileID: 1665290738}
+  - component: {fileID: 1158322030}
+  - component: {fileID: 1158322029}
+  - component: {fileID: 1158322028}
+  - component: {fileID: 1158322027}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -183,33 +183,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1665290738
+--- !u!114 &1158322027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665290737}
+  m_GameObject: {fileID: 1158322026}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebc7de7311be64600a47847a926bbab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metadream.Shoot::Metadream.Shoot.Presentation.CameraRig
---- !u!81 &1665290739
+--- !u!81 &1158322028
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665290737}
+  m_GameObject: {fileID: 1158322026}
   m_Enabled: 1
---- !u!20 &1665290740
+--- !u!20 &1158322029
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665290737}
+  m_GameObject: {fileID: 1158322026}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
@@ -254,13 +254,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &1665290741
+--- !u!4 &1158322030
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665290737}
+  m_GameObject: {fileID: 1158322026}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
@@ -273,5 +273,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1665290741}
-  - {fileID: 126278958}
+  - {fileID: 1158322030}
+  - {fileID: 372725344}

@@ -33,6 +33,7 @@ namespace Metadream.Shoot.Online
         private float _sendTimer;
         private float _autoPickAt = -1f;
         private float _logTimer;
+        private float _gameOverSeen = -1f;
         private float _autoStartTimer = 3f;
 
         public ClientState State { get; private set; } = ClientState.Connecting;
@@ -102,6 +103,15 @@ namespace Metadream.Shoot.Online
             }
 
             if (State == ClientState.InMatch) SendInput();
+            if (State == ClientState.InMatch && _snapshot.Phase == MatchPhase.GameOver)
+            {
+                if (_gameOverSeen < 0f) _gameOverSeen = Time.unscaledTime;
+                var kb = UnityEngine.InputSystem.Keyboard.current;
+                bool ok = kb != null && (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame);
+                foreach (var gp in UnityEngine.InputSystem.Gamepad.all) ok |= gp.buttonSouth.wasPressedThisFrame || gp.startButton.wasPressedThisFrame;
+                if ((ok && Time.unscaledTime - _gameOverSeen > 1.5f) || (Autoplay && Time.unscaledTime - _gameOverSeen > 3f)) { Leave(null); return; }
+            }
+            else _gameOverSeen = -1f;
             // Test mode: an autoplaying room leader on a dedicated server presses "start" by itself.
             if (Autoplay && State == ClientState.Lobby && IsLeader && !Lobby.InMatch)
             {
@@ -147,10 +157,12 @@ namespace Metadream.Shoot.Online
                         SyncProjectiles();
                         break;
                     case MsgType.ToLobby:
+                        if (_snapshot.Phase == MatchPhase.GameOver) { Leave(null); break; } // results are over: back to the title
                         EndMatchMirror();
                         State = ClientState.Lobby;
                         break;
                     case MsgType.Bye:
+                        if (State == ClientState.InMatch && _snapshot.Phase == MatchPhase.GameOver) { Leave(null); break; }
                         Leave(Lobby != null && Lobby.Dedicated ? "서버가 종료되었습니다" : "호스트가 방을 닫았습니다");
                         break;
                 }
@@ -170,7 +182,7 @@ namespace Metadream.Shoot.Online
             var flow = GameFlow.Instance;
             flow.BeginMirror(names, MySlot);
             flow.EscapeOverride = () => Leave(null);
-            flow.MirrorGameOverText = Lobby != null && Lobby.Dedicated ? null : "호스트가 재대결을 시작할 때까지 대기 · Esc: 나가기";
+            flow.MirrorGameOverText = null;
             if (Autoplay && MySlot >= 0 && MySlot < flow.Fighters.Count)
                 _local = new BotInput(Environment.TickCount, "auto") { Self = flow.Fighters[MySlot] };
             else

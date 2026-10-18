@@ -1,0 +1,29 @@
+{
+    "id": "rounds_empower",
+    "title": "강화",
+    "subtitle": "EMPOWER",
+    "description": "방어 후 다음 한 발의 피해가 두 배, 탄속이 1.5배가 된다.",
+    "rarity": "Uncommon",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "empower_on_block",
+            "amount": 2,
+            "duration": 0
+        }
+    ],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

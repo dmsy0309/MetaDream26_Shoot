@@ -1,0 +1,36 @@
+{
+    "id": "rounds_frost_slam",
+    "title": "서리 강타",
+    "subtitle": "FROST SLAM",
+    "description": "방어하면 주변 적을 느리게 만든다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.3,
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "slow_on_block",
+            "radius": 8,
+            "amount": 0.6,
+            "duration": 2
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+30%",
+            "positive": true
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

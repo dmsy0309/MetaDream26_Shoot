@@ -8,11 +8,77 @@ namespace Metadream.Shoot.Maps
     {
         public readonly Vector2 Center;
         public readonly Vector2 Size;
-        public MapBlock(float x, float y, float w, float h)
+        /// <summary>Rotation around the centre in degrees (counter-clockwise).</summary>
+        public readonly float Rotation;
+        public MapBlock(float x, float y, float w, float h, float rotation = 0f)
         {
             Center = new Vector2(x, y);
             Size = new Vector2(w, h);
+            Rotation = rotation;
         }
+
+        /// <summary>Point in block-local coordinates (unrotated, centre at 0).</summary>
+        public Vector2 ToLocal(Vector2 p)
+        {
+            Vector2 d = p - Center;
+            float a = -Rotation * Mathf.Deg2Rad, c = Mathf.Cos(a), s = Mathf.Sin(a);
+            return new Vector2(d.x * c - d.y * s, d.x * s + d.y * c);
+        }
+
+        public bool Contains(Vector2 p, float margin = 0f)
+        {
+            var l = ToLocal(p);
+            return Mathf.Abs(l.x) <= Size.x * 0.5f + margin && Mathf.Abs(l.y) <= Size.y * 0.5f + margin;
+        }
+    }
+
+    /// <summary>Kinematic platform that loops through Path (offsets from its start), pausing Wait seconds at each point.</summary>
+    public sealed class MapMover
+    {
+        public MapBlock Block;
+        public Vector2[] Path = new Vector2[0];
+        public float Speed = 6f;
+        public float Wait = 1f;
+
+        public float CycleTime
+        {
+            get
+            {
+                float t = 0f;
+                for (int i = 0; i < Path.Length; i++) t += Vector2.Distance(Path[i], Path[(i + 1) % Path.Length]) / Mathf.Max(0.01f, Speed) + Wait;
+                return Mathf.Max(0.01f, t);
+            }
+        }
+
+        /// <summary>Offset from the start position at time t (deterministic, loops).</summary>
+        public Vector2 OffsetAt(float t)
+        {
+            if (Path.Length == 0) return Vector2.zero;
+            if (Path.Length == 1) return Path[0];
+            t %= CycleTime;
+            for (int i = 0; i < Path.Length; i++)
+            {
+                if (t < Wait) return Path[i];
+                t -= Wait;
+                Vector2 a = Path[i], b = Path[(i + 1) % Path.Length];
+                float move = Vector2.Distance(a, b) / Mathf.Max(0.01f, Speed);
+                if (t < move) return Vector2.Lerp(a, b, Mathf.SmoothStep(0f, 1f, t / Mathf.Max(0.0001f, move)));
+                t -= move;
+            }
+            return Path[0];
+        }
+    }
+
+    public enum ZoneKind { JumpPad, Hazard, Wind }
+
+    /// <summary>Area gimmick: jump pad (Power = launch speed), hazard (Dps), wind (Force = acceleration).</summary>
+    public sealed class MapZone
+    {
+        public ZoneKind Kind;
+        public MapBlock Block;
+        public float Power;
+        public float Dps;
+        public Vector2 Force;
     }
 
     /// <summary>
@@ -29,6 +95,8 @@ namespace Metadream.Shoot.Maps
         public MapBlock[] Solids = new MapBlock[0];
         public MapBlock[] Boxes = new MapBlock[0];
         public Vector2[] Spawns = new Vector2[0];
+        public MapMover[] Movers = new MapMover[0];
+        public MapZone[] Zones = new MapZone[0];
     }
 
     public static class MapCatalog

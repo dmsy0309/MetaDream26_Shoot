@@ -11,6 +11,8 @@ namespace Metadream.Shoot.Presentation
         public float gravity;
         public float life = 0.6f;
         public float grow;
+        /// <summary>Rotation speed in degrees per second.</summary>
+        public float spin;
         private float _age;
         private SpriteRenderer _sr;
         private Color _color;
@@ -40,6 +42,7 @@ namespace Metadream.Shoot.Presentation
             transform.position += (Vector3)(velocity * dt);
             float k = Mathf.Clamp01(_age / life);
             transform.localScale = _scale * (1f + grow * k);
+            if (spin != 0f) transform.Rotate(0f, 0f, spin * dt);
             var c = _color;
             c.a *= 1f - k;
             _sr.color = c;

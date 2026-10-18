@@ -269,6 +269,21 @@ namespace Metadream.Shoot.Core
         /// <summary>Returns to the lobby keeping participants; StartMatch resets the score.</summary>
         public void ResetToLobby()
         {
+            ResetToLobbyCore();
+        }
+
+        /// <summary>Ends the match at once (every human of the other team left).</summary>
+        public void Forfeit(int winningTeam)
+        {
+            if (Phase == MatchPhase.GameOver || Phase == MatchPhase.WaitingForPlayers) return;
+            WinningTeam = winningTeam;
+            IsTransitioning = false;
+            _pickQueue.Clear();
+            SetPhase(MatchPhase.GameOver);
+        }
+
+        private void ResetToLobbyCore()
+        {
             IsTransitioning = false;
             _pickQueue.Clear();
             WinningTeam = -1;

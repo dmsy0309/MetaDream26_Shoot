@@ -128,6 +128,7 @@ namespace Metadream.Shoot.Online
         private readonly ConcurrentQueue<string> _commands = new ConcurrentQueue<string>();
         private NetHostSession _host;
         private float _statusTimer;
+        private float _gameOverAt = -1f;
         private float _startedAt;
         private Thread _console;
         private bool _quitting;
@@ -175,7 +176,7 @@ namespace Metadream.Shoot.Online
             _startedAt = Time.realtimeSinceStartup;
 
             var flow = GameFlow.Instance;
-            flow.AutoRematch = true;
+            flow.AutoRematch = false; // no rematch: after the result screen the room empties and players return to their title
             flow.RematchDelay = Mathf.Max(1f, Config.rematchDelay);
             flow.DedicatedServer = true;
 
@@ -271,10 +272,17 @@ namespace Metadream.Shoot.Online
                 Log("all players left, returning to lobby");
                 _host.ReturnToLobby();
             }
+            else if (flow != null && flow.Phase == MatchPhase.GameOver)
+            {
+                // No rematch: show the result for rematchDelay seconds, then empty the room (clients go to their title).
+                if (_gameOverAt < 0f) _gameOverAt = Time.realtimeSinceStartup;
+                else if (Time.realtimeSinceStartup - _gameOverAt > Mathf.Max(3f, Config.rematchDelay)) { Log("match finished, back to lobby"); _gameOverAt = -1f; _host.ReturnToLobby(); }
+            }
             else if (flow != null && !flow.HasMatch)
             {
                 _host.ReturnToLobby();
             }
+            if (flow == null || flow.Phase != MatchPhase.GameOver) _gameOverAt = -1f;
 
             _statusTimer -= dt;
             if (Config.statusInterval > 0f && _statusTimer <= 0f)

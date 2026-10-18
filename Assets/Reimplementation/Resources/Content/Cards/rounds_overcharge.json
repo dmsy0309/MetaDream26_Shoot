@@ -1,0 +1,28 @@
+{
+    "id": "rounds_overcharge",
+    "title": "과충전",
+    "subtitle": "OVERCHARGE",
+    "description": "탄속이 두 배가 되지만 반동이 크다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "projectileSpeed": 2.0
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄속",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "반동",
+            "amount": "250%",
+            "positive": false
+        }
+    ]
+}

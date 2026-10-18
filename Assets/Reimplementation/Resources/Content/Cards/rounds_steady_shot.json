@@ -1,0 +1,35 @@
+{
+    "id": "rounds_steady_shot",
+    "title": "안정 사격",
+    "subtitle": "STEADY SHOT",
+    "description": "체력과 탄속이 오른다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "projectileSpeed": 2.0,
+        "reloadTimeAdd": 0.25,
+        "health": 1.4
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+40%",
+            "positive": true
+        },
+        {
+            "label": "탄속",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

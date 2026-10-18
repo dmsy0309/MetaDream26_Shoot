@@ -1,0 +1,23 @@
+{
+    "id": "rounds_quick_reload",
+    "title": "빠른 재장전",
+    "subtitle": "QUICK RELOAD",
+    "description": "재장전 시간이 크게 줄어든다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeMultiplier": 0.3
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "-70%",
+            "positive": true
+        }
+    ]
+}

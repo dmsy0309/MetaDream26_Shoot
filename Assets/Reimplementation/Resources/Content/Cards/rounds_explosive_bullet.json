@@ -1,0 +1,36 @@
+{
+    "id": "rounds_explosive_bullet",
+    "title": "폭발탄",
+    "subtitle": "EXPLOSIVE BULLET",
+    "description": "탄이 닿은 곳에서 폭발한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "attackSpeed": 2.0,
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "explosion_on_hit",
+            "radius": 3,
+            "damage": 25,
+            "amount": 10
+        }
+    ],
+    "lines": [
+        {
+            "label": "공격 속도",
+            "amount": "-100%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

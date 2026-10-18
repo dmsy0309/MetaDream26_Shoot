@@ -1,0 +1,36 @@
+{
+    "id": "rounds_silence",
+    "title": "침묵",
+    "subtitle": "SILENCE",
+    "description": "방어하면 주변 적을 잠시 거의 멈추게 한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.25,
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "slow_on_block",
+            "radius": 8,
+            "amount": 0.95,
+            "duration": 1
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+25%",
+            "positive": true
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

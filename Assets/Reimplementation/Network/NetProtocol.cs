@@ -29,13 +29,15 @@ namespace Metadream.Shoot.Network
         Empty = 0,
         Host = 1,
         Remote = 2,
-        Cpu = 3
+        Cpu = 3,
+        /// <summary>Player left mid-match; only the same device may take the slot back (v5).</summary>
+        Disconnected = 4
     }
 
     public static class Protocol
     {
-        /// <summary>v3: Hello carries the content hash. v4: Hello also carries nickname and computer name.</summary>
-        public const int Version = 4;
+        /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks.</summary>
+        public const int Version = 5;
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;

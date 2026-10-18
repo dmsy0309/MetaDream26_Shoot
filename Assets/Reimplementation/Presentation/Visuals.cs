@@ -70,6 +70,9 @@ namespace Metadream.Shoot.Presentation
         public static readonly Color Background = new Color(0.93f, 0.90f, 0.84f);
         public static readonly Color Solid = new Color(0.16f, 0.15f, 0.19f);
         public static readonly Color Box = new Color(0.35f, 0.33f, 0.38f);
+        public static readonly Color Mover = new Color(0.27f, 0.25f, 0.36f);
+        public static readonly Color JumpPad = new Color(0.25f, 0.85f, 0.45f);
+        public static readonly Color Hazard = new Color(0.95f, 0.25f, 0.2f);
         public static readonly Color PlayerOne = new Color(1f, 0.49f, 0.18f);
         public static readonly Color PlayerTwo = new Color(0.16f, 0.58f, 1f);
         public static readonly Color Common = new Color(0.82f, 0.82f, 0.82f);
@@ -93,7 +96,9 @@ namespace Metadream.Shoot.Presentation
         JumpPuff,
         Ring,
         EdgeFlash,
-        Shake
+        Shake,
+        Muzzle,
+        Death
     }
 
     /// <summary>Visual event replicated from the host to clients.</summary>
@@ -129,6 +134,8 @@ namespace Metadream.Shoot.Presentation
                 case FxType.Ring: Ring(e.Position, e.Color, e.A); break;
                 case FxType.EdgeFlash: EdgeFlash(e.Position, Vector2.zero); break;
                 case FxType.Shake: Shake(e.A); break;
+                case FxType.Muzzle: Muzzle(e.Position, e.Color, e.A); break;
+                case FxType.Death: Death(e.Position, e.Color); break;
             }
         }
 
@@ -147,10 +154,11 @@ namespace Metadream.Shoot.Presentation
             if (Headless) return;
             for (int i = 0; i < count; i++)
             {
-                var p = Make(pos, SpriteFactory.Square, color, Random.Range(0.18f, 0.45f), 30);
+                var p = Make(pos, i % 3 == 0 ? SpriteFactory.Circle : SpriteFactory.Square, i % 4 == 0 ? Color.Lerp(color, Color.white, 0.6f) : color, Random.Range(0.18f, 0.45f), 30);
                 p.velocity = Random.insideUnitCircle.normalized * Random.Range(speed * 0.3f, speed);
                 p.gravity = 18f;
                 p.life = Random.Range(0.4f, 0.9f);
+                p.spin = Random.Range(-720f, 720f);
             }
         }
 
@@ -158,12 +166,57 @@ namespace Metadream.Shoot.Presentation
         {
             Record(FxType.Spark, pos, color, 0f, 0f);
             if (Headless) return;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 7; i++)
             {
-                var p = Make(pos, SpriteFactory.Square, color, 0.15f, 30);
-                p.velocity = Random.insideUnitCircle.normalized * 7f;
-                p.life = 0.25f;
+                var p = Make(pos, SpriteFactory.Square, i % 2 == 0 ? Color.white : color, Random.Range(0.1f, 0.2f), 30);
+                p.velocity = Random.insideUnitCircle.normalized * Random.Range(5f, 11f);
+                p.life = Random.Range(0.18f, 0.32f);
+                p.spin = Random.Range(-900f, 900f);
             }
+            var flash = Make(pos, SpriteFactory.Circle, new Color(1f, 1f, 1f, 0.8f), 0.7f, 31);
+            flash.life = 0.09f;
+            flash.grow = 0.6f;
+        }
+
+        /// <summary>Muzzle flash at the barrel; angle in degrees.</summary>
+        public static void Muzzle(Vector2 pos, Color color, float angle)
+        {
+            Record(FxType.Muzzle, pos, color, angle, 0f);
+            if (Headless) return;
+            var core = Make(pos, SpriteFactory.Circle, new Color(1f, 0.97f, 0.8f, 0.95f), 0.55f, 32);
+            core.life = 0.07f;
+            core.grow = 0.5f;
+            var glow = Make(pos, SpriteFactory.Circle, new Color(color.r, color.g, color.b, 0.45f), 0.95f, 31);
+            glow.life = 0.1f;
+            Vector2 dir = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+            for (int i = 0; i < 3; i++)
+            {
+                var p = Make(pos, SpriteFactory.Square, Color.Lerp(color, Color.white, 0.5f), 0.1f, 31);
+                p.velocity = (dir + Random.insideUnitCircle * 0.5f) * Random.Range(6f, 12f);
+                p.life = 0.15f;
+            }
+        }
+
+        /// <summary>Fighter death: big burst, shock ring, white flash and camera shake.</summary>
+        public static void Death(Vector2 pos, Color color)
+        {
+            Record(FxType.Death, pos, color, 0f, 0f);
+            if (Headless) return;
+            var flash = Make(pos, SpriteFactory.Circle, new Color(1f, 1f, 1f, 0.9f), 1.6f, 33);
+            flash.life = 0.14f;
+            flash.grow = 1.2f;
+            var ring = Make(pos, SpriteFactory.Ring, color, 2.2f, 26);
+            ring.life = 0.45f;
+            ring.grow = 2.2f;
+            for (int i = 0; i < 22; i++)
+            {
+                var p = Make(pos, i % 2 == 0 ? SpriteFactory.Circle : SpriteFactory.Square, i % 5 == 0 ? Color.white : color, Random.Range(0.2f, 0.55f), 30);
+                p.velocity = Random.insideUnitCircle.normalized * Random.Range(4f, 16f);
+                p.gravity = 14f;
+                p.life = Random.Range(0.5f, 1.1f);
+                p.spin = Random.Range(-720f, 720f);
+            }
+            if (CameraRig.Instance != null) CameraRig.Instance.AddShake(0.5f);
         }
 
         public static void JumpPuff(Vector2 pos, Color color)

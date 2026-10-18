@@ -1,0 +1,33 @@
+{
+    "id": "rounds_shields_up",
+    "title": "방패 올려",
+    "subtitle": "SHIELDS UP",
+    "description": "마지막 탄을 쏘면 자동으로 방어한다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.5,
+        "blockCdAdd": 0.5
+    },
+    "effects": [
+        {
+            "type": "block_on_empty"
+        }
+    ],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.5",
+            "positive": false
+        }
+    ]
+}

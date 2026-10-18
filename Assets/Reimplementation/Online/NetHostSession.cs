@@ -366,6 +366,17 @@ namespace Metadream.Shoot.Online
             if (InMatch)
             {
                 if (!_options.AllowMidJoin) { Reject(peer, "이미 게임이 진행 중입니다"); return; }
+                // A player who left may come back from the same computer and gets their own fighter back.
+                for (int i = first; i < SlotCount; i++)
+                {
+                    if (_kinds[i] != SlotKind.Disconnected || !string.Equals(_devices[i], device, StringComparison.OrdinalIgnoreCase)) continue;
+                    TakeSlot(peer, i, nick, device);
+                    _inputs[i] = new NetworkInput(_names[i]);
+                    GameFlow.Instance?.ReplaceInput(i, _inputs[i], _names[i]);
+                    GameFlow.Instance?.SetAbsent(i, false);
+                    Debug.Log("[Net] peer " + peer + " rejoined slot " + i + " from " + device);
+                    return;
+                }
                 for (int i = first; i < SlotCount; i++)
                 {
                     if (_kinds[i] != SlotKind.Cpu) continue;
@@ -383,7 +394,9 @@ namespace Metadream.Shoot.Online
                     Debug.Log("[Net] peer " + peer + " took over CPU slot " + i + " mid-match");
                     return;
                 }
-                Reject(peer, "진행 중인 게임에 빈 자리가 없습니다");
+                bool reserved = false;
+                for (int i = first; i < SlotCount; i++) reserved |= _kinds[i] == SlotKind.Disconnected;
+                Reject(peer, reserved ? "진행 중인 게임의 빈 자리는 나간 플레이어의 컴퓨터에서만 다시 들어올 수 있습니다" : "진행 중인 게임에 빈 자리가 없습니다");
                 return;
             }
             for (int i = first; i < SlotCount; i++)
@@ -437,10 +450,11 @@ namespace Metadream.Shoot.Online
             Debug.Log("[Net] peer " + peer + " left slot " + slot);
             if (InMatch)
             {
-                _kinds[slot] = SlotKind.Cpu;
-                _names[slot] = (string.IsNullOrEmpty(_names[slot]) ? "P" + (slot + 1) : _names[slot]) + " (CPU)";
+                // No bot takes over: the slot waits for the same computer to reconnect.
+                _kinds[slot] = SlotKind.Disconnected;
                 _inputs[slot] = null;
-                GameFlow.Instance?.ReplaceInput(slot, new BotInput(_rng.Next(), "CPU"), _names[slot]);
+                GameFlow.Instance?.SetAbsent(slot, true);
+                CheckForfeit();
             }
             else
             {
@@ -519,7 +533,7 @@ namespace Metadream.Shoot.Online
             for (int i = 0; i < MaxSlots; i++)
             {
                 _inputs[i] = null;
-                if (_kinds[i] == SlotKind.Cpu) { _kinds[i] = SlotKind.Empty; _names[i] = ""; }
+                if (_kinds[i] == SlotKind.Cpu || _kinds[i] == SlotKind.Disconnected) { _kinds[i] = SlotKind.Empty; _names[i] = ""; }
             }
             _server.Broadcast(Protocol.Pack(MsgType.ToLobby));
             _lobbyDirty = true;
@@ -554,6 +568,28 @@ namespace Metadream.Shoot.Online
         }
 
         private static string Short(string hash) => string.IsNullOrEmpty(hash) ? "?" : hash.Substring(0, Math.Min(8, hash.Length));
+
+        /// <summary>When every human of one team has left, the other team wins at once.</summary>
+        private void CheckForfeit()
+        {
+            var flow = GameFlow.Instance;
+            if (flow == null || !flow.HasMatch || flow.Phase == MatchPhase.GameOver) return;
+            var had = new bool[2];
+            var has = new bool[2];
+            for (int i = 0; i < SlotCount; i++)
+            {
+                int t = i % 2;
+                if (_kinds[i] == SlotKind.Host || _kinds[i] == SlotKind.Remote) had[t] = has[t] = true;
+                else if (_kinds[i] == SlotKind.Disconnected) had[t] = true;
+            }
+            for (int t = 0; t < 2; t++)
+            {
+                if (!had[t] || has[t] || !has[1 - t]) continue;
+                flow.Forfeit(1 - t, "상대 팀이 모두 나갔습니다 · 확인(Enter/Space): 메인 화면으로");
+                Debug.Log("[Net] team " + t + " left, team " + (1 - t) + " wins");
+                return;
+            }
+        }
 
         /// <summary>What this room reports to the main hosting server: ip, port, current and max players.</summary>
         public MasterPacket MasterInfo()

@@ -39,6 +39,7 @@ namespace Metadream.Shoot.Replay
         private bool _dragBar;
         private bool _panning;
         private Vector2 _panLast;
+        private bool _manualCamera;
 
         public float CurrentTime => _time;
         public float Duration => _data.Duration;
@@ -150,7 +151,13 @@ namespace Metadream.Shoot.Replay
             if (_zoom <= 1.001f) _focus = Vector2.zero;
         }
 
-        public void Select(int slot) => _selected = slot;
+        public void Select(int slot)
+        {
+            _selected = slot;
+            _manualCamera = false;
+        }
+
+        public void ToggleDebugUi() => DebugOverlay.Suppressed = !DebugOverlay.Suppressed;
 
         private void Update()
         {
@@ -166,6 +173,19 @@ namespace Metadream.Shoot.Replay
                 if (kb.minusKey.wasPressedThisFrame || kb.numpadMinusKey.wasPressedThisFrame) SetSpeedIndex(_speed - 1);
                 if (kb.equalsKey.wasPressedThisFrame || kb.numpadPlusKey.wasPressedThisFrame) SetSpeedIndex(_speed + 1);
                 if (kb.homeKey.wasPressedThisFrame) Seek(0f);
+                if (kb.tabKey.wasPressedThisFrame) ToggleDebugUi();
+                // Free camera after zooming: WASD pans (and stops following the selected fighter).
+                Vector2 pan = Vector2.zero;
+                if (kb.wKey.isPressed) pan.y += 1f;
+                if (kb.sKey.isPressed) pan.y -= 1f;
+                if (kb.aKey.isPressed) pan.x -= 1f;
+                if (kb.dKey.isPressed) pan.x += 1f;
+                if (pan != Vector2.zero && _zoom > 1.01f)
+                {
+                    _manualCamera = true;
+                    float speed = (kb.leftShiftKey.isPressed ? 60f : 28f) / _zoom;
+                    _focus += pan.normalized * speed * Time.unscaledDeltaTime;
+                }
             }
             var cam = Camera.main;
             if (mouse != null && cam != null)
@@ -179,7 +199,7 @@ namespace Metadream.Shoot.Replay
                 if (mouse.leftButton.wasPressedThisFrame && !overUi) Select(FighterAt(world));
                 if (mouse.rightButton.wasPressedThisFrame && !overUi) { _panning = true; _panLast = world; }
                 if (!mouse.rightButton.isPressed) _panning = false;
-                if (_panning && _zoom > 1f) _focus -= world - _panLast;
+                if (_panning && _zoom > 1f) { _focus -= world - _panLast; _manualCamera = true; }
             }
 
             if (!_paused)
@@ -197,7 +217,7 @@ namespace Metadream.Shoot.Replay
                 }
             Time.timeScale = _paused ? 0f : Mathf.Clamp(_snap.TimeScale * Speed, 0.01f, 100f);
 
-            if (_selected >= 0 && _selected < flow.Fighters.Count && _zoom > 1.01f && !_panning)
+            if (_selected >= 0 && _selected < flow.Fighters.Count && _zoom > 1.01f && !_panning && !_manualCamera)
                 _focus = Vector2.Lerp(_focus, flow.Fighters[_selected].Position, 1f - Mathf.Exp(-6f * Time.unscaledDeltaTime));
             float maxX = 35.56f * (1f - 1f / _zoom), maxY = 20f * (1f - 1f / _zoom);
             _focus = new Vector2(Mathf.Clamp(_focus.x, -maxX, maxX), Mathf.Clamp(_focus.y, -maxY, maxY));
@@ -250,6 +270,7 @@ namespace Metadream.Shoot.Replay
             _proxies.Clear();
             CameraRig.Zoom = 1f;
             CameraRig.Focus = Vector2.zero;
+            DebugOverlay.Suppressed = false;
             Time.timeScale = 1f;
             var flow = GameFlow.Instance;
             if (flow != null && flow.ReplayMode)
@@ -321,8 +342,9 @@ namespace Metadream.Shoot.Replay
             if (Button(new Rect(x, y, 50, h), "－")) _deferred = () => SetZoom(_zoom / 1.25f, _focus); x += 56;
             if (Button(new Rect(x, y, 86, h), _zoom.ToString("0.0") + "×", _zoom > 1.01f)) _deferred = () => SetZoom(1f); x += 92;
             if (Button(new Rect(x, y, 50, h), "＋")) _deferred = () => SetZoom(_zoom * 1.25f, _selected >= 0 && _selected < flow.Fighters.Count ? flow.Fighters[_selected].Position : _focus);
+            if (Button(new Rect(W - 440, y, 140, h), "디버그 UI", !DebugOverlay.Suppressed)) _deferred = ToggleDebugUi;
             if (Button(new Rect(W - 290, y, 140, h), "종료 (Esc)")) _deferred = () => Exit(true);
-            Text(new Rect(0, H - 40, W, 34), "Space 정지 · ←/→ 10초 · -/+ 배속 · 진행 바 클릭/드래그 이동 · 휠 줌 · 우클릭 드래그로 화면 이동 · 캐릭터 좌클릭 정보 (줌 상태면 따라감) · 줌 배율 클릭 = 원래대로", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 17 }, new Color(1, 1, 1, 0.55f));
+            Text(new Rect(0, H - 40, W, 34), "Space 정지 · ←/→ 10초 · -/+ 배속 · 진행 바 클릭/드래그 · 휠 줌 · 줌 후 WASD(Shift 빠르게)/우클릭 드래그로 화면 이동 · 캐릭터 좌클릭 정보·추적 · Tab 디버그 UI", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 17 }, new Color(1, 1, 1, 0.55f));
 
             // header
             var m0 = _data.Meta;

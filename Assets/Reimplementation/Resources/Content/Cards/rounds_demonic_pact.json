@@ -1,0 +1,40 @@
+{
+    "id": "rounds_demonic_pact",
+    "title": "악마의 계약",
+    "subtitle": "DEMONIC PACT",
+    "description": "쏠 때마다 체력 10 소모. 공격 간격이 거의 없어진다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "attackSpeed": 0.025,
+        "reloadTimeAdd": 0.25,
+        "ammo": 9
+    },
+    "effects": [
+        {
+            "type": "health_cost_on_shoot",
+            "damage": 10
+        }
+    ],
+    "lines": [
+        {
+            "label": "탄 수",
+            "amount": "+9",
+            "positive": true
+        },
+        {
+            "label": "Splash DMG",
+            "amount": "+2",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

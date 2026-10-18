@@ -1,0 +1,24 @@
+{
+    "id": "rounds_big_bullet",
+    "title": "큰 탄",
+    "subtitle": "BIG BULLET",
+    "description": "탄이 커진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "projectileSize": 1.5,
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

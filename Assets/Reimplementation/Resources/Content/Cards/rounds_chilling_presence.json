@@ -1,0 +1,29 @@
+{
+    "id": "rounds_chilling_presence",
+    "title": "냉기",
+    "subtitle": "CHILLING PRESENCE",
+    "description": "주변 적이 조금 느려진다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.25
+    },
+    "effects": [
+        {
+            "type": "slow_aura",
+            "radius": 6,
+            "amount": 0.3
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+25%",
+            "positive": true
+        }
+    ]
+}

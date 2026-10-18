@@ -1,0 +1,28 @@
+{
+    "id": "rounds_shield_charge",
+    "title": "방패 돌격",
+    "subtitle": "SHIELD CHARGE",
+    "description": "방어하면 조준 방향으로 돌진한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "dash_on_block",
+            "amount": 40
+        }
+    ],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

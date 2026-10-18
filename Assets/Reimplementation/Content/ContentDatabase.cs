@@ -41,12 +41,36 @@ namespace Metadream.Shoot.Content
     public sealed class RectData
     {
         public float x, y, w, h;
+        /// <summary>Rotation in degrees (counter-clockwise), optional.</summary>
+        public float r;
     }
 
     [Serializable]
     public sealed class PointData
     {
         public float x, y;
+    }
+
+    [Serializable]
+    public sealed class MoverData
+    {
+        public float x, y, w, h, r;
+        /// <summary>Waypoints as offsets from (x, y); the platform loops 0 → 1 → … → 0.</summary>
+        public PointData[] path = new PointData[0];
+        public float speed = 6f;
+        public float wait = 1f;
+    }
+
+    [Serializable]
+    public sealed class ZoneData
+    {
+        public float x, y, w, h, r;
+        /// <summary>Jump pad: launch speed along the pad's up direction.</summary>
+        public float power = 32f;
+        /// <summary>Hazard: damage per second.</summary>
+        public float dps = 40f;
+        /// <summary>Wind: acceleration (units/s²).</summary>
+        public float fx, fy;
     }
 
     [Serializable]
@@ -59,6 +83,12 @@ namespace Metadream.Shoot.Content
         public RectData[] solids = new RectData[0];
         public RectData[] boxes = new RectData[0];
         public PointData[] spawns = new PointData[0];
+        public MoverData[] movers = new MoverData[0];
+        public ZoneData[] pads = new ZoneData[0];
+        public ZoneData[] hazards = new ZoneData[0];
+        public ZoneData[] winds = new ZoneData[0];
+        /// <summary>Free text, e.g. "ROUNDS level12".</summary>
+        public string origin = "";
     }
 
     public enum ContentSeverity
@@ -360,18 +390,54 @@ namespace Metadream.Shoot.Content
             var solids = d.solids ?? new RectData[0];
             var boxes = d.boxes ?? new RectData[0];
             var spawns = d.spawns ?? new PointData[0];
+            var movers = d.movers ?? new MoverData[0];
+            var pads = d.pads ?? new ZoneData[0];
+            var hazards = d.hazards ?? new ZoneData[0];
+            var winds = d.winds ?? new ZoneData[0];
             if (string.IsNullOrWhiteSpace(d.name)) Warn("\"name\" is empty");
-            if (solids.Length == 0) Error("needs at least one entry in \"solids\"");
+            if (solids.Length == 0 && movers.Length == 0) Error("needs at least one entry in \"solids\" (or \"movers\")");
             if (spawns.Length < 2) Error("needs at least 2 spawns (team 0 = spawns[0], team 1 = spawns[1])");
 
             for (int i = 0; i < solids.Length; i++) CheckRect("solids", i, solids[i]);
             for (int i = 0; i < boxes.Length; i++) CheckRect("boxes", i, boxes[i]);
+            if (boxes.Length + movers.Length > 120) Error("boxes + movers must be at most 120 (network snapshot size), got " + (boxes.Length + movers.Length));
             void CheckRect(string list, int i, RectData r)
             {
                 if (r == null) { Error(list + "[" + i + "] is null"); return; }
-                if (!(r.w > 0f) || !(r.h > 0f)) Error(list + "[" + i + "] needs w > 0 and h > 0");
-                if (Mathf.Abs(r.x) - r.w / 2f > ArenaHalfWidth || Mathf.Abs(r.y) - r.h / 2f > ArenaHalfHeight)
+                CheckArea(list, i, r.x, r.y, r.w, r.h);
+            }
+            void CheckArea(string list, int i, float x, float y, float w, float h)
+            {
+                if (!(w > 0f) || !(h > 0f)) Error(list + "[" + i + "] needs w > 0 and h > 0");
+                if (Mathf.Abs(x) - Mathf.Max(w, h) / 2f > ArenaHalfWidth || Mathf.Abs(y) - Mathf.Max(w, h) / 2f > ArenaHalfHeight)
                     Warn(list + "[" + i + "] is completely outside the arena (±" + ArenaHalfWidth + ", ±" + ArenaHalfHeight + ")");
+            }
+            for (int i = 0; i < movers.Length; i++)
+            {
+                var m = movers[i];
+                if (m == null) { Error("movers[" + i + "] is null"); continue; }
+                CheckArea("movers", i, m.x, m.y, m.w, m.h);
+                if (m.path == null || m.path.Length < 2) Error("movers[" + i + "] needs at least 2 path points (offsets, usually starting with {\"x\":0,\"y\":0})");
+                if (!(m.speed > 0f)) Error("movers[" + i + "] needs speed > 0");
+                if (m.wait < 0f) Error("movers[" + i + "] needs wait >= 0");
+            }
+            for (int i = 0; i < pads.Length; i++)
+            {
+                if (pads[i] == null) { Error("pads[" + i + "] is null"); continue; }
+                CheckArea("pads", i, pads[i].x, pads[i].y, pads[i].w, pads[i].h);
+                if (!(pads[i].power > 0f)) Error("pads[" + i + "] needs power > 0");
+            }
+            for (int i = 0; i < hazards.Length; i++)
+            {
+                if (hazards[i] == null) { Error("hazards[" + i + "] is null"); continue; }
+                CheckArea("hazards", i, hazards[i].x, hazards[i].y, hazards[i].w, hazards[i].h);
+                if (!(hazards[i].dps > 0f)) Error("hazards[" + i + "] needs dps > 0");
+            }
+            for (int i = 0; i < winds.Length; i++)
+            {
+                if (winds[i] == null) { Error("winds[" + i + "] is null"); continue; }
+                CheckArea("winds", i, winds[i].x, winds[i].y, winds[i].w, winds[i].h);
+                if (winds[i].fx == 0f && winds[i].fy == 0f) Warn("winds[" + i + "] has no force (fx, fy)");
             }
 
             for (int s = 0; s < spawns.Length; s++)
@@ -381,27 +447,44 @@ namespace Metadream.Shoot.Content
                 if (Mathf.Abs(p.x) > ArenaHalfWidth - 1.5f || Mathf.Abs(p.y) > ArenaHalfHeight - 1.5f)
                     Error("spawns[" + s + "] (" + p.x + ", " + p.y + ") is outside or too close to the arena edge");
                 bool ground = false;
+                var sp = new Vector2(p.x, p.y);
                 for (int i = 0; i < solids.Length; i++)
                 {
                     var r = solids[i];
                     if (r == null) continue;
-                    bool insideX = Mathf.Abs(p.x - r.x) < r.w / 2f + 0.62f;
-                    bool insideY = Mathf.Abs(p.y - r.y) < r.h / 2f + 0.62f;
-                    if (insideX && insideY) Error("spawns[" + s + "] overlaps solids[" + i + "] (a player is ~1.24 wide)");
-                    if (Mathf.Abs(p.x - r.x) < r.w / 2f && r.y + r.h / 2f < p.y) ground = true;
+                    var block = new MapBlock(r.x, r.y, r.w, r.h, r.r);
+                    if (block.Contains(sp, 0.62f)) Error("spawns[" + s + "] overlaps solids[" + i + "] (a player is ~1.24 wide)");
+                    if (Mathf.Abs(p.x - r.x) < Mathf.Max(r.w, Mathf.Abs(r.r) > 1f ? r.h : 0f) / 2f && r.y < p.y) ground = true;
                 }
+                foreach (var m in movers) if (m != null && Mathf.Abs(p.x - m.x) < m.w / 2f + 2f && m.y < p.y) ground = true;
                 if (!ground) Warn("spawns[" + s + "] has no solid below it: players will fall off the map");
             }
             if (!ok) return null;
 
+            MapZone Zone(ZoneKind kind, ZoneData z) => new MapZone
+            {
+                Kind = kind, Block = new MapBlock(z.x, z.y, z.w, z.h, z.r), Power = z.power, Dps = z.dps, Force = new Vector2(z.fx, z.fy)
+            };
+            var zones = new List<MapZone>();
+            foreach (var z in pads) zones.Add(Zone(ZoneKind.JumpPad, z));
+            foreach (var z in hazards) zones.Add(Zone(ZoneKind.Hazard, z));
+            foreach (var z in winds) zones.Add(Zone(ZoneKind.Wind, z));
             var def = new MapDefinition
             {
                 Id = d.id,
                 Name = string.IsNullOrWhiteSpace(d.name) ? d.id : d.name,
                 TutorialOnly = d.tutorialOnly,
-                Solids = Array.ConvertAll(solids, r => new MapBlock(r.x, r.y, r.w, r.h)),
-                Boxes = Array.ConvertAll(boxes, r => new MapBlock(r.x, r.y, r.w, r.h)),
+                Solids = Array.ConvertAll(solids, r => new MapBlock(r.x, r.y, r.w, r.h, r.r)),
+                Boxes = Array.ConvertAll(boxes, r => new MapBlock(r.x, r.y, r.w, r.h, r.r)),
                 Spawns = Array.ConvertAll(spawns, p => new Vector2(p.x, p.y)),
+                Movers = Array.ConvertAll(movers, m => new MapMover
+                {
+                    Block = new MapBlock(m.x, m.y, m.w, m.h, m.r),
+                    Path = Array.ConvertAll(m.path, p => new Vector2(p.x, p.y)),
+                    Speed = m.speed,
+                    Wait = m.wait
+                }),
+                Zones = zones.ToArray(),
                 Source = source
             };
             return def;

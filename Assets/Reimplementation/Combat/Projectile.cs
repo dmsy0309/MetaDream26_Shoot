@@ -86,13 +86,30 @@ namespace Metadream.Shoot.Combat
             sr.color = Color.Lerp(color, Color.white, 0.25f);
             sr.sortingOrder = 20;
             go.transform.localScale = Vector3.one * (radius * 2f);
+            // Glow halo and a white-hot core so bullets read clearly against any map.
+            var halo = new GameObject("Halo");
+            halo.transform.SetParent(go.transform, false);
+            halo.transform.localScale = Vector3.one * 2.1f;
+            var hs = halo.AddComponent<SpriteRenderer>();
+            hs.sprite = SpriteFactory.Circle;
+            hs.sharedMaterial = SpriteFactory.Material;
+            hs.color = new Color(color.r, color.g, color.b, 0.22f);
+            hs.sortingOrder = 18;
+            var core = new GameObject("Core");
+            core.transform.SetParent(go.transform, false);
+            core.transform.localScale = Vector3.one * 0.45f;
+            var cs = core.AddComponent<SpriteRenderer>();
+            cs.sprite = SpriteFactory.Circle;
+            cs.sharedMaterial = SpriteFactory.Material;
+            cs.color = new Color(1f, 1f, 1f, 0.9f);
+            cs.sortingOrder = 21;
 
             var trail = go.AddComponent<TrailRenderer>();
             trail.sharedMaterial = SpriteFactory.Material;
-            trail.time = 0.12f;
+            trail.time = 0.2f;
             trail.minVertexDistance = 0.1f;
             trail.widthMultiplier = 1f;
-            trail.startWidth = radius * 1.8f;
+            trail.startWidth = radius * 2.2f;
             trail.endWidth = 0f;
             trail.sortingOrder = 19;
             var gradient = new Gradient();
@@ -114,6 +131,7 @@ namespace Metadream.Shoot.Combat
             float dt = Time.deltaTime;
             _life += dt;
             Velocity += Vector2.down * _gravity * dt;
+            ApplyModifiers(dt);
 
             Vector2 pos = transform.position;
             Vector2 delta = Velocity * dt;
@@ -187,6 +205,40 @@ namespace Metadream.Shoot.Combat
 
         /// <summary>Free-form per-projectile data for abilities (e.g. "explosive").</summary>
         public readonly HashSet<string> Tags = new HashSet<string>();
+
+        /// <summary>Homing turn rate in degrees per second toward the nearest visible enemy within HomingRadius (0 = off).</summary>
+        public float HomingRate;
+        public float HomingRadius = 30f;
+        /// <summary>Damage grows by this fraction of the starting damage per second of flight (GROW).</summary>
+        public float GrowPerSecond;
+        private float _baseDamage = -1f;
+
+        public void ScaleDamage(float factor) => _damage = Mathf.Max(0f, _damage * factor);
+
+        public void SetVelocity(Vector2 velocity) => Velocity = velocity;
+
+        private void ApplyModifiers(float dt)
+        {
+            if (GrowPerSecond > 0f)
+            {
+                if (_baseDamage < 0f) _baseDamage = _damage;
+                _damage += _baseDamage * GrowPerSecond * dt;
+            }
+            if (HomingRate <= 0f) return;
+            Fighter target = null;
+            float best = HomingRadius;
+            foreach (var f in Fighter.Active)
+            {
+                if (f == null || f.IsDead || !f.IsPlaying || !Threatens(f) || f == Owner) continue;
+                float d = Vector2.Distance(f.Position, Position);
+                if (d < best) { best = d; target = f; }
+            }
+            if (target == null) return;
+            float speed = Velocity.magnitude;
+            Vector2 want = (target.Position - Position).normalized * speed;
+            float maxRad = HomingRate * Mathf.Deg2Rad * dt;
+            Velocity = (Vector2)Vector3.RotateTowards(Velocity, want, maxRad, 0f);
+        }
 
         private void NotifyHitFighter(Fighter target)
         {

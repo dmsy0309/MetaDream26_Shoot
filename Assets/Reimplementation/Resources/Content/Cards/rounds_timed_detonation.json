@@ -1,0 +1,37 @@
+{
+    "id": "rounds_timed_detonation",
+    "title": "시한 폭발",
+    "subtitle": "TIMED DETONATION",
+    "description": "탄이 닿은 곳에 0.5초 뒤 터지는 폭탄을 남긴다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.85,
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "timed_bomb",
+            "duration": 0.5,
+            "radius": 3.5,
+            "damage": 30,
+            "amount": 8
+        }
+    ],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "-15%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

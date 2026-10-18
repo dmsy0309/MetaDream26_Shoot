@@ -1,0 +1,27 @@
+{
+    "id": "rounds_scavenger",
+    "title": "약탈자",
+    "subtitle": "SCAVENGER",
+    "description": "피해를 주면 즉시 재장전한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.5
+    },
+    "effects": [
+        {
+            "type": "reload_on_damage"
+        }
+    ],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

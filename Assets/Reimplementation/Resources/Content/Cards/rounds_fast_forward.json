@@ -1,0 +1,29 @@
+{
+    "id": "rounds_fast_forward",
+    "title": "빨리 감기",
+    "subtitle": "FAST FORWARD",
+    "description": "탄이 같은 궤적을 더 빠르게 날아간다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "projectileSpeed": 2.0,
+        "reloadTimeMultiplier": 0.7
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄속",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "재장전 속도",
+            "amount": "+30%",
+            "positive": true
+        }
+    ]
+}

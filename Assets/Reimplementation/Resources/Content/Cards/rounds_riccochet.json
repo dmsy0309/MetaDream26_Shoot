@@ -1,0 +1,36 @@
+{
+    "id": "rounds_riccochet",
+    "title": "도탄",
+    "subtitle": "RICCOCHET",
+    "description": "탄이 두 번 튕기지만 튕길 때 속도가 절반이 된다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "attackSpeed": 0.75,
+        "speedMOnBounce": 0.5,
+        "reloadTimeAdd": 0.25,
+        "reflects": 2
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "Bullet bounces",
+            "amount": "+2",
+            "positive": true
+        },
+        {
+            "label": "공격 속도",
+            "amount": "+25%",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

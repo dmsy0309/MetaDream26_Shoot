@@ -37,6 +37,75 @@
 }
 ```
 
+
+## 7. 기믹 (v5 추가)
+
+### 7.1 카드 효과 전체 목록
+
+`chance`(0~1, 기본 1)는 발동 확률이며 지원하는 효과에만 의미가 있습니다. 한 카드에 효과를 여러 개 넣을 수 있습니다.
+
+| type | 값 | 동작 | 예시 카드 |
+|---|---|---|---|
+| `explosion_on_hit` | radius, damage, amount(넉백) | 명중/착탄 지점 폭발 | 폭발탄 |
+| `shockwave_on_block` | radius, amount | 방어 시 밀어내기 | 충격파 |
+| `poison_on_hit` | damage(초당), duration | 명중 시 중독 | 독, 기생충 |
+| `homing` | amount(초당 회전 각도, 기본 240), radius(탐지 거리) | 탄이 가까운 적을 따라감 | 유도탄 |
+| `grow_damage` | amount(초당 +비율) | 날아갈수록 피해 증가 | 성장 |
+| `slow_on_hit` | amount(감속 0~0.95), duration, chance | 명중 시 감속/기절 | 냉기탄, 현혹, 속박 |
+| `push_on_hit` | amount(속도) | 명중 시 탄 방향으로 밀어냄 | 추진기, 강타 |
+| `timed_bomb` | duration(지연), radius, damage, amount | 착탄 지점 시한폭탄 | 시한 폭발 |
+| `health_cost_on_shoot` | damage(발당) | 쏠 때 체력 소모 | 악마의 계약 |
+| `slow_aura` | radius, amount | 주변 적 지속 감속 | 냉기 |
+| `drain_aura` | radius, damage(초당), amount(회복 비율) | 주변 적 지속 피해·흡수 | 흡혈귀, 광휘 |
+| `blast_on_block` | radius, damage, amount, chance | 방어 시 주변 폭발 | 압도, 톱날, 폭탄 투하 |
+| `pull_on_block` | radius, amount | 방어 시 끌어당김 | 블랙홀, 내파 |
+| `slow_on_block` | radius, amount, duration | 방어 시 주변 감속 | 서리 강타, EMP, 침묵 |
+| `heal_on_block` | amount | 방어 시 회복 | 치유의 장 |
+| `teleport_on_block` | amount(거리) | 방어 시 조준 방향 순간이동(벽 앞에서 멈춤) | 순간이동 |
+| `dash_on_block` | amount(속도) | 방어 시 돌진 | 방패 돌격 |
+| `reload_on_block` | - | 방어 시 즉시 재장전 | 전술 재장전 |
+| `empower_on_block` | amount(피해 배율), duration(0 = 다음 탄까지) | 방어 후 다음 탄 강화 | 강화 |
+| `block_on_empty` | - | 마지막 탄을 쏘면 자동 방어 | 방패 올려 |
+| `reload_on_damage` | - | 피해를 주면 즉시 재장전 | 약탈자 |
+| `block_on_damage` | - | 피해를 주면 방어 대기 초기화 | 재충전 |
+| `speed_after_damage` | amount(+비율), duration | 피해를 주면 잠시 빨라짐 | 피의 맛 |
+
+예 — 방어하면 끌어당긴 뒤 기절:
+
+```json
+"effects": [
+    { "type": "pull_on_block", "radius": 14, "amount": 30 },
+    { "type": "slow_on_block", "radius": 6, "amount": 0.9, "duration": 1.2 }
+]
+```
+
+### 7.2 맵 기믹
+
+| 키 | 필드 | 동작 |
+|---|---|---|
+| `solids`/`boxes`의 `r` | 각도(도, 반시계) | 기울어진 지형·상자 |
+| `movers` | `x, y, w, h, r`, `path`(시작점 기준 오프셋 배열, 2개 이상), `speed`(기본 6), `wait`(각 지점 대기 초, 기본 1) | 경로를 반복해서 오가는 움직이는 발판. 온라인에서도 위치가 맞춰짐 |
+| `pads` | `x, y, w, h, r`, `power`(발사 속도, 기본 32) | 점프대. 회전하면 그 방향으로 튕김 |
+| `hazards` | `x, y, w, h, r`, `dps`(초당 피해, 기본 40) | 용암·가시 같은 피해 구역 (방어 불가) |
+| `winds` | `x, y, w, h, r`, `fx, fy`(가속도) | 바람·상승 기류 구역 |
+| `origin` | 문자열 | 출처 메모 (예: `"ROUNDS level12"`) |
+
+```json
+"movers":  [ { "x": -9, "y": -12, "w": 7, "h": 1.2, "path": [ {"x":0,"y":0}, {"x":0,"y":13} ], "speed": 5, "wait": 1 } ],
+"pads":    [ { "x": -30, "y": -10.2, "w": 3, "h": 0.6, "power": 34 } ],
+"hazards": [ { "x": 0, "y": -18.5, "w": 72, "h": 3, "dps": 60 } ],
+"winds":   [ { "x": -17, "y": 0, "w": 10, "h": 24, "fx": 0, "fy": 26 } ]
+```
+
+검증: 기믹 영역은 `w, h > 0`, 점프대 `power > 0`, 피해 구역 `dps > 0`, 움직이는 발판은 `path` 2개 이상·`speed > 0`, `boxes + movers`는 최대 120개(온라인 스냅샷 크기).
+예시 맵: `gimmick_lava_lifts`(용암 승강장), `gimmick_wind_canyon`(바람 협곡), `gimmick_spike_pit`(가시 구덩이).
+
+### 7.3 원작 ROUNDS 콘텐츠
+
+- `rounds_*.json` 카드 69장과 맵 33개는 원작 에셋(CardInfo/Gun/CharacterStatModifiers/Block, Map 씬의 BoxCollider2D·Rigidbody2D·SpawnPoint·MoveSequence)에서 변환했습니다. 능력치는 원작 값, 특수 효과는 위 효과로 근사합니다(설명에 "원작:"으로 차이를 적음).
+- 원작 카드 중 10장(DIVINE COUNTDOWN 미완성, AMMO REG, SNEAKY, RADAR SHOT, BRAWLER, DECAY, PRISTINE PERSEVERANCE, REMOTE, ABYSSAL COUNTDOWN)과 로프·파괴 상자·물리 상자 60개 초과 맵은 아직 재현하지 않았습니다.
+- 한 포인트가 45초를 넘으면 **서든 데스**(모두 점점 체력 감소)가 시작돼 복잡한 맵에서도 포인트가 끝납니다.
+
 ### 2.1 기본 필드
 
 | 키 | 타입 | 필수 | 기본값 | 설명 |

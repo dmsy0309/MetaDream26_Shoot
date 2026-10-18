@@ -1,0 +1,35 @@
+{
+    "id": "rounds_tank",
+    "title": "탱크",
+    "subtitle": "TANK",
+    "description": "체력이 두 배가 되지만 공격이 느려진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "attackSpeed": 1.25,
+        "reloadTimeAdd": 0.5,
+        "health": 2.0
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "공격 속도",
+            "amount": "-25%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

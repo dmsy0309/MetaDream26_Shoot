@@ -52,7 +52,7 @@ namespace Metadream.Shoot.Tests
             Assert.AreEqual("training", flow.CurrentMap.Definition.Id);
             Assert.AreEqual(2, flow.Fighters.Count);
             Assert.AreEqual(TutorialController.Step.Move, tutorial.Current);
-            Assert.IsTrue(flow.CanUseDebugCommands, "debug commands work in the tutorial sandbox");
+            Assert.IsTrue(flow.CanUseDebugCommands, "debug commands work in the tutorial sandbox (role=" + flow.Role + " menu=" + flow.InMenu + " match=" + flow.HasMatch + ")");
             yield return new WaitForSeconds(1f);
             Assert.IsFalse(flow.Fighters[0].IsDead, "player stands safely on the training map");
             Assert.IsNotNull(flow.EscapeOverride);

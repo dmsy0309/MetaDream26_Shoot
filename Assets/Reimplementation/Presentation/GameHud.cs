@@ -19,7 +19,8 @@ namespace Metadream.Shoot.Presentation
             if (!flow.IsSandbox) DrawScore(flow); // the tutorial draws its own panel in that area
             DrawCardBars(flow);
             if (flow.IsPicking) DrawPick(flow);
-            DrawBanner(flow);
+            if (flow.Phase == MatchPhase.GameOver && flow.WinningTeam >= 0 && !string.IsNullOrEmpty(flow.Banner)) DrawResult(flow);
+            else DrawBanner(flow);
             string footer = flow.IsSandbox ? "Esc: 튜토리얼 종료" : flow.Role == NetRole.Client ? "Esc: 방 나가기" : flow.Role == NetRole.Host ? "Esc: 대기실로" : "Esc: 타이틀";
             if (!flow.ReplayMode) Shadowed(new Rect(20, H - 40, 600, 30), footer, Tiny, new Color(1, 1, 1, 0.8f));
         }
@@ -130,38 +131,130 @@ namespace Metadream.Shoot.Presentation
             string phase = flow.Phase == MatchPhase.InitialCardPick ? "시작 카드" : "라운드 패배 보상";
             Shadowed(new Rect(0, 150, W, 70), picker.DisplayName + " — " + phase, Big, picker.Color);
             int n = offer.Count;
-            float cw = 300, ch = 430, gap = 34;
+            float cw = 300, ch = 480, gap = 34;
             float total = n * cw + (n - 1) * gap;
             float x0 = (W - total) / 2;
             for (int i = 0; i < n; i++)
             {
-                var card = offer[i];
                 bool sel = i == flow.OfferIndex;
-                var r = new Rect(x0 + i * (cw + gap), 300 - (sel ? 28 : 0), cw, ch);
-                if (sel) Fill(new Rect(r.x - 6, r.y - 6, r.width + 12, r.height + 12), picker.Color);
-                Fill(r, new Color(0.97f, 0.96f, 0.93f));
-                Color rc = RarityColor(card.Rarity);
-                Fill(new Rect(r.x, r.y, r.width, 14), rc);
-                Text(new Rect(r.x, r.y + 22, r.width, 26), RarityLabel(card.Rarity), Small, Color.Lerp(rc, Palette.Ink, 0.4f));
-                Text(new Rect(r.x + 10, r.y + 58, r.width - 20, 48), card.Title, CardTitle, Palette.Ink);
-                Text(new Rect(r.x + 10, r.y + 104, r.width - 20, 26), card.Subtitle, Small, new Color(0, 0, 0, 0.45f));
-                Text(new Rect(r.x + 22, r.y + 146, r.width - 44, 90), card.Description, CardBody, new Color(0.2f, 0.2f, 0.22f));
-                for (int l = 0; l < card.Lines.Length; l++)
-                {
-                    var line = card.Lines[l];
-                    var lr = new Rect(r.x + 22, r.y + 250 + l * 40, r.width - 44, 34);
-                    Fill(lr, line.Positive ? new Color(0.25f, 0.7f, 0.35f, 0.16f) : new Color(0.85f, 0.25f, 0.2f, 0.14f));
-                    var col = line.Positive ? new Color(0.12f, 0.5f, 0.22f) : new Color(0.72f, 0.18f, 0.14f);
-                    Text(new Rect(lr.x + 10, lr.y, lr.width * 0.6f, lr.height), line.Label, Tiny, col);
-                    Text(new Rect(lr.x, lr.y, lr.width - 10, lr.height), line.Amount, TinyRight, col);
-                }
+                float bob = sel ? Mathf.Sin(Time.unscaledTime * 3f) * 4f : 0f;
+                DrawCard(new Rect(x0 + i * (cw + gap), 270 - (sel ? 30 : 0) + bob, cw, ch), offer[i], sel, picker.Color);
             }
             string help;
             if (picker.IsBot) help = "CPU가 고르는 중…";
             else if (flow.Role == NetRole.Client && picker.PlayerId != flow.LocalSlot) help = picker.DisplayName + " 플레이어가 고르는 중…";
             else if (flow.Role == NetRole.Host && picker.Input is NetworkInput) help = picker.DisplayName + " 플레이어가 원격으로 고르는 중…";
             else help = "← / → 로 고르고 사격 키(F · . · 패드 X/RT)로 결정";
-            Text(new Rect(0, 800, W, 40), help, Small, new Color(1, 1, 1, 0.8f));
+            Text(new Rect(0, 820, W, 40), help, Small, new Color(1, 1, 1, 0.8f));
+        }
+
+        /// <summary>Card face: frame, rarity band, procedural emblem, title, description and stat lines.</summary>
+        private static void DrawCard(Rect r, CardDefinition card, bool selected, Color accent)
+        {
+            Color rc = RarityColor(card.Rarity);
+            Fill(new Rect(r.x + 8, r.y + 10, r.width, r.height), new Color(0, 0, 0, 0.35f));
+            if (selected)
+            {
+                float glow = 0.5f + 0.5f * Mathf.Sin(Time.unscaledTime * 5f);
+                Fill(new Rect(r.x - 14, r.y - 14, r.width + 28, r.height + 28), new Color(accent.r, accent.g, accent.b, 0.18f + 0.12f * glow));
+                Fill(new Rect(r.x - 6, r.y - 6, r.width + 12, r.height + 12), accent);
+            }
+            Fill(r, new Color(0.11f, 0.11f, 0.14f));
+            var inner = new Rect(r.x + 6, r.y + 6, r.width - 12, r.height - 12);
+            Fill(inner, new Color(0.97f, 0.96f, 0.93f));
+            // rarity band
+            var band = new Rect(inner.x, inner.y, inner.width, 44);
+            Fill(band, rc);
+            Fill(new Rect(band.x, band.yMax - 6, band.width, 6), Color.Lerp(rc, Color.black, 0.25f));
+            Text(new Rect(band.x + 14, band.y, 120, band.height), RarityLabel(card.Rarity), new GUIStyle(Tiny) { fontStyle = FontStyle.Bold, fontSize = 20 }, Palette.Ink);
+            bool original = System.Array.IndexOf(card.Categories ?? new string[0], "rounds") >= 0;
+            if (original)
+            {
+                var badge = new Rect(band.xMax - 104, band.y + 9, 92, 26);
+                Fill(badge, new Color(0.1f, 0.1f, 0.12f, 0.85f));
+                Text(badge, "ROUNDS", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 15, fontStyle = FontStyle.Bold }, Color.white);
+            }
+            // emblem art
+            var art = new Rect(inner.x + 14, band.yMax + 10, inner.width - 28, 112);
+            Fill(art, Color.Lerp(rc, Palette.Ink, 0.62f));
+            for (int s = 0; s < 6; s++)
+                Fill(new Rect(art.x, art.y + s * 20 + 6, art.width, 2), new Color(1, 1, 1, 0.05f));
+            Vector2 c = art.center;
+            Disc(c, 48, Color.Lerp(rc, Color.white, 0.25f));
+            Disc(c, 40, Color.Lerp(rc, Palette.Ink, 0.35f));
+            string glyph = Emblem(card);
+            Text(new Rect(c.x - 50, c.y - 32, 100, 64), glyph, new GUIStyle(Mid) { fontSize = glyph.Length > 2 ? 26 : 36 }, Color.white);
+            int fx = card.Effects != null ? card.Effects.Length : 0;
+            for (int e = 0; e < fx; e++) Disc(new Vector2(art.xMax - 16 - e * 18, art.yMax - 14), 6, new Color(1f, 0.85f, 0.3f));
+            // text
+            Text(new Rect(inner.x + 8, art.yMax + 6, inner.width - 16, 44), card.Title, CardTitle, Palette.Ink);
+            Text(new Rect(inner.x + 8, art.yMax + 46, inner.width - 16, 22), card.Subtitle, new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 16 }, new Color(0, 0, 0, 0.45f));
+            Text(new Rect(inner.x + 16, art.yMax + 70, inner.width - 32, 70), card.Description, CardBody, new Color(0.2f, 0.2f, 0.22f));
+            float ly = art.yMax + 146;
+            int max = Mathf.Min(card.Lines.Length, Mathf.FloorToInt((inner.yMax - ly - 6) / 32f));
+            for (int l = 0; l < max; l++)
+            {
+                var line = card.Lines[l];
+                var lr = new Rect(inner.x + 14, ly + l * 32, inner.width - 28, 28);
+                Fill(lr, line.Positive ? new Color(0.25f, 0.7f, 0.35f, 0.16f) : new Color(0.85f, 0.25f, 0.2f, 0.14f));
+                Fill(new Rect(lr.x, lr.y, 4, lr.height), line.Positive ? new Color(0.2f, 0.65f, 0.3f) : new Color(0.8f, 0.25f, 0.2f));
+                var col = line.Positive ? new Color(0.12f, 0.5f, 0.22f) : new Color(0.72f, 0.18f, 0.14f);
+                Text(new Rect(lr.x + 12, lr.y, lr.width * 0.62f, lr.height), line.Label, Tiny, col);
+                Text(new Rect(lr.x, lr.y, lr.width - 10, lr.height), line.Amount, TinyRight, col);
+            }
+        }
+
+        /// <summary>Two-letter emblem from the English name (EXPLOSIVE BULLET → EB).</summary>
+        private static string Emblem(CardDefinition card)
+        {
+            string s = string.IsNullOrWhiteSpace(card.Subtitle) ? card.Title : card.Subtitle;
+            var words = s.Split(new[] { ' ', '-', '_' }, System.StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length == 0) return "?";
+            if (words.Length == 1) return words[0].Substring(0, Mathf.Min(2, words[0].Length)).ToUpperInvariant();
+            return (words[0].Substring(0, 1) + words[1].Substring(0, 1)).ToUpperInvariant();
+        }
+
+        /// <summary>Win/lose screen. Leaving it (Enter/Space or the button) returns to the main menu — no rematch.</summary>
+        private void DrawResult(GameFlow flow)
+        {
+            int win = flow.WinningTeam;
+            int me = flow.LocalTeam;
+            string head = me < 0 ? flow.SideName(win) + " 승리" : me == win ? "승리!" : "패배";
+            Color hc = me < 0 ? flow.SideColor(win) : me == win ? new Color(1f, 0.82f, 0.25f) : new Color(0.7f, 0.74f, 0.82f);
+            Fill(new Rect(0, 0, W, H), new Color(0, 0, 0, 0.55f));
+            var panel = new Rect(W / 2 - 540, 190, 1080, 640);
+            Fill(new Rect(panel.x + 10, panel.y + 12, panel.width, panel.height), new Color(0, 0, 0, 0.4f));
+            Fill(panel, new Color(0.08f, 0.08f, 0.11f, 0.96f));
+            Fill(new Rect(panel.x, panel.y, panel.width, 10), hc);
+            float pulse = 1f + 0.03f * Mathf.Sin(Time.unscaledTime * 4f);
+            var titleStyle = new GUIStyle(Title) { fontSize = Mathf.RoundToInt(Title.fontSize * pulse) };
+            Shadowed(new Rect(panel.x, panel.y + 30, panel.width, 120), head, titleStyle, hc);
+            Text(new Rect(panel.x, panel.y + 150, panel.width, 40), flow.SideName(win) + " 승리 · 라운드 " + flow.TeamRounds(0) + " : " + flow.TeamRounds(1), Mid, Color.white);
+            for (int t = 0; t < 2; t++)
+            {
+                float x = panel.x + 60 + t * 500;
+                var head2 = new Rect(x, panel.y + 220, 460, 46);
+                Fill(head2, new Color(flow.SideColor(t).r, flow.SideColor(t).g, flow.SideColor(t).b, t == win ? 0.85f : 0.35f));
+                Text(head2, (t == win ? "★ " : "") + flow.SideName(t) + "  " + flow.TeamRounds(t) + "R", Mid, Color.white);
+                int row = 0;
+                foreach (var f in flow.Fighters)
+                {
+                    if (f.TeamId != t) continue;
+                    var rr = new Rect(x, panel.y + 276 + row * 52, 460, 46);
+                    Fill(rr, new Color(1, 1, 1, 0.07f));
+                    Disc(new Vector2(rr.x + 26, rr.center.y), 13, f.Color);
+                    Text(new Rect(rr.x + 50, rr.y, 260, rr.height), f.DisplayName + (f.Absent ? " (나감)" : ""), new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft }, f.Absent ? new Color(1, 1, 1, 0.45f) : Color.white);
+                    Text(new Rect(rr.x, rr.y, rr.width - 14, rr.height), "카드 " + f.Cards.Count + "장", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleRight }, new Color(1, 1, 1, 0.65f));
+                    row++;
+                }
+            }
+            if (!string.IsNullOrEmpty(flow.ForfeitText))
+                Text(new Rect(panel.x, panel.yMax - 150, panel.width, 34), flow.ForfeitText.Split('·')[0].Trim(), Small, new Color(1f, 0.85f, 0.5f));
+            if (flow.ReplayMode || (flow.Role == NetRole.Host && flow.DedicatedServer)) return;
+            var btn = new Rect(W / 2 - 220, panel.yMax - 100, 440, 70);
+            Fill(btn, hc);
+            Text(btn, "메인 화면으로 (Enter)", Mid, Palette.Ink);
+            if (Clicked(btn)) flow.ExitResults();
         }
 
         private void DrawBanner(GameFlow flow)

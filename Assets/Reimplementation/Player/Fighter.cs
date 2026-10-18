@@ -28,6 +28,12 @@ namespace Metadream.Shoot.Player
         private CircleCollider2D _collider;
         private SpriteRenderer _body;
         private SpriteRenderer _barrel;
+        private SpriteRenderer _barrelTip;
+        private SpriteRenderer _outline;
+        private SpriteRenderer _shine;
+        private Transform _eyeL, _eyeR, _pupilL, _pupilR;
+        private float _blinkAt = 2f;
+        private float _blinkUntil;
         private SpriteRenderer _ring;
         private SpriteRenderer _cooldownRing;
         private Transform _barrelPivot;
@@ -66,7 +72,9 @@ namespace Metadream.Shoot.Player
         public float MaxHealth => Stats.character.maxHealth;
         public bool IsDead { get; private set; }
         public bool IsPlaying { get; private set; }
-        public bool CountsAsAlive => !IsDead || _pendingRevive;
+        public bool CountsAsAlive => !Absent && (!IsDead || _pendingRevive);
+        /// <summary>The player left the match (online); the fighter stays hidden until the same device rejoins.</summary>
+        public bool Absent { get; set; }
         public AmmoState Ammo { get; } = new AmmoState();
         public BlockState Block { get; } = new BlockState();
         public Vector2 AimDirection { get; private set; } = Vector2.right;
@@ -98,6 +106,64 @@ namespace Metadream.Shoot.Player
         }
         private readonly List<DamageOverTime> _dots = new List<DamageOverTime>();
         public bool IsPoisoned => _dots.Count > 0;
+
+        private struct SpeedModifier
+        {
+            public float Factor;
+            public float Remaining;
+        }
+
+        private readonly List<SpeedModifier> _speedMods = new List<SpeedModifier>();
+
+        /// <summary>Product of active temporary movement modifiers (slows &lt; 1, boosts &gt; 1).</summary>
+        public float SpeedFactor
+        {
+            get
+            {
+                float k = 1f;
+                foreach (var m in _speedMods) k *= m.Factor;
+                return Mathf.Clamp(k, 0.05f, 4f);
+            }
+        }
+
+        public bool IsSlowed => SpeedFactor < 0.99f;
+
+        /// <summary>Temporary movement multiplier (0.5 = half speed). Same-direction modifiers refresh instead of stacking.</summary>
+        public void AddSpeedModifier(float factor, float duration)
+        {
+            if (IsDead || duration <= 0f || factor <= 0f || Mathf.Approximately(factor, 1f)) return;
+            for (int i = 0; i < _speedMods.Count; i++)
+            {
+                var m = _speedMods[i];
+                if ((m.Factor < 1f) != (factor < 1f)) continue;
+                m.Factor = factor < 1f ? Mathf.Min(m.Factor, factor) : Mathf.Max(m.Factor, factor);
+                m.Remaining = Mathf.Max(m.Remaining, duration);
+                _speedMods[i] = m;
+                return;
+            }
+            _speedMods.Add(new SpeedModifier { Factor = factor, Remaining = duration });
+        }
+
+        private void TickSpeedModifiers(float dt)
+        {
+            for (int i = _speedMods.Count - 1; i >= 0; i--)
+            {
+                var m = _speedMods[i];
+                m.Remaining -= dt;
+                if (m.Remaining <= 0f) _speedMods.RemoveAt(i);
+                else _speedMods[i] = m;
+            }
+        }
+
+        /// <summary>Block becomes ready immediately (Refresh, etc.).</summary>
+        public void RefreshBlock() => Block.counter = 1000f;
+
+        /// <summary>Moves the fighter (teleport), keeping velocity.</summary>
+        public void Teleport(Vector2 position)
+        {
+            if (_rb != null) _rb.position = position;
+            transform.position = position;
+        }
         public int BlocksSucceeded { get; private set; }
 
         public event Action<Fighter, Fighter> Died;
@@ -153,8 +219,33 @@ namespace Metadream.Shoot.Player
             _barrel.sharedMaterial = SpriteFactory.Material;
             _barrel.color = Color.Lerp(Color, Color.black, 0.45f);
             _barrel.sortingOrder = 11;
+            var tip = new GameObject("BarrelTip");
+            tip.transform.SetParent(_barrelPivot, false);
+            tip.transform.localPosition = new Vector3(0.82f, 0f, 0f);
+            tip.transform.localScale = new Vector3(0.08f, 0.26f, 1f);
+            _barrelTip = tip.AddComponent<SpriteRenderer>();
+            _barrelTip.sprite = SpriteFactory.Square;
+            _barrelTip.sharedMaterial = SpriteFactory.Material;
+            _barrelTip.color = Color.Lerp(Color, Color.black, 0.65f);
+            _barrelTip.sortingOrder = 12;
 
-            _ring = MakeChildSprite("BlockRing", SpriteFactory.Ring, 1.9f, 12);
+            // Character model: dark outline, soft highlight and eyes that follow the aim.
+            _outline = MakeChildSprite("Outline", SpriteFactory.Circle, 1.14f, 9);
+            _outline.color = Color.Lerp(Color, Color.black, 0.55f);
+            _shine = MakeChildSprite("Shine", SpriteFactory.Circle, 0.34f, 11);
+            _shine.transform.localPosition = new Vector3(-0.17f, 0.2f, 0f);
+            _shine.color = new Color(1f, 1f, 1f, 0.32f);
+            _eyeL = MakeChildSprite("EyeL", SpriteFactory.Circle, 0.25f, 13).transform;
+            _eyeR = MakeChildSprite("EyeR", SpriteFactory.Circle, 0.25f, 13).transform;
+            _eyeL.localPosition = new Vector3(-0.13f, 0.1f, 0f);
+            _eyeR.localPosition = new Vector3(0.13f, 0.1f, 0f);
+            var pl = MakeChildSprite("PupilL", SpriteFactory.Circle, 0.12f, 14);
+            var pr = MakeChildSprite("PupilR", SpriteFactory.Circle, 0.12f, 14);
+            pl.color = pr.color = Palette.Ink;
+            _pupilL = pl.transform;
+            _pupilR = pr.transform;
+
+            _ring = MakeChildSprite("BlockRing", SpriteFactory.Ring, 1.9f, 15);
             _ring.color = new Color(1f, 1f, 1f, 0f);
             _cooldownRing = MakeChildSprite("ReadyRing", SpriteFactory.Ring, 1.35f, 9);
             _cooldownRing.color = new Color(1f, 1f, 1f, 0f);
@@ -274,6 +365,7 @@ namespace Metadream.Shoot.Player
             if (!IsPlaying || IsDead) return;
 
             float dt = Time.deltaTime;
+            TickSpeedModifiers(dt);
             _frame = Input != null ? Input.Read(new InputContext { Position = transform.position, Camera = Camera.main }) : default;
 
             _sinceGrounded += dt;
@@ -307,7 +399,7 @@ namespace Metadream.Shoot.Player
             Vector2 v = _rb.linearVelocity;
             v += MotionModel.BaseGravityDelta(Time.fixedDeltaTime);
             v += MotionModel.AirGravityDelta(_sinceGrounded, _sinceWallGrab, t.gravityForce, t.gravityExponent);
-            v += MotionModel.MoveDelta(_frame.Move, t.force, Stats.character.movementSpeed, 0f, mult);
+            v += MotionModel.MoveDelta(_frame.Move, t.force, Stats.character.movementSpeed * SpeedFactor, 0f, mult);
             v -= MotionModel.DragDelta(v, t.extraDrag, mult);
             _rb.linearVelocity = v;
         }
@@ -431,6 +523,7 @@ namespace Metadream.Shoot.Player
             ShotsFired++;
             Vector2 origin = (Vector2)transform.position + dir * (Radius + 0.35f);
             var projectile = Projectile.Spawn(this, origin, dir, Stats.gun);
+            Fx.Muzzle(origin, Color, Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg);
             for (int i = 0; i < Effects.Count; i++) Effects[i].OnShoot(projectile);
         }
 
@@ -537,8 +630,7 @@ namespace Metadream.Shoot.Player
             IsDead = true;
             IsPlaying = false;
             if (_burst != null) { StopCoroutine(_burst); _burst = null; }
-            Fx.Burst(transform.position, Color, 22, 14f);
-            Fx.Shake(0.5f);
+            Fx.Death(transform.position, Color);
             if (RespawnsLeft > 0)
             {
                 RespawnsLeft--;
@@ -604,7 +696,28 @@ namespace Metadream.Shoot.Player
             if (_body == null || !_body.enabled) return;
             float angle = Mathf.Atan2(AimDirection.y, AimDirection.x) * Mathf.Rad2Deg;
             _barrelPivot.localRotation = Quaternion.Euler(0f, 0f, angle);
-            _body.color = Color.Lerp(Color, Color.white, _flash * 0.8f);
+            float hp = MaxHealth > 0f ? Mathf.Clamp01(Health / MaxHealth) : 1f;
+            float danger = hp < 0.3f ? (0.5f + 0.5f * Mathf.Sin(Time.time * 10f)) * (1f - hp / 0.3f) * 0.45f : 0f;
+            Color baseColor = Color.Lerp(Color, new Color(1f, 0.15f, 0.1f), danger);
+            if (IsSlowed) baseColor = Color.Lerp(baseColor, new Color(0.65f, 0.85f, 1f), 0.35f);
+            if (IsPoisoned) baseColor = Color.Lerp(baseColor, new Color(0.45f, 0.85f, 0.25f), 0.3f);
+            _body.color = Color.Lerp(baseColor, Color.white, _flash * 0.8f);
+            if (_outline != null)
+            {
+                _outline.color = Color.Lerp(Color.Lerp(Color, Color.black, 0.55f), Color.white, _flash * 0.5f);
+                Vector2 look = AimDirection.sqrMagnitude > 0.01f ? AimDirection.normalized : Vector2.right;
+                Vector3 pupil = new Vector3(look.x, look.y, 0f) * 0.05f;
+                _eyeL.localPosition = new Vector3(-0.13f + look.x * 0.08f, 0.1f + look.y * 0.06f, 0f);
+                _eyeR.localPosition = new Vector3(0.13f + look.x * 0.08f, 0.1f + look.y * 0.06f, 0f);
+                _pupilL.localPosition = _eyeL.localPosition + pupil;
+                _pupilR.localPosition = _eyeR.localPosition + pupil;
+                if (Time.time > _blinkAt) { _blinkUntil = Time.time + 0.11f; _blinkAt = Time.time + UnityEngine.Random.Range(2f, 5f); }
+                bool blink = Time.time < _blinkUntil || IsDead;
+                float ey = blink ? 0.04f : 0.25f;
+                _eyeL.localScale = _eyeR.localScale = new Vector3(0.25f, ey, 1f);
+                float py = blink ? 0.02f : 0.12f;
+                _pupilL.localScale = _pupilR.localScale = new Vector3(0.12f, py, 1f);
+            }
             float blockAlpha = Block.IsBlocking ? Mathf.Clamp01(1f - Block.sinceBlock / CombatRules.BlockWindow) : 0f;
             _ring.color = new Color(1f, 1f, 1f, blockAlpha);
             bool ready = BlockReadyProgress >= 1f;

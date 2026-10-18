@@ -77,6 +77,8 @@ namespace Metadream.Shoot
         public bool DedicatedServer { get; set; }
         /// <summary>Client: replaces the host's GameOver hint (null keeps the server's text).</summary>
         public string MirrorGameOverText { get; set; }
+        /// <summary>Shown under the winner banner when the match ended because players left.</summary>
+        public string ForfeitText { get; private set; }
         public int MatchesCompleted { get; private set; }
         public int PointsPlayed { get; private set; }
         public int PicksCompleted { get; private set; }
@@ -217,6 +219,9 @@ namespace Metadream.Shoot
 
         public void StartMatch(GameMode mode, MatchSettings settings = null, int? seed = null)
         {
+            // Offline entry point (menus, CPU modes): never inherits a network role.
+            Role = NetRole.Offline;
+            ReplayMode = false;
             int s = seed ?? Environment.TickCount;
             StartWithSlots(mode, BuildSlots(mode, new System.Random(s ^ 0x5bd1e995)), settings, s);
         }
@@ -253,6 +258,7 @@ namespace Metadream.Shoot
             Match.PhaseChanged += OnPhaseChanged;
             foreach (var f in Fighters) Match.Join(f.PlayerId, f.TeamId);
             LoadMapImmediate(_rotation.Next());
+            ForfeitText = null;
             Log("match start mode=" + mode + " players=" + Fighters.Count + " points=" + Settings.pointsToWinRound + " rounds=" + Settings.roundsToWinGame);
             Match.StartMatch();
         }
@@ -265,6 +271,54 @@ namespace Metadream.Shoot
             f.Input = input;
             if (input is BotInput bot) bot.Self = f;
             if (newName != null) f.SetDisplayName(newName);
+        }
+
+        /// <summary>Host: a player left (absent = true) or the same device rejoined (false). No CPU takes the slot.</summary>
+        public void SetAbsent(int slot, bool absent)
+        {
+            if (slot < 0 || slot >= Fighters.Count) return;
+            var f = Fighters[slot];
+            f.Absent = absent;
+            if (absent)
+            {
+                f.Input = null;
+                f.SetPresent(false);
+                if (Picker == f && Match != null) ConfirmPick(BotChoice());
+                _deathPending = true;
+            }
+            Log("slot " + slot + (absent ? " left (absent)" : " rejoined"));
+        }
+
+        /// <summary>Ends the match immediately in favour of winningTeam.</summary>
+        public void Forfeit(int winningTeam, string reason)
+        {
+            if (Match == null || Match.Phase == MatchPhase.GameOver) return;
+            ForfeitText = reason;
+            _offer = null;
+            Picker = null;
+            Log("forfeit winner=" + winningTeam + " (" + reason + ")");
+            Match.Forfeit(winningTeam);
+        }
+
+        /// <summary>Team of the local player (-1 when only watching).</summary>
+        public int LocalTeam
+        {
+            get
+            {
+                if (ReplayMode) return -1;
+                if (Role == NetRole.Client) return LocalSlot >= 0 && LocalSlot < Fighters.Count ? Fighters[LocalSlot].TeamId : -1;
+                if (Role == NetRole.Host) return DedicatedServer ? -1 : 0;
+                if (Mode == GameMode.CpuDemo || Mode == GameMode.CpuDemoTeams) return -1;
+                return Fighters.Count > 0 ? Fighters[0].TeamId : -1;
+            }
+        }
+
+        /// <summary>Leaves the result screen: everyone goes back to the main menu (no rematch).</summary>
+        public void ExitResults()
+        {
+            if (Role == NetRole.Client) { Online.NetClientSession.Active?.Leave(null); return; }
+            if (Role == NetRole.Host && !DedicatedServer && Online.NetHostSession.Active != null) { Online.NetHostSession.Active.Close(); FrontEnd.Instance?.ShowTitle(); return; }
+            ReturnToTitle();
         }
 
         public void Rematch()
@@ -282,6 +336,7 @@ namespace Metadream.Shoot
             PicksCompleted = 0;
             Match.ResetToLobby();
             LoadMapImmediate(_rotation.Next());
+            ForfeitText = null;
             Log("rematch");
             Match.StartMatch();
         }
@@ -353,9 +408,35 @@ namespace Metadream.Shoot
                 return;
             }
             if (Match == null) return;
-            if (Match.Phase == MatchPhase.Battle) BattleTime += Time.deltaTime;
+            if (Match.Phase == MatchPhase.Battle)
+            {
+                BattleTime += Time.deltaTime;
+                UpdateSuddenDeath(Time.deltaTime);
+            }
             if (IsPicking) UpdatePick();
             if (Match.Phase == MatchPhase.GameOver) UpdateGameOver(kb);
+        }
+
+        /// <summary>Seconds of one point before sudden death starts (everyone takes growing damage so points always end).</summary>
+        public const float SuddenDeathAfter = 45f;
+        private float _suddenFx;
+
+        private void UpdateSuddenDeath(float dt)
+        {
+            if (BattleTime < SuddenDeathAfter) return;
+            float over = BattleTime - SuddenDeathAfter;
+            if (over < dt * 1.5f) { Banner = "서든 데스"; SubBanner = "모두 점점 체력을 잃습니다"; BannerColor = new Color(1f, 0.35f, 0.25f); }
+            else if (over > 1.6f && Banner == "서든 데스") { Banner = null; SubBanner = null; }
+            float dps = 4f + over * 2f;
+            _suddenFx -= dt;
+            bool fx = _suddenFx <= 0f;
+            if (fx) _suddenFx = 0.6f;
+            foreach (var f in Fighters.ToArray())
+            {
+                if (f == null || f.IsDead || !f.IsPlaying) continue;
+                f.TakeDamage(dps * dt, null, Vector2.zero, true, 0f, true);
+                if (fx) Fx.Ring(f.Position, new Color(1f, 0.3f, 0.2f), 1.6f);
+            }
         }
 
         private void LateUpdate()
@@ -374,7 +455,7 @@ namespace Metadream.Shoot
         {
             if (Picker == null) return;
             float open = Time.unscaledTime - _pickOpenedAt;
-            if (Picker.IsBot)
+            if (Picker.IsBot || Picker.Absent || Picker.Input == null)
             {
                 if (open > 0.9f) ConfirmPick(BotChoice());
                 return;
@@ -402,9 +483,10 @@ namespace Metadream.Shoot
         private void UpdateGameOver(Keyboard kb)
         {
             if (Time.unscaledTime - _gameOverAt < 1f) return;
+            if (DedicatedServer) return; // the server goes back to its lobby on its own
             bool confirm = kb != null && (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame || kb.fKey.wasPressedThisFrame || kb.periodKey.wasPressedThisFrame);
             foreach (var gp in Gamepad.all) confirm |= gp.buttonSouth.wasPressedThisFrame || gp.startButton.wasPressedThisFrame;
-            if (confirm) Rematch();
+            if (confirm && !AutoRematch) ExitResults();
         }
 
         // ------------------------------------------------------------ phases
@@ -464,6 +546,7 @@ namespace Metadream.Shoot
             foreach (var f in Fighters)
             {
                 int team = Mathf.Clamp(f.TeamId, 0, 1);
+                if (f.Absent) { f.SetPresent(false); continue; }
                 f.Revive(CurrentMap.SpawnPoint(f.TeamId, perTeam[team]++), true);
                 f.SetPlaying(false);
             }
@@ -474,7 +557,7 @@ namespace Metadream.Shoot
             yield return new WaitForSecondsRealtime(0.55f);
             Banner = "싸워라!";
             SubBanner = null;
-            foreach (var f in Fighters) f.SetPlaying(true);
+            foreach (var f in Fighters) if (!f.Absent) f.SetPlaying(true);
             yield return new WaitForSecondsRealtime(0.45f);
             if (Banner == "싸워라!") Banner = null;
         }
@@ -521,11 +604,10 @@ namespace Metadream.Shoot
             _gameOverAt = Time.unscaledTime;
             Banner = SideName(team) + " 승리!";
             BannerColor = SideColor(team);
-            SubBanner = DedicatedServer ? RematchDelay.ToString("0") + "초 후 재대결이 시작됩니다 · Esc: 나가기"
-                : Role == NetRole.Host ? "확인(Enter/Space/F): 재대결 · Esc: 방으로"
-                : "확인(Enter/Space/F): 재대결 · Esc: 타이틀";
+            SubBanner = ForfeitText ?? "확인(Enter/Space): 메인 화면으로";
             if (AutoRematch)
             {
+                // Test harness only (-demo / -autoplay command lines); players never get a rematch.
                 yield return new WaitForSecondsRealtime(RematchDelay);
                 _routine = null;
                 Rematch();
@@ -717,6 +799,8 @@ namespace Metadream.Shoot
         public void StartSandbox(MapDefinition map, List<SlotSpec> slots, BaseStats stats = null)
         {
             StopFlow();
+            Role = NetRole.Offline;
+            ReplayMode = false;
             DestroyFighters();
             Projectile.ClearAll();
             Fx.ClearAll();

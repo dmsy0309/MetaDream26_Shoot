@@ -18,6 +18,8 @@ namespace Metadream.Shoot.Presentation
     /// </summary>
     public sealed class DebugOverlay : MonoBehaviour
     {
+        /// <summary>Hides the overlay without leaving debug mode (replay "디버그 UI" toggle).</summary>
+        public static bool Suppressed;
         private readonly Queue<string> _log = new Queue<string>();
         private bool _panel = true;
         private int _cardCursor;
@@ -87,7 +89,7 @@ namespace Metadream.Shoot.Presentation
 
         private void OnGUI()
         {
-            if (!DevSettings.DebugMode) return;
+            if (!DevSettings.DebugMode || Suppressed) return;
             var flow = GameFlow.Instance;
             if (flow == null) return;
             GUI.depth = -100;
