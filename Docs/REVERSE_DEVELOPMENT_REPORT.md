@@ -107,6 +107,19 @@
 - 메인 호스팅 서버: 리플레이 수신·검색(`/replays.html?q=`)·다운로드. tailnet 밖 공개는 Hermes가 Tailscale Funnel(HTTPS 10000)로 시도했으나 sudo 권한이 없어 관리자 명령 1회가 남음.
 - 문서: `Docs/CONTENT_JSON_GUIDE.md`(맵/스킬 JSON 작성 가이드).
 
+### 10.10 원작 카드·맵, 기믹, 이탈 규칙, 그래픽 (2026-10-18 5차)
+
+- git: 프로젝트를 git 저장소로 만들고 기준 커밋(`05b1460`) 뒤에 작업 단위로 커밋. `Library/Builds/Logs/UserSettings` 등은 `.gitignore`.
+- 원작 콘텐츠 추출: ROUNDS 에셋(Unity 2022.3.34f1)에는 타입 트리가 없어서 UnityPy + TypeTreeGenerator(게임 `Managed/*.dll`)로 MonoBehaviour를 해석. CardInfo 79개(카드 이름·설명·희귀도·카드 수치 줄)와 같은 프리팹의 Gun/CharacterStatModifiers/Block 값을 modifiers로 변환해 `rounds_*.json` 69장 생성(미완성·재현 불가 10장 제외). Map 씬 70개 중 BoxCollider2D/Rigidbody2D/SpawnPoint(TEAMID)/MoveSequence로 표현 가능한 33개를 `rounds_NN.json`으로 변환(로프·파괴 상자·물리 상자 60개 초과 맵 제외, 경기장 밖 장식 제거).
+- 카드 기믹: `Abilities/GimmickEffects.cs`에 효과 20종(유도, 성장, 감속/기절, 밀치기, 시한폭탄, 체력 소모 사격, 감속/흡수 오라, 방어 시 폭발·끌어당김·감속·회복·순간이동·돌진·재장전·강화, 탄 소진 시 방어, 피해 시 재장전·방어 초기화·가속). 모두 카드 JSON `effects`로 설정.
+- 맵 기믹: 회전(`r`), 움직이는 발판(`movers`, 박스 스냅샷으로 온라인 동기화), 점프대(`pads`), 피해 구역(`hazards`), 바람(`winds`). 예시 맵 3개(용암 승강장·바람 협곡·가시 구덩이). 원작 MoveSequence는 movers로 근사(속도 6, timeAtPos → wait).
+- 서든 데스: 한 포인트 45초 초과 시 모두 점점 체력 감소(복잡한 원작 맵에서 CPU 대전이 끝나지 않던 문제 해결).
+- 이탈 규칙(프로토콜 v5): 게임 중 나간 자리는 봇 없이 비워 두고(SlotKind.Disconnected), 같은 PC 이름으로 다시 접속하면 그 자리로 복귀. 한 팀의 사람이 모두 나가면 남은 팀이 즉시 승리(MatchStateMachine.Forfeit).
+- 재대결 제거: 결과 창(승리/패배, 팀별 참가자·카드 수)에서 확인하면 메인 화면으로. 방장은 방을 닫고, 참가자는 연결을 끊고, 전용 서버는 `rematchDelay`초 뒤 대기실로. (`-demo` 등 테스트용 명령줄에서만 자동 재대결 유지)
+- 리플레이: 디버그 UI 토글(버튼/Tab), 줌 후 WASD(Shift 빠르게) 자유 이동.
+- 그래픽: 캐릭터 외곽선·하이라이트·조준을 따라가는 눈·깜빡임·저체력 경고·감속/중독 색, 총구 섬광, 탄 광채·코어·긴 꼬리, 명중 섬광, 사망 폭발(링·플래시·흔들림), 회전 파편. 카드: 프레임·희귀도 띠·문양(영문 머리글자)·효과 표시점·ROUNDS 배지·선택 카드 빛남. FxType에 Muzzle/Death 추가.
+- 검증: EditMode 57/57, PlayMode 6/6. 실제 빌드로 2대2 방장+참가자 3명: 이탈 시 봇 없음 → 같은 PC 재접속 복귀 → 한 팀 전원 이탈 시 즉시 승리 → 참가자 결과 확인 후 메인 화면을 확인.
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

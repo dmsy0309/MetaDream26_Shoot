@@ -27,7 +27,7 @@
             "positive": true
         },
         {
-            "label": "Splash DMG",
+            "label": "폭발 피해",
             "amount": "+2",
             "positive": true
         },

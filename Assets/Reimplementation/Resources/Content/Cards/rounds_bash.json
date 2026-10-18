@@ -20,8 +20,8 @@
     ],
     "lines": [
         {
-            "label": "Bullet stun",
-            "amount": "+A little bit of",
+            "label": "명중 시 기절",
+            "amount": "+약간",
             "positive": true
         },
         {

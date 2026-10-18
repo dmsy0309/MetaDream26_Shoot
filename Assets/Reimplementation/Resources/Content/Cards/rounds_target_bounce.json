@@ -23,7 +23,7 @@
     ],
     "lines": [
         {
-            "label": "Bullet bounce",
+            "label": "탄 튕김",
             "amount": "+1",
             "positive": true
         },

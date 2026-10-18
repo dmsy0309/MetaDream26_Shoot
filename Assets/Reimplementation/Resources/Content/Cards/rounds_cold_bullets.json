@@ -21,7 +21,7 @@
     ],
     "lines": [
         {
-            "label": "Bullet slow",
+            "label": "명중 시 감속",
             "amount": "+70%",
             "positive": true
         },

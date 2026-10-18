@@ -94,7 +94,7 @@ namespace Metadream.Shoot.Presentation
             if (flow == null) return;
             GUI.depth = -100;
             Begin();
-            if (!flow.InMenu && flow.HasMatch) DrawGizmos(flow);
+            if (!flow.InMenu && flow.HasMatch && !flow.IsPicking && flow.Phase != Core.MatchPhase.GameOver) DrawGizmos(flow);
             // Menus already show a content summary (title/settings); the panel would cover their headings.
             if (_panel && !flow.InMenu) DrawPanel(flow);
             if (_toast != null && Time.unscaledTime < _toastUntil)
@@ -143,7 +143,7 @@ namespace Metadream.Shoot.Presentation
             foreach (var issue in ContentDatabase.Issues)
             {
                 if (issue.Severity == ContentSeverity.Info) continue;
-                if (issueLines++ >= 10) { issues.Append("…\n"); break; }
+                if (issueLines++ >= 4) { issues.Append("… (설정 화면에서 전체 보기)\n"); break; }
                 issues.Append(issue.Severity == ContentSeverity.Error ? "[오류] " : "[경고] ").Append(issue.Source).Append(": ").Append(issue.Message).Append('\n');
             }
             var logs = new StringBuilder();

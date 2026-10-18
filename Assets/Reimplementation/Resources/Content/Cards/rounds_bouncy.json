@@ -17,7 +17,7 @@
     "effects": [],
     "lines": [
         {
-            "label": "Bullet bounces",
+            "label": "탄 튕김",
             "amount": "+2",
             "positive": true
         },

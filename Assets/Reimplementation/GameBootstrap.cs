@@ -88,7 +88,7 @@ namespace Metadream.Shoot
 
             if (HasArg(args, "-demo") || HasArg(args, "-demo2v2"))
             {
-                flow.AutoRematch = true;
+                flow.AutoRematch = !HasArg(args, "-norematch");
                 flow.StartMatch(HasArg(args, "-demo2v2") ? GameMode.CpuDemoTeams : GameMode.CpuDemo, settings, seed);
             }
             else if (HasArg(args, "-host"))
@@ -149,14 +149,21 @@ namespace Metadream.Shoot
             if (autoQuit > 0f) StartCoroutine(QuitAfter(autoQuit, timeScale));
             else if (timeScale != 1f) StartCoroutine(HoldTimeScale(timeScale));
             string captureDir = StringArg(args, "-capture");
-            if (captureDir != null) StartCoroutine(Capture(captureDir));
+            if (captureDir != null) StartCoroutine(Capture(captureDir, StringArg(args, "-captureat")));
         }
 
-        private static IEnumerator Capture(string directory)
+        private static IEnumerator Capture(string directory, string times)
         {
             System.IO.Directory.CreateDirectory(directory);
             float start = Time.realtimeSinceStartup;
-            foreach (float at in new[] { 2f, 5f, 9f })
+            var list = new System.Collections.Generic.List<float> { 2f, 5f, 9f };
+            if (!string.IsNullOrEmpty(times))
+            {
+                list.Clear();
+                foreach (var part in times.Split(','))
+                    if (float.TryParse(part, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var t)) list.Add(t);
+            }
+            foreach (float at in list)
             {
                 while (Time.realtimeSinceStartup - start < at) yield return null;
                 yield return new WaitForEndOfFrame();
