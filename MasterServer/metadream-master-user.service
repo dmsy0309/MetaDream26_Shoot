@@ -1,0 +1,14 @@
+[Unit]
+Description=Metadream Shoot main hosting server (server list, user service)
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=@APP_DIR@
+ExecStart=/usr/bin/env python3 @APP_DIR@/master_server.py --host 0.0.0.0 --port 47800 --http-port 47801 --ttl 15
+Restart=always
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=default.target

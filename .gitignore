@@ -1,0 +1,31 @@
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+*.csproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.pidb
+*.booproj
+.vs/
+.idea/
+.DS_Store
+# build outputs, local replays, screenshots taken by the editor capture tool
+/Builds/
+/Replays/
+/Assets/Screenshots/
+/Assets/Screenshots.meta
+/Screenshots/
+# python
+__pycache__/
+*.pyc
+# main hosting server runtime data
+MasterServer/replays/
+MasterServer/admin_token.txt
+

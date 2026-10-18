@@ -1,0 +1,442 @@
+source_evidence_id=ev_d49e6ff07727b35f8d425aad275b3d9018a2cf126e001dfe507c8ad64a2fc7e1
+## fields OutOfBoundsHandler: outOfBounds, almostOutOfBounds, mainCam, data, wall, burst, burstBig, warning, shieldWall, shieldBurst, shieldBurstBig, rpc, counter, warningPercentage
+
+### OutOfBoundsHandler.Start 0x06000370 IL_SHA256=2495ac28adfb3893b4ca2867ecd91ac0f119883a3ce81ac7bdb0fcc447352d08
+    0 ldarg.0        
+    1 call           UnityEngine.Component.get_transform
+    6 call           UnityEngine.Vector3.get_up
+   11 ldc.r4         200
+   16 call           UnityEngine.Vector3.op_Multiply
+   21 callvirt       UnityEngine.Transform.set_position
+   26 ldarg.0        
+   27 ldarg.0        
+   28 call           UnityEngine.Component.get_transform
+   33 callvirt       UnityEngine.Transform.get_root
+   38 callvirt       0x2b000009
+   43 stfld          OutOfBoundsHandler.data
+   48 ldarg.0        
+   49 ldarg.0        
+   50 ldfld          OutOfBoundsHandler.data
+   55 callvirt       0x2b0000a4
+   60 stfld          OutOfBoundsHandler.rpc
+   65 ldarg.0        
+   66 ldfld          OutOfBoundsHandler.rpc
+   71 ldfld          ChildRPC.childRPCs
+   76 ldstr          "OutOfBounds"
+   81 ldarg.0        
+   82 ldftn          OutOfBoundsHandler.RPCA_DisplayOutOfBounds
+   88 newobj         System.Action..ctor
+   93 callvirt       System.Collections.Generic.Dictionary`2.Add
+   98 ldarg.0        
+   99 ldfld          OutOfBoundsHandler.rpc
+  104 ldfld          ChildRPC.childRPCs
+  109 ldstr          "ShieldOutOfBounds"
+  114 ldarg.0        
+  115 ldftn          OutOfBoundsHandler.RPCA_DisplayOutOfBoundsShield
+  121 newobj         System.Action..ctor
+  126 callvirt       System.Collections.Generic.Dictionary`2.Add
+  131 ldarg.0        
+  132 ldsfld         MainCam.instance
+  137 callvirt       UnityEngine.Component.get_transform
+  142 callvirt       0x2b000005
+  147 stfld          OutOfBoundsHandler.mainCam
+  152 ldarg.0        
+  153 call           UnityEngine.Component.get_transform
+  158 ldnull         
+  159 callvirt       UnityEngine.Transform.SetParent
+  164 ret            
+
+### OutOfBoundsHandler.LateUpdate 0x06000371 IL_SHA256=2ed17a743b4bdd458dd0db6174bc95d6d78bd2fb7aa72cfda59de97a865d32f6
+    0 ldarg.0        
+    1 ldfld          OutOfBoundsHandler.data
+    6 call           UnityEngine.Object.op_Implicit
+   11 brtrue.s       25
+   13 ldarg.0        
+   14 call           UnityEngine.Component.get_gameObject
+   19 call           UnityEngine.Object.Destroy
+   24 ret            
+   25 ldarg.0        
+   26 ldfld          OutOfBoundsHandler.data
+   31 ldfld          CharacterData.playerVel
+   36 ldfld          PlayerVelocity.simulated
+   41 brtrue.s       44
+   43 ret            
+   44 ldarg.0        
+   45 ldfld          OutOfBoundsHandler.data
+   50 ldfld          CharacterData.isPlaying
+   55 brtrue.s       58
+   57 ret            
+   58 ldc.r4         -35.560001373291016
+   63 ldc.r4         35.560001373291016
+   68 ldarg.0        
+   69 ldfld          OutOfBoundsHandler.data
+   74 callvirt       UnityEngine.Component.get_transform
+   79 callvirt       UnityEngine.Transform.get_position
+   84 ldfld          UnityEngine.Vector3.x
+   89 call           UnityEngine.Mathf.InverseLerp
+   94 stloc.0        
+   95 ldc.r4         -20
+  100 ldc.r4         20
+  105 ldarg.0        
+  106 ldfld          OutOfBoundsHandler.data
+  111 callvirt       UnityEngine.Component.get_transform
+  116 callvirt       UnityEngine.Transform.get_position
+  121 ldfld          UnityEngine.Vector3.y
+  126 call           UnityEngine.Mathf.InverseLerp
+  131 stloc.1        
+  132 ldloca.s       2
+  134 ldloc.0        
+  135 ldloc.1        
+  136 ldc.r4         0
+  141 call           UnityEngine.Vector3..ctor
+  146 ldloca.s       2
+  148 ldloc.2        
+  149 ldfld          UnityEngine.Vector3.x
+  154 ldc.r4         0
+  159 ldc.r4         1
+  164 call           UnityEngine.Mathf.Clamp
+  169 ldloc.2        
+  170 ldfld          UnityEngine.Vector3.y
+  175 ldc.r4         0
+  180 ldc.r4         1
+  185 call           UnityEngine.Mathf.Clamp
+  190 ldloc.2        
+  191 ldfld          UnityEngine.Vector3.z
+  196 call           UnityEngine.Vector3..ctor
+  201 ldarg.0        
+  202 ldc.i4.0       
+  203 stfld          OutOfBoundsHandler.almostOutOfBounds
+  208 ldarg.0        
+  209 ldc.i4.0       
+  210 stfld          OutOfBoundsHandler.outOfBounds
+  215 ldloc.2        
+  216 ldfld          UnityEngine.Vector3.x
+  221 ldc.r4         0
+  226 ble.s          267
+  228 ldloc.2        
+  229 ldfld          UnityEngine.Vector3.x
+  234 ldc.r4         1
+  239 bge.s          267
+  241 ldloc.2        
+  242 ldfld          UnityEngine.Vector3.y
+  247 ldc.r4         1
+  252 bge.s          267
+  254 ldloc.2        
+  255 ldfld          UnityEngine.Vector3.y
+  260 ldc.r4         0
+  265 bgt.un.s       279
+  267 ldarg.0        
+  268 ldc.i4.1       
+  269 stfld          OutOfBoundsHandler.outOfBounds
+  274 br             470
+  279 ldloc.2        
+  280 ldfld          UnityEngine.Vector3.x
+  285 ldarg.0        
+  286 ldfld          OutOfBoundsHandler.warningPercentage
+  291 blt.s          347
+  293 ldloc.2        
+  294 ldfld          UnityEngine.Vector3.x
+  299 ldc.r4         1
+  304 ldarg.0        
+  305 ldfld          OutOfBoundsHandler.warningPercentage
+  310 sub            
+  311 bgt.s          347
+  313 ldloc.2        
+  314 ldfld          UnityEngine.Vector3.y
+  319 ldc.r4         1
+  324 ldarg.0        
+  325 ldfld          OutOfBoundsHandler.warningPercentage
+  330 sub            
+  331 bgt.s          347
+  333 ldloc.2        
+  334 ldfld          UnityEngine.Vector3.y
+  339 ldarg.0        
+  340 ldfld          OutOfBoundsHandler.warningPercentage
+  345 bge.un.s       470
+  347 ldarg.0        
+  348 ldc.i4.1       
+  349 stfld          OutOfBoundsHandler.almostOutOfBounds
+  354 ldloc.2        
+  355 ldfld          UnityEngine.Vector3.x
+  360 ldarg.0        
+  361 ldfld          OutOfBoundsHandler.warningPercentage
+  366 bge.un.s       380
+  368 ldloca.s       2
+  370 ldc.r4         0
+  375 stfld          UnityEngine.Vector3.x
+  380 ldloc.2        
+  381 ldfld          UnityEngine.Vector3.x
+  386 ldc.r4         1
+  391 ldarg.0        
+  392 ldfld          OutOfBoundsHandler.warningPercentage
+  397 sub            
+  398 ble.un.s       412
+  400 ldloca.s       2
+  402 ldc.r4         1
+  407 stfld          UnityEngine.Vector3.x
+  412 ldloc.2        
+  413 ldfld          UnityEngine.Vector3.y
+  418 ldarg.0        
+  419 ldfld          OutOfBoundsHandler.warningPercentage
+  424 bge.un.s       438
+  426 ldloca.s       2
+  428 ldc.r4         0
+  433 stfld          UnityEngine.Vector3.y
+  438 ldloc.2        
+  439 ldfld          UnityEngine.Vector3.y
+  444 ldc.r4         1
+  449 ldarg.0        
+  450 ldfld          OutOfBoundsHandler.warningPercentage
+  455 sub            
+  456 ble.un.s       470
+  458 ldloca.s       2
+  460 ldc.r4         1
+  465 stfld          UnityEngine.Vector3.y
+  470 ldarg.0        
+  471 ldarg.0        
+  472 ldfld          OutOfBoundsHandler.counter
+  477 ldsfld         TimeHandler.deltaTime
+  482 add            
+  483 stfld          OutOfBoundsHandler.counter
+  488 ldarg.0        
+  489 ldfld          OutOfBoundsHandler.almostOutOfBounds
+  494 brfalse.s      620
+  496 ldarg.0        
+  497 ldfld          OutOfBoundsHandler.data
+  502 ldfld          CharacterData.dead
+  507 brtrue.s       620
+  509 ldarg.0        
+  510 call           UnityEngine.Component.get_transform
+  515 ldarg.0        
+  516 ldloc.2        
+  517 call           OutOfBoundsHandler.GetPoint
+  522 callvirt       UnityEngine.Transform.set_position
+  527 ldarg.0        
+  528 call           UnityEngine.Component.get_transform
+  533 call           UnityEngine.Vector3.get_forward
+  538 ldarg.0        
+  539 ldfld          OutOfBoundsHandler.data
+  544 callvirt       UnityEngine.Component.get_transform
+  549 callvirt       UnityEngine.Transform.get_position
+  554 ldarg.0        
+  555 call           UnityEngine.Component.get_transform
+  560 callvirt       UnityEngine.Transform.get_position
+  565 call           UnityEngine.Vector3.op_Subtraction
+  570 call           UnityEngine.Vector3.op_UnaryNegation
+  575 call           UnityEngine.Quaternion.LookRotation
+  580 callvirt       UnityEngine.Transform.set_rotation
+  585 ldarg.0        
+  586 ldfld          OutOfBoundsHandler.counter
+  591 ldc.r4         0.10000000149011612
+  596 ble.un.s       620
+  598 ldarg.0        
+  599 ldc.r4         0
+  604 stfld          OutOfBoundsHandler.counter
+  609 ldarg.0        
+  610 ldfld          OutOfBoundsHandler.warning
+  615 callvirt       UnityEngine.ParticleSystem.Play
+  620 ldarg.0        
+  621 ldfld          OutOfBoundsHandler.outOfBounds
+  626 brfalse        1109
+  631 ldarg.0        
+  632 ldfld          OutOfBoundsHandler.data
+  637 ldfld          CharacterData.dead
+  642 brtrue         1109
+  647 ldarg.0        
+  648 ldfld          OutOfBoundsHandler.data
+  653 ldc.r4         0
+  658 stfld          CharacterData.sinceGrounded
+  663 ldarg.0        
+  664 call           UnityEngine.Component.get_transform
+  669 ldarg.0        
+  670 ldloc.2        
+  671 call           OutOfBoundsHandler.GetPoint
+  676 callvirt       UnityEngine.Transform.set_position
+  681 ldarg.0        
+  682 call           UnityEngine.Component.get_transform
+  687 call           UnityEngine.Vector3.get_forward
+  692 ldarg.0        
+  693 ldfld          OutOfBoundsHandler.data
+  698 callvirt       UnityEngine.Component.get_transform
+  703 callvirt       UnityEngine.Transform.get_position
+  708 ldarg.0        
+  709 call           UnityEngine.Component.get_transform
+  714 callvirt       UnityEngine.Transform.get_position
+  719 call           UnityEngine.Vector3.op_Subtraction
+  724 call           UnityEngine.Vector3.op_UnaryNegation
+  729 call           UnityEngine.Quaternion.LookRotation
+  734 callvirt       UnityEngine.Transform.set_rotation
+  739 ldarg.0        
+  740 ldfld          OutOfBoundsHandler.counter
+  745 ldc.r4         0.10000000149011612
+  750 ble.un         1109
+  755 ldarg.0        
+  756 ldfld          OutOfBoundsHandler.data
+  761 ldfld          CharacterData.view
+  766 callvirt       Photon.Pun.PhotonView.get_IsMine
+  771 brfalse        1109
+  776 ldarg.0        
+  777 ldc.r4         0
+  782 stfld          OutOfBoundsHandler.counter
+  787 ldarg.0        
+  788 ldfld          OutOfBoundsHandler.data
+  793 ldfld          CharacterData.block
+  798 callvirt       Block.IsBlocking
+  803 brfalse        955
+  808 ldarg.0        
+  809 ldfld          OutOfBoundsHandler.rpc
+  814 ldstr          "ShieldOutOfBounds"
+  819 callvirt       ChildRPC.CallFunction
+  824 ldarg.0        
+  825 ldfld          OutOfBoundsHandler.data
+  830 ldfld          CharacterData.playerVel
+  835 dup            
+  836 ldfld          PlayerVelocity.velocity
+  841 ldc.r4         0
+  846 call           UnityEngine.Vector2.op_Multiply
+  851 stfld          PlayerVelocity.velocity
+  856 ldarg.0        
+  857 ldfld          OutOfBoundsHandler.data
+  862 ldfld          CharacterData.healthHandler
+  867 ldarg.0        
+  868 call           UnityEngine.Component.get_transform
+  873 callvirt       UnityEngine.Transform.get_up
+  878 ldc.r4         400
+  883 call           UnityEngine.Vector3.op_Multiply
+  888 ldarg.0        
+  889 ldfld          OutOfBoundsHandler.data
+  894 ldfld          CharacterData.playerVel
+  899 ldfld          PlayerVelocity.mass
+  904 call           UnityEngine.Vector3.op_Multiply
+  909 call           UnityEngine.Vector2.op_Implicit
+  914 ldc.i4.1       
+  915 ldc.i4.0       
+  916 ldc.i4.1       
+  917 ldc.r4         0
+  922 callvirt       HealthHandler.CallTakeForce
+  927 ldarg.0        
+  928 ldfld          OutOfBoundsHandler.data
+  933 callvirt       UnityEngine.Component.get_transform
+  938 ldarg.0        
+  939 call           UnityEngine.Component.get_transform
+  944 callvirt       UnityEngine.Transform.get_position
+  949 callvirt       UnityEngine.Transform.set_position
+  954 ret            
+  955 ldarg.0        
+  956 ldfld          OutOfBoundsHandler.rpc
+  961 ldstr          "OutOfBounds"
+  966 callvirt       ChildRPC.CallFunction
+  971 ldarg.0        
+  972 ldfld          OutOfBoundsHandler.data
+  977 ldfld          CharacterData.healthHandler
+  982 ldarg.0        
+  983 call           UnityEngine.Component.get_transform
+  988 callvirt       UnityEngine.Transform.get_up
+  993 ldc.r4         200
+  998 call           UnityEngine.Vector3.op_Multiply
+ 1003 ldarg.0        
+ 1004 ldfld          OutOfBoundsHandler.data
+ 1009 ldfld          CharacterData.playerVel
+ 1014 ldfld          PlayerVelocity.mass
+ 1019 call           UnityEngine.Vector3.op_Multiply
+ 1024 call           UnityEngine.Vector2.op_Implicit
+ 1029 ldc.i4.1       
+ 1030 ldc.i4.0       
+ 1031 ldc.i4.1       
+ 1032 ldc.r4         0
+ 1037 callvirt       HealthHandler.CallTakeForce
+ 1042 ldarg.0        
+ 1043 ldfld          OutOfBoundsHandler.data
+ 1048 ldfld          CharacterData.healthHandler
+ 1053 ldc.r4         51
+ 1058 ldarg.0        
+ 1059 call           UnityEngine.Component.get_transform
+ 1064 callvirt       UnityEngine.Transform.get_up
+ 1069 call           UnityEngine.Vector3.op_Multiply
+ 1074 call           UnityEngine.Vector2.op_Implicit
+ 1079 ldarg.0        
+ 1080 ldfld          OutOfBoundsHandler.data
+ 1085 callvirt       UnityEngine.Component.get_transform
+ 1090 callvirt       UnityEngine.Transform.get_position
+ 1095 call           UnityEngine.Vector2.op_Implicit
+ 1100 ldnull         
+ 1101 ldnull         
+ 1102 ldc.i4.1       
+ 1103 ldc.i4.1       
+ 1104 callvirt       Damagable.CallTakeDamage
+ 1109 ret            
+
+### OutOfBoundsHandler.GetPoint 0x06000372 IL_SHA256=ef6d1173500621edc8ef893639e219f70a1670107695db73b9408cfe6f8fadec
+    0 ldc.r4         -35.560001373291016
+    5 ldc.r4         35.560001373291016
+   10 ldarg.1        
+   11 ldfld          UnityEngine.Vector3.x
+   16 call           UnityEngine.Mathf.Lerp
+   21 ldc.r4         -20
+   26 ldc.r4         20
+   31 ldarg.1        
+   32 ldfld          UnityEngine.Vector3.y
+   37 call           UnityEngine.Mathf.Lerp
+   42 stloc.0        
+   43 ldloc.0        
+   44 ldc.r4         0
+   49 newobj         UnityEngine.Vector3..ctor
+   54 ret            
+
+### OutOfBoundsHandler.RPCA_DisplayOutOfBounds 0x06000373 IL_SHA256=55068176e58c1a858c8a0957c7d7f7cb1750973e371d436eaa7ac173355e9610
+    0 call           Sonigon.SoundManager.get_Instance
+    5 ldarg.0        
+    6 ldfld          OutOfBoundsHandler.data
+   11 ldfld          CharacterData.playerSounds
+   16 ldfld          PlayerSounds.soundCharacterDamageScreenEdge
+   21 ldarg.0        
+   22 ldfld          OutOfBoundsHandler.data
+   27 callvirt       UnityEngine.Component.get_transform
+   32 callvirt       Sonigon.SoundManager.Play
+   37 ldarg.0        
+   38 ldfld          OutOfBoundsHandler.burst
+   43 callvirt       UnityEngine.ParticleSystem.Play
+   48 ldarg.0        
+   49 ldfld          OutOfBoundsHandler.wall
+   54 callvirt       UnityEngine.ParticleSystem.Play
+   59 ldarg.0        
+   60 ldfld          OutOfBoundsHandler.burstBig
+   65 callvirt       UnityEngine.ParticleSystem.Play
+   70 ldarg.0        
+   71 ldfld          OutOfBoundsHandler.data
+   76 ldc.r4         0
+   81 stfld          CharacterData.sinceGrounded
+   86 ret            
+
+### OutOfBoundsHandler.RPCA_DisplayOutOfBoundsShield 0x06000374 IL_SHA256=787fcc2c9c29a0d1cadfc39e5170dac97b2046eb889a5f610d83cd1cca7394f2
+    0 call           Sonigon.SoundManager.get_Instance
+    5 ldarg.0        
+    6 ldfld          OutOfBoundsHandler.data
+   11 ldfld          CharacterData.playerSounds
+   16 ldfld          PlayerSounds.soundCharacterDamageScreenEdge
+   21 ldarg.0        
+   22 ldfld          OutOfBoundsHandler.data
+   27 callvirt       UnityEngine.Component.get_transform
+   32 callvirt       Sonigon.SoundManager.Play
+   37 ldarg.0        
+   38 ldfld          OutOfBoundsHandler.shieldBurst
+   43 callvirt       UnityEngine.ParticleSystem.Play
+   48 ldarg.0        
+   49 ldfld          OutOfBoundsHandler.shieldWall
+   54 callvirt       UnityEngine.ParticleSystem.Play
+   59 ldarg.0        
+   60 ldfld          OutOfBoundsHandler.shieldBurstBig
+   65 callvirt       UnityEngine.ParticleSystem.Play
+   70 ldarg.0        
+   71 ldfld          OutOfBoundsHandler.data
+   76 ldc.r4         0
+   81 stfld          CharacterData.sinceGrounded
+   86 ret            
+
+### OutOfBoundsHandler..ctor 0x06000375 IL_SHA256=23e940413c3cb71436c60a94aaec7918b27f5307d342e91f8d155457a8809a68
+    0 ldarg.0        
+    1 ldc.r4         0.10000000149011612
+    6 stfld          OutOfBoundsHandler.warningPercentage
+   11 ldarg.0        
+   12 call           UnityEngine.MonoBehaviour..ctor
+   17 ret            

@@ -1,0 +1,21 @@
+# systemd unit example. Copy the server folder to /opt/metadream-shoot, create a user, then:
+#   sudo cp metadream-shoot.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now metadream-shoot
+#   journalctl -u metadream-shoot -f
+[Unit]
+Description=Metadream Shoot dedicated server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=metadream
+WorkingDirectory=/opt/metadream-shoot
+ExecStart=/opt/metadream-shoot/start-server.sh
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

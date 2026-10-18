@@ -1,0 +1,1130 @@
+source_evidence_id=ev_d49e6ff07727b35f8d425aad275b3d9018a2cf126e001dfe507c8ad64a2fc7e1
+## fields <DoAttacks>d__89: <>1__state, <>2__current, <>4__this, charge, forceAttack, damageM, recoilM, useAmmo, attacks, <i>5__2
+## fields <FireBurst>d__93: <>1__state, <>2__current, <>4__this, charge, useAmmo, damageM, <currentNumberOfProjectiles>5__2, <ii>5__3
+## fields GeneralInput: controlledElseWhere, stunnedInput, silencedInput, left, right, up, down, jump, shoot, shield, direction, latestPressedDirection, aimDirection, lastAimDirection, jumpWasPressed, jumpIsPressed, shootWasPressed, shootIsPressed, shootWasReleased, shieldWasPressed, acceptWasPressed, inputType, lastStickDirection, stickPressDir, data, m_optionLockMouse, m_optionLockStick, snapNumber
+## fields Gravity: gravityForce, exponent, rig, data
+
+### GeneralInput.Start 0x06000242 IL_SHA256=31fc63bf81e3855908ebc0a0ec5178e43d8b6235293201e55d20ac1b500c9a9f
+    0 ldarg.0        
+    1 ldarg.0        
+    2 call           0x2b000009
+    7 stfld          GeneralInput.data
+   12 ldarg.0        
+   13 ldsfld         Optionshandler.instance
+   18 callvirt       Optionshandler.get_OptionsData
+   23 ldstr          "OPTION_MOUSE_AIM8DIR"
+   28 callvirt       OptionsData.GetSettingsData
+   33 stfld          GeneralInput.m_optionLockMouse
+   38 ldarg.0        
+   39 ldsfld         Optionshandler.instance
+   44 callvirt       Optionshandler.get_OptionsData
+   49 ldstr          "OPTION_CONTROLLER_AIM8DIR"
+   54 callvirt       OptionsData.GetSettingsData
+   59 stfld          GeneralInput.m_optionLockStick
+   64 ret            
+
+### GeneralInput.ResetInput 0x06000243 IL_SHA256=e133b8d475075a9f96a571e796e7c4cfd7599dbe7df29b33d88d3b9b861b4c84
+    0 ldarg.0        
+    1 call           UnityEngine.Vector3.get_zero
+    6 stfld          GeneralInput.direction
+   11 ldarg.0        
+   12 call           UnityEngine.Vector3.get_zero
+   17 stfld          GeneralInput.aimDirection
+   22 ldarg.0        
+   23 ldc.i4.0       
+   24 stfld          GeneralInput.jumpIsPressed
+   29 ldarg.0        
+   30 ldc.i4.0       
+   31 stfld          GeneralInput.jumpWasPressed
+   36 ldarg.0        
+   37 ldc.i4.0       
+   38 stfld          GeneralInput.shootIsPressed
+   43 ldarg.0        
+   44 ldc.i4.0       
+   45 stfld          GeneralInput.shootWasPressed
+   50 ldarg.0        
+   51 ldc.i4.0       
+   52 stfld          GeneralInput.shootWasReleased
+   57 ldarg.0        
+   58 ldc.i4.0       
+   59 stfld          GeneralInput.shieldWasPressed
+   64 ldarg.0        
+   65 ldc.i4.0       
+   66 stfld          GeneralInput.acceptWasPressed
+   71 ret            
+
+### GeneralInput.Update 0x06000244 IL_SHA256=8d02a730633eec7e57a81d00b7e9d584d0776c4888739fab5d1d0560289aa580
+    0 ldarg.0        
+    1 ldfld          GeneralInput.controlledElseWhere
+    6 brfalse.s      9
+    8 ret            
+    9 ldarg.0        
+   10 call           GeneralInput.ResetInput
+   15 ldarg.0        
+   16 call           GeneralInput.DoUIInput
+   21 ldsfld         GameManager.lockInput
+   26 brfalse.s      29
+   28 ret            
+   29 ldarg.0        
+   30 ldfld          GeneralInput.stunnedInput
+   35 brfalse.s      38
+   37 ret            
+   38 ldarg.0        
+   39 ldfld          GeneralInput.data
+   44 ldfld          CharacterData.isPlaying
+   49 brtrue.s       52
+   51 ret            
+   52 ldarg.0        
+   53 ldfld          GeneralInput.data
+   58 ldfld          CharacterData.playerActions
+   63 brfalse        720
+   68 ldarg.0        
+   69 ldarg.0        
+   70 ldfld          GeneralInput.direction
+   75 ldarg.0        
+   76 ldfld          GeneralInput.data
+   81 ldfld          CharacterData.playerActions
+   86 ldfld          PlayerActions.Move
+   91 call           InControl.TwoAxisInputControl.op_Implicit
+   96 call           UnityEngine.Vector3.op_Addition
+  101 stfld          GeneralInput.direction
+  106 ldarg.0        
+  107 ldarg.0        
+  108 ldarg.0        
+  109 ldfld          GeneralInput.direction
+  114 call           GeneralInput.MakeEightDirections
+  119 stfld          GeneralInput.direction
+  124 ldarg.0        
+  125 ldfld          GeneralInput.direction
+  130 call           UnityEngine.Vector3.get_zero
+  135 call           UnityEngine.Vector3.op_Inequality
+  140 brfalse.s      154
+  142 ldarg.0        
+  143 ldarg.0        
+  144 ldfld          GeneralInput.direction
+  149 stfld          GeneralInput.latestPressedDirection
+  154 ldarg.0        
+  155 ldfld          GeneralInput.data
+  160 ldfld          CharacterData.playerActions
+  165 callvirt       InControl.PlayerActionSet.get_Device
+  170 brtrue.s       274
+  172 ldarg.0        
+  173 ldsfld         MainCam.instance
+  178 ldfld          MainCam.cam
+  183 call           UnityEngine.Input.get_mousePosition
+  188 callvirt       UnityEngine.Camera.ScreenToWorldPoint
+  193 ldarg.0        
+  194 call           UnityEngine.Component.get_transform
+  199 callvirt       UnityEngine.Transform.get_position
+  204 call           UnityEngine.Vector3.op_Subtraction
+  209 stfld          GeneralInput.aimDirection
+  214 ldarg.0        
+  215 ldflda         GeneralInput.aimDirection
+  220 ldc.r4         0
+  225 stfld          UnityEngine.Vector3.z
+  230 ldarg.0        
+  231 ldflda         GeneralInput.aimDirection
+  236 call           UnityEngine.Vector3.Normalize
+  241 ldarg.0        
+  242 ldfld          GeneralInput.m_optionLockMouse
+  247 callvirt       SettingsData.get_CurrentValueToggle
+  252 brfalse.s      377
+  254 ldarg.0        
+  255 ldarg.0        
+  256 ldarg.0        
+  257 ldfld          GeneralInput.aimDirection
+  262 call           GeneralInput.MakeEightDirections
+  267 stfld          GeneralInput.aimDirection
+  272 br.s           377
+  274 ldarg.0        
+  275 ldflda         GeneralInput.aimDirection
+  280 ldflda         UnityEngine.Vector3.x
+  285 dup            
+  286 ldind.r4       
+  287 ldarg.0        
+  288 ldfld          GeneralInput.data
+  293 ldfld          CharacterData.playerActions
+  298 ldfld          PlayerActions.Aim
+  303 callvirt       InControl.TwoAxisInputControl.get_X
+  308 add            
+  309 stind.r4       
+  310 ldarg.0        
+  311 ldflda         GeneralInput.aimDirection
+  316 ldflda         UnityEngine.Vector3.y
+  321 dup            
+  322 ldind.r4       
+  323 ldarg.0        
+  324 ldfld          GeneralInput.data
+  329 ldfld          CharacterData.playerActions
+  334 ldfld          PlayerActions.Aim
+  339 callvirt       InControl.TwoAxisInputControl.get_Y
+  344 add            
+  345 stind.r4       
+  346 ldarg.0        
+  347 ldfld          GeneralInput.m_optionLockStick
+  352 callvirt       SettingsData.get_CurrentValueToggle
+  357 brfalse.s      377
+  359 ldarg.0        
+  360 ldarg.0        
+  361 ldarg.0        
+  362 ldfld          GeneralInput.aimDirection
+  367 call           GeneralInput.MakeEightDirections
+  372 stfld          GeneralInput.aimDirection
+  377 ldarg.0        
+  378 ldfld          GeneralInput.aimDirection
+  383 call           UnityEngine.Vector3.get_zero
+  388 call           UnityEngine.Vector3.op_Inequality
+  393 brfalse.s      468
+  395 ldarg.0        
+  396 ldarg.0        
+  397 ldfld          GeneralInput.aimDirection
+  402 call           UnityEngine.Vector3.get_up
+  407 ldc.r4         0.12999999523162842
+  412 call           UnityEngine.Vector3.op_Multiply
+  417 ldarg.0        
+  418 ldfld          GeneralInput.data
+  423 ldfld          CharacterData.weaponHandler
+  428 ldfld          WeaponHandler.gun
+  433 ldfld          Gun.projectileSpeed
+  438 ldc.r4         1
+  443 ldc.r4         100
+  448 call           UnityEngine.Mathf.Clamp
+  453 call           UnityEngine.Vector3.op_Division
+  458 call           UnityEngine.Vector3.op_Addition
+  463 stfld          GeneralInput.aimDirection
+  468 ldarg.0        
+  469 ldfld          GeneralInput.aimDirection
+  474 call           UnityEngine.Vector3.get_zero
+  479 call           UnityEngine.Vector3.op_Inequality
+  484 brfalse.s      498
+  486 ldarg.0        
+  487 ldarg.0        
+  488 ldfld          GeneralInput.aimDirection
+  493 stfld          GeneralInput.lastAimDirection
+  498 ldarg.0        
+  499 ldfld          GeneralInput.data
+  504 ldfld          CharacterData.playerActions
+  509 ldfld          PlayerActions.Jump
+  514 callvirt       InControl.OneAxisInputControl.get_IsPressed
+  519 brfalse.s      528
+  521 ldarg.0        
+  522 ldc.i4.1       
+  523 stfld          GeneralInput.jumpIsPressed
+  528 ldarg.0        
+  529 ldfld          GeneralInput.data
+  534 ldfld          CharacterData.playerActions
+  539 ldfld          PlayerActions.Jump
+  544 callvirt       InControl.OneAxisInputControl.get_WasPressed
+  549 brfalse.s      558
+  551 ldarg.0        
+  552 ldc.i4.1       
+  553 stfld          GeneralInput.jumpWasPressed
+  558 ldarg.0        
+  559 ldfld          GeneralInput.silencedInput
+  564 brfalse.s      567
+  566 ret            
+  567 ldarg.0        
+  568 ldfld          GeneralInput.data
+  573 ldfld          CharacterData.playerActions
+  578 ldfld          PlayerActions.Fire
+  583 callvirt       InControl.OneAxisInputControl.get_IsPressed
+  588 brfalse.s      597
+  590 ldarg.0        
+  591 ldc.i4.1       
+  592 stfld          GeneralInput.shootIsPressed
+  597 ldarg.0        
+  598 ldfld          GeneralInput.data
+  603 ldfld          CharacterData.playerActions
+  608 ldfld          PlayerActions.Fire
+  613 callvirt       InControl.OneAxisInputControl.get_WasPressed
+  618 brfalse.s      627
+  620 ldarg.0        
+  621 ldc.i4.1       
+  622 stfld          GeneralInput.shootWasPressed
+  627 ldarg.0        
+  628 ldfld          GeneralInput.data
+  633 ldfld          CharacterData.playerActions
+  638 ldfld          PlayerActions.Fire
+  643 callvirt       InControl.OneAxisInputControl.get_WasReleased
+  648 brfalse.s      657
+  650 ldarg.0        
+  651 ldc.i4.1       
+  652 stfld          GeneralInput.shootWasReleased
+  657 ldarg.0        
+  658 ldfld          GeneralInput.data
+  663 ldfld          CharacterData.playerActions
+  668 ldfld          PlayerActions.Block
+  673 callvirt       InControl.OneAxisInputControl.get_WasPressed
+  678 brfalse.s      687
+  680 ldarg.0        
+  681 ldc.i4.1       
+  682 stfld          GeneralInput.shieldWasPressed
+  687 ldarg.0        
+  688 ldfld          GeneralInput.data
+  693 ldfld          CharacterData.playerActions
+  698 ldfld          PlayerActions.Chat
+  703 callvirt       InControl.OneAxisInputControl.get_WasReleased
+  708 brfalse.s      720
+  710 call           0x2b000075
+  715 callvirt       DevConsole.OpenTextDialog
+  720 ret            
+
+### GeneralInput.DoUIInput 0x06000245 IL_SHA256=3e027f5fbf83fc6a4ebed70f16d51bf51542dc6f84df0ffd5efbe4cec3a8bd0b
+    0 ldc.i4.2       
+    1 stloc.0        
+    2 ldarg.0        
+    3 ldfld          GeneralInput.data
+    8 ldfld          CharacterData.playerActions
+   13 ldfld          PlayerActions.Move
+   18 callvirt       InControl.TwoAxisInputControl.get_X
+   23 ldc.r4         0.699999988079071
+   28 ble.un.s       32
+   30 ldc.i4.1       
+   31 stloc.0        
+   32 ldarg.0        
+   33 ldfld          GeneralInput.data
+   38 ldfld          CharacterData.playerActions
+   43 ldfld          PlayerActions.Move
+   48 callvirt       InControl.TwoAxisInputControl.get_X
+   53 ldc.r4         -0.699999988079071
+   58 bge.un.s       62
+   60 ldc.i4.0       
+   61 stloc.0        
+   62 ldloc.0        
+   63 ldarg.0        
+   64 ldfld          GeneralInput.lastStickDirection
+   69 beq.s          87
+   71 ldarg.0        
+   72 ldloc.0        
+   73 stfld          GeneralInput.stickPressDir
+   78 ldarg.0        
+   79 ldloc.0        
+   80 stfld          GeneralInput.lastStickDirection
+   85 br.s           94
+   87 ldarg.0        
+   88 ldc.i4.2       
+   89 stfld          GeneralInput.stickPressDir
+   94 ldarg.0        
+   95 ldfld          GeneralInput.data
+  100 ldfld          CharacterData.playerActions
+  105 ldfld          PlayerActions.Jump
+  110 callvirt       InControl.OneAxisInputControl.get_WasPressed
+  115 brfalse.s      124
+  117 ldarg.0        
+  118 ldc.i4.1       
+  119 stfld          GeneralInput.acceptWasPressed
+  124 ret            
+
+### GeneralInput.DoStun 0x06000246 IL_SHA256=3bd1fe01d956c59c6cff399315f65926465ab28bbf62b743f7649bf1a57b8f7f
+    0 ldarg.0        
+    1 call           UnityEngine.Component.get_gameObject
+    6 callvirt       UnityEngine.GameObject.get_activeSelf
+   11 brfalse.s      27
+   13 ldarg.0        
+   14 ldarg.0        
+   15 ldarg.1        
+   16 call           GeneralInput.Stun
+   21 call           UnityEngine.MonoBehaviour.StartCoroutine
+   26 pop            
+   27 ret            
+
+### GeneralInput.Stun 0x06000247 IL_SHA256=3c4637bed0265398ada6f7678922fc33a1b39c67bccf1e73a198008da9bef382
+    0 ldc.i4.0       
+    1 newobj         <Stun>d__34..ctor
+    6 dup            
+    7 ldarg.0        
+    8 stfld          <Stun>d__34.<>4__this
+   13 dup            
+   14 ldarg.1        
+   15 stfld          <Stun>d__34.stun
+   20 ret            
+
+### GeneralInput.SetState 0x06000248 IL_SHA256=eed3a60169a686977eae3be0233f6a1684ee02c95f3415625f98a2fc5533757e
+    0 ldarg.0        
+    1 call           UnityEngine.Component.get_transform
+    6 ldarg.1        
+    7 callvirt       UnityEngine.Transform.set_position
+   12 ret            
+
+### GeneralInput.Move 0x06000249 IL_SHA256=522ab706af78f5c19a85d609f7488ad1e6b506f78a338467531a02f5a92a0cbe
+    0 ldarg.0        
+    1 call           GeneralInput.ResetInput
+    6 ldarg.2        
+    7 brfalse.s      31
+    9 ldarg.0        
+   10 ldarg.0        
+   11 ldfld          GeneralInput.direction
+   16 call           UnityEngine.Vector3.get_left
+   21 call           UnityEngine.Vector3.op_Addition
+   26 stfld          GeneralInput.direction
+   31 ldarg.1        
+   32 brfalse.s      56
+   34 ldarg.0        
+   35 ldarg.0        
+   36 ldfld          GeneralInput.direction
+   41 call           UnityEngine.Vector3.get_right
+   46 call           UnityEngine.Vector3.op_Addition
+   51 stfld          GeneralInput.direction
+   56 ldarg.3        
+   57 brfalse.s      81
+   59 ldarg.0        
+   60 ldarg.0        
+   61 ldfld          GeneralInput.direction
+   66 call           UnityEngine.Vector3.get_up
+   71 call           UnityEngine.Vector3.op_Addition
+   76 stfld          GeneralInput.direction
+   81 ldarg.s        4
+   83 brfalse.s      107
+   85 ldarg.0        
+   86 ldarg.0        
+   87 ldfld          GeneralInput.direction
+   92 call           UnityEngine.Vector3.get_down
+   97 call           UnityEngine.Vector3.op_Addition
+  102 stfld          GeneralInput.direction
+  107 ldarg.s        5
+  109 brfalse.s      118
+  111 ldarg.0        
+  112 ldc.i4.1       
+  113 stfld          GeneralInput.jumpWasPressed
+  118 ldc.i4.6       
+  119 newarr         0x01000101
+  124 dup            
+  125 ldc.i4.0       
+  126 ldstr          "Move: Right: "
+  131 stelem.ref     
+  132 dup            
+  133 ldc.i4.1       
+  134 ldarga.s       1
+  136 call           System.Boolean.ToString
+  141 stelem.ref     
+  142 dup            
+  143 ldc.i4.2       
+  144 ldstr          " Left: "
+  149 stelem.ref     
+  150 dup            
+  151 ldc.i4.3       
+  152 ldarga.s       2
+  154 call           System.Boolean.ToString
+  159 stelem.ref     
+  160 dup            
+  161 ldc.i4.4       
+  162 ldstr          " Jump: "
+  167 stelem.ref     
+  168 dup            
+  169 ldc.i4.5       
+  170 ldarga.s       5
+  172 call           System.Boolean.ToString
+  177 stelem.ref     
+  178 call           System.String.Concat
+  183 call           UnityEngine.Debug.Log
+  188 ldarg.0        
+  189 ldfld          GeneralInput.shoot
+  194 call           UnityEngine.Input.GetKey
+  199 brfalse.s      208
+  201 ldarg.0        
+  202 ldc.i4.1       
+  203 stfld          GeneralInput.shootIsPressed
+  208 ldarg.0        
+  209 ldfld          GeneralInput.shoot
+  214 call           UnityEngine.Input.GetKeyDown
+  219 brfalse.s      228
+  221 ldarg.0        
+  222 ldc.i4.1       
+  223 stfld          GeneralInput.shootWasPressed
+  228 ldarg.0        
+  229 ldfld          GeneralInput.shoot
+  234 call           UnityEngine.Input.GetKeyUp
+  239 brfalse.s      248
+  241 ldarg.0        
+  242 ldc.i4.1       
+  243 stfld          GeneralInput.shootWasReleased
+  248 ret            
+
+### GeneralInput.MakeEightDirections 0x0600024a IL_SHA256=3fb92cc2b9bf681381026dab0718c7a1724f9a692674781e2829b7ed53dc8204
+    0 call           UnityEngine.Vector3.get_zero
+    5 pop            
+    6 ldc.r4         360
+   11 ldarg.0        
+   12 ldfld          GeneralInput.snapNumber
+   17 conv.r4        
+   18 div            
+   19 stloc.0        
+   20 call           UnityEngine.Vector3.get_up
+   25 stloc.1        
+   26 ldloc.1        
+   27 stloc.2        
+   28 ldc.r4         999
+   33 stloc.3        
+   34 ldarg.1        
+   35 stloc.s        4
+   37 ldc.i4.0       
+   38 stloc.s        5
+   40 br.s           99
+   42 call           UnityEngine.Vector3.get_forward
+   47 ldloc.0        
+   48 call           UnityEngine.Vector3.op_Multiply
+   53 ldloc.s        5
+   55 conv.r4        
+   56 call           UnityEngine.Vector3.op_Multiply
+   61 call           UnityEngine.Quaternion.Euler
+   66 ldloc.1        
+   67 call           UnityEngine.Quaternion.op_Multiply
+   72 stloc.2        
+   73 ldarg.1        
+   74 ldloc.2        
+   75 call           UnityEngine.Vector3.Angle
+   80 stloc.s        6
+   82 ldloc.s        6
+   84 ldloc.3        
+   85 bge.un.s       93
+   87 ldloc.s        6
+   89 stloc.3        
+   90 ldloc.2        
+   91 stloc.s        4
+   93 ldloc.s        5
+   95 ldc.i4.1       
+   96 add            
+   97 stloc.s        5
+   99 ldloc.s        5
+  101 ldarg.0        
+  102 ldfld          GeneralInput.snapNumber
+  107 blt.s          42
+  109 ldarg.1        
+  110 call           UnityEngine.Vector3.get_zero
+  115 call           UnityEngine.Vector3.op_Equality
+  120 brfalse.s      128
+  122 call           UnityEngine.Vector3.get_zero
+  127 ret            
+  128 ldarga.s       1
+  130 call           UnityEngine.Vector3.get_normalized
+  135 starg.s        1
+  137 ldloc.s        4
+  139 ret            
+
+### GeneralInput..ctor 0x0600024b IL_SHA256=8419b01e5889887ea8ce3af8bf72730a67832303ce029f2c379c0e2d53b67261
+    0 ldarg.0        
+    1 ldc.i4.2       
+    2 stfld          GeneralInput.stickPressDir
+    7 ldarg.0        
+    8 ldc.i4.s       16
+   10 stfld          GeneralInput.snapNumber
+   15 ldarg.0        
+   16 call           UnityEngine.MonoBehaviour..ctor
+   21 ret            
+
+### Gravity.Start 0x06000285 IL_SHA256=892de8d9fc9a429ced10bac1d9f1d2654db2fe084817bdc6ef946fb0a1fd2f68
+    0 ldarg.0        
+    1 ldarg.0        
+    2 call           0x2b000009
+    7 stfld          Gravity.data
+   12 ldarg.0        
+   13 ldarg.0        
+   14 call           0x2b00004c
+   19 stfld          Gravity.rig
+   24 ret            
+
+### Gravity.FixedUpdate 0x06000286 IL_SHA256=0b30c8f26ea58914cfe7ea9d3bc4dc01834aff8edc76c27ae533961f5863f9aa
+    0 ldarg.0        
+    1 ldfld          Gravity.data
+    6 ldfld          CharacterData.sinceGrounded
+   11 stloc.0        
+   12 ldarg.0        
+   13 ldfld          Gravity.data
+   18 ldfld          CharacterData.sinceWallGrab
+   23 ldloc.0        
+   24 bge.un.s       38
+   26 ldarg.0        
+   27 ldfld          Gravity.data
+   32 ldfld          CharacterData.sinceWallGrab
+   37 stloc.0        
+   38 ldloc.0        
+   39 ldc.r4         0
+   44 ble.un.s       118
+   46 ldarg.0        
+   47 ldfld          Gravity.rig
+   52 call           UnityEngine.Vector3.get_down
+   57 ldsfld         TimeHandler.timeScale
+   62 call           UnityEngine.Vector3.op_Multiply
+   67 ldloc.0        
+   68 ldarg.0        
+   69 ldfld          Gravity.exponent
+   74 call           UnityEngine.Mathf.Pow
+   79 call           UnityEngine.Vector3.op_Multiply
+   84 ldarg.0        
+   85 ldfld          Gravity.gravityForce
+   90 call           UnityEngine.Vector3.op_Multiply
+   95 ldarg.0        
+   96 ldfld          Gravity.rig
+  101 ldfld          PlayerVelocity.mass
+  106 call           UnityEngine.Vector3.op_Multiply
+  111 ldc.i4.0       
+  112 callvirt       PlayerVelocity.AddForce
+  117 ret            
+  118 ldarg.0        
+  119 ldfld          Gravity.rig
+  124 call           UnityEngine.Vector3.get_down
+  129 ldsfld         TimeHandler.timeScale
+  134 call           UnityEngine.Vector3.op_Multiply
+  139 ldloc.0        
+  140 call           UnityEngine.Vector3.op_Multiply
+  145 ldarg.0        
+  146 ldfld          Gravity.gravityForce
+  151 call           UnityEngine.Vector3.op_Multiply
+  156 ldarg.0        
+  157 ldfld          Gravity.rig
+  162 ldfld          PlayerVelocity.mass
+  167 call           UnityEngine.Vector3.op_Multiply
+  172 ldc.i4.0       
+  173 callvirt       PlayerVelocity.AddForce
+  178 ret            
+
+### Gravity..ctor 0x06000287 IL_SHA256=d9c6b1d0619f479e861c70f1c209936f519609ac8334868f76215e56ac4c141d
+    0 ldarg.0        
+    1 ldc.r4         1
+    6 stfld          Gravity.exponent
+   11 ldarg.0        
+   12 call           UnityEngine.MonoBehaviour..ctor
+   17 ret            
+
+### <DoAttacks>d__89..ctor 0x06000cf6 IL_SHA256=81b4f8a1a125df726112cec694014d99942a83faf615c896ebfcde2d152f0e80
+    0 ldarg.0        
+    1 call           System.Object..ctor
+    6 ldarg.0        
+    7 ldarg.1        
+    8 stfld          <DoAttacks>d__89.<>1__state
+   13 ret            
+
+### <DoAttacks>d__89.System.IDisposable.Dispose 0x06000cf7 IL_SHA256=684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1
+    0 ret            
+
+### <DoAttacks>d__89.MoveNext 0x06000cf8 IL_SHA256=64f55f029986aafc0925a126277fdd675d18557c1aa3bb9f326c9d47f1f0f7b4
+    0 ldarg.0        
+    1 ldfld          <DoAttacks>d__89.<>1__state
+    6 stloc.0        
+    7 ldarg.0        
+    8 ldfld          <DoAttacks>d__89.<>4__this
+   13 stloc.1        
+   14 ldloc.0        
+   15 brfalse.s      23
+   17 ldloc.0        
+   18 ldc.i4.1       
+   19 beq.s          108
+   21 ldc.i4.0       
+   22 ret            
+   23 ldarg.0        
+   24 ldc.i4.m1      
+   25 stfld          <DoAttacks>d__89.<>1__state
+   30 ldarg.0        
+   31 ldc.i4.0       
+   32 stfld          <DoAttacks>d__89.<i>5__2
+   37 br.s           131
+   39 ldloc.1        
+   40 ldarg.0        
+   41 ldfld          <DoAttacks>d__89.charge
+   46 ldarg.0        
+   47 ldfld          <DoAttacks>d__89.forceAttack
+   52 ldarg.0        
+   53 ldfld          <DoAttacks>d__89.damageM
+   58 ldarg.0        
+   59 ldfld          <DoAttacks>d__89.recoilM
+   64 ldarg.0        
+   65 ldfld          <DoAttacks>d__89.useAmmo
+   70 call           Gun.DoAttack
+   75 ldarg.0        
+   76 ldc.r4         0.30000001192092896
+   81 ldarg.0        
+   82 ldfld          <DoAttacks>d__89.attacks
+   87 conv.r4        
+   88 div            
+   89 newobj         UnityEngine.WaitForSeconds..ctor
+   94 stfld          <DoAttacks>d__89.<>2__current
+   99 ldarg.0        
+  100 ldc.i4.1       
+  101 stfld          <DoAttacks>d__89.<>1__state
+  106 ldc.i4.1       
+  107 ret            
+  108 ldarg.0        
+  109 ldc.i4.m1      
+  110 stfld          <DoAttacks>d__89.<>1__state
+  115 ldarg.0        
+  116 ldfld          <DoAttacks>d__89.<i>5__2
+  121 stloc.2        
+  122 ldarg.0        
+  123 ldloc.2        
+  124 ldc.i4.1       
+  125 add            
+  126 stfld          <DoAttacks>d__89.<i>5__2
+  131 ldarg.0        
+  132 ldfld          <DoAttacks>d__89.<i>5__2
+  137 ldarg.0        
+  138 ldfld          <DoAttacks>d__89.attacks
+  143 blt.s          39
+  145 ldc.i4.0       
+  146 ret            
+
+### <DoAttacks>d__89.System.Collections.Generic.IEnumerator<System.Object>.get_Current 0x06000cf9 IL_SHA256=77b01fcd91da858206e1c7f0cf347a3f093ee0ee6862795085123cbd1920bfff
+    0 ldarg.0        
+    1 ldfld          <DoAttacks>d__89.<>2__current
+    6 ret            
+
+### <DoAttacks>d__89.System.Collections.IEnumerator.Reset 0x06000cfa IL_SHA256=22ba73e8b3e31c111cb8024d9693322192e139d122f356041b5ff030ee41f21b
+    0 newobj         System.NotSupportedException..ctor
+    5 throw          
+
+### <DoAttacks>d__89.System.Collections.IEnumerator.get_Current 0x06000cfb IL_SHA256=77b01fcd91da858206e1c7f0cf347a3f093ee0ee6862795085123cbd1920bfff
+    0 ldarg.0        
+    1 ldfld          <DoAttacks>d__89.<>2__current
+    6 ret            
+
+### <FireBurst>d__93..ctor 0x06000cfc IL_SHA256=7f2760e60a5255c15dae62b356d63161b0b070923b3ef1ce6d7fbdfb14456bea
+    0 ldarg.0        
+    1 call           System.Object..ctor
+    6 ldarg.0        
+    7 ldarg.1        
+    8 stfld          <FireBurst>d__93.<>1__state
+   13 ret            
+
+### <FireBurst>d__93.System.IDisposable.Dispose 0x06000cfd IL_SHA256=684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1
+    0 ret            
+
+### <FireBurst>d__93.MoveNext 0x06000cfe IL_SHA256=12f5e5151af3742a68c20fa7b3f61761fd9a8224f3b7a28e6a87386250cee66d
+    0 ldarg.0        
+    1 ldfld          <FireBurst>d__93.<>1__state
+    6 stloc.0        
+    7 ldarg.0        
+    8 ldfld          <FireBurst>d__93.<>4__this
+   13 stloc.1        
+   14 ldloc.0        
+   15 brfalse.s      26
+   17 ldloc.0        
+   18 ldc.i4.1       
+   19 beq            1201
+   24 ldc.i4.0       
+   25 ret            
+   26 ldarg.0        
+   27 ldc.i4.m1      
+   28 stfld          <FireBurst>d__93.<>1__state
+   33 ldloc.1        
+   34 ldfld          Gun.m_spawnedBullets
+   39 callvirt       System.Collections.Generic.List`1.get_Count
+   44 ldc.i4.1       
+   45 sub            
+   46 stloc.2        
+   47 br.s           85
+   49 ldloc.1        
+   50 ldfld          Gun.m_spawnedBullets
+   55 ldloc.2        
+   56 callvirt       System.Collections.Generic.List`1.get_Item
+   61 ldnull         
+   62 call           UnityEngine.Object.op_Equality
+   67 brfalse.s      81
+   69 ldloc.1        
+   70 ldfld          Gun.m_spawnedBullets
+   75 ldloc.2        
+   76 callvirt       System.Collections.Generic.List`1.RemoveAt
+   81 ldloc.2        
+   82 ldc.i4.1       
+   83 sub            
+   84 stloc.2        
+   85 ldloc.2        
+   86 ldc.i4.0       
+   87 bge.s          49
+   89 ldarg.0        
+   90 ldloc.1        
+   91 ldfld          Gun.lockGunToDefault
+   96 brtrue.s       125
+   98 ldloc.1        
+   99 ldfld          Gun.numberOfProjectiles
+  104 ldloc.1        
+  105 ldfld          Gun.chargeNumberOfProjectilesTo
+  110 ldarg.0        
+  111 ldfld          <FireBurst>d__93.charge
+  116 mul            
+  117 call           UnityEngine.Mathf.RoundToInt
+  122 add            
+  123 br.s           126
+  125 ldc.i4.1       
+  126 stfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  131 ldloc.1        
+  132 ldfld          Gun.lockGunToDefault
+  137 brtrue.s       146
+  139 ldarg.0        
+  140 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  145 pop            
+  146 ldloc.1        
+  147 ldfld          Gun.timeBetweenBullets
+  152 ldc.r4         0
+  157 bne.un.s       208
+  159 ldloc.1        
+  160 call           UnityEngine.Component.get_transform
+  165 callvirt       UnityEngine.Transform.get_up
+  170 ldloc.1        
+  171 ldfld          Gun.shake
+  176 call           UnityEngine.Vector3.op_Multiply
+  181 call           UnityEngine.Vector2.op_Implicit
+  186 call           GamefeelManager.GameFeel
+  191 ldloc.1        
+  192 ldfld          Gun.soundGun
+  197 ldarg.0        
+  198 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  203 callvirt       SoundImplementation.SoundGun.PlayShot
+  208 ldarg.0        
+  209 ldc.i4.0       
+  210 stfld          <FireBurst>d__93.<ii>5__3
+  215 br             1226
+  220 ldc.i4.0       
+  221 stloc.3        
+  222 br             1062
+  227 ldc.i4.0       
+  228 stloc.s        4
+  230 br             1045
+  235 ldloc.1        
+  236 call           Gun.CheckIsMine
+  241 brfalse        977
+  246 ldloc.1        
+  247 ldloc.1        
+  248 call           UnityEngine.Component.get_transform
+  253 callvirt       UnityEngine.Transform.get_position
+  258 stfld          Gun.spawnPos
+  263 ldloc.1        
+  264 ldfld          Gun.player
+  269 call           UnityEngine.Object.op_Implicit
+  274 brfalse.s      327
+  276 ldloc.1        
+  277 ldfld          Gun.player
+  282 callvirt       0x2b000012
+  287 callvirt       PlayerAudioModifyers.SetStacks
+  292 ldloc.1        
+  293 ldfld          Weapon.holdable
+  298 call           UnityEngine.Object.op_Implicit
+  303 brfalse.s      327
+  305 ldloc.1        
+  306 ldloc.1        
+  307 ldfld          Gun.player
+  312 callvirt       UnityEngine.Component.get_transform
+  317 callvirt       UnityEngine.Transform.get_position
+  322 stfld          Gun.spawnPos
+  327 ldloc.1        
+  328 ldfld          Gun.projectiles
+  333 ldloc.3        
+  334 ldelem.ref     
+  335 ldfld          ProjectilesToSpawn.objectToSpawn
+  340 callvirt       UnityEngine.GameObject.get_gameObject
+  345 callvirt       UnityEngine.Object.get_name
+  350 ldloc.1        
+  351 ldfld          Gun.spawnPos
+  356 ldloc.1        
+  357 ldloc.s        4
+  359 ldarg.0        
+  360 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  365 ldarg.0        
+  366 ldfld          <FireBurst>d__93.charge
+  371 call           Gun.getShootRotation
+  376 ldc.i4.0       
+  377 ldnull         
+  378 call           Photon.Pun.PhotonNetwork.Instantiate
+  383 stloc.s        5
+  385 ldloc.1        
+  386 ldfld          Gun.m_spawnedBullets
+  391 ldloc.s        5
+  393 callvirt       System.Collections.Generic.List`1.Add
+  398 ldloc.1        
+  399 ldfld          Weapon.holdable
+  404 call           UnityEngine.Object.op_Implicit
+  409 brfalse        795
+  414 ldarg.0        
+  415 ldfld          <FireBurst>d__93.useAmmo
+  420 brfalse        610
+  425 call           Photon.Pun.PhotonNetwork.get_OfflineMode
+  430 brfalse.s      499
+  432 ldloc.s        5
+  434 callvirt       0x2b000180
+  439 ldloc.1        
+  440 ldfld          Weapon.holdable
+  445 ldfld          Holdable.holder
+  450 ldfld          CharacterData.player
+  455 callvirt       Player.get_PlayerID
+  460 ldarg.0        
+  461 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  466 ldarg.0        
+  467 ldfld          <FireBurst>d__93.damageM
+  472 conv.r4        
+  473 ldc.r4         0
+  478 ldc.r4         1
+  483 call           UnityEngine.Random.Range
+  488 conv.r4        
+  489 callvirt       ProjectileInit.OFFLINE_Init
+  494 br             977
+  499 ldloc.s        5
+  501 callvirt       0x2b000031
+  506 ldstr          "RPCA_Init"
+  511 ldc.i4.0       
+  512 ldc.i4.4       
+  513 newarr         0x01000006
+  518 dup            
+  519 ldc.i4.0       
+  520 ldloc.1        
+  521 ldfld          Weapon.holdable
+  526 ldfld          Holdable.holder
+  531 ldfld          CharacterData.view
+  536 callvirt       Photon.Pun.PhotonView.get_OwnerActorNr
+  541 box            0x0100010c
+  546 stelem.ref     
+  547 dup            
+  548 ldc.i4.1       
+  549 ldarg.0        
+  550 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  555 box            0x0100010c
+  560 stelem.ref     
+  561 dup            
+  562 ldc.i4.2       
+  563 ldarg.0        
+  564 ldfld          <FireBurst>d__93.damageM
+  569 conv.r4        
+  570 box            0x01000128
+  575 stelem.ref     
+  576 dup            
+  577 ldc.i4.3       
+  578 ldc.r4         0
+  583 ldc.r4         1
+  588 call           UnityEngine.Random.Range
+  593 conv.r4        
+  594 box            0x01000128
+  599 stelem.ref     
+  600 callvirt       Photon.Pun.PhotonView.RPC
+  605 br             977
+  610 call           Photon.Pun.PhotonNetwork.get_OfflineMode
+  615 brfalse.s      684
+  617 ldloc.s        5
+  619 callvirt       0x2b000180
+  624 ldloc.1        
+  625 ldfld          Weapon.holdable
+  630 ldfld          Holdable.holder
+  635 ldfld          CharacterData.player
+  640 callvirt       Player.get_PlayerID
+  645 ldarg.0        
+  646 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  651 ldarg.0        
+  652 ldfld          <FireBurst>d__93.damageM
+  657 conv.r4        
+  658 ldc.r4         0
+  663 ldc.r4         1
+  668 call           UnityEngine.Random.Range
+  673 conv.r4        
+  674 callvirt       ProjectileInit.OFFLINE_Init_noAmmoUse
+  679 br             977
+  684 ldloc.s        5
+  686 callvirt       0x2b000031
+  691 ldstr          "RPCA_Init_noAmmoUse"
+  696 ldc.i4.0       
+  697 ldc.i4.4       
+  698 newarr         0x01000006
+  703 dup            
+  704 ldc.i4.0       
+  705 ldloc.1        
+  706 ldfld          Weapon.holdable
+  711 ldfld          Holdable.holder
+  716 ldfld          CharacterData.view
+  721 callvirt       Photon.Pun.PhotonView.get_OwnerActorNr
+  726 box            0x0100010c
+  731 stelem.ref     
+  732 dup            
+  733 ldc.i4.1       
+  734 ldarg.0        
+  735 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  740 box            0x0100010c
+  745 stelem.ref     
+  746 dup            
+  747 ldc.i4.2       
+  748 ldarg.0        
+  749 ldfld          <FireBurst>d__93.damageM
+  754 conv.r4        
+  755 box            0x01000128
+  760 stelem.ref     
+  761 dup            
+  762 ldc.i4.3       
+  763 ldc.r4         0
+  768 ldc.r4         1
+  773 call           UnityEngine.Random.Range
+  778 conv.r4        
+  779 box            0x01000128
+  784 stelem.ref     
+  785 callvirt       Photon.Pun.PhotonView.RPC
+  790 br             977
+  795 call           Photon.Pun.PhotonNetwork.get_OfflineMode
+  800 brfalse.s      862
+  802 ldloc.s        5
+  804 callvirt       0x2b000180
+  809 ldloc.1        
+  810 call           0x2b000020
+  815 callvirt       Player.get_PlayerID
+  820 ldloc.1        
+  821 ldfld          Gun.gunID
+  826 ldarg.0        
+  827 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  832 ldarg.0        
+  833 ldfld          <FireBurst>d__93.damageM
+  838 conv.r4        
+  839 ldc.r4         0
+  844 ldc.r4         1
+  849 call           UnityEngine.Random.Range
+  854 conv.r4        
+  855 callvirt       ProjectileInit.OFFLINE_Init_SeparateGun
+  860 br.s           977
+  862 ldloc.s        5
+  864 callvirt       0x2b000031
+  869 ldstr          "RPCA_Init_SeparateGun"
+  874 ldc.i4.0       
+  875 ldc.i4.5       
+  876 newarr         0x01000006
+  881 dup            
+  882 ldc.i4.0       
+  883 ldloc.1        
+  884 call           0x2b00001c
+  889 ldfld          CharacterData.view
+  894 callvirt       Photon.Pun.PhotonView.get_OwnerActorNr
+  899 box            0x0100010c
+  904 stelem.ref     
+  905 dup            
+  906 ldc.i4.1       
+  907 ldloc.1        
+  908 ldfld          Gun.gunID
+  913 box            0x0100010c
+  918 stelem.ref     
+  919 dup            
+  920 ldc.i4.2       
+  921 ldarg.0        
+  922 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+  927 box            0x0100010c
+  932 stelem.ref     
+  933 dup            
+  934 ldc.i4.3       
+  935 ldarg.0        
+  936 ldfld          <FireBurst>d__93.damageM
+  941 conv.r4        
+  942 box            0x01000128
+  947 stelem.ref     
+  948 dup            
+  949 ldc.i4.4       
+  950 ldc.r4         0
+  955 ldc.r4         1
+  960 call           UnityEngine.Random.Range
+  965 conv.r4        
+  966 box            0x01000128
+  971 stelem.ref     
+  972 callvirt       Photon.Pun.PhotonView.RPC
+  977 ldloc.1        
+  978 ldfld          Gun.timeBetweenBullets
+  983 ldc.r4         0
+  988 beq.s          1039
+  990 ldloc.1        
+  991 call           UnityEngine.Component.get_transform
+  996 callvirt       UnityEngine.Transform.get_up
+ 1001 ldloc.1        
+ 1002 ldfld          Gun.shake
+ 1007 call           UnityEngine.Vector3.op_Multiply
+ 1012 call           UnityEngine.Vector2.op_Implicit
+ 1017 call           GamefeelManager.GameFeel
+ 1022 ldloc.1        
+ 1023 ldfld          Gun.soundGun
+ 1028 ldarg.0        
+ 1029 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+ 1034 callvirt       SoundImplementation.SoundGun.PlayShot
+ 1039 ldloc.s        4
+ 1041 ldc.i4.1       
+ 1042 add            
+ 1043 stloc.s        4
+ 1045 ldloc.s        4
+ 1047 ldarg.0        
+ 1048 ldfld          <FireBurst>d__93.<currentNumberOfProjectiles>5__2
+ 1053 blt            235
+ 1058 ldloc.3        
+ 1059 ldc.i4.1       
+ 1060 add            
+ 1061 stloc.3        
+ 1062 ldloc.3        
+ 1063 ldloc.1        
+ 1064 ldfld          Gun.projectiles
+ 1069 ldlen          
+ 1070 conv.i4        
+ 1071 blt            227
+ 1076 ldloc.1        
+ 1077 ldfld          Gun.bursts
+ 1082 ldc.i4.1       
+ 1083 ble.s          1120
+ 1085 ldarg.0        
+ 1086 ldfld          <FireBurst>d__93.<ii>5__3
+ 1091 ldc.i4.1       
+ 1092 add            
+ 1093 ldloc.1        
+ 1094 ldfld          Gun.bursts
+ 1099 ldc.i4.1       
+ 1100 ldc.i4.s       100
+ 1102 call           UnityEngine.Mathf.Clamp
+ 1107 bne.un.s       1120
+ 1109 ldloc.1        
+ 1110 ldfld          Gun.soundGun
+ 1115 callvirt       SoundImplementation.SoundGun.StopAutoPlayTail
+ 1120 ldloc.1        
+ 1121 ldfld          Gun.dontAllowBeekeeperAchievement
+ 1126 brtrue.s       1162
+ 1128 ldloc.1        
+ 1129 ldfld          Gun.m_spawnedBullets
+ 1134 callvirt       System.Collections.Generic.List`1.get_Count
+ 1139 ldc.i4.s       30
+ 1141 blt.s          1162
+ 1143 ldloc.1        
+ 1144 ldfld          Gun.player
+ 1149 callvirt       Player.get_IsLocal
+ 1154 brfalse.s      1162
+ 1156 ldc.i4.4       
+ 1157 call           FriendlyFoe.Platform.PlatformManager.UnlockAchievement
+ 1162 ldloc.1        
+ 1163 ldfld          Gun.timeBetweenBullets
+ 1168 ldc.r4         0
+ 1173 ble.un.s       1208
+ 1175 ldarg.0        
+ 1176 ldloc.1        
+ 1177 ldfld          Gun.timeBetweenBullets
+ 1182 newobj         UnityEngine.WaitForSeconds..ctor
+ 1187 stfld          <FireBurst>d__93.<>2__current
+ 1192 ldarg.0        
+ 1193 ldc.i4.1       
+ 1194 stfld          <FireBurst>d__93.<>1__state
+ 1199 ldc.i4.1       
+ 1200 ret            
+ 1201 ldarg.0        
+ 1202 ldc.i4.m1      
+ 1203 stfld          <FireBurst>d__93.<>1__state
+ 1208 ldarg.0        
+ 1209 ldfld          <FireBurst>d__93.<ii>5__3
+ 1214 stloc.s        6
+ 1216 ldarg.0        
+ 1217 ldloc.s        6
+ 1219 ldc.i4.1       
+ 1220 add            
+ 1221 stfld          <FireBurst>d__93.<ii>5__3
+ 1226 ldarg.0        
+ 1227 ldfld          <FireBurst>d__93.<ii>5__3
+ 1232 ldloc.1        
+ 1233 ldfld          Gun.bursts
+ 1238 ldc.i4.1       
+ 1239 ldc.i4.s       100
+ 1241 call           UnityEngine.Mathf.Clamp
+ 1246 blt            220
+ 1251 ldc.i4.0       
+ 1252 ret            
+
+### <FireBurst>d__93.System.Collections.Generic.IEnumerator<System.Object>.get_Current 0x06000cff IL_SHA256=96cc9e2e9fa006187f261ace31cd23c33a93b8a027864ea559d46bed3f905fe3
+    0 ldarg.0        
+    1 ldfld          <FireBurst>d__93.<>2__current
+    6 ret            
+
+### <FireBurst>d__93.System.Collections.IEnumerator.Reset 0x06000d00 IL_SHA256=22ba73e8b3e31c111cb8024d9693322192e139d122f356041b5ff030ee41f21b
+    0 newobj         System.NotSupportedException..ctor
+    5 throw          
+
+### <FireBurst>d__93.System.Collections.IEnumerator.get_Current 0x06000d01 IL_SHA256=96cc9e2e9fa006187f261ace31cd23c33a93b8a027864ea559d46bed3f905fe3
+    0 ldarg.0        
+    1 ldfld          <FireBurst>d__93.<>2__current
+    6 ret            

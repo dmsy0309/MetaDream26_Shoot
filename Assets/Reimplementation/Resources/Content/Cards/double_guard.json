@@ -1,0 +1,29 @@
+{
+    "id": "double_guard",
+    "title": "이중 방패",
+    "subtitle": "DOUBLE GUARD",
+    "description": "방어가 0.2초 뒤 한 번 더 발동한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "block"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "additionalBlocks": 1,
+        "blockCdAdd": 0.5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "추가 방어",
+            "amount": "+1",
+            "positive": true
+        },
+        {
+            "label": "방어 쿨다운",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

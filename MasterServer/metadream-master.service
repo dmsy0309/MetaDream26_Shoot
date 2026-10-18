@@ -1,0 +1,17 @@
+[Unit]
+Description=Metadream Shoot main hosting server (server list)
+After=network-online.target tailscaled.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=@USER@
+WorkingDirectory=@APP_DIR@
+ExecStart=/usr/bin/env python3 @APP_DIR@/master_server.py --host 0.0.0.0 --port 47800 --http-port 47801 --ttl 15
+Restart=always
+RestartSec=3
+Environment=PYTHONUNBUFFERED=1
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

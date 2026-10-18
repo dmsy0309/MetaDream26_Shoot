@@ -1,0 +1,21 @@
+{
+    "name": "Metadream.Shoot.Tests.PlayMode",
+    "rootNamespace": "Metadream.Shoot.Tests",
+    "references": [
+        "Metadream.Shoot",
+        "UnityEngine.TestRunner"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

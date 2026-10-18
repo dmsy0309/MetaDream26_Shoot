@@ -1,0 +1,27 @@
+{
+    "id": "velocity_rounds",
+    "title": "고속탄",
+    "subtitle": "VELOCITY ROUNDS",
+    "description": "탄이 빠르고 덜 떨어진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "projectileSpeed": 1.6,
+        "gravity": 0.5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄속",
+            "amount": "+60%",
+            "positive": true
+        },
+        {
+            "label": "탄 낙차",
+            "amount": "-50%",
+            "positive": true
+        }
+    ]
+}

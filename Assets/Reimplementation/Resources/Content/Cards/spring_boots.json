@@ -1,0 +1,27 @@
+{
+    "id": "spring_boots",
+    "title": "스프링 부츠",
+    "subtitle": "SPRING BOOTS",
+    "description": "공중에서 한 번 더 뛴다.",
+    "rarity": "Uncommon",
+    "allowMultiple": false,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "numberOfJumps": 1,
+        "jump": 1.1
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "점프 횟수",
+            "amount": "+1",
+            "positive": true
+        },
+        {
+            "label": "점프력",
+            "amount": "+10%",
+            "positive": true
+        }
+    ]
+}

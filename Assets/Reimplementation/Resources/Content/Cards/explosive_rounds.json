@@ -1,0 +1,41 @@
+{
+    "id": "explosive_rounds",
+    "title": "폭발탄",
+    "subtitle": "EXPLOSIVE ROUNDS",
+    "description": "탄이 닿은 곳에서 폭발해 주변 적에게 피해를 준다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "explosive"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.8,
+        "attackSpeed": 1.15
+    },
+    "effects": [
+        {
+            "type": "explosion_on_hit",
+            "radius": 3.5,
+            "damage": 25,
+            "amount": 8
+        }
+    ],
+    "lines": [
+        {
+            "label": "폭발 피해",
+            "amount": "25",
+            "positive": true
+        },
+        {
+            "label": "폭발 반경",
+            "amount": "3.5",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-20%",
+            "positive": false
+        }
+    ]
+}

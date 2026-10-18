@@ -1,0 +1,151 @@
+source_evidence_id=ev_d49e6ff07727b35f8d425aad275b3d9018a2cf126e001dfe507c8ad64a2fc7e1
+## fields ProjectileInit: m_owner, guns
+
+### ProjectileInit.get_Owner 0x06000906 IL_SHA256=e1414d80d1385c9292bff108a7947e11fdadb3e119412746cba575bd583c8e03
+    0 ldarg.0        
+    1 ldfld          ProjectileInit.m_owner
+    6 ret            
+
+### ProjectileInit.RPCA_Init 0x06000907 IL_SHA256=aec683b3b0e8a4eefa8c9a6904ffe85468d7a8d55fd2570c5bbafff4632593cd
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldarg.1        
+    7 callvirt       PlayerManager.GetPlayerWithActorID
+   12 stfld          ProjectileInit.m_owner
+   17 ldarg.0        
+   18 ldfld          ProjectileInit.m_owner
+   23 ldfld          Player.data
+   28 ldfld          CharacterData.weaponHandler
+   33 ldfld          WeaponHandler.gun
+   38 ldarg.0        
+   39 call           UnityEngine.Component.get_gameObject
+   44 ldarg.2        
+   45 ldarg.3        
+   46 ldarg.s        4
+   48 ldc.i4.1       
+   49 callvirt       Gun.BulletInit
+   54 ret            
+
+### ProjectileInit.OFFLINE_Init 0x06000908 IL_SHA256=53c451b39ca30f6a7157b6c3fdf5488f84761bdb0705edaa5b9a280d33e988b8
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldfld          PlayerManager.players
+   11 ldarg.1        
+   12 callvirt       System.Collections.Generic.List`1.get_Item
+   17 stfld          ProjectileInit.m_owner
+   22 ldarg.0        
+   23 ldfld          ProjectileInit.m_owner
+   28 ldfld          Player.data
+   33 ldfld          CharacterData.weaponHandler
+   38 ldfld          WeaponHandler.gun
+   43 ldarg.0        
+   44 call           UnityEngine.Component.get_gameObject
+   49 ldarg.2        
+   50 ldarg.3        
+   51 ldarg.s        4
+   53 ldc.i4.1       
+   54 callvirt       Gun.BulletInit
+   59 ret            
+
+### ProjectileInit.RPCA_Init_SeparateGun 0x06000909 IL_SHA256=ea408da7a06b73d8a7caff34bfbb6ae01b10b11f52f930bc59a56e6f761dec0f
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldarg.1        
+    7 callvirt       PlayerManager.GetPlayerWithActorID
+   12 stfld          ProjectileInit.m_owner
+   17 ldarg.0        
+   18 ldarg.2        
+   19 ldarg.0        
+   20 ldfld          ProjectileInit.m_owner
+   25 callvirt       UnityEngine.Component.get_gameObject
+   30 call           ProjectileInit.GetChildGunWithID
+   35 ldarg.0        
+   36 call           UnityEngine.Component.get_gameObject
+   41 ldarg.3        
+   42 ldarg.s        4
+   44 ldarg.s        5
+   46 ldc.i4.1       
+   47 callvirt       Gun.BulletInit
+   52 ret            
+
+### ProjectileInit.OFFLINE_Init_SeparateGun 0x0600090a IL_SHA256=f9639480814564cd7ed79e90aa41cfd75c0f4d3a8b2f4c4c37b535d8dff553a8
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldfld          PlayerManager.players
+   11 ldarg.1        
+   12 callvirt       System.Collections.Generic.List`1.get_Item
+   17 stfld          ProjectileInit.m_owner
+   22 ldarg.0        
+   23 ldarg.2        
+   24 ldarg.0        
+   25 ldfld          ProjectileInit.m_owner
+   30 callvirt       UnityEngine.Component.get_gameObject
+   35 call           ProjectileInit.GetChildGunWithID
+   40 ldarg.0        
+   41 call           UnityEngine.Component.get_gameObject
+   46 ldarg.3        
+   47 ldarg.s        4
+   49 ldarg.s        5
+   51 ldc.i4.1       
+   52 callvirt       Gun.BulletInit
+   57 ret            
+
+### ProjectileInit.GetChildGunWithID 0x0600090b IL_SHA256=94b7c8ecb8e27c89604ea96bdac2610e3a527af7480674e92bd6261262e41e3c
+    0 ldarg.0        
+    1 ldfld          ProjectileInit.guns
+    6 brtrue.s       20
+    8 ldarg.0        
+    9 ldarg.2        
+   10 callvirt       0x2b000147
+   15 stfld          ProjectileInit.guns
+   20 ldarg.0        
+   21 ldfld          ProjectileInit.guns
+   26 ldarg.1        
+   27 ldelem.ref     
+   28 ret            
+
+### ProjectileInit.RPCA_Init_noAmmoUse 0x0600090c IL_SHA256=0d654283de72a31d340dd407a8de8400238f0172f84f7a64157988e5c5447102
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldarg.1        
+    7 callvirt       PlayerManager.GetPlayerWithActorID
+   12 stfld          ProjectileInit.m_owner
+   17 ldarg.0        
+   18 ldfld          ProjectileInit.m_owner
+   23 ldfld          Player.data
+   28 ldfld          CharacterData.weaponHandler
+   33 ldfld          WeaponHandler.gun
+   38 ldarg.0        
+   39 call           UnityEngine.Component.get_gameObject
+   44 ldarg.2        
+   45 ldarg.3        
+   46 ldarg.s        4
+   48 ldc.i4.0       
+   49 callvirt       Gun.BulletInit
+   54 ret            
+
+### ProjectileInit.OFFLINE_Init_noAmmoUse 0x0600090d IL_SHA256=ec5569e3ef0a7f90eb820a571140773193dc81a6a0b09bc2613ed51f689552fc
+    0 ldarg.0        
+    1 ldsfld         PlayerManager.instance
+    6 ldfld          PlayerManager.players
+   11 ldarg.1        
+   12 callvirt       System.Collections.Generic.List`1.get_Item
+   17 stfld          ProjectileInit.m_owner
+   22 ldarg.0        
+   23 ldfld          ProjectileInit.m_owner
+   28 ldfld          Player.data
+   33 ldfld          CharacterData.weaponHandler
+   38 ldfld          WeaponHandler.gun
+   43 ldarg.0        
+   44 call           UnityEngine.Component.get_gameObject
+   49 ldarg.2        
+   50 ldarg.3        
+   51 ldarg.s        4
+   53 ldc.i4.0       
+   54 callvirt       Gun.BulletInit
+   59 ret            
+
+### ProjectileInit..ctor 0x0600090e IL_SHA256=a00f1851f956228998148d2e320ac0d49ed7b0dc670f89ff02496915d7aee82c
+    0 ldarg.0        
+    1 call           UnityEngine.MonoBehaviour..ctor
+    6 ret            

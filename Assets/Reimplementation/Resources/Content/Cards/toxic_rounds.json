@@ -1,0 +1,32 @@
+{
+    "id": "toxic_rounds",
+    "title": "독탄",
+    "subtitle": "TOXIC ROUNDS",
+    "description": "맞은 적이 3초 동안 중독되어 체력이 깎인다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.85
+    },
+    "effects": [
+        {
+            "type": "poison_on_hit",
+            "damage": 8,
+            "duration": 3
+        }
+    ],
+    "lines": [
+        {
+            "label": "중독",
+            "amount": "8/s · 3초",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-15%",
+            "positive": false
+        }
+    ]
+}

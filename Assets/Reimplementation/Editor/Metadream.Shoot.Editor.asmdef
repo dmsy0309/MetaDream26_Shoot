@@ -1,0 +1,18 @@
+{
+    "name": "Metadream.Shoot.Editor",
+    "rootNamespace": "Metadream.Shoot.EditorTools",
+    "references": [
+        "Metadream.Shoot"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
