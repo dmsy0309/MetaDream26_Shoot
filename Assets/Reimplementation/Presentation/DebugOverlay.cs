@@ -89,7 +89,7 @@ namespace Metadream.Shoot.Presentation
 
         private void OnGUI()
         {
-            if (!DevSettings.DebugMode || Suppressed) return;
+            if (!DevSettings.DebugMode || Suppressed || CheatPanel.IsOpen) return;
             var flow = GameFlow.Instance;
             if (flow == null) return;
             GUI.depth = -100;

@@ -10,8 +10,10 @@ namespace Metadream.Shoot
         private const string KeyDebug = "settings.debugMode";
         private const string KeyFullscreen = "settings.fullscreen";
         private const string KeyMaster = "settings.masterServer";
+        private const string KeySfx = "settings.sfxVolume";
         private static bool _loaded;
         private static bool _debug, _fullscreen, _master = true;
+        private static float _sfx = 0.8f;
 
         public static event Action Changed;
 
@@ -42,6 +44,13 @@ namespace Metadream.Shoot
             set { Load(); _master = value; Save(); }
         }
 
+        /// <summary>Sound effect volume 0..1 (Settings → 효과음 볼륨).</summary>
+        public static float SfxVolume
+        {
+            get { Load(); return _sfx; }
+            set { Load(); _sfx = Mathf.Clamp01(value); Save(); }
+        }
+
         /// <summary>-debug forces debug mode on for this run without saving.</summary>
         public static void ApplyCommandLine(string[] args)
         {
@@ -56,6 +65,7 @@ namespace Metadream.Shoot
             _debug = PlayerPrefs.GetInt(KeyDebug, 0) == 1;
             _fullscreen = PlayerPrefs.GetInt(KeyFullscreen, Screen.fullScreen ? 1 : 0) == 1;
             _master = PlayerPrefs.GetInt(KeyMaster, 1) == 1;
+            _sfx = PlayerPrefs.GetFloat(KeySfx, 0.8f);
             DevLog.Enabled = _debug;
         }
 
@@ -64,6 +74,7 @@ namespace Metadream.Shoot
             PlayerPrefs.SetInt(KeyDebug, _debug ? 1 : 0);
             PlayerPrefs.SetInt(KeyFullscreen, _fullscreen ? 1 : 0);
             PlayerPrefs.SetInt(KeyMaster, _master ? 1 : 0);
+            PlayerPrefs.SetFloat(KeySfx, _sfx);
             PlayerPrefs.Save();
             Changed?.Invoke();
         }

@@ -98,7 +98,9 @@ namespace Metadream.Shoot.Presentation
         EdgeFlash,
         Shake,
         Muzzle,
-        Death
+        Death,
+        /// <summary>Sound event: A = SoundBank.Hash(id), B = volume scale.</summary>
+        Sound
     }
 
     /// <summary>Visual event replicated from the host to clients.</summary>
@@ -136,7 +138,16 @@ namespace Metadream.Shoot.Presentation
                 case FxType.Shake: Shake(e.A); break;
                 case FxType.Muzzle: Muzzle(e.Position, e.Color, e.A); break;
                 case FxType.Death: Death(e.Position, e.Color); break;
+                case FxType.Sound: Audio.Sfx.PlayHash(Mathf.RoundToInt(e.A), e.Position, e.B); break;
             }
+        }
+
+        /// <summary>Gameplay sound: plays here and is replicated to clients / recorded in replays.</summary>
+        public static void Sound(string id, Vector2 pos, float volumeScale = 1f)
+        {
+            Record(FxType.Sound, pos, Color.white, Audio.SoundBank.Hash(id), volumeScale);
+            if (Headless) return;
+            Audio.Sfx.Play(id, pos, volumeScale);
         }
 
         private static FxParticle Make(Vector2 pos, Sprite sprite, Color color, float scale, int order)
@@ -183,6 +194,7 @@ namespace Metadream.Shoot.Presentation
         {
             Record(FxType.Muzzle, pos, color, angle, 0f);
             if (Headless) return;
+            Audio.Sfx.Play("shoot", pos);
             var core = Make(pos, SpriteFactory.Circle, new Color(1f, 0.97f, 0.8f, 0.95f), 0.55f, 32);
             core.life = 0.07f;
             core.grow = 0.5f;
@@ -202,6 +214,7 @@ namespace Metadream.Shoot.Presentation
         {
             Record(FxType.Death, pos, color, 0f, 0f);
             if (Headless) return;
+            Audio.Sfx.Play("death", pos);
             var flash = Make(pos, SpriteFactory.Circle, new Color(1f, 1f, 1f, 0.9f), 1.6f, 33);
             flash.life = 0.14f;
             flash.grow = 1.2f;
@@ -223,6 +236,7 @@ namespace Metadream.Shoot.Presentation
         {
             Record(FxType.JumpPuff, pos, color, 0f, 0f);
             if (Headless) return;
+            Audio.Sfx.Play("jump", pos);
             for (int i = 0; i < 3; i++)
             {
                 var p = Make(pos, SpriteFactory.Circle, Color.Lerp(color, Color.white, 0.6f), 0.35f, 5);
@@ -244,6 +258,7 @@ namespace Metadream.Shoot.Presentation
         {
             Record(FxType.EdgeFlash, pos, Color.white, 0f, 0f);
             if (Headless) return;
+            Audio.Sfx.Play("edge", pos);
             var p = Make(pos, SpriteFactory.Ring, new Color(1f, 0.25f, 0.2f), 3f, 25);
             p.life = 0.35f;
             p.grow = 0.8f;

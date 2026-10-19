@@ -22,7 +22,8 @@ namespace Metadream.Shoot
             Notice,
             Settings,
             Nickname,
-            Replays
+            Replays,
+            Codex
         }
 
         private struct Item
@@ -382,63 +383,140 @@ namespace Metadream.Shoot
                     if (arrowUp || Down(kb, UnityEngine.InputSystem.Key.W)) _settingIndex = (_settingIndex - 1 + n) % n;
                     if (arrowDown || Down(kb, UnityEngine.InputSystem.Key.S)) _settingIndex = (_settingIndex + 1) % n;
                     bool side = Down(kb, UnityEngine.InputSystem.Key.LeftArrow) || Down(kb, UnityEngine.InputSystem.Key.RightArrow) || padLeft || padRight;
-                    if (enter || side || Down(kb, UnityEngine.InputSystem.Key.Space)) ActivateSetting(_settingIndex);
+                    bool leftKey = Down(kb, UnityEngine.InputSystem.Key.LeftArrow) || padLeft;
+                    if (RowAt(_settingIndex) == SettingRow.Volume && side) ActivateSetting(_settingIndex, leftKey ? -1 : 1);
+                    else if (enter || side || Down(kb, UnityEngine.InputSystem.Key.Space)) ActivateSetting(_settingIndex);
                     else if (back) ShowTitle();
                     break;
                 }
+                case Page.Codex:
+                    if (back) _page = Page.Settings;
+                    break;
             }
         }
 
         // ------------------------------------------------------------ settings
 
-        private const int SettingRows = 5;
+        private enum SettingRow { Debug, Fullscreen, Master, Volume, TutorialReset, Codex, CheatDuel, CheatTeams, Back }
+
+        /// <summary>Rows shown on the settings page; the developer rows only exist in debug mode.</summary>
+        private static List<SettingRow> SettingList()
+        {
+            var rows = new List<SettingRow> { SettingRow.Debug, SettingRow.Fullscreen, SettingRow.Master, SettingRow.Volume, SettingRow.TutorialReset };
+            if (DevSettings.DebugMode) { rows.Add(SettingRow.Codex); rows.Add(SettingRow.CheatDuel); rows.Add(SettingRow.CheatTeams); }
+            rows.Add(SettingRow.Back);
+            return rows;
+        }
+
+        private static int SettingRows => SettingList().Count;
+
+        private static SettingRow RowAt(int i)
+        {
+            var rows = SettingList();
+            return rows[Mathf.Clamp(i, 0, rows.Count - 1)];
+        }
 
         private string SettingLabel(int i)
         {
-            switch (i)
+            switch (RowAt(i))
             {
-                case 0: return "개발자 디버그 모드";
-                case 1: return "전체 화면";
-                case 2: return "메인 서버 목록 사용";
-                case 3: return "튜토리얼 기록 초기화";
+                case SettingRow.Debug: return "개발자 디버그 모드";
+                case SettingRow.Fullscreen: return "전체 화면";
+                case SettingRow.Master: return "메인 서버 목록 사용";
+                case SettingRow.Volume: return "효과음 볼륨";
+                case SettingRow.TutorialReset: return "튜토리얼 기록 초기화";
+                case SettingRow.Codex: return "콘텐츠 도감 (카드 · 맵)";
+                case SettingRow.CheatDuel: return "치트 대전 1대1";
+                case SettingRow.CheatTeams: return "치트 대전 2대2";
                 default: return "뒤로";
             }
         }
 
         private string SettingValue(int i)
         {
-            switch (i)
+            switch (RowAt(i))
             {
-                case 0: return DevSettings.DebugMode ? "켜짐" : "꺼짐";
-                case 1: return DevSettings.Fullscreen ? "켜짐" : "꺼짐";
-                case 2: return DevSettings.UseMasterServer ? "켜짐" : "꺼짐";
-                case 3: return TutorialController.Completed ? "완료함" : "미완료";
+                case SettingRow.Debug: return DevSettings.DebugMode ? "켜짐" : "꺼짐";
+                case SettingRow.Fullscreen: return DevSettings.Fullscreen ? "켜짐" : "꺼짐";
+                case SettingRow.Master: return DevSettings.UseMasterServer ? "켜짐" : "꺼짐";
+                case SettingRow.Volume: return Mathf.RoundToInt(DevSettings.SfxVolume * 100f) + "%";
+                case SettingRow.TutorialReset: return TutorialController.Completed ? "완료함" : "미완료";
+                case SettingRow.Codex: case SettingRow.CheatDuel: case SettingRow.CheatTeams: return "열기";
                 default: return "";
             }
         }
 
         private string SettingHint(int i)
         {
-            switch (i)
+            switch (RowAt(i))
             {
-                case 0: return "오버레이 · 히트박스/스폰 표시 · 콘텐츠 오류 목록 · F1–F7 개발자 명령";
-                case 1: return "창 모드 1600×900 / 전체 화면";
-                case 2: return "방을 만들면 메인 서버(" + MasterServerEndpoint.Host + ")에 등록하고, 방 참가에서 전체 서버 목록을 받아옵니다";
-                case 3: return "다음 실행 때 튜토리얼 안내가 다시 표시됩니다";
+                case SettingRow.Debug: return "오버레이 · 히트박스/스폰 표시 · 콘텐츠 오류 목록 · F1–F7 개발자 명령 · 아래에 개발자 메뉴 표시";
+                case SettingRow.Fullscreen: return "창 모드 1600×900 / 전체 화면";
+                case SettingRow.Master: return "방을 만들면 메인 서버에 등록하고, 방 참가에서 전체 서버 목록을 받아옵니다";
+                case SettingRow.Volume: return "←/→ 10%씩 조절 (클릭하면 10%씩 올라가고 100% 다음은 0%)";
+                case SettingRow.TutorialReset: return "다음 실행 때 튜토리얼 안내가 다시 표시됩니다";
+                case SettingRow.Codex: return "모든 카드와 맵을 한눈에 보고, 누르면 세부 정보를 확인합니다";
+                case SettingRow.CheatDuel: return "나 vs CPU · F8/버튼으로 카드 검색해 나에게만 적용 · F2–F7 사용 가능";
+                case SettingRow.CheatTeams: return "나 + CPU 팀원 vs CPU 2명 · F8/버튼으로 카드 검색해 나에게만 적용";
                 default: return "타이틀로 돌아가기 (Esc)";
             }
         }
 
-        private void ActivateSetting(int i)
+        private void ActivateSetting(int i, int direction = 1)
         {
-            switch (i)
+            switch (RowAt(i))
             {
-                case 0: DevSettings.DebugMode = !DevSettings.DebugMode; break;
-                case 1: DevSettings.Fullscreen = !DevSettings.Fullscreen; break;
-                case 2: DevSettings.UseMasterServer = !DevSettings.UseMasterServer; break;
-                case 3: TutorialController.ResetProgress(); break;
+                case SettingRow.Debug:
+                    DevSettings.DebugMode = !DevSettings.DebugMode;
+                    _settingIndex = Mathf.Clamp(_settingIndex, 0, SettingRows - 1);
+                    break;
+                case SettingRow.Fullscreen: DevSettings.Fullscreen = !DevSettings.Fullscreen; break;
+                case SettingRow.Master: DevSettings.UseMasterServer = !DevSettings.UseMasterServer; break;
+                case SettingRow.Volume:
+                {
+                    int step = Mathf.RoundToInt(DevSettings.SfxVolume * 10f) + (direction < 0 ? -1 : 1);
+                    if (step > 10) step = 0;
+                    if (step < 0) step = direction < 0 ? 0 : 10;
+                    DevSettings.SfxVolume = step / 10f;
+                    Audio.Sfx.Play("ui_click");
+                    break;
+                }
+                case SettingRow.TutorialReset: TutorialController.ResetProgress(); break;
+                case SettingRow.Codex: OpenCodex(); break;
+                case SettingRow.CheatDuel: StartCheat(GameMode.CheatDuel, null); break;
+                case SettingRow.CheatTeams: StartCheat(GameMode.CheatTeams, null); break;
                 default: ShowTitle(); break;
             }
+        }
+
+        // ------------------------------------------------------------ developer pages
+
+        private readonly ContentBrowser _codex = new ContentBrowser();
+
+        private void OpenCodex()
+        {
+            _codex.Close = () => { _page = Page.Settings; };
+            _codex.PlayMap = id => StartCheat(GameMode.CheatDuel, id);
+            _page = Page.Codex;
+        }
+
+        /// <summary>-codex cards|maps: open the browser with the first entry selected (screenshots).</summary>
+        public void OpenCodexPage(string tab)
+        {
+            OpenCodex();
+            _codex.Current = tab == "maps" ? ContentBrowser.Tab.Maps : ContentBrowser.Tab.Cards;
+            _codex.SelectFirst();
+        }
+
+        /// <summary>Cheat matches are offline only and need debug mode (settings rows only exist then).</summary>
+        private void StartCheat(GameMode mode, string mapId)
+        {
+            if (!DevSettings.DebugMode) return;
+            CloseListener();
+            _page = Page.Title;
+            var settings = new Core.MatchSettings();
+            if (!string.IsNullOrEmpty(mapId)) settings.mapPool = new[] { mapId };
+            Flow.StartMatch(mode, settings);
         }
 
         private void TryJoin()
@@ -482,6 +560,7 @@ namespace Metadream.Shoot
                 case Page.Settings: DrawSettings(); break;
                 case Page.Nickname: DrawNickname(); break;
                 case Page.Replays: DrawReplays(); break;
+                case Page.Codex: _codex.Draw(); break;
             }
         }
 
@@ -569,28 +648,31 @@ namespace Metadream.Shoot
         private void DrawSettings()
         {
             Shadowed(new Rect(0, 80, W, 80), "설정", Big, Palette.PlayerOne);
-            for (int i = 0; i < SettingRows; i++)
+            int rowCount = SettingRows;
+            float step = rowCount > 6 ? 74f : 92f, height = step - 10f;
+            for (int i = 0; i < rowCount; i++)
             {
                 bool sel = i == _settingIndex;
-                var r = new Rect(W / 2 - 480, 200 + i * 92, 960, 80);
-                Fill(r, sel ? new Color(1, 1, 1, 0.95f) : new Color(1, 1, 1, 0.12f));
+                var r = new Rect(W / 2 - 480, 180 + i * step, 960, height);
+                bool dev = RowAt(i) >= SettingRow.Codex && RowAt(i) <= SettingRow.CheatTeams;
+                Fill(r, sel ? new Color(1, 1, 1, 0.95f) : dev ? new Color(1f, 0.8f, 0.25f, 0.16f) : new Color(1, 1, 1, 0.12f));
                 Color ink = sel ? Palette.Ink : Color.white;
-                Text(new Rect(r.x + 30, r.y + 4, 520, 42), SettingLabel(i), new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft }, ink);
-                Text(new Rect(r.x + 30, r.y + 44, r.width - 60, 30), SettingHint(i), new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontSize = 19, clipping = TextClipping.Clip }, sel ? new Color(0, 0, 0, 0.6f) : new Color(1, 1, 1, 0.5f));
+                Text(new Rect(r.x + 30, r.y + 2, 600, height * 0.55f), SettingLabel(i), new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft, fontSize = rowCount > 6 ? 30 : 34 }, ink);
+                Text(new Rect(r.x + 30, r.y + height * 0.55f, r.width - 240, height * 0.4f), SettingHint(i), new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontSize = 18, clipping = TextClipping.Clip }, sel ? new Color(0, 0, 0, 0.6f) : new Color(1, 1, 1, 0.5f));
                 string v = SettingValue(i);
                 if (v.Length > 0)
                 {
                     bool on = v == "켜짐" || v == "완료함";
-                    var pill = new Rect(r.xMax - 170, r.y + 14, 140, 34);
-                    Fill(pill, on ? new Color(0.35f, 0.8f, 0.45f) : new Color(0.45f, 0.45f, 0.5f));
+                    var pill = new Rect(r.xMax - 170, r.y + (height - 34) / 2f, 140, 34);
+                    Fill(pill, on ? new Color(0.35f, 0.8f, 0.45f) : v == "열기" ? new Color(0.85f, 0.6f, 0.15f) : new Color(0.45f, 0.45f, 0.5f));
                     Text(pill, v, new GUIStyle(Small) { fontSize = 22 }, Color.white);
                 }
                 if (Clicked(r)) { _settingIndex = i; int k = i; _deferred = () => ActivateSetting(k); }
             }
-            float y = 200 + SettingRows * 92 + 10;
+            float y = 180 + rowCount * step + 6;
             if (DevSettings.DebugMode)
             {
-                var box = new Rect(W / 2 - 480, y, 960, 160);
+                var box = new Rect(W / 2 - 480, y, 960, Mathf.Min(160f, 1080 - 70 - y));
                 Fill(box, new Color(0, 0, 0, 0.45f));
                 string ext = ContentDatabase.LoadedExternalDirectory ?? "없음 (실행 파일 옆 Content 폴더)";
                 Text(new Rect(box.x + 20, box.y + 8, box.width - 40, 30), "콘텐츠: 카드 " + ContentDatabase.Cards.Count + " · 맵 " + ContentDatabase.Maps.Count + " · 오류 " + ContentDatabase.ErrorCount + " · 경고 " + ContentDatabase.WarningCount + " · 해시 " + ContentDatabase.Hash.Substring(0, Math.Min(12, ContentDatabase.Hash.Length)), new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontSize = 20 }, Color.white);
@@ -725,9 +807,9 @@ namespace Metadream.Shoot
             string masterLine;
             Color masterColor = new Color(1, 1, 1, 0.6f);
             if (_master == null) masterLine = "메인 서버 목록 꺼짐 (설정에서 켤 수 있음) · 같은 네트워크의 방만 표시";
-            else if (_master.Error != null) { masterLine = "메인 서버 " + _master.Endpoint + " 오류: " + _master.Error; masterColor = new Color(1f, 0.6f, 0.5f); }
-            else if (_master.RepliesReceived == 0) { masterLine = _master.Unreachable ? "메인 서버 " + _master.Endpoint + " 응답 없음 (Tailscale 연결 확인) · 같은 네트워크의 방만 표시" : "메인 서버 " + _master.Endpoint + " 에서 목록을 받는 중…"; if (_master.Unreachable) masterColor = new Color(1f, 0.75f, 0.4f); }
-            else { masterLine = "메인 서버 " + _master.Endpoint + " 연결됨 · 서버 " + _master.Servers.Count + "개" + (_master.Unreachable ? " (최근 응답 없음)" : ""); masterColor = new Color(0.6f, 1f, 0.6f, 0.85f); }
+            else if (_master.Error != null) { masterLine = "메인 서버 연결 오류: " + _master.Error; masterColor = new Color(1f, 0.6f, 0.5f); }
+            else if (_master.RepliesReceived == 0) { masterLine = _master.Unreachable ? "메인 서버 응답 없음 (인터넷 연결 확인) · 같은 네트워크의 방만 표시" : "메인 서버에서 목록을 받는 중…"; if (_master.Unreachable) masterColor = new Color(1f, 0.75f, 0.4f); }
+            else { masterLine = "메인 서버 연결됨 · 서버 " + _master.Servers.Count + "개" + (_master.Unreachable ? " (최근 응답 없음)" : ""); masterColor = new Color(0.6f, 1f, 0.6f, 0.85f); }
             Text(new Rect(0, 176, W, 34), masterLine, Small, masterColor);
             if (_entries.Count == 0)
             {

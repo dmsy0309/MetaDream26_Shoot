@@ -154,6 +154,7 @@ namespace Metadream.Shoot.Maps
                             float along = Vector2.Dot(f.Velocity, up);
                             if (along < z.Power) f.AddImpulse(up * (z.Power - along));
                             Fx.Ring(f.Position, Palette.JumpPad, 2.2f);
+                            Fx.Sound("pad", f.Position);
                             break;
                         case ZoneKind.Hazard:
                             f.TakeDamage(z.Dps * dt, null, Vector2.up, true, 0f, true);

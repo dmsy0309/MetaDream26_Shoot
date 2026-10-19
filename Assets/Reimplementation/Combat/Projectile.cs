@@ -189,11 +189,13 @@ namespace Metadream.Shoot.Combat
                     if (Owner != null) _ignore.Remove(Owner);
                     transform.position = hit.centroid + hit.normal * 0.02f;
                     Fx.Spark(hit.point, Color.white);
+                    Fx.Sound("bounce", hit.point);
                     NotifyHitSurface(hit.point, hit.normal, false);
                     return true;
                 }
 
                 Fx.Spark(hit.point, Owner != null ? Owner.Color : Color.white);
+                Fx.Sound("impact", hit.point);
                 NotifyHitSurface(hit.point, hit.normal, true);
                 Destroy(gameObject);
                 return true;

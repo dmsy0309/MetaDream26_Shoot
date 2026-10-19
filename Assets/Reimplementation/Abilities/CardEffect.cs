@@ -154,6 +154,7 @@ namespace Metadream.Shoot.Abilities
             Presentation.Fx.Ring(center, color, radius * 2f);
             Presentation.Fx.Burst(center, color, 10, radius * 3f);
             Presentation.Fx.Shake(0.2f);
+            Presentation.Fx.Sound("explosion", center);
             DevLog.Verbose("[Effect] explosion at " + center.ToString("F1") + " r=" + radius + " dmg=" + damage + " hits=" + hits);
             return hits;
         }
@@ -161,6 +162,7 @@ namespace Metadream.Shoot.Abilities
         /// <summary>Knockback only (no damage) away from center.</summary>
         public static int Push(Vector2 center, float radius, float strength, Fighter source)
         {
+            Presentation.Fx.Sound("shockwave", center);
             int hits = 0;
             foreach (var f in Fighter.Active.ToArray())
             {

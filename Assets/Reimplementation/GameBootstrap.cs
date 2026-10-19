@@ -65,6 +65,7 @@ namespace Metadream.Shoot
             if (GetComponent<FrontEnd>() == null) gameObject.AddComponent<FrontEnd>();
             if (GetComponent<GameHud>() == null) gameObject.AddComponent<GameHud>();
             if (GetComponent<DebugOverlay>() == null) gameObject.AddComponent<DebugOverlay>();
+            if (GetComponent<CheatPanel>() == null) gameObject.AddComponent<CheatPanel>();
         }
 
         private void Start()
@@ -136,6 +137,18 @@ namespace Metadream.Shoot
             {
                 GetComponent<FrontEnd>().OpenReplaysPage();
             }
+            else if (HasArg(args, "-codex"))
+            {
+                DevSettings.ApplyCommandLine(new[] { "-debug" });
+                GetComponent<FrontEnd>().OpenCodexPage(StringArg(args, "-codex"));
+            }
+            else if (StringArg(args, "-cheat") != null)
+            {
+                DevSettings.ApplyCommandLine(new[] { "-debug" });
+                flow.StartMatch(StringArg(args, "-cheat") == "2" ? GameMode.CheatTeams : GameMode.CheatDuel);
+                string query = StringArg(args, "-cheatsearch");
+                if (query != null) StartCoroutine(OpenCheatSearch(query));
+            }
             else
             {
                 string target = StringArg(args, "-join");
@@ -177,6 +190,16 @@ namespace Metadream.Shoot
         {
             yield return new WaitForSecondsRealtime(seconds);
             if (host != null && !host.InMatch) host.StartMatch(settings, seed);
+        }
+
+        /// <summary>-cheatsearch: open the cheat card search with a query once the battle runs (screenshots).</summary>
+        private static IEnumerator OpenCheatSearch(string query)
+        {
+            yield return new WaitForSecondsRealtime(4f);
+            var panel = FindAnyObjectByType<CheatPanel>();
+            if (panel == null) yield break;
+            panel.Open();
+            panel.SetQuery(query);
         }
 
         private static IEnumerator QuitServerAfter(float seconds)

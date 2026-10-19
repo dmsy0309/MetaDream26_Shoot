@@ -107,6 +107,9 @@ namespace Metadream.Shoot.Player
         private readonly List<DamageOverTime> _dots = new List<DamageOverTime>();
         public bool IsPoisoned => _dots.Count > 0;
 
+        /// <summary>True while a text field (cheat card search) has focus: local keyboard/pad input is ignored.</summary>
+        public static bool InputSuspended;
+
         private struct SpeedModifier
         {
             public float Factor;
@@ -367,6 +370,7 @@ namespace Metadream.Shoot.Player
             float dt = Time.deltaTime;
             TickSpeedModifiers(dt);
             _frame = Input != null ? Input.Read(new InputContext { Position = transform.position, Camera = Camera.main }) : default;
+            if (InputSuspended && Input is DeviceInput) _frame = default;
 
             _sinceGrounded += dt;
             _sinceWallGrab += dt;
@@ -512,6 +516,7 @@ namespace Metadream.Shoot.Player
                     SpawnProjectile(dir);
                     // Gun.BulletInit: one GunAmmo.Shoot per spawned projectile when useAmmo.
                     Ammo.Shoot(Stats.ammo.EffectiveReloadTime);
+                    if (Ammo.isReloading && Ammo.currentAmmo <= 0) Fx.Sound("reload", transform.position);
                 }
                 Fx.Shake(0.12f + 0.04f * count);
                 if (g.timeBetweenBullets > 0f && burst < g.BurstCount - 1) yield return new WaitForSeconds(g.timeBetweenBullets);
@@ -550,6 +555,7 @@ namespace Metadream.Shoot.Player
         {
             if (!Block.TryBlock(Stats.block.EffectiveCooldown)) return false;
             Fx.Ring(transform.position, Color.white, 1.9f * transform.localScale.x);
+            Fx.Sound("block", transform.position);
             if (Stats.block.healing > 0f) Heal(Stats.block.healing);
             if (Stats.block.additionalBlocks > 0) StartCoroutine(ExtraBlocks(Stats.block.additionalBlocks));
             for (int i = 0; i < Effects.Count; i++) Effects[i].OnBlock();
@@ -573,6 +579,7 @@ namespace Metadream.Shoot.Player
             if (!Block.TryBlockMe()) return false;
             BlocksSucceeded++;
             Fx.Ring(transform.position, Color.white, 2.2f * transform.localScale.x);
+            Fx.Sound("reflect", transform.position);
             Fx.Shake(0.15f);
             if (projectile != null)
                 for (int i = 0; i < Effects.Count; i++) Effects[i].OnBlockedProjectile(projectile);
@@ -595,6 +602,7 @@ namespace Metadream.Shoot.Player
             if (source != null && source != this && source.Stats.character.lifeSteal > 0f)
                 source.Heal(amount * source.Stats.character.lifeSteal);
             if (!quiet) Fx.Burst(transform.position, Color, 6, 6f);
+            if (!quiet && amount > 0.5f) Fx.Sound("hit", transform.position, Mathf.Clamp(amount / 55f, 0.5f, 1.3f));
             for (int i = 0; i < Effects.Count; i++) Effects[i].OnDamaged(amount, source);
             if (source != null && source != this)
                 for (int i = 0; i < source.Effects.Count; i++) source.Effects[i].OnDealtDamage(this, amount);

@@ -10,6 +10,8 @@ namespace Metadream.Shoot.Presentation
     /// <summary>In-match IMGUI HUD: team score, fighter overlays, owned cards, card pick, banners.</summary>
     public sealed class GameHud : MonoBehaviour
     {
+        private bool _resultSound;
+
         private void OnGUI()
         {
             var flow = GameFlow.Instance;
@@ -20,7 +22,7 @@ namespace Metadream.Shoot.Presentation
             DrawCardBars(flow);
             if (flow.IsPicking) DrawPick(flow);
             if (flow.Phase == MatchPhase.GameOver && flow.WinningTeam >= 0 && !string.IsNullOrEmpty(flow.Banner)) DrawResult(flow);
-            else DrawBanner(flow);
+            else { DrawBanner(flow); if (flow.Phase != MatchPhase.GameOver) _resultSound = false; }
             string footer = flow.IsSandbox ? "Esc: 튜토리얼 종료" : flow.Role == NetRole.Client ? "Esc: 방 나가기" : flow.Role == NetRole.Host ? "Esc: 대기실로" : "Esc: 타이틀";
             if (!flow.ReplayMode) Shadowed(new Rect(20, H - 40, 600, 30), footer, Tiny, new Color(1, 1, 1, 0.8f));
         }
@@ -159,7 +161,7 @@ namespace Metadream.Shoot.Presentation
         }
 
         /// <summary>Card face: frame, rarity band, procedural emblem, title, description and stat lines.</summary>
-        private static void DrawCard(Rect r, CardDefinition card, bool selected, Color accent)
+        internal static void DrawCard(Rect r, CardDefinition card, bool selected, Color accent)
         {
             Color rc = RarityColor(card.Rarity);
             Fill(new Rect(r.x + 8, r.y + 10, r.width, r.height), new Color(0, 0, 0, 0.35f));
@@ -229,6 +231,11 @@ namespace Metadream.Shoot.Presentation
         {
             int win = flow.WinningTeam;
             int me = flow.LocalTeam;
+            if (!_resultSound && Event.current.type == EventType.Repaint)
+            {
+                _resultSound = true;
+                Audio.Sfx.Play(me < 0 || me == win ? "victory" : "defeat");
+            }
             string head = me < 0 ? flow.SideName(win) + " 승리" : me == win ? "승리!" : "패배";
             Color hc = me < 0 ? flow.SideColor(win) : me == win ? new Color(1f, 0.82f, 0.25f) : new Color(0.7f, 0.74f, 0.82f);
             Fill(new Rect(0, 0, W, H), new Color(0, 0, 0, 0.55f));

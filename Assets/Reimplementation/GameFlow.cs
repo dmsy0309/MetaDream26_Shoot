@@ -22,7 +22,11 @@ namespace Metadream.Shoot
         CpuDemo = 3,
         CpuDemoTeams = 4,
         Online = 5,
-        Sandbox = 6
+        Sandbox = 6,
+        /// <summary>Debug mode only: P1 vs CPU with cheats (card search, F2–F7).</summary>
+        CheatDuel = 7,
+        /// <summary>Debug mode only: P1 + CPU teammate vs 2 CPU with cheats.</summary>
+        CheatTeams = 8
     }
 
     public enum NetRole
@@ -132,8 +136,12 @@ namespace Metadream.Shoot
             _offer[index] = drawn[0];
             _rerolls[Picker.PlayerId] = RerollsLeft(Picker) - 1;
             OfferIndex = index;
+            Fx.Sound("reroll", Vector2.zero);
             return true;
         }
+
+        /// <summary>Cheat matches (settings → 치트 대전, debug mode only).</summary>
+        public bool IsCheatMatch => Role == NetRole.Offline && (Mode == GameMode.CheatDuel || Mode == GameMode.CheatTeams);
 
         /// <summary>UI request (mouse button under a card) from whoever is playing on this machine.</summary>
         public void RequestReroll(int index)
@@ -244,8 +252,15 @@ namespace Metadream.Shoot
                     }
                     break;
                 case GameMode.VersusCpu:
+                case GameMode.CheatDuel:
                     Add(list, "P1", P1());
                     Add(list, "CPU", Bot("CPU"));
+                    break;
+                case GameMode.CheatTeams:
+                    Add(list, "P1", P1());
+                    Add(list, "CPU 상대 1", Bot("CPU 상대 1"));
+                    Add(list, "CPU 팀원", Bot("CPU 팀원"));
+                    Add(list, "CPU 상대 2", Bot("CPU 상대 2"));
                     break;
                 case GameMode.CpuDemo:
                     Add(list, "CPU 1", Bot("CPU 1"));
@@ -433,6 +448,7 @@ namespace Metadream.Shoot
             }
             picker.ApplyCard(card);
             PicksCompleted++;
+            Fx.Sound("card_pick", Vector2.zero);
             History.Add(picker.DisplayName + " ← " + card.Title);
             Log("pick " + picker.DisplayName + " " + card.Id);
             _offer = null;
@@ -448,6 +464,7 @@ namespace Metadream.Shoot
             var kb = Keyboard.current;
             if (!InMenu && kb != null && kb.escapeKey.wasPressedThisFrame)
             {
+                if (Presentation.CheatPanel.IsOpen) return; // the panel closes itself
                 if (EscapeOverride != null) EscapeOverride();
                 else ReturnToTitle();
                 return;
@@ -500,12 +517,15 @@ namespace Metadream.Shoot
                 if (f.CountsAsAlive) alive.Add(f.TeamId);
             var result = Match.ReportAliveTeams(alive);
             if (result.Kind != PointResultKind.Ignored) Log("result " + result);
+            if (result.Kind == PointResultKind.Point) Fx.Sound("point", Vector2.zero);
+            else if (result.Kind == PointResultKind.Round) Fx.Sound("round", Vector2.zero);
         }
 
         private void UpdatePick()
         {
             if (Picker == null) return;
             float open = Time.unscaledTime - _pickOpenedAt;
+            if (Fighter.InputSuspended && !Picker.IsBot && !(Picker.Input is Network.NetworkInput)) return;
             if (Picker.IsBot || Picker.Absent || Picker.Input == null)
             {
                 if (open > 0.9f) ConfirmPick(BotChoice());
@@ -610,6 +630,7 @@ namespace Metadream.Shoot
             SubBanner = CurrentMap.Definition.Name;
             yield return new WaitForSecondsRealtime(0.55f);
             Banner = "싸워라!";
+            Fx.Sound("fight", Vector2.zero);
             SubBanner = null;
             foreach (var f in Fighters) if (!f.Absent) f.SetPlaying(true);
             yield return new WaitForSecondsRealtime(0.45f);

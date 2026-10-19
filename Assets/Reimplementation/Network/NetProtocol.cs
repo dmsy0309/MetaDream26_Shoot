@@ -37,7 +37,8 @@ namespace Metadream.Shoot.Network
     public static class Protocol
     {
         /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks. v6: card rerolls.</summary>
-        public const int Version = 6;
+        /// <summary>v7: sound events (FxType.Sound) in snapshots.</summary>
+        public const int Version = 7;
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;

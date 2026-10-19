@@ -92,7 +92,12 @@ namespace Metadream.Shoot.Presentation
         }
 
         /// <summary>Invisible click target over an already drawn rect.</summary>
-        public static bool Clicked(Rect r) => GUI.Button(r, GUIContent.none, GUIStyle.none);
+        public static bool Clicked(Rect r)
+        {
+            bool hit = GUI.Button(r, GUIContent.none, GUIStyle.none);
+            if (hit) Audio.Sfx.Play("ui_click");
+            return hit;
+        }
 
         public static Vector2 WorldToGui(Camera cam, Vector3 world)
         {

@@ -1,0 +1,685 @@
+{
+  "sounds": [
+    {
+      "id": "shoot",
+      "description": "총 발사",
+      "clip": "",
+      "volume": 0.45,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.02,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 900,
+          "freqEnd": 180,
+          "duration": 0.09,
+          "volume": 0.6,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 3
+        },
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.06,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 4
+        }
+      ]
+    },
+    {
+      "id": "hit",
+      "description": "탄이 캐릭터에 명중",
+      "clip": "",
+      "volume": 0.55,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.08,
+          "volume": 0.8,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 3
+        },
+        {
+          "wave": "sine",
+          "freq": 220,
+          "freqEnd": 90,
+          "duration": 0.12,
+          "volume": 0.9,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "impact",
+      "description": "탄이 벽에 맞고 사라짐",
+      "clip": "",
+      "volume": 0.25,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.04,
+      "layers": [
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.05,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 4
+        },
+        {
+          "wave": "triangle",
+          "freq": 500,
+          "freqEnd": 250,
+          "duration": 0.05,
+          "volume": 0.4,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 3
+        }
+      ]
+    },
+    {
+      "id": "bounce",
+      "description": "탄이 벽에 튕김",
+      "clip": "",
+      "volume": 0.3,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.04,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 700,
+          "freqEnd": 1100,
+          "duration": 0.07,
+          "volume": 0.8,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "description": "점프",
+      "clip": "",
+      "volume": 0.3,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.06,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 260,
+          "freqEnd": 520,
+          "duration": 0.08,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "block",
+      "description": "방어 발동",
+      "clip": "",
+      "volume": 0.45,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 660,
+          "freqEnd": 880,
+          "duration": 0.12,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "sine",
+          "freq": 1320,
+          "freqEnd": 1320,
+          "duration": 0.1,
+          "volume": 0.3,
+          "delay": 0.02,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "reflect",
+      "description": "방어로 탄을 튕겨냄",
+      "clip": "",
+      "volume": 0.6,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 1200,
+          "freqEnd": 2400,
+          "duration": 0.1,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "sine",
+          "freq": 1800,
+          "freqEnd": 900,
+          "duration": 0.18,
+          "volume": 0.6,
+          "delay": 0.03,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "reload",
+      "description": "탄창 비움 → 재장전 시작",
+      "clip": "",
+      "volume": 0.35,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.2,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 400,
+          "freqEnd": 400,
+          "duration": 0.03,
+          "volume": 0.6,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 1
+        },
+        {
+          "wave": "square",
+          "freq": 300,
+          "freqEnd": 300,
+          "duration": 0.03,
+          "volume": 0.6,
+          "delay": 0.07,
+          "attack": 0.004,
+          "curve": 1
+        },
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.04,
+          "volume": 0.3,
+          "delay": 0.14,
+          "attack": 0.004,
+          "curve": 3
+        }
+      ]
+    },
+    {
+      "id": "death",
+      "description": "캐릭터 사망",
+      "clip": "",
+      "volume": 0.7,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.1,
+      "layers": [
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.45,
+          "volume": 0.9,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "saw",
+          "freq": 300,
+          "freqEnd": 40,
+          "duration": 0.5,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 1.5
+        },
+        {
+          "wave": "sine",
+          "freq": 80,
+          "freqEnd": 40,
+          "duration": 0.35,
+          "volume": 0.8,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "edge",
+      "description": "경기장 경계에 닿음",
+      "clip": "",
+      "volume": 0.5,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.1,
+      "layers": [
+        {
+          "wave": "saw",
+          "freq": 180,
+          "freqEnd": 90,
+          "duration": 0.2,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.12,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 3
+        }
+      ]
+    },
+    {
+      "id": "explosion",
+      "description": "폭발 (폭발탄, 시한폭탄, 방어 폭발)",
+      "clip": "",
+      "volume": 0.65,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.05,
+      "layers": [
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.5,
+          "volume": 1,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2.5
+        },
+        {
+          "wave": "sine",
+          "freq": 120,
+          "freqEnd": 35,
+          "duration": 0.45,
+          "volume": 0.9,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "shockwave",
+      "description": "충격파·끌어당김",
+      "clip": "",
+      "volume": 0.5,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.08,
+      "layers": [
+        {
+          "wave": "sine",
+          "freq": 160,
+          "freqEnd": 60,
+          "duration": 0.35,
+          "volume": 0.9,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 1.5
+        },
+        {
+          "wave": "noise",
+          "freq": 1,
+          "freqEnd": 1,
+          "duration": 0.25,
+          "volume": 0.4,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 3
+        }
+      ]
+    },
+    {
+      "id": "pad",
+      "description": "점프대",
+      "clip": "",
+      "volume": 0.45,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.1,
+      "layers": [
+        {
+          "wave": "sine",
+          "freq": 300,
+          "freqEnd": 1200,
+          "duration": 0.18,
+          "volume": 0.8,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 1.5
+        }
+      ]
+    },
+    {
+      "id": "card_pick",
+      "description": "카드 결정",
+      "clip": "",
+      "volume": 0.5,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 523,
+          "freqEnd": 523,
+          "duration": 0.08,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 784,
+          "freqEnd": 784,
+          "duration": 0.12,
+          "volume": 0.7,
+          "delay": 0.07,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "sine",
+          "freq": 1046,
+          "freqEnd": 1046,
+          "duration": 0.18,
+          "volume": 0.5,
+          "delay": 0.14,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "reroll",
+      "description": "카드 새로고침",
+      "clip": "",
+      "volume": 0.45,
+      "pitch": 1,
+      "pitchJitter": 0.02,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 900,
+          "freqEnd": 300,
+          "duration": 0.06,
+          "volume": 0.4,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 400,
+          "freqEnd": 1200,
+          "duration": 0.14,
+          "volume": 0.6,
+          "delay": 0.05,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "fight",
+      "description": "라운드 시작 (싸워라!)",
+      "clip": "",
+      "volume": 0.55,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 0.5,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 392,
+          "freqEnd": 392,
+          "duration": 0.09,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 1.5
+        },
+        {
+          "wave": "square",
+          "freq": 587,
+          "freqEnd": 587,
+          "duration": 0.2,
+          "volume": 0.6,
+          "delay": 0.1,
+          "attack": 0.004,
+          "curve": 1.5
+        }
+      ]
+    },
+    {
+      "id": "point",
+      "description": "포인트 획득",
+      "clip": "",
+      "volume": 0.5,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 0.5,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 660,
+          "freqEnd": 660,
+          "duration": 0.1,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 880,
+          "freqEnd": 880,
+          "duration": 0.16,
+          "volume": 0.7,
+          "delay": 0.09,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "round",
+      "description": "라운드 승리",
+      "clip": "",
+      "volume": 0.6,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 0.5,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 523,
+          "freqEnd": 523,
+          "duration": 0.1,
+          "volume": 0.45,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "square",
+          "freq": 659,
+          "freqEnd": 659,
+          "duration": 0.1,
+          "volume": 0.45,
+          "delay": 0.1,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "square",
+          "freq": 784,
+          "freqEnd": 784,
+          "duration": 0.25,
+          "volume": 0.5,
+          "delay": 0.2,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "victory",
+      "description": "게임 승리",
+      "clip": "",
+      "volume": 0.65,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 1,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 523,
+          "freqEnd": 523,
+          "duration": 0.12,
+          "volume": 0.45,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "square",
+          "freq": 659,
+          "freqEnd": 659,
+          "duration": 0.12,
+          "volume": 0.45,
+          "delay": 0.12,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "square",
+          "freq": 784,
+          "freqEnd": 784,
+          "duration": 0.12,
+          "volume": 0.45,
+          "delay": 0.24,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 1046,
+          "freqEnd": 1046,
+          "duration": 0.5,
+          "volume": 0.6,
+          "delay": 0.36,
+          "attack": 0.004,
+          "curve": 1.5
+        }
+      ]
+    },
+    {
+      "id": "defeat",
+      "description": "게임 패배",
+      "clip": "",
+      "volume": 0.6,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 1,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 392,
+          "freqEnd": 392,
+          "duration": 0.18,
+          "volume": 0.6,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 330,
+          "freqEnd": 330,
+          "duration": 0.18,
+          "volume": 0.6,
+          "delay": 0.18,
+          "attack": 0.004,
+          "curve": 2
+        },
+        {
+          "wave": "saw",
+          "freq": 262,
+          "freqEnd": 196,
+          "duration": 0.5,
+          "volume": 0.4,
+          "delay": 0.36,
+          "attack": 0.004,
+          "curve": 1.5
+        }
+      ]
+    },
+    {
+      "id": "ui_click",
+      "description": "메뉴 버튼 클릭",
+      "clip": "",
+      "volume": 0.3,
+      "pitch": 1,
+      "pitchJitter": 0.02,
+      "cooldown": 0.02,
+      "layers": [
+        {
+          "wave": "triangle",
+          "freq": 1200,
+          "freqEnd": 900,
+          "duration": 0.04,
+          "volume": 0.7,
+          "delay": 0,
+          "attack": 0.004,
+          "curve": 2
+        }
+      ]
+    }
+  ]
+}
