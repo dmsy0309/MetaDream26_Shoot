@@ -11,7 +11,7 @@
     "targetFrameRate": 60,
     "statusInterval": 30.0,
     "masterServer": true,
-    "masterHost": "100.64.0.10",
+    "masterHost": "203.0.113.10",
     "masterPort": 47800,
     "publicAddress": "",
     "contentDir": "",
@@ -26,6 +26,8 @@
         "cardsPerPick": 5,
         "mapPool": [],
         "cardPool": [],
+        "rerollsAtStart": 3,
+        "rerollsPerRound": 0,
         "stats": {
             "maxHealth": 100.0,
             "bulletDamage": 55.0,

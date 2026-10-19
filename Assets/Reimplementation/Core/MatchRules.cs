@@ -39,6 +39,10 @@ namespace Metadream.Shoot.Core
         public bool pickPhase = true;
         // Number of cards shown per pick is UNKNOWN-03 (CardChoice.picks=6 is not the shown count). Provisional.
         public int cardsPerPick = 5;
+        /// <summary>Card rerolls each player gets when the game starts.</summary>
+        public int rerollsAtStart = 3;
+        /// <summary>Rerolls added to every player after each round.</summary>
+        public int rerollsPerRound = 0;
         /// <summary>Map ids used in rotation (empty = every non-tutorial map).</summary>
         public string[] mapPool = new string[0];
         /// <summary>Card ids that can be offered (empty = every card).</summary>

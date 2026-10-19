@@ -471,6 +471,7 @@ namespace Metadream.Shoot.Online
                 RoomName = RoomName, Code = Code, TeamSize = TeamSize, InMatch = InMatch, Dedicated = Dedicated,
                 LeaderSlot = LeaderSlot, Countdown = Countdown, PointsToWin = Settings.pointsToWinRound,
                 RoundsToWin = Settings.roundsToWinGame, FillWithCpu = FillWithCpu
+                , RerollsAtStart = Settings.rerollsAtStart, RerollsPerRound = Settings.rerollsPerRound
             };
             for (int i = 0; i < SlotCount; i++) l.Slots.Add(new LobbySlot { Kind = _kinds[i], Name = _names[i] });
             return l;
@@ -479,6 +480,15 @@ namespace Metadream.Shoot.Online
         // ------------------------------------------------------------ match
 
         public bool CanStart => !InMatch && (FillWithCpu ? (Dedicated ? RemoteCount > 0 : true) : RemoteCount + (Dedicated ? 0 : 1) >= SlotCount);
+
+        /// <summary>Room setting: card rerolls at game start and added per round (applies to the next match).</summary>
+        public void SetRerolls(int atStart, int perRound)
+        {
+            if (InMatch) return;
+            Settings.rerollsAtStart = Mathf.Clamp(atStart, 0, 20);
+            Settings.rerollsPerRound = Mathf.Clamp(perRound, 0, 10);
+            _lobbyDirty = true;
+        }
 
         public bool StartMatch(MatchSettings settings = null, int? seed = null)
         {

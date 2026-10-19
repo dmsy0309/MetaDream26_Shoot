@@ -139,13 +139,23 @@ namespace Metadream.Shoot.Presentation
                 bool sel = i == flow.OfferIndex;
                 float bob = sel ? Mathf.Sin(Time.unscaledTime * 3f) * 4f : 0f;
                 DrawCard(new Rect(x0 + i * (cw + gap), 270 - (sel ? 30 : 0) + bob, cw, ch), offer[i], sel, picker.Color);
+                // Reroll button under every card (only the player who is picking can press it).
+                int left = flow.PickerRerolls;
+                bool usable = flow.LocalPicker && left > 0;
+                var rb = new Rect(x0 + i * (cw + gap) + 30, 270 + ch + 18, cw - 60, 50);
+                Fill(rb, usable ? new Color(1f, 1f, 1f, 0.9f) : new Color(1f, 1f, 1f, 0.12f));
+                Text(rb, "↻ 새로고침", new GUIStyle(Small) { fontSize = 22, fontStyle = FontStyle.Bold }, usable ? Palette.Ink : new Color(1, 1, 1, 0.35f));
+                if (usable && Clicked(rb)) { int k = i; flow.RequestReroll(k); }
             }
             string help;
             if (picker.IsBot) help = "CPU가 고르는 중…";
             else if (flow.Role == NetRole.Client && picker.PlayerId != flow.LocalSlot) help = picker.DisplayName + " 플레이어가 고르는 중…";
             else if (flow.Role == NetRole.Host && picker.Input is NetworkInput) help = picker.DisplayName + " 플레이어가 원격으로 고르는 중…";
             else help = "← / → 로 고르고 사격 키(F · . · 패드 X/RT)로 결정";
-            Text(new Rect(0, 820, W, 40), help, Small, new Color(1, 1, 1, 0.8f));
+            Text(new Rect(0, 850, W, 40), help, Small, new Color(1, 1, 1, 0.8f));
+            int remaining = flow.PickerRerolls;
+            string rerollText = "남은 새로고침: " + remaining + "회" + (flow.LocalPicker ? "  ·  카드 아래 버튼 또는 R / 패드 Y (선택한 카드)" : "");
+            Text(new Rect(0, 900, W, 40), rerollText, new GUIStyle(Mid) { fontSize = 28 }, remaining > 0 ? new Color(1f, 0.85f, 0.4f) : new Color(1, 1, 1, 0.5f));
         }
 
         /// <summary>Card face: frame, rarity band, procedural emblem, title, description and stat lines.</summary>

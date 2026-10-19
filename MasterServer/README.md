@@ -8,7 +8,7 @@ Python 3 표준 라이브러리만 사용하므로 pip 설치가 필요 없습�
 | 47800 | UDP | 게임 패킷 (JSON 한 개 = 데이터그램 한 개) |
 | 47801 | HTTP | `GET /health` (Uptime Kuma), `GET /servers` (목록 확인용) |
 
-게임에 하드코딩된 주소: `100.64.0.10:47800` (`Assets/Reimplementation/Network/MasterServer.cs` 의 `MasterServerEndpoint`).
+게임에 하드코딩된 주소: **공인 IP** `203.0.113.10:47800` (UDP, 서버 목록)과 `203.0.113.10:47801` (HTTP, 리플레이 업로드). `Assets/Reimplementation/Network/MasterServer.cs` 의 `MasterServerEndpoint.DefaultHost`. tailnet 주소(100.64.0.10)는 쓰지 않으므로 공유기의 포트 포워딩(UDP 47800, TCP 47801)이 유지돼야 합니다.
 
 ## 패킷
 

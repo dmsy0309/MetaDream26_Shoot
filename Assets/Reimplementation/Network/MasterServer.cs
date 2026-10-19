@@ -14,7 +14,8 @@ namespace Metadream.Shoot.Network
     /// </summary>
     public static class MasterServerEndpoint
     {
-        public const string DefaultHost = "100.64.0.10";
+        /// <summary>Public IP of the main hosting server (not the tailnet address), so PCs outside the tailnet work too.</summary>
+        public const string DefaultHost = "203.0.113.10";
         public const int DefaultPort = 47800;
         public const float HeartbeatInterval = 5f;
         public const float QueryInterval = 3f;

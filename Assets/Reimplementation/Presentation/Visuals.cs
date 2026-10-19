@@ -62,7 +62,7 @@ namespace Metadream.Shoot.Presentation
     {
         private static PhysicsMaterial2D _frictionless, _box;
         public static PhysicsMaterial2D Frictionless => _frictionless != null ? _frictionless : (_frictionless = new PhysicsMaterial2D("Frictionless") { friction = 0f, bounciness = 0f });
-        public static PhysicsMaterial2D Box => _box != null ? _box : (_box = new PhysicsMaterial2D("Box") { friction = 0.5f, bounciness = 0.05f });
+        public static PhysicsMaterial2D Box => _box != null ? _box : (_box = new PhysicsMaterial2D("Box") { friction = 0.25f, bounciness = 0.05f });
     }
 
     public static class Palette

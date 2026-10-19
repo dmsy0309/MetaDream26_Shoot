@@ -18,6 +18,8 @@ namespace Metadream.Shoot.Player
         public bool NavRight;
         public bool NavUp;
         public bool NavDown;
+        /// <summary>Card reroll request: 0 none, 1..n = card index + 1, 255 = the selected card.</summary>
+        public int Reroll;
     }
 
     public struct InputContext
@@ -100,6 +102,7 @@ namespace Metadream.Shoot.Player
                 frame.NavUp = Pressed(kb, _keys.Up);
                 frame.NavDown = Pressed(kb, _keys.Down);
                 frame.ConfirmPressed = frame.ShootPressed || Pressed(kb, _keys.AltJump);
+                if (Pressed(kb, Key.R)) frame.Reroll = 255;
             }
 
             Vector2 move = keyDir;
@@ -117,6 +120,7 @@ namespace Metadream.Shoot.Player
                 else if (pad.sqrMagnitude > 0.05f) aim = pad;
 
                 frame.JumpPressed |= gp.buttonSouth.wasPressedThisFrame;
+                if (gp.buttonNorth.wasPressedThisFrame) frame.Reroll = 255;
                 frame.JumpHeld |= gp.buttonSouth.isPressed;
                 bool shootNow = gp.rightTrigger.wasPressedThisFrame || gp.buttonWest.wasPressedThisFrame;
                 frame.ShootPressed |= shootNow;

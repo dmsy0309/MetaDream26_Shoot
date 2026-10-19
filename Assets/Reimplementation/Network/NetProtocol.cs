@@ -36,8 +36,8 @@ namespace Metadream.Shoot.Network
 
     public static class Protocol
     {
-        /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks.</summary>
-        public const int Version = 5;
+        /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks. v6: card rerolls.</summary>
+        public const int Version = 6;
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;
@@ -88,6 +88,7 @@ namespace Metadream.Shoot.Network
             if (f.NavUp) flags |= 256;
             if (f.NavDown) flags |= 512;
             w.Write((ushort)flags);
+            w.Write((byte)Mathf.Clamp(f.Reroll, 0, 255));
         }
 
         public static InputFrame ReadInput(BinaryReader r)
@@ -104,6 +105,7 @@ namespace Metadream.Shoot.Network
             f.NavRight = (flags & 128) != 0;
             f.NavUp = (flags & 256) != 0;
             f.NavDown = (flags & 512) != 0;
+            f.Reroll = r.ReadByte();
             return f;
         }
     }
@@ -127,6 +129,8 @@ namespace Metadream.Shoot.Network
         public int PointsToWin = 2;
         public int RoundsToWin = 5;
         public bool FillWithCpu = true;
+        public int RerollsAtStart = 3;
+        public int RerollsPerRound;
         public readonly List<LobbySlot> Slots = new List<LobbySlot>();
 
         public void Write(BinaryWriter w)
@@ -147,6 +151,8 @@ namespace Metadream.Shoot.Network
                 w.Write((byte)s.Kind);
                 w.Write(s.Name ?? "");
             }
+            w.Write((byte)Mathf.Clamp(RerollsAtStart, 0, 255));
+            w.Write((byte)Mathf.Clamp(RerollsPerRound, 0, 255));
         }
 
         public static LobbyInfo Read(BinaryReader r)
@@ -160,6 +166,7 @@ namespace Metadream.Shoot.Network
             l.FillWithCpu = r.ReadBoolean();
             int n = r.ReadByte();
             for (int i = 0; i < n; i++) l.Slots.Add(new LobbySlot { Kind = (SlotKind)r.ReadByte(), Name = r.ReadString() });
+            if (r.BaseStream.Position < r.BaseStream.Length) { l.RerollsAtStart = r.ReadByte(); l.RerollsPerRound = r.ReadByte(); }
             return l;
         }
     }
@@ -252,6 +259,8 @@ namespace Metadream.Shoot.Network
         public Color32 BannerColor = new Color32(255, 255, 255, 255);
         public int MapIndex = -1, IncomingMap = -1;
         public int WinningTeam = -1;
+        /// <summary>Rerolls left for the current picker (written last; old replays without it read 0).</summary>
+        public int PickerRerolls;
         public readonly List<FighterState> Fighters = new List<FighterState>();
         public readonly List<ProjectileState> Projectiles = new List<ProjectileState>();
         public readonly List<BoxState> Boxes = new List<BoxState>();
@@ -308,6 +317,7 @@ namespace Metadream.Shoot.Network
                 w.Write(e.A);
                 w.Write(e.B);
             }
+            w.Write((byte)Mathf.Clamp(PickerRerolls, 0, 255));
         }
 
         public void Read(BinaryReader r)
@@ -356,6 +366,7 @@ namespace Metadream.Shoot.Network
                 e.B = r.ReadSingle();
                 Fx.Add(e);
             }
+            PickerRerolls = r.BaseStream.Position < r.BaseStream.Length ? r.ReadByte() : 0;
         }
     }
 
@@ -367,6 +378,7 @@ namespace Metadream.Shoot.Network
     {
         private InputFrame _latest;
         private bool _jump, _shoot, _block, _confirm, _left, _right, _up, _down;
+        private int _reroll;
 
         public NetworkInput(string label)
         {
@@ -387,6 +399,7 @@ namespace Metadream.Shoot.Network
             _right |= f.NavRight;
             _up |= f.NavUp;
             _down |= f.NavDown;
+            if (f.Reroll != 0) _reroll = f.Reroll;
             LastReceived = Time.unscaledTime;
         }
 
@@ -401,6 +414,8 @@ namespace Metadream.Shoot.Network
             f.NavRight = _right;
             f.NavUp = _up;
             f.NavDown = _down;
+            f.Reroll = _reroll;
+            _reroll = 0;
             _jump = _shoot = _block = _confirm = _left = _right = _up = _down = false;
             return f;
         }

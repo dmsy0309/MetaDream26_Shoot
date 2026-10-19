@@ -73,10 +73,11 @@ namespace Metadream.Shoot.Maps
             {
                 col.sharedMaterial = PhysicsMaterials.Box;
                 var rb = go.AddComponent<Rigidbody2D>();
-                rb.mass = 2f * block.Size.x * block.Size.y;
+                // Light enough that a fighter (mass ≈ 1) and bullets visibly shove it, as in ROUNDS.
+                rb.mass = Mathf.Clamp(0.18f * block.Size.x * block.Size.y, 0.25f, 6f);
                 rb.gravityScale = 3f;
-                rb.linearDamping = 0.2f;
-                rb.angularDamping = 0.5f;
+                rb.linearDamping = 0.1f;
+                rb.angularDamping = 0.3f;
                 _bodies.Add(rb);
             }
             return go;

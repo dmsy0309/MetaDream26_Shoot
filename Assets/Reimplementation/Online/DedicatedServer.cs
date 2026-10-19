@@ -57,6 +57,8 @@ namespace Metadream.Shoot.Online
             s.pointsToWinRound = Mathf.Max(1, s.pointsToWinRound);
             s.roundsToWinGame = Mathf.Max(1, s.roundsToWinGame);
             s.cardsPerPick = Mathf.Clamp(s.cardsPerPick, 1, 10);
+            s.rerollsAtStart = Mathf.Clamp(s.rerollsAtStart, 0, 20);
+            s.rerollsPerRound = Mathf.Clamp(s.rerollsPerRound, 0, 10);
             s.mapPool = s.mapPool ?? new string[0];
             s.cardPool = s.cardPool ?? new string[0];
             var b = s.stats ?? new BaseStats();
@@ -220,6 +222,8 @@ namespace Metadream.Shoot.Online
             c.rules.roundsToWinGame = (int)FloatArg(args, "-rounds", c.rules.roundsToWinGame);
             c.rules.pointsToWinRound = (int)FloatArg(args, "-points", c.rules.pointsToWinRound);
             c.rules.cardsPerPick = (int)FloatArg(args, "-cards", c.rules.cardsPerPick);
+            c.rules.rerollsAtStart = (int)FloatArg(args, "-rerolls", c.rules.rerollsAtStart);
+            c.rules.rerollsPerRound = (int)FloatArg(args, "-rerollsround", c.rules.rerollsPerRound);
             c.rematchDelay = FloatArg(args, "-rematch", c.rematchDelay);
             c.targetFrameRate = (int)FloatArg(args, "-fps", c.targetFrameRate);
             c.statusInterval = FloatArg(args, "-status", c.statusInterval);
@@ -329,7 +333,20 @@ namespace Metadream.Shoot.Online
             switch (cmd)
             {
                 case "help":
-                    Log("commands: status | start | lobby | teamsize 1|2 | rounds N | points N | countdown S | rules | master | content | quit");
+                    Log("commands: status | start | lobby | teamsize 1|2 | rounds N | points N | rerolls START [PER_ROUND] | countdown S | rules | master | content | quit");
+                    break;
+                case "rerolls":
+                {
+                    var p = arg.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (p.Length > 0 && int.TryParse(p[0], out int rs))
+                    {
+                        int rr = p.Length > 1 && int.TryParse(p[1], out int x) ? x : Config.rules.rerollsPerRound;
+                        Config.rules.rerollsAtStart = Mathf.Clamp(rs, 0, 20);
+                        Config.rules.rerollsPerRound = Mathf.Clamp(rr, 0, 10);
+                        _host.SetRerolls(Config.rules.rerollsAtStart, Config.rules.rerollsPerRound);
+                        Log("rerolls start=" + Config.rules.rerollsAtStart + " perRound=" + Config.rules.rerollsPerRound + " (next match)");
+                    }
+                }
                     break;
                 case "status":
                     Log("status " + _host.StatusLine() + " uptime=" + Uptime());

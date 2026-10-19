@@ -28,9 +28,8 @@ namespace Metadream.Shoot.Replay
 
         public static List<string> Endpoints()
         {
-            var list = new List<string> { "http://" + MasterServerEndpoint.Host + ":" + HttpPort };
-            if (!string.IsNullOrEmpty(PublicUrl) && MasterServerEndpoint.Host == MasterServerEndpoint.DefaultHost) list.Add(PublicUrl);
-            return list;
+            // Hardcoded public IP of the main hosting server (same host as the server list); no tailnet address.
+            return new List<string> { "http://" + MasterServerEndpoint.Host + ":" + HttpPort };
         }
 
         public static void Upload(string path, ReplayMeta meta)

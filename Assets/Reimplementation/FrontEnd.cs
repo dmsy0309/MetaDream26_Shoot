@@ -642,15 +642,39 @@ namespace Metadream.Shoot
             }
 
             var start = new Rect(W / 2 - 330, 700, 420, 70);
+            // Room settings: card rerolls
+            {
+                float y = 672;
+                Text(new Rect(W / 2 - 520, y, 260, 46), "카드 새로고침", new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold }, Color.white);
+                SettingStepper(new Rect(W / 2 - 280, y, 340, 46), "시작 시", host.Settings.rerollsAtStart, v => host.SetRerolls(v, host.Settings.rerollsPerRound));
+                SettingStepper(new Rect(W / 2 + 90, y, 400, 46), "라운드마다 +", host.Settings.rerollsPerRound, v => host.SetRerolls(host.Settings.rerollsAtStart, v));
+            }
+            start = new Rect(W / 2 - 330, 740, 420, 70);
             Fill(start, Palette.PlayerOne);
             Text(start, "시작 (Enter)", Mid, Palette.Ink);
             if (Clicked(start)) _deferred = () => host.StartMatch();
-            var close = new Rect(W / 2 + 110, 700, 220, 70);
+            var close = new Rect(W / 2 + 110, 740, 220, 70);
             Fill(close, new Color(1, 1, 1, 0.15f));
             Text(close, "방 닫기 (Esc)", Small, Color.white);
             if (Clicked(close)) _deferred = () => { host.Close(); ShowTitle(); };
-            Text(new Rect(0, 800, W, 30), "←/→ 1대1·2대2 전환 · 호스트는 P1 조작키로 플레이합니다", Small, new Color(1, 1, 1, 0.6f));
-            Text(new Rect(0, 840, W, 30), "인터넷 너머의 친구와 하려면 공유기에서 TCP " + host.Port + " 포트 포워딩이 필요합니다. 처음 실행 시 방화벽 허용을 눌러 주세요.", Small, new Color(1, 1, 1, 0.45f));
+            Text(new Rect(0, 830, W, 30), "←/→ 1대1·2대2 전환 · 호스트는 P1 조작키로 플레이합니다", Small, new Color(1, 1, 1, 0.6f));
+            Text(new Rect(0, 870, W, 30), "인터넷 너머의 친구와 하려면 공유기에서 TCP " + host.Port + " 포트 포워딩이 필요합니다. 처음 실행 시 방화벽 허용을 눌러 주세요.", Small, new Color(1, 1, 1, 0.45f));
+        }
+
+        /// <summary>"label  [−] value [+]" control; changes are deferred to Update like other buttons.</summary>
+        private void SettingStepper(Rect r, string label, int value, Action<int> set)
+        {
+            Fill(r, new Color(1, 1, 1, 0.1f));
+            Text(new Rect(r.x + 14, r.y, r.width - 170, r.height), label, new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft }, new Color(1, 1, 1, 0.8f));
+            var minus = new Rect(r.xMax - 176, r.y + 4, 44, r.height - 8);
+            var plus = new Rect(r.xMax - 50, r.y + 4, 44, r.height - 8);
+            Fill(minus, new Color(1, 1, 1, 0.2f));
+            Fill(plus, new Color(1, 1, 1, 0.2f));
+            Text(minus, "−", Mid, Color.white);
+            Text(plus, "+", Mid, Color.white);
+            Text(new Rect(r.xMax - 132, r.y, 82, r.height), value + "회", new GUIStyle(Mid) { fontSize = 28 }, Palette.PlayerOne);
+            if (Clicked(minus)) _deferred = () => set(value - 1);
+            if (Clicked(plus)) _deferred = () => set(value + 1);
         }
 
         private void DrawClient(NetClientSession client)
@@ -666,6 +690,7 @@ namespace Metadream.Shoot
             Shadowed(new Rect(0, 90, W, 80), lobby.RoomName, Big, Palette.PlayerTwo);
             string kind = lobby.Dedicated ? "전용 서버" : "방 코드 " + lobby.Code;
             Text(new Rect(0, 180, W, 40), kind + " · " + lobby.TeamSize + "대" + lobby.TeamSize + " · " + lobby.PointsToWin + "포인트=1라운드, " + lobby.RoundsToWin + "라운드 선승", Mid, new Color(1, 1, 1, 0.8f));
+            Text(new Rect(0, 222, W, 34), "카드 새로고침: 시작 " + lobby.RerollsAtStart + "회 · 라운드마다 +" + lobby.RerollsPerRound + "회", Small, new Color(1f, 0.85f, 0.4f));
             for (int t = 0; t < 2; t++)
             {
                 float x = W / 2 + (t == 0 ? -520 : 40);

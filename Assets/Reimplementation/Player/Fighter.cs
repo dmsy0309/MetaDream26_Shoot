@@ -405,7 +405,23 @@ namespace Metadream.Shoot.Player
         }
 
         private void OnCollisionEnter2D(Collision2D collision) => ReadContacts(collision);
-        private void OnCollisionStay2D(Collision2D collision) => ReadContacts(collision);
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            ReadContacts(collision);
+            PushBody(collision);
+        }
+
+        /// <summary>Walking into a loose box pushes it along (contact physics alone barely moves heavier boxes).</summary>
+        private void PushBody(Collision2D collision)
+        {
+            var body = collision.rigidbody;
+            if (Puppet || body == null || body.bodyType != RigidbodyType2D.Dynamic || !IsPlaying || IsDead) return;
+            float move = _frame.Move.x;
+            if (Mathf.Abs(move) < 0.1f) return;
+            Vector2 toBody = body.worldCenterOfMass - (Vector2)transform.position;
+            if (Mathf.Sign(toBody.x) != Mathf.Sign(move) || Mathf.Abs(toBody.x) < Mathf.Abs(toBody.y) * 0.5f) return;
+            body.AddForce(new Vector2(move * 40f * Stats.character.movementSpeed, 0f));
+        }
 
         private void ReadContacts(Collision2D collision)
         {

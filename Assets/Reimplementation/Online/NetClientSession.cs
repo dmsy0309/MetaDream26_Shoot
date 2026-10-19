@@ -34,6 +34,10 @@ namespace Metadream.Shoot.Online
         private float _autoPickAt = -1f;
         private float _logTimer;
         private float _gameOverSeen = -1f;
+        private int _pendingReroll;
+
+        /// <summary>Mouse click on a reroll button: sent with the next input packet.</summary>
+        public void QueueReroll(int index) => _pendingReroll = index + 1;
         private float _autoStartTimer = 3f;
 
         public ClientState State { get; private set; } = ClientState.Connecting;
@@ -228,6 +232,7 @@ namespace Metadream.Shoot.Online
             if (_local == null || flow == null || MySlot < 0 || MySlot >= flow.Fighters.Count) return;
             var me = flow.Fighters[MySlot];
             var frame = _local.Read(new InputContext { Position = me.Position, Camera = Camera.main });
+            if (_pendingReroll > 0) { frame.Reroll = _pendingReroll; _pendingReroll = 0; }
 
             // An autoplaying client still has to confirm its card picks on the host.
             if (Autoplay && flow.IsPicking && flow.Picker == me)

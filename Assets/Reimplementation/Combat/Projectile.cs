@@ -176,7 +176,7 @@ namespace Metadream.Shoot.Combat
 
                 var body = hit.rigidbody;
                 if (body != null && body.bodyType == RigidbodyType2D.Dynamic)
-                    body.AddForceAtPosition(Velocity.normalized * _damage * 0.05f * _knockback, hit.point, ForceMode2D.Impulse);
+                    body.AddForceAtPosition(Velocity.normalized * _damage * 0.09f * _knockback, hit.point, ForceMode2D.Impulse);
                 if (_ignoreWalls) continue;
 
                 if (_reflectsLeft > 0)

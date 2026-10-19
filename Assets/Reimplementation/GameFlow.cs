@@ -103,6 +103,55 @@ namespace Metadream.Shoot
         private int _mPointsToWin = 2;
         private int _mRoundsToWin = 5;
         private int _mWinning = -1;
+        private int _mPickerRerolls;
+        private readonly Dictionary<int, int> _rerolls = new Dictionary<int, int>();
+
+        /// <summary>Rerolls the given fighter has left in this game.</summary>
+        public int RerollsLeft(Fighter f) => f != null && _rerolls.TryGetValue(f.PlayerId, out int n) ? n : 0;
+
+        /// <summary>Rerolls left for the current picker (mirrored on clients).</summary>
+        public int PickerRerolls => Role == NetRole.Client ? _mPickerRerolls : RerollsLeft(Picker);
+
+        private void ResetRerolls()
+        {
+            _rerolls.Clear();
+            foreach (var f in Fighters) _rerolls[f.PlayerId] = Mathf.Max(0, Settings.rerollsAtStart);
+        }
+
+        /// <summary>Replaces one offered card with a new random one (costs one reroll of the picker).</summary>
+        public bool Reroll(int index)
+        {
+            if (Role == NetRole.Client || Match == null || !IsPicking || index < 0 || index >= _offer.Count) return false;
+            if (RerollsLeft(Picker) <= 0) return false;
+            var pool = new List<CardDefinition>();
+            foreach (var c in CardCatalog.Pool(Settings.cardPool))
+                if (!_offer.Contains(c)) pool.Add(c);
+            var drawn = CardRules.DrawOffer(pool, Picker.Cards, 1, _rng);
+            if (drawn.Count == 0) return false;
+            Log("reroll " + Picker.DisplayName + " " + _offer[index].Id + " -> " + drawn[0].Id);
+            _offer[index] = drawn[0];
+            _rerolls[Picker.PlayerId] = RerollsLeft(Picker) - 1;
+            OfferIndex = index;
+            return true;
+        }
+
+        /// <summary>UI request (mouse button under a card) from whoever is playing on this machine.</summary>
+        public void RequestReroll(int index)
+        {
+            if (Role == NetRole.Client) { Online.NetClientSession.Active?.QueueReroll(index); return; }
+            if (Picker != null && !Picker.IsBot && !(Picker.Input is Network.NetworkInput)) Reroll(index);
+        }
+
+        /// <summary>True when the current picker is controlled from this machine (UI shows the reroll buttons).</summary>
+        public bool LocalPicker
+        {
+            get
+            {
+                if (Picker == null || ReplayMode) return false;
+                if (Role == NetRole.Client) return Picker.PlayerId == LocalSlot;
+                return !Picker.IsBot && Picker.Input != null && !(Picker.Input is Network.NetworkInput);
+            }
+        }
         private int _mirrorSlideTarget = -1;
         private Action<CardDefinition> _sandboxPicked;
 
@@ -259,6 +308,7 @@ namespace Metadream.Shoot
             foreach (var f in Fighters) Match.Join(f.PlayerId, f.TeamId);
             LoadMapImmediate(_rotation.Next());
             ForfeitText = null;
+            ResetRerolls();
             Log("match start mode=" + mode + " players=" + Fighters.Count + " points=" + Settings.pointsToWinRound + " rounds=" + Settings.roundsToWinGame);
             Match.StartMatch();
         }
@@ -337,6 +387,7 @@ namespace Metadream.Shoot
             Match.ResetToLobby();
             LoadMapImmediate(_rotation.Next());
             ForfeitText = null;
+            ResetRerolls();
             Log("rematch");
             Match.StartMatch();
         }
@@ -465,6 +516,7 @@ namespace Metadream.Shoot
             int n = _offer.Count;
             if (frame.NavLeft) OfferIndex = (OfferIndex - 1 + n) % n;
             if (frame.NavRight) OfferIndex = (OfferIndex + 1) % n;
+            if (frame.Reroll > 0 && Match != null) Reroll(frame.Reroll == 255 ? OfferIndex : frame.Reroll - 1);
             if (frame.ConfirmPressed) ConfirmPick(OfferIndex);
         }
 
@@ -495,6 +547,8 @@ namespace Metadream.Shoot
         {
             Log("phase " + previous + " -> " + next);
             PhaseChanged?.Invoke(previous, next);
+            if (next == MatchPhase.RoundTransition && Settings.rerollsPerRound > 0)
+                foreach (var f in Fighters) _rerolls[f.PlayerId] = RerollsLeft(f) + Settings.rerollsPerRound;
             switch (next)
             {
                 case MatchPhase.InitialCardPick:
@@ -654,6 +708,7 @@ namespace Metadream.Shoot
             s.Picker = IsPicking ? Picker.PlayerId : -1;
             if (IsPicking) foreach (var c in _offer) s.Offer.Add((byte)c.Index);
             s.OfferIndex = OfferIndex;
+            s.PickerRerolls = IsPicking ? RerollsLeft(Picker) : 0;
             s.Banner = Banner ?? "";
             s.SubBanner = SubBanner ?? "";
             s.BannerColor = BannerColor;
@@ -742,6 +797,7 @@ namespace Metadream.Shoot
             _mRoundsToWin = s.RoundsToWin;
             for (int t = 0; t < 2; t++) { _mPoints[t] = s.Points[t]; _mRounds[t] = s.Rounds[t]; }
             _mWinning = s.WinningTeam;
+            _mPickerRerolls = s.PickerRerolls;
             Time.timeScale = Mathf.Clamp(s.TimeScale, 0.05f, 8f);
 
             Banner = string.IsNullOrEmpty(s.Banner) ? null : s.Banner;
