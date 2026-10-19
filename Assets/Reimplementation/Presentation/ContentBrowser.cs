@@ -85,7 +85,7 @@ namespace Metadream.Shoot.Presentation
             const int cols = 3;
             const float tw = 284, th = 92, gap = 8;
             int rows = (cards.Count + cols - 1) / cols;
-            var content = new Rect(0, 0, area.width - 24, Mathf.Max(area.height - 20, rows * (th + gap) + gap));
+            var content = new Rect(0, 0, area.width - 40, Mathf.Max(area.height - 20, rows * (th + gap) + gap));
             _scroll = GUI.BeginScrollView(new Rect(area.x + 6, area.y + 10, area.width - 12, area.height - 20), _scroll, content);
             for (int i = 0; i < cards.Count; i++)
             {
@@ -155,7 +155,7 @@ namespace Metadream.Shoot.Presentation
             const int cols = 3;
             const float tw = 284, th = 204, gap = 8;
             int rows = (maps.Count + cols - 1) / cols;
-            var content = new Rect(0, 0, area.width - 24, Mathf.Max(area.height - 20, rows * (th + gap) + gap));
+            var content = new Rect(0, 0, area.width - 40, Mathf.Max(area.height - 20, rows * (th + gap) + gap));
             _scroll = GUI.BeginScrollView(new Rect(area.x + 6, area.y + 10, area.width - 12, area.height - 20), _scroll, content);
             for (int i = 0; i < maps.Count; i++)
             {
