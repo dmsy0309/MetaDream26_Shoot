@@ -67,6 +67,17 @@ namespace Metadream.Shoot.Maps
             sr.sharedMaterial = SpriteFactory.Material;
             sr.color = dynamic ? Palette.Box : Palette.Solid;
             sr.sortingOrder = dynamic ? 2 : 1;
+            // Top-edge highlight (child sprite, not a collider) for contrast on the dark background.
+            var edge = new GameObject("Edge");
+            edge.transform.SetParent(go.transform, false);
+            float edgeHeight = Mathf.Min(0.18f, block.Size.y * 0.35f);
+            edge.transform.localScale = new Vector3(1f, edgeHeight / Mathf.Max(0.01f, block.Size.y), 1f);
+            edge.transform.localPosition = new Vector3(0f, 0.5f - edge.transform.localScale.y * 0.5f, 0f);
+            var es = edge.AddComponent<SpriteRenderer>();
+            es.sprite = SpriteFactory.Square;
+            es.sharedMaterial = SpriteFactory.Material;
+            es.color = dynamic ? Color.Lerp(Palette.Box, Color.white, 0.45f) : Palette.SolidEdge;
+            es.sortingOrder = sr.sortingOrder + 1;
             var col = go.AddComponent<BoxCollider2D>();
             col.size = Vector2.one;
             if (dynamic)

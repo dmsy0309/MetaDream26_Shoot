@@ -51,5 +51,34 @@ namespace Metadream.Shoot.Tests
             var ids = new System.Collections.Generic.HashSet<string>();
             foreach (var c in flow.Offer) Assert.IsTrue(ids.Add(c.Id), "offer has no duplicates");
         }
+
+        [UnityTest]
+        public IEnumerator QuitConfirmLocksYesForThreeSecondsAndClosesOnNo()
+        {
+            yield return null;
+            var flow = GameFlow.Instance;
+            flow.StartMatch(GameMode.VersusCpu, new MatchSettings(), 7);
+            yield return null;
+            Assert.IsNotNull(Presentation.QuitConfirm.Instance, "bootstrap adds the dialog");
+            bool left = false;
+            float scaleBefore = Time.timeScale;
+            Presentation.QuitConfirm.Open(() => left = true);
+            Assert.IsTrue(Presentation.QuitConfirm.IsOpen);
+            Assert.AreEqual(0f, Time.timeScale, "offline game pauses");
+            Assert.IsFalse(Presentation.QuitConfirm.Confirm(), "'예' is locked right after opening");
+            Assert.IsFalse(left);
+            Presentation.QuitConfirm.Close(); // '아니요' / Esc
+            Assert.IsFalse(Presentation.QuitConfirm.IsOpen);
+            Assert.AreEqual(scaleBefore > 0.01f ? scaleBefore : 1f, Time.timeScale, 1e-4f, "closing resumes");
+            Assert.IsTrue(flow.HasMatch, "still in the match");
+
+            Presentation.QuitConfirm.Open(() => left = true);
+            float until = Time.realtimeSinceStartup + Presentation.QuitConfirm.YesDelay + 0.2f;
+            while (Time.realtimeSinceStartup < until) yield return null;
+            Assert.IsTrue(Presentation.QuitConfirm.YesEnabled, "'예' unlocks after 3 seconds");
+            Assert.IsTrue(Presentation.QuitConfirm.Confirm());
+            Assert.IsTrue(left);
+            Assert.IsFalse(Presentation.QuitConfirm.IsOpen);
+        }
     }
 }

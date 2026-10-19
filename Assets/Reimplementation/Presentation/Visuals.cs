@@ -67,12 +67,15 @@ namespace Metadream.Shoot.Presentation
 
     public static class Palette
     {
-        public static readonly Color Background = new Color(0.93f, 0.90f, 0.84f);
-        public static readonly Color Solid = new Color(0.16f, 0.15f, 0.19f);
-        public static readonly Color Box = new Color(0.35f, 0.33f, 0.38f);
-        public static readonly Color Mover = new Color(0.27f, 0.25f, 0.36f);
-        public static readonly Color JumpPad = new Color(0.25f, 0.85f, 0.45f);
-        public static readonly Color Hazard = new Color(0.95f, 0.25f, 0.2f);
+        // Dark theme for dimly lit rooms: deep navy background, light slate terrain, warm boxes.
+        public static readonly Color Background = new Color(0.065f, 0.07f, 0.095f);
+        public static readonly Color Solid = new Color(0.50f, 0.54f, 0.65f);
+        public static readonly Color Box = new Color(0.78f, 0.62f, 0.40f);
+        public static readonly Color Mover = new Color(0.62f, 0.50f, 0.95f);
+        public static readonly Color JumpPad = new Color(0.30f, 0.95f, 0.55f);
+        public static readonly Color Hazard = new Color(1f, 0.30f, 0.22f);
+        /// <summary>Thin highlight drawn on the top edge of terrain so platforms read clearly in the dark.</summary>
+        public static readonly Color SolidEdge = new Color(0.80f, 0.84f, 0.95f);
         public static readonly Color PlayerOne = new Color(1f, 0.49f, 0.18f);
         public static readonly Color PlayerTwo = new Color(0.16f, 0.58f, 1f);
         public static readonly Color Common = new Color(0.82f, 0.82f, 0.82f);

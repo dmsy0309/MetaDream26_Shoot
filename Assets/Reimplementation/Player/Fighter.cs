@@ -234,7 +234,7 @@ namespace Metadream.Shoot.Player
 
             // Character model: dark outline, soft highlight and eyes that follow the aim.
             _outline = MakeChildSprite("Outline", SpriteFactory.Circle, 1.14f, 9);
-            _outline.color = Color.Lerp(Color, Color.black, 0.55f);
+            _outline.color = Color.Lerp(Color, Color.white, 0.6f);
             _shine = MakeChildSprite("Shine", SpriteFactory.Circle, 0.34f, 11);
             _shine.transform.localPosition = new Vector3(-0.17f, 0.2f, 0f);
             _shine.color = new Color(1f, 1f, 1f, 0.32f);
@@ -728,7 +728,7 @@ namespace Metadream.Shoot.Player
             _body.color = Color.Lerp(baseColor, Color.white, _flash * 0.8f);
             if (_outline != null)
             {
-                _outline.color = Color.Lerp(Color.Lerp(Color, Color.black, 0.55f), Color.white, _flash * 0.5f);
+                _outline.color = Color.Lerp(Color.Lerp(Color, Color.white, 0.6f), Color.white, _flash * 0.5f);
                 Vector2 look = AimDirection.sqrMagnitude > 0.01f ? AimDirection.normalized : Vector2.right;
                 Vector3 pupil = new Vector3(look.x, look.y, 0f) * 0.05f;
                 _eyeL.localPosition = new Vector3(-0.13f + look.x * 0.08f, 0.1f + look.y * 0.06f, 0f);

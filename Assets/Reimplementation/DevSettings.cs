@@ -56,6 +56,7 @@ namespace Metadream.Shoot
         {
             Load();
             if (Array.IndexOf(args, "-debug") >= 0) { _debug = true; DevLog.Enabled = true; }
+            if (Array.IndexOf(args, "-nodebug") >= 0) { _debug = false; DevLog.Enabled = false; } // this session only (not saved)
         }
 
         private static void Load()

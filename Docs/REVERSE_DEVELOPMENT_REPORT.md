@@ -132,6 +132,20 @@
 - 메인 서버 IP 문구를 방 참가 화면과 설정 설명에서 제거.
 - 효과음 21종(`Resources/Content/Sounds/sounds.json`): 파일 없이 합성(layers), `Content/Sounds/<id>.wav`·`Resources/Sounds`로 교체 가능. 게임플레이 소리는 `FxType.Sound`로 참가자·리플레이에 전달(프로토콜 v7). 설정에 효과음 볼륨. 문서 `Docs/SOUNDS.md`.
 
+### 10.13 어두운 테마 · 나가기 확인 · 원작식 카드 선택 연출 (2026-10-19)
+
+- 어두운 실내 발표용 테마: 모든 맵 배경 `Palette.Background` (0.065, 0.07, 0.095). 지형 (0.50, 0.54, 0.65)·상자·이동 발판·점프대·위험 지형을 밝게 올리고, 지형/상자 윗면에 밝은 테두리(`SolidEdge`)를 추가. 캐릭터 외곽선을 밝게, HUD 라운드/포인트/탄약/재장전/방어 표시를 어두운 배경 기준으로 반전. 맵 JSON에 색을 지정하지 않으면 자동 적용.
+- 게임 중 Esc → `Presentation/QuitConfirm`의 '정말 나가시겠습니까?' 창. '예'는 3초 후 활성화(남은 초·진행 바 표시), '아니요'·Esc 다시 누르기·N 키로 닫힘. 오프라인 게임은 창이 열린 동안 일시정지, 온라인은 게임이 계속되고 내 입력만 멈춤(새로고침 입력은 유지). 리플레이와 결과 화면에서는 바로 나감.
+- 카드 선택 연출(아래 REA 관찰을 IMGUI로 근사): 선택자 공에서 카드가 0.1초 간격으로 한 장씩 날아와 펼쳐짐(`card_deal`), 선택 카드 1.15배·나머지 0.9배와 어둡게, 선택 카드 Perlin 흔들림, 두 손이 스프링(강성 120, 감쇠 11)과 Perlin 흔들림으로 선택 카드를 따라감(쉬는 손은 강성 절반), 새로고침 시 카드가 0.3초 뒤집힘, 결정 후 고른 카드는 EaseInOut으로 캐릭터에게 날아가고 나머지는 무작위 힘·회전으로 튕겨 떨어짐(0.9초).
+- REA 관찰 (Assembly-CSharp.dll SHA-256 `4509e77d…aa8f2a`, `inspect_managed_members` 기록 `ev_b2d943c6…`, IL 디코딩 `ReverseAnalysis/evidence/extra-il-cardpick.txt` ← `node ReverseAnalysis/tools/decode-cardpick-il.mjs CardChoice CardChoiceVisuals CardVisuals '<DoPick>d__34' '<IDoEndPick>d__18' '<ReplaceCards>d__24'`):
+  - `<ReplaceCards>d__24`: `WaitForSecondsRealtime` 0.1/0.2/0.2/0.1 사이에 `SpawnUniqueCard`로 한 장씩 배분, 공 등장/퇴장 소리.
+  - `CardVisuals.ChangeSelected`: 선택 시 shake 1.15, 비선택 0.9 + CanvasGroup alpha 0.15 + chillColor, 카드 애니메이션 끔.
+  - `CardChoiceVisuals.Update`: 손이 선택 카드로 스프링·감쇠 이동 + `Mathf.PerlinNoise` 흔들림, 쉬는 손은 스프링 ×0.5, `unscaledDeltaTime > 0.1`이면 그 프레임 건너뜀. `Show`: localScale 33.
+  - `<IDoEndPick>d__18`: 고른 카드를 AnimationCurve `LerpUnclamped`(속도 4)로 플레이어에게, 나머지 카드는 Rigidbody `AddForce` Random(0,50)·`AddTorque` Random(0,200) 후 Random(0.5,1)초 뒤 파괴, 0.25초 대기 후 EaseInOut ×1.5로 복귀.
+  - 근사한 부분(원작 확인값 아님): 손 모양은 2D 원, 튕겨 나가는 카드는 물리 대신 UI 포물선, 비선택 카드는 alpha 0.15 대신 어둡게 덮기(0.55, 카드 글자를 읽을 수 있도록), 시간 상수는 화면 비율에 맞춰 조정.
+- 효과음 `card_deal`·`card_switch` 추가(`sounds.json`, `Docs/SOUNDS.md`). 실행 인자 `-nodebug`(이번 실행만 디버그 끔), `-versuscpu`, `-quitprompt N`(캡처용). 네트워크 형식 변경 없음(프로토콜 v7 유지).
+- 검증: EditMode 63/63, PlayMode 9/9(새 `QuitConfirmLocksYesForThreeSecondsAndClosesOnNo`: 열자마자 '예' 잠김, 오프라인 일시정지, 닫으면 재개, 3초 후 확인 가능). macOS 빌드 캡처 `Docs/screenshots/v8-*.png`.
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

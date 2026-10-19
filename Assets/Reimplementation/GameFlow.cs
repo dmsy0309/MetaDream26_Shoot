@@ -465,8 +465,11 @@ namespace Metadream.Shoot
             if (!InMenu && kb != null && kb.escapeKey.wasPressedThisFrame)
             {
                 if (Presentation.CheatPanel.IsOpen) return; // the panel closes itself
-                if (EscapeOverride != null) EscapeOverride();
-                else ReturnToTitle();
+                if (Presentation.QuitConfirm.IsOpen) { Presentation.QuitConfirm.Close(); return; }
+                Action leave = EscapeOverride ?? ReturnToTitle;
+                // Replays and the result screen leave directly; a running game asks first.
+                if (ReplayMode || Phase == MatchPhase.GameOver || Presentation.QuitConfirm.Instance == null) leave();
+                else Presentation.QuitConfirm.Open(leave);
                 return;
             }
             if (InMenu || Role == NetRole.Client) return;

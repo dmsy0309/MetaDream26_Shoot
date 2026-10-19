@@ -15,12 +15,14 @@ namespace Metadream.Shoot.Presentation
         private void OnGUI()
         {
             var flow = GameFlow.Instance;
-            if (flow == null || flow.InMenu || !flow.HasMatch) return;
+            if (flow == null || flow.InMenu || !flow.HasMatch) { ResetPickAnimation(); return; }
             Begin();
             DrawOverlays(flow);
             if (!flow.IsSandbox) DrawScore(flow); // the tutorial draws its own panel in that area
             DrawCardBars(flow);
+            UpdatePickAnimation(flow);
             if (flow.IsPicking) DrawPick(flow);
+            DrawPickExit();
             if (flow.Phase == MatchPhase.GameOver && flow.WinningTeam >= 0 && !string.IsNullOrEmpty(flow.Banner)) DrawResult(flow);
             else { DrawBanner(flow); if (flow.Phase != MatchPhase.GameOver) _resultSound = false; }
             string footer = flow.IsSandbox ? "Esc: 튜토리얼 종료" : flow.Role == NetRole.Client ? "Esc: 방 나가기" : flow.Role == NetRole.Host ? "Esc: 대기실로" : "Esc: 타이틀";
@@ -42,14 +44,14 @@ namespace Metadream.Shoot.Presentation
                     int idx = left ? rounds - 1 - r : r;
                     float x = cx + (r - (rounds - 1) * 0.5f) * 34;
                     bool won = flow.TeamRounds(t) > idx;
-                    Disc(new Vector2(x, 82), 14, new Color(0, 0, 0, 0.35f));
-                    Disc(new Vector2(x, 82), 11, won ? c : new Color(1, 1, 1, 0.6f));
+                    Disc(new Vector2(x, 82), 14, new Color(1, 1, 1, 0.35f));
+                    Disc(new Vector2(x, 82), 11, won ? c : new Color(0.12f, 0.13f, 0.17f, 0.95f));
                 }
                 for (int p = 0; p < points; p++)
                 {
                     float x = cx + (p - (points - 1) * 0.5f) * 22;
                     bool got = flow.TeamPoints(t) > p;
-                    Disc(new Vector2(x, 112), 7, got ? c : new Color(0, 0, 0, 0.25f));
+                    Disc(new Vector2(x, 112), 7, got ? c : new Color(1, 1, 1, 0.22f));
                 }
             }
         }
@@ -80,17 +82,17 @@ namespace Metadream.Shoot.Presentation
                 {
                     float x = top.x + (i - (max - 1) * 0.5f) * pip;
                     bool has = !f.Ammo.isReloading && i < f.Ammo.currentAmmo;
-                    Disc(new Vector2(x, top.y + 16), pip * 0.36f, has ? new Color(0.15f, 0.15f, 0.15f, 0.9f) : new Color(0, 0, 0, 0.18f));
+                    Disc(new Vector2(x, top.y + 16), pip * 0.36f, has ? new Color(0.95f, 0.95f, 0.98f, 0.95f) : new Color(1, 1, 1, 0.18f));
                 }
                 if (f.Ammo.isReloading)
                 {
-                    Fill(new Rect(top.x - w / 2, top.y + 26, w, 5), new Color(0, 0, 0, 0.35f));
+                    Fill(new Rect(top.x - w / 2, top.y + 26, w, 5), new Color(1, 1, 1, 0.18f));
                     Fill(new Rect(top.x - w / 2, top.y + 26, w * f.ReloadProgress, 5), f.Color);
                 }
                 float cd = f.BlockReadyProgress;
                 if (cd < 1f)
                 {
-                    Fill(new Rect(top.x - w / 2, top.y - 18, w, 4), new Color(0, 0, 0, 0.3f));
+                    Fill(new Rect(top.x - w / 2, top.y - 18, w, 4), new Color(1, 1, 1, 0.18f));
                     Fill(new Rect(top.x - w / 2, top.y - 18, w * cd, 4), new Color(1, 1, 1, 0.9f));
                 }
             }
@@ -125,39 +127,278 @@ namespace Metadream.Shoot.Presentation
             }
         }
 
+        // ── Card pick presentation, modelled on ROUNDS CardChoice / CardChoiceVisuals (REVERSE_DEVELOPMENT_REPORT §10.13):
+        // cards are dealt one by one from the picker's ball, the selected card grows (1.15) while the others shrink (0.9)
+        // and dim, two "hands" follow the selection on a spring with Perlin sway, and after the pick the chosen card flies
+        // to the player while the rest are knocked away.
+        private const float CardW = 300f, CardH = 480f, CardGap = 34f, CardCenterY = 520f;
+        private const float DealDelay = 0.15f, DealInterval = 0.1f, DealTime = 0.28f;
+        private const float SelScale = 1.15f, IdleScale = 0.9f, IdleDim = 0.55f;
+        private const float HandSpring = 120f, HandDrag = 11f, FlipTime = 0.3f, ExitTime = 0.9f, ExitGravity = 2400f;
+        private static readonly Vector2 PickerBall = new Vector2(960f, 1010f);
+
+        private struct ExitCard { public CardDefinition Card; public Vector2 Pos, Vel; public float Angle, Spin, Scale; public bool Chosen; }
+
+        private Fighter _pickFighter;
+        private MatchPhase _pickPhase;
+        private bool _wasPicking;
+        private float _sessionStart, _lastAnimTime;
+        private int _lastSel = -1, _dealtSounds;
+        private CardDefinition[] _shown = new CardDefinition[0];
+        private CardDefinition[] _flipFrom = new CardDefinition[0];
+        private float[] _flipAt = new float[0], _scale = new float[0], _dim = new float[0], _spin0 = new float[0];
+        private Vector2 _hand, _handVel, _rest, _restVel;
+        private Color _pickColor = Color.white;
+        private readonly System.Collections.Generic.List<ExitCard> _exit = new System.Collections.Generic.List<ExitCard>();
+        private float _exitStart = -10f;
+        private Vector2 _exitTarget;
+
+        private static float Fit(int n) => Mathf.Min(1f, (W - 80f) / Mathf.Max(1f, n * CardW + (n - 1) * CardGap));
+
+        private static Vector2 Slot(int i, int n)
+        {
+            float fit = Fit(n);
+            float total = (n * CardW + (n - 1) * CardGap) * fit;
+            return new Vector2((W - total) / 2f + i * (CardW + CardGap) * fit + CardW * fit / 2f, CardCenterY);
+        }
+
+        private float DealStart(int i) => _sessionStart + DealDelay + i * DealInterval;
+
+        private static float EaseOutBack(float x)
+        {
+            const float c1 = 1.70158f, c3 = c1 + 1f;
+            float a = x - 1f;
+            return 1f + c3 * a * a * a + c1 * a * a;
+        }
+
+        private static void Spring(ref Vector2 p, ref Vector2 v, Vector2 target, float k, float drag, float dt)
+        {
+            v += (target - p) * k * dt;
+            v -= v * Mathf.Min(1f, drag * dt);
+            p += v * dt;
+        }
+
+        private void ResetPickAnimation()
+        {
+            _wasPicking = false;
+            _pickFighter = null;
+            _exit.Clear();
+        }
+
+        /// <summary>Advances the pick animation once per frame (Repaint only).</summary>
+        private void UpdatePickAnimation(GameFlow flow)
+        {
+            if (Event.current.type != EventType.Repaint) return;
+            float now = Time.unscaledTime;
+            float dt = Mathf.Clamp(now - _lastAnimTime, 0f, 0.1f); // ROUNDS skips frames with unscaledDeltaTime > 0.1
+            _lastAnimTime = now;
+            bool picking = flow.IsPicking;
+            bool newSession = picking && (!_wasPicking || flow.Picker != _pickFighter || flow.Phase != _pickPhase);
+            if (_wasPicking && (!picking || newSession)) StartExit();
+            if (newSession || (picking && _shown.Length != flow.Offer.Count)) StartSession(flow, now);
+            _wasPicking = picking;
+            if (!picking) return;
+
+            var offer = flow.Offer;
+            int n = offer.Count;
+            for (int i = 0; i < n; i++)
+            {
+                if (_shown[i] == offer[i]) continue; // reroll: flip the card over to the new face
+                _flipFrom[i] = _shown[i];
+                _flipAt[i] = now;
+                _shown[i] = offer[i];
+            }
+            while (_dealtSounds < n && now >= DealStart(_dealtSounds)) { Audio.Sfx.Play("card_deal"); _dealtSounds++; }
+            int sel = Mathf.Clamp(flow.OfferIndex, 0, n - 1);
+            if (sel != _lastSel) { Audio.Sfx.Play("card_switch"); _lastSel = sel; }
+
+            float k = 1f - Mathf.Exp(-14f * dt);
+            for (int i = 0; i < n; i++)
+            {
+                _scale[i] = Mathf.Lerp(_scale[i], i == sel ? SelScale : IdleScale, k);
+                _dim[i] = Mathf.Lerp(_dim[i], i == sel ? 0f : IdleDim, k);
+            }
+            float fit = Fit(n);
+            var sway = new Vector2(Mathf.PerlinNoise(now * 0.9f, 0.3f) - 0.5f, Mathf.PerlinNoise(0.7f, now * 0.9f) - 0.5f) * 28f;
+            Vector2 slot = Slot(sel, n);
+            Vector2 target = slot + new Vector2(CardW * 0.5f * fit * SelScale - 22f, CardH * 0.5f * fit * SelScale - 50f) + sway;
+            Spring(ref _hand, ref _handVel, target, HandSpring, HandDrag, dt);
+            Spring(ref _rest, ref _restVel, PickerBall + new Vector2(-120f, -30f) + sway * 0.5f, HandSpring * 0.5f, HandDrag, dt);
+        }
+
+        private void StartSession(GameFlow flow, float now)
+        {
+            _pickFighter = flow.Picker;
+            _pickPhase = flow.Phase;
+            _pickColor = flow.Picker.Color;
+            _sessionStart = now;
+            int n = flow.Offer.Count;
+            _shown = new CardDefinition[n];
+            _flipFrom = new CardDefinition[n];
+            _flipAt = new float[n];
+            _scale = new float[n];
+            _dim = new float[n];
+            _spin0 = new float[n];
+            for (int i = 0; i < n; i++)
+            {
+                _shown[i] = flow.Offer[i];
+                _flipAt[i] = -10f;
+                _scale[i] = IdleScale;
+                _dim[i] = IdleDim;
+                _spin0[i] = UnityEngine.Random.Range(-28f, 28f);
+            }
+            _dealtSounds = 0;
+            _lastSel = Mathf.Clamp(flow.OfferIndex, 0, Mathf.Max(0, n - 1));
+            _hand = _rest = PickerBall;
+            _handVel = _restVel = Vector2.zero;
+        }
+
+        /// <summary>The pick ended: the chosen card flies to the picker, the others get a random push and spin and fall away.</summary>
+        private void StartExit()
+        {
+            _exit.Clear();
+            int n = _shown.Length;
+            float now = Time.unscaledTime;
+            float fit = Fit(n);
+            for (int i = 0; i < n; i++)
+            {
+                if (_shown[i] == null || now < DealStart(i)) continue;
+                Vector2 pos = Slot(i, n);
+                bool chosen = i == _lastSel;
+                float side = Mathf.Sign(pos.x - W / 2f + 0.01f);
+                _exit.Add(new ExitCard
+                {
+                    Card = _shown[i],
+                    Pos = pos,
+                    Scale = (i < _scale.Length ? _scale[i] : IdleScale) * fit,
+                    Chosen = chosen,
+                    Vel = new Vector2(side * UnityEngine.Random.Range(150f, 700f), UnityEngine.Random.Range(-900f, -350f)),
+                    Spin = UnityEngine.Random.Range(-420f, 420f),
+                });
+            }
+            _exitStart = now;
+            _exitTarget = PickerBall;
+            var cam = Camera.main;
+            if (cam != null && _pickFighter != null && _pickFighter.IsVisible) _exitTarget = WorldToGui(cam, _pickFighter.Position);
+            _pickFighter = null;
+        }
+
+        /// <summary>Draws a card rotated/scaled around its centre. sx &lt; 1 squashes it horizontally (reroll flip).</summary>
+        private static void DrawCardAt(CardDefinition card, Vector2 center, float scale, float sx, float angle, bool selected, Color accent, float dim)
+        {
+            var baseM = GUI.matrix;
+            GUI.matrix = baseM * Matrix4x4.TRS(center, Quaternion.Euler(0f, 0f, angle), new Vector3(scale * sx, scale, 1f))
+                               * Matrix4x4.Translate(new Vector3(-CardW / 2f, -CardH / 2f, 0f));
+            var r = new Rect(0f, 0f, CardW, CardH);
+            DrawCard(r, card, selected, accent);
+            if (dim > 0.01f) Fill(r, new Color(0.02f, 0.02f, 0.04f, dim));
+            GUI.matrix = baseM;
+        }
+
+        private void DrawPickExit()
+        {
+            if (_exit.Count == 0) return;
+            float t = Time.unscaledTime - _exitStart;
+            if (t > ExitTime) { _exit.Clear(); return; }
+            foreach (var c in _exit)
+            {
+                if (c.Chosen) continue;
+                Vector2 p = c.Pos + c.Vel * t + new Vector2(0f, 0.5f * ExitGravity * t * t);
+                DrawCardAt(c.Card, p, c.Scale, 1f, c.Angle + c.Spin * t, false, _pickColor, IdleDim + 0.25f * t);
+            }
+            foreach (var c in _exit)
+            {
+                if (!c.Chosen) continue;
+                float u = Mathf.Clamp01((t - 0.1f) / 0.35f);
+                float e = Mathf.SmoothStep(0f, 1f, u); // ROUNDS uses an EaseInOut AnimationCurve here
+                if (u < 1f) DrawCardAt(c.Card, Vector2.LerpUnclamped(c.Pos, _exitTarget, e), Mathf.Lerp(c.Scale * SelScale, 0.1f, e), 1f, 0f, true, _pickColor, 0f);
+                else
+                {
+                    float a = Mathf.Clamp01((t - 0.45f) / (ExitTime - 0.45f));
+                    Disc(_exitTarget, 24f + 90f * a, new Color(_pickColor.r, _pickColor.g, _pickColor.b, 0.55f * (1f - a)));
+                }
+            }
+        }
+
+        private static void DrawPickerBall(Color c)
+        {
+            float pulse = 1f + 0.04f * Mathf.Sin(Time.unscaledTime * 4f);
+            Disc(PickerBall, 50f * pulse, new Color(c.r, c.g, c.b, 0.25f));
+            Disc(PickerBall, 40f, Color.Lerp(c, Color.white, 0.6f));
+            Disc(PickerBall, 35f, c);
+            Disc(PickerBall + new Vector2(-11f, -11f), 9f, new Color(1f, 1f, 1f, 0.35f));
+        }
+
+        private static void DrawHand(Vector2 p, Color c, float alpha)
+        {
+            Disc(p + new Vector2(4f, 6f), 30f, new Color(0f, 0f, 0f, 0.35f * alpha));
+            Disc(p, 30f, new Color(0.95f, 0.96f, 1f, alpha));
+            Disc(p, 25f, new Color(c.r, c.g, c.b, alpha));
+            Disc(p + new Vector2(-8f, -8f), 7f, new Color(1f, 1f, 1f, 0.4f * alpha));
+        }
+
         private void DrawPick(GameFlow flow)
         {
             var picker = flow.Picker;
             var offer = flow.Offer;
-            Fill(new Rect(0, 0, W, H), new Color(0.05f, 0.05f, 0.07f, 0.78f));
+            int n = Mathf.Min(offer.Count, _shown.Length);
+            float now = Time.unscaledTime;
+            float fit = Fit(n);
+            Fill(new Rect(0, 0, W, H), new Color(0.03f, 0.035f, 0.05f, 0.82f));
             string phase = flow.Phase == MatchPhase.InitialCardPick ? "시작 카드" : "라운드 패배 보상";
-            Shadowed(new Rect(0, 150, W, 70), picker.DisplayName + " — " + phase, Big, picker.Color);
-            int n = offer.Count;
-            float cw = 300, ch = 480, gap = 34;
-            float total = n * cw + (n - 1) * gap;
-            float x0 = (W - total) / 2;
+            Shadowed(new Rect(0, 130, W, 70), picker.DisplayName + " — " + phase, Big, picker.Color);
+            DrawPickerBall(picker.Color);
+            int sel = Mathf.Clamp(flow.OfferIndex, 0, Mathf.Max(0, n - 1));
+            for (int pass = 0; pass < 2; pass++)
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    if ((i == sel) != (pass == 1)) continue; // the selected card is drawn on top
+                    float d = (now - DealStart(i)) / DealTime;
+                    if (d <= 0f) continue;
+                    d = Mathf.Clamp01(d);
+                    float e = EaseOutBack(d);
+                    Vector2 pos = Vector2.LerpUnclamped(PickerBall, Slot(i, n), e);
+                    float scale = Mathf.LerpUnclamped(0.15f, _scale[i], e) * fit;
+                    float angle = _spin0[i] * (1f - d);
+                    if (i == sel)
+                    {
+                        pos.y += Mathf.Sin(now * 3f) * 4f - 10f;
+                        angle += (Mathf.PerlinNoise(now * 1.3f, 0.5f) - 0.5f) * 3f; // ROUNDS "shake" on the selected card
+                    }
+                    float sx = 1f;
+                    var face = _shown[i];
+                    float ft = (now - _flipAt[i]) / FlipTime;
+                    if (ft >= 0f && ft < 1f)
+                    {
+                        sx = Mathf.Max(0.02f, Mathf.Abs(Mathf.Cos(ft * Mathf.PI)));
+                        if (ft < 0.5f && _flipFrom[i] != null) face = _flipFrom[i];
+                    }
+                    DrawCardAt(face, pos, scale, sx, angle, i == sel, picker.Color, _dim[i]);
+                }
+            }
+            // Reroll button under every card (only the player who is picking can press it).
+            int left = flow.PickerRerolls;
+            bool usable = flow.LocalPicker && left > 0;
             for (int i = 0; i < n; i++)
             {
-                bool sel = i == flow.OfferIndex;
-                float bob = sel ? Mathf.Sin(Time.unscaledTime * 3f) * 4f : 0f;
-                DrawCard(new Rect(x0 + i * (cw + gap), 270 - (sel ? 30 : 0) + bob, cw, ch), offer[i], sel, picker.Color);
-                // Reroll button under every card (only the player who is picking can press it).
-                int left = flow.PickerRerolls;
-                bool usable = flow.LocalPicker && left > 0;
-                var rb = new Rect(x0 + i * (cw + gap) + 30, 270 + ch + 18, cw - 60, 50);
+                if (now < DealStart(i) + DealTime) continue;
+                Vector2 s = Slot(i, n);
+                var rb = new Rect(s.x - CardW * fit / 2f + 30f, CardCenterY + CardH * fit / 2f + 44f, CardW * fit - 60f, 50f);
                 Fill(rb, usable ? new Color(1f, 1f, 1f, 0.9f) : new Color(1f, 1f, 1f, 0.12f));
                 Text(rb, "↻ 새로고침", new GUIStyle(Small) { fontSize = 22, fontStyle = FontStyle.Bold }, usable ? Palette.Ink : new Color(1, 1, 1, 0.35f));
                 if (usable && Clicked(rb)) { int k = i; flow.RequestReroll(k); }
             }
+            if (n > 0 && now >= DealStart(0)) DrawHand(_rest, picker.Color, 0.75f);
+            if (n > 0 && now >= DealStart(n - 1) + DealTime * 0.5f) DrawHand(_hand, picker.Color, 1f);
             string help;
             if (picker.IsBot) help = "CPU가 고르는 중…";
             else if (flow.Role == NetRole.Client && picker.PlayerId != flow.LocalSlot) help = picker.DisplayName + " 플레이어가 고르는 중…";
             else if (flow.Role == NetRole.Host && picker.Input is NetworkInput) help = picker.DisplayName + " 플레이어가 원격으로 고르는 중…";
             else help = "← / → 로 고르고 사격 키(F · . · 패드 X/RT)로 결정";
-            Text(new Rect(0, 850, W, 40), help, Small, new Color(1, 1, 1, 0.8f));
-            int remaining = flow.PickerRerolls;
-            string rerollText = "남은 새로고침: " + remaining + "회" + (flow.LocalPicker ? "  ·  카드 아래 버튼 또는 R / 패드 Y (선택한 카드)" : "");
-            Text(new Rect(0, 900, W, 40), rerollText, new GUIStyle(Mid) { fontSize = 28 }, remaining > 0 ? new Color(1f, 0.85f, 0.4f) : new Color(1, 1, 1, 0.5f));
+            Text(new Rect(0, 868, W, 36), help, Small, new Color(1, 1, 1, 0.8f));
+            string rerollText = "남은 새로고침: " + left + "회" + (flow.LocalPicker ? "  ·  카드 아래 버튼 또는 R / 패드 Y (선택한 카드)" : "");
+            Text(new Rect(0, 906, W, 40), rerollText, new GUIStyle(Mid) { fontSize = 28 }, left > 0 ? new Color(1f, 0.85f, 0.4f) : new Color(1, 1, 1, 0.5f));
         }
 
         /// <summary>Card face: frame, rarity band, procedural emblem, title, description and stat lines.</summary>

@@ -63,6 +63,7 @@ WAV는 16비트 PCM을 권장합니다(8/24비트 PCM, 32비트 float도 읽음)
 | `explosion` / `shockwave` | 폭발 효과 / 밀어내기·끌어당기기 | 예 |
 | `pad` | 점프대 | 예 |
 | `card_pick` / `reroll` | 카드 결정 / 카드 새로고침 | 예 |
+| `card_deal` / `card_switch` | 카드 선택 화면에서 카드 한 장 배분 / 선택 이동 | 각자 재생 |
 | `fight` / `point` / `round` | 포인트 시작("싸워라!") / 포인트 / 라운드 승리 | 예 |
 | `victory` / `defeat` | 결과 창 (내 팀 기준) | 각자 재생 |
 | `ui_click` | 메뉴 버튼 클릭 | 각자 재생 |

@@ -466,6 +466,58 @@
       ]
     },
     {
+      "id": "card_deal",
+      "description": "카드 한 장 배분 (ROUNDS ReplaceCards 0.1초 간격)",
+      "clip": "",
+      "volume": 0.35,
+      "pitch": 1,
+      "pitchJitter": 0.06,
+      "cooldown": 0.03,
+      "layers": [
+        {
+          "wave": "noise",
+          "freq": 2400,
+          "freqEnd": 900,
+          "duration": 0.05,
+          "volume": 0.35,
+          "delay": 0,
+          "attack": 0.002,
+          "curve": 2
+        },
+        {
+          "wave": "triangle",
+          "freq": 660,
+          "freqEnd": 880,
+          "duration": 0.07,
+          "volume": 0.5,
+          "delay": 0.01,
+          "attack": 0.003,
+          "curve": 2
+        }
+      ]
+    },
+    {
+      "id": "card_switch",
+      "description": "카드 선택 이동",
+      "clip": "",
+      "volume": 0.3,
+      "pitch": 1,
+      "pitchJitter": 0.03,
+      "cooldown": 0.04,
+      "layers": [
+        {
+          "wave": "sine",
+          "freq": 1180,
+          "freqEnd": 980,
+          "duration": 0.05,
+          "volume": 0.6,
+          "delay": 0,
+          "attack": 0.002,
+          "curve": 2
+        }
+      ]
+    },
+    {
       "id": "fight",
       "description": "라운드 시작 (싸워라!)",
       "clip": "",

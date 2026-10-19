@@ -233,6 +233,7 @@ namespace Metadream.Shoot.Online
             var me = flow.Fighters[MySlot];
             var frame = _local.Read(new InputContext { Position = me.Position, Camera = Camera.main });
             if (_pendingReroll > 0) { frame.Reroll = _pendingReroll; _pendingReroll = 0; }
+            if (Fighter.InputSuspended) { int reroll = frame.Reroll; frame = default; frame.Reroll = reroll; }
 
             // An autoplaying client still has to confirm its card picks on the host.
             if (Autoplay && flow.IsPicking && flow.Picker == me)

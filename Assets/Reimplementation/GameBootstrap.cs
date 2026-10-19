@@ -66,6 +66,7 @@ namespace Metadream.Shoot
             if (GetComponent<GameHud>() == null) gameObject.AddComponent<GameHud>();
             if (GetComponent<DebugOverlay>() == null) gameObject.AddComponent<DebugOverlay>();
             if (GetComponent<CheatPanel>() == null) gameObject.AddComponent<CheatPanel>();
+            if (GetComponent<QuitConfirm>() == null) gameObject.AddComponent<QuitConfirm>();
         }
 
         private void Start()
@@ -91,6 +92,10 @@ namespace Metadream.Shoot
             {
                 flow.AutoRematch = !HasArg(args, "-norematch");
                 flow.StartMatch(HasArg(args, "-demo2v2") ? GameMode.CpuDemoTeams : GameMode.CpuDemo, settings, seed);
+            }
+            else if (HasArg(args, "-versuscpu"))
+            {
+                flow.StartMatch(GameMode.VersusCpu, settings, seed);
             }
             else if (HasArg(args, "-host"))
             {
@@ -161,8 +166,18 @@ namespace Metadream.Shoot
 
             if (autoQuit > 0f) StartCoroutine(QuitAfter(autoQuit, timeScale));
             else if (timeScale != 1f) StartCoroutine(HoldTimeScale(timeScale));
+            float quitPrompt = FloatArg(args, "-quitprompt", -1f);
+            if (quitPrompt >= 0f) StartCoroutine(OpenQuitPrompt(quitPrompt));
             string captureDir = StringArg(args, "-capture");
             if (captureDir != null) StartCoroutine(Capture(captureDir, StringArg(args, "-captureat")));
+        }
+
+        /// <summary>-quitprompt N: open the "정말 나가시겠습니까?" dialog after N seconds (screenshots).</summary>
+        private static IEnumerator OpenQuitPrompt(float seconds)
+        {
+            yield return new WaitForSecondsRealtime(seconds);
+            var flow = GameFlow.Instance;
+            if (flow != null && flow.HasMatch) QuitConfirm.Open(flow.EscapeOverride ?? flow.ReturnToTitle);
         }
 
         private static IEnumerator Capture(string directory, string times)
