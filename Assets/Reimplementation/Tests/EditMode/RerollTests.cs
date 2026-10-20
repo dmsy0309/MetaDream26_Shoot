@@ -44,8 +44,15 @@ namespace Metadream.Shoot.Tests
             var back = new MatchSnapshot();
             using (var r = new BinaryReader(new MemoryStream(bytes))) back.Read(r);
             Assert.AreEqual(2, back.PickerRerolls);
-            // Replays recorded before v6 have no trailing byte.
-            var old = new byte[bytes.Length - 1];
+            // v6/v7 replays end after the rerolls byte (no v8 map script data: 1 count byte + 1 empty-string byte).
+            var v7 = new byte[bytes.Length - 2];
+            System.Array.Copy(bytes, v7, v7.Length);
+            var seven = new MatchSnapshot();
+            using (var r = new BinaryReader(new MemoryStream(v7))) seven.Read(r);
+            Assert.AreEqual(2, seven.PickerRerolls);
+            Assert.AreEqual(0, seven.MapObjects.Count);
+            // Replays recorded before v6 have no rerolls byte either.
+            var old = new byte[bytes.Length - 3];
             System.Array.Copy(bytes, old, old.Length);
             var legacy = new MatchSnapshot();
             using (var r = new BinaryReader(new MemoryStream(old))) legacy.Read(r);

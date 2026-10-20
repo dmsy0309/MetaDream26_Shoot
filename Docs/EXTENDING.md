@@ -193,6 +193,15 @@ namespace Metadream.Shoot.Abilities
 
 서버에서 특정 맵만 쓰려면 `server.json`의 `"rules": { "mapPool": ["bridge_gap", "plateau"] }`.
 
+### 4.1 맵 고유 기믹 (맵 스크립트 · C# 맵 동작)
+
+맵 하나에서만 동작하는 코드는 [MAP_SCRIPTING.md](MAP_SCRIPTING.md)를 따릅니다.
+
+- 빌드 없이: 맵 JSON의 `"script"` (자체 해석기 `Maps/Scripting/MdsParser.cs`·`MdsRuntime.cs`, 허용 명령 목록 `MdsLibrary.cs`).
+- C#: `Maps/Scripting/`에 `[MapBehavior("id")] class X : MapBehavior` 파일 하나 + 맵 JSON `"behaviors"`.
+- 둘 다 `MapScriptApi`만으로 맵을 바꾸며, 방장/서버에서만 실행되고 이름 붙은 오브젝트 상태는 `MatchSnapshot.MapObjects`(프로토콜 v8)로 참가자·리플레이에 전달됩니다.
+- 테스트: `Tests/EditMode/MapScriptTests.cs`(문법·검증 메시지), `Tests/PlayMode/MapScriptPlayModeTests.cs`(실행·동기화·폭주 방지).
+
 ## 5. 개발자 디버그 모드
 
 켜는 방법: 게임 → **설정** → **개발자 디버그 모드** (저장됨), 또는 실행 인자 `-debug`(이번 실행만). 전용 서버는 `"debugLog": true` 또는 `-debug`.

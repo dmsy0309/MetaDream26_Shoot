@@ -113,6 +113,8 @@ namespace Metadream.Shoot.Presentation
             if (flow.HasMatch) sb.Append("  ·  ").Append(flow.Phase).Append(flow.IsSandbox ? " (sandbox)" : "");
             if (flow.CurrentMap != null) sb.Append("  ·  map ").Append(flow.CurrentMap.Definition.Id);
             sb.Append('\n');
+            string scriptStatus = flow.CurrentMap != null ? flow.CurrentMap.ScriptStatus() : null;
+            if (scriptStatus != null) sb.Append(scriptStatus).Append('\n');
             sb.Append("content ").Append(ContentDatabase.Cards.Count).Append(" cards / ").Append(ContentDatabase.Maps.Count).Append(" maps  hash ").Append(ContentDatabase.Hash)
               .Append("  errors ").Append(ContentDatabase.ErrorCount).Append("  warnings ").Append(ContentDatabase.WarningCount);
             if (ContentDatabase.LoadedExternalDirectory != null) sb.Append("\nexternal ").Append(ContentDatabase.LoadedExternalDirectory);

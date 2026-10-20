@@ -146,6 +146,18 @@
 - 효과음 `card_deal`·`card_switch` 추가(`sounds.json`, `Docs/SOUNDS.md`). 실행 인자 `-nodebug`(이번 실행만 디버그 끔), `-versuscpu`, `-quitprompt N`(캡처용). 네트워크 형식 변경 없음(프로토콜 v7 유지).
 - 검증: EditMode 63/63, PlayMode 9/9(새 `QuitConfirmLocksYesForThreeSecondsAndClosesOnNo`: 열자마자 '예' 잠김, 오프라인 일시정지, 닫으면 재개, 3초 후 확인 가능). macOS 빌드 캡처 `Docs/screenshots/v8-*.png`.
 
+### 10.14 맵 고유 기믹: 맵 스크립트 · C# 맵 동작 (2026-10-20)
+
+- 원작 ROUNDS의 맵 기믹은 씬/프리팹에 붙은 MonoBehaviour라 정적 분석으로 맵별 스크립트 형식을 확인할 수 없음 → 원작 재현이 아닌 개발 결정으로 설계.
+- 맵 JSON 확장: 모든 오브젝트에 선택 `name`, 보이지 않는 트리거 `areas`, 텍스트 스크립트 `script`(문자열 배열), C# 맵 동작 `behaviors`. 문서 `Docs/MAP_SCRIPTING.md`.
+- 텍스트 스크립트(MDS): 자체 렉서/파서/트리 해석기(`Maps/Scripting/MdsParser.cs`, `MdsRuntime.cs`). 이벤트 `on start/tick/enter/exit/inside/death/shot`, `every N`, `after N`; `var`, `if/elif/else`, `repeat`(≤1000), `foreach player`, `stop`, 속성 읽기/쓰기. 호출은 `MdsLibrary`의 허용 목록(게임 동작 25개 + 함수 21개)만, 모두 `MapScriptApi`를 거쳐 값이 범위로 잘림. 파일·네트워크·리플렉션 접근 없음. 단계 예산(핸들러 5000/프레임 30000) 초과나 런타임 오류는 그 맵 스크립트만 정지하고 경기는 계속.
+- C# 맵 동작: `[MapBehavior("id")] class : MapBehavior` 자동 등록(`MapBehaviorRegistry`). 기본 제공 `spin`, `blink`, `rise`, `turret`, `bounce_area`. 예외 시 해당 동작만 제거.
+- 실행 위치: 오프라인·방장·전용 서버의 현재 맵에서만(`MapRoot.ScriptsActive`: 타이틀 배경·참가자·리플레이 제외). 이름 붙은 오브젝트의 위치·회전·크기·보임·색과 HUD 문구를 `MatchSnapshot.MapObjects`/`ScriptHud`로 전송 → 프로토콜 v8. v7 이하 리플레이는 이 데이터 없이 읽힘.
+- 검증: 콘텐츠 로드 시 문법 오류를 `script line N: 이유 → "그 줄"`로 보고(맵 미로드), 이름 중복·예약어·없는 대상 검사. 디버그 오버레이에 스크립트 상태(핸들러·실행 횟수·변수·정지 사유), 콘텐츠 도감에 스크립트 요약.
+- 예시 맵: `script_rising_lava`, `script_switch_gate`, `script_turret_core`. 실행 인자 `-map <id>` 추가(데모/치트 대전의 맵 고정).
+- 함께 고친 것: 서버 빌드 후 에디터가 Server 서브타깃(UNITY_SERVER)에 남아 Play Mode 테스트가 헤드리스로 돌던 문제 → 빌드 후와 Setup에서 Player로 복구.
+- 검증: EditMode 68/68(새 `MapScriptTests` 5개), PlayMode 12/12(새 `MapScriptPlayModeTests` 3개: 이동·숨김·영역 피해·HUD·스냅샷 반영, 폭주 스크립트 정지, C# 동작과 `on shot`).
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

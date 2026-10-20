@@ -187,6 +187,8 @@ namespace Metadream.Shoot.Presentation
                 "id: " + m.Id + (m.TutorialOnly ? " · 튜토리얼 전용 (일반 순환 제외)" : ""),
                 "지형 " + m.Solids.Length + " · 상자 " + m.Boxes.Length + " · 움직이는 발판 " + m.Movers.Length + " · 점프대 " + pads + " · 피해 구역 " + hazards + " · 바람 " + winds + " · 스폰 " + m.Spawns.Length,
                 "범례: 회청색 지형 · 주황 상자 · 보라 발판(점 = 경로) · 초록 점프대 · 빨강 피해 구역 · 하늘색 바람 · 원 = 스폰(팀 색)",
+                "맵 스크립트: " + (m.Script != null ? m.ScriptSource.Length + "줄 · 핸들러 " + m.Script.Handlers.Count + "개" : "없음")
+                    + " · C# 동작 " + m.Behaviors.Length + "개 · 이름 붙은 오브젝트 " + m.ObjectNames.Length + "개 · 트리거 영역 " + m.Areas.Length + "개",
                 "파일: " + m.Source
             };
             DrawLines(new Rect(area.x + 24, preview.yMax + 14, area.width - 48, 200), lines);

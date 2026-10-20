@@ -86,6 +86,8 @@ namespace Metadream.Shoot
             bool autoplay = HasArg(args, "-autoplay");
             var settings = new MatchSettings();
             if (HasArg(args, "-quick")) settings.roundsToWinGame = 2;
+            string onlyMap = StringArg(args, "-map");
+            if (!string.IsNullOrEmpty(onlyMap)) settings.mapPool = new[] { onlyMap }; // e.g. -cheat 1 -map script_rising_lava
             var flow = GetComponent<GameFlow>();
 
             if (HasArg(args, "-demo") || HasArg(args, "-demo2v2"))
@@ -150,7 +152,7 @@ namespace Metadream.Shoot
             else if (StringArg(args, "-cheat") != null)
             {
                 DevSettings.ApplyCommandLine(new[] { "-debug" });
-                flow.StartMatch(StringArg(args, "-cheat") == "2" ? GameMode.CheatTeams : GameMode.CheatDuel);
+                flow.StartMatch(StringArg(args, "-cheat") == "2" ? GameMode.CheatTeams : GameMode.CheatDuel, settings);
                 string query = StringArg(args, "-cheatsearch");
                 if (query != null) StartCoroutine(OpenCheatSearch(query));
             }

@@ -37,8 +37,8 @@ namespace Metadream.Shoot.Network
     public static class Protocol
     {
         /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks. v6: card rerolls.</summary>
-        /// <summary>v7: sound events (FxType.Sound) in snapshots.</summary>
-        public const int Version = 7;
+        /// <summary>v7: sound events (FxType.Sound) in snapshots. v8: map script state (named objects + HUD text).</summary>
+        public const int Version = 8;
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;
@@ -244,6 +244,16 @@ namespace Metadream.Shoot.Network
         public float Rotation;
     }
 
+    /// <summary>State of one named map object (map scripts), in MapDefinition.ObjectNames order.</summary>
+    public struct MapObjectState
+    {
+        public Vector2 Position;
+        public float Rotation;
+        public Vector2 Size;
+        public bool Visible, HasTint;
+        public Color32 Tint;
+    }
+
     /// <summary>Everything a client needs to draw one host frame.</summary>
     public sealed class MatchSnapshot
     {
@@ -266,6 +276,9 @@ namespace Metadream.Shoot.Network
         public readonly List<ProjectileState> Projectiles = new List<ProjectileState>();
         public readonly List<BoxState> Boxes = new List<BoxState>();
         public readonly List<FxEvent> Fx = new List<FxEvent>();
+        /// <summary>v8: named map objects changed by map scripts, and the script HUD line (written after PickerRerolls).</summary>
+        public readonly List<MapObjectState> MapObjects = new List<MapObjectState>();
+        public string ScriptHud = "";
 
         public void Clear()
         {
@@ -274,6 +287,8 @@ namespace Metadream.Shoot.Network
             Projectiles.Clear();
             Boxes.Clear();
             Fx.Clear();
+            MapObjects.Clear();
+            ScriptHud = "";
         }
 
         public void Write(BinaryWriter w)
@@ -319,6 +334,17 @@ namespace Metadream.Shoot.Network
                 w.Write(e.B);
             }
             w.Write((byte)Mathf.Clamp(PickerRerolls, 0, 255));
+            w.Write((byte)Mathf.Min(MapObjects.Count, 255));
+            for (int i = 0; i < MapObjects.Count && i < 255; i++)
+            {
+                var o = MapObjects[i];
+                Protocol.WriteV2(w, o.Position);
+                w.Write(o.Rotation);
+                Protocol.WriteV2(w, o.Size);
+                w.Write((byte)((o.Visible ? 1 : 0) | (o.HasTint ? 2 : 0)));
+                w.Write(o.Tint.r); w.Write(o.Tint.g); w.Write(o.Tint.b); w.Write(o.Tint.a);
+            }
+            w.Write(ScriptHud ?? "");
         }
 
         public void Read(BinaryReader r)
@@ -368,6 +394,20 @@ namespace Metadream.Shoot.Network
                 Fx.Add(e);
             }
             PickerRerolls = r.BaseStream.Position < r.BaseStream.Length ? r.ReadByte() : 0;
+            if (r.BaseStream.Position < r.BaseStream.Length)
+            {
+                int no = r.ReadByte();
+                for (int i = 0; i < no; i++)
+                {
+                    var o = new MapObjectState { Position = Protocol.ReadV2(r), Rotation = r.ReadSingle(), Size = Protocol.ReadV2(r) };
+                    byte flags = r.ReadByte();
+                    o.Visible = (flags & 1) != 0;
+                    o.HasTint = (flags & 2) != 0;
+                    o.Tint = new Color32(r.ReadByte(), r.ReadByte(), r.ReadByte(), r.ReadByte());
+                    MapObjects.Add(o);
+                }
+                ScriptHud = r.ReadString();
+            }
         }
     }
 

@@ -1,0 +1,113 @@
+{
+  "id": "script_turret_core",
+  "name": "포탑 코어",
+  "tutorialOnly": false,
+  "origin": "Metadream 맵 스크립트 예시 (C# 동작 + 스크립트)",
+  "solids": [
+    {
+      "x": -20,
+      "y": -12,
+      "w": 24,
+      "h": 3
+    },
+    {
+      "x": 20,
+      "y": -12,
+      "w": 24,
+      "h": 3
+    },
+    {
+      "x": 0,
+      "y": -6,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "name": "blade",
+      "x": 0,
+      "y": 2,
+      "w": 10,
+      "h": 0.8
+    },
+    {
+      "name": "core",
+      "x": 0,
+      "y": 12,
+      "w": 2.4,
+      "h": 2.4
+    },
+    {
+      "x": -24,
+      "y": 2,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "x": 24,
+      "y": 2,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "name": "bridge",
+      "x": 0,
+      "y": -12,
+      "w": 16,
+      "h": 1.2
+    }
+  ],
+  "spawns": [
+    {
+      "x": -20,
+      "y": -8
+    },
+    {
+      "x": 20,
+      "y": -8
+    }
+  ],
+  "behaviors": [
+    {
+      "type": "turret",
+      "target": "core",
+      "interval": 2.5,
+      "delay": 1.5,
+      "speed": 38,
+      "damage": 18
+    },
+    {
+      "type": "spin",
+      "target": "blade",
+      "speed": 40
+    },
+    {
+      "type": "blink",
+      "target": "bridge",
+      "interval": 4,
+      "sound": "block"
+    }
+  ],
+  "script": [
+    "# 코어(포탑)를 5번 맞히면 폭발하고 포탑이 멈춘다",
+    "var hits = 0",
+    "",
+    "on start",
+    "  hud(\"코어를 5번 맞히면 포탑이 멈춥니다\")",
+    "end",
+    "",
+    "on shot core",
+    "  if core.visible and player != none",
+    "    hits = hits + 1",
+    "    effect(\"spark\", event_x, event_y, 1, \"#ffd040\")",
+    "    color(core, 1, 1 - hits * 0.18, 0.2)",
+    "    hud(\"코어 \" + hits + \"/5\")",
+    "    if hits >= 5",
+    "      explode(core.x, core.y, 5, 25, 20)",
+    "      hide(core)",
+    "      banner(\"포탑 파괴!\", 1.5, \"#ffd040\")",
+    "      hud(\"포탑이 멈췄습니다\")",
+    "    end",
+    "  end",
+    "end"
+  ]
+}

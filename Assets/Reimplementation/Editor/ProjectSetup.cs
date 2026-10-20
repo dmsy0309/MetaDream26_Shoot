@@ -67,6 +67,9 @@ namespace Metadream.Shoot.EditorTools
             PlayerSettings.defaultScreenWidth = 1600;
             PlayerSettings.defaultScreenHeight = 900;
             PlayerSettings.resizableWindow = true;
+            // A dedicated-server build leaves the editor on the Server subtarget (UNITY_SERVER define), which would
+            // make Play Mode and tests behave like a headless server. Always come back to the normal player.
+            EditorUserBuildSettings.standaloneBuildSubtarget = StandaloneBuildSubtarget.Player;
             AssetDatabase.SaveAssets();
             Debug.Log("[Setup] Arena scene and settings written");
         }
@@ -137,6 +140,7 @@ namespace Metadream.Shoot.EditorTools
                 options = BuildOptions.None
             };
             var report = BuildPipeline.BuildPlayer(options);
+            EditorUserBuildSettings.standaloneBuildSubtarget = StandaloneBuildSubtarget.Player;
             var summary = report.summary;
             if (summary.result == BuildResult.Succeeded) CopyLicenses(target, output);
             Debug.Log("[Build] target=" + target + " subtarget=" + subtarget + " result=" + summary.result + " size=" + summary.totalSize + " errors=" + summary.totalErrors + " path=" + output);

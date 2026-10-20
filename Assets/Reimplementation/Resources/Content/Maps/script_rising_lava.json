@@ -1,0 +1,114 @@
+{
+  "id": "script_rising_lava",
+  "name": "차오르는 용암",
+  "tutorialOnly": false,
+  "origin": "Metadream 맵 스크립트 예시",
+  "solids": [
+    {
+      "x": -24,
+      "y": -8,
+      "w": 14,
+      "h": 2
+    },
+    {
+      "x": 24,
+      "y": -8,
+      "w": 14,
+      "h": 2
+    },
+    {
+      "x": 0,
+      "y": -10,
+      "w": 10,
+      "h": 1.2
+    },
+    {
+      "x": -12,
+      "y": 0,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "x": 12,
+      "y": 0,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "x": 0,
+      "y": 8,
+      "w": 12,
+      "h": 1.2
+    },
+    {
+      "x": -26,
+      "y": 6,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "x": 26,
+      "y": 6,
+      "w": 8,
+      "h": 1.2
+    }
+  ],
+  "boxes": [
+    {
+      "x": 0,
+      "y": 10,
+      "w": 1.6,
+      "h": 1.6
+    }
+  ],
+  "spawns": [
+    {
+      "x": -24,
+      "y": -5
+    },
+    {
+      "x": 24,
+      "y": -5
+    }
+  ],
+  "hazards": [
+    {
+      "name": "lava",
+      "x": 0,
+      "y": -18.5,
+      "w": 72,
+      "h": 3,
+      "dps": 40
+    }
+  ],
+  "script": [
+    "# 10초마다 용암이 3칸씩 차오른다 (최대 4단계)",
+    "var level = 0",
+    "var next_rise = 10",
+    "",
+    "on tick",
+    "  if level < 4",
+    "    hud(\"용암 상승까지 \" + text(max(0, next_rise - time), 0) + \"초 · 단계 \" + level + \"/4\")",
+    "  else",
+    "    hud(\"용암 최고 단계!\")",
+    "  end",
+    "end",
+    "",
+    "every 10",
+    "  if level < 4",
+    "    level = level + 1",
+    "    next_rise = next_rise + 10",
+    "    move_by(lava, 0, 1.5, 2)",
+    "    resize(lava, lava.w, lava.h + 3, 2)",
+    "    sound(\"shockwave\")",
+    "    effect(\"shake\", 0, 0, 3)",
+    "    banner(\"용암이 차오릅니다! \" + level + \"단계\", 1.5, \"#ff7040\")",
+    "  end",
+    "end",
+    "",
+    "on enter lava",
+    "  push(player, 0, 22)",
+    "  effect(\"burst\", player.x, player.y, 2, \"#ff6030\")",
+    "end"
+  ]
+}

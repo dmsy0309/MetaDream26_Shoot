@@ -108,6 +108,10 @@ namespace Metadream.Shoot
         private int _mRoundsToWin = 5;
         private int _mWinning = -1;
         private int _mPickerRerolls;
+        private string _mScriptHud = "";
+
+        /// <summary>Map script HUD line ("hud(…)" in the map script). Empty when none.</summary>
+        public string MapHud => _mirrorActive ? _mScriptHud : CurrentMap != null ? CurrentMap.HudText : "";
         private readonly Dictionary<int, int> _rerolls = new Dictionary<int, int>();
 
         /// <summary>Rerolls the given fighter has left in this game.</summary>
@@ -756,6 +760,8 @@ namespace Metadream.Shoot
             if (CurrentMap != null && !_sliding)
                 foreach (var rb in CurrentMap.Bodies)
                     if (rb != null) s.Boxes.Add(new BoxState { Position = rb.transform.localPosition, Rotation = rb.transform.localEulerAngles.z });
+            if (CurrentMap != null && !_sliding) CurrentMap.CaptureObjects(s.MapObjects);
+            s.ScriptHud = _sliding ? "" : MapHud;
             if (Fx.Outbox != null)
             {
                 s.Fx.AddRange(Fx.Outbox);
@@ -822,6 +828,7 @@ namespace Metadream.Shoot
             for (int t = 0; t < 2; t++) { _mPoints[t] = s.Points[t]; _mRounds[t] = s.Rounds[t]; }
             _mWinning = s.WinningTeam;
             _mPickerRerolls = s.PickerRerolls;
+            _mScriptHud = s.ScriptHud ?? "";
             Time.timeScale = Mathf.Clamp(s.TimeScale, 0.05f, 8f);
 
             Banner = string.IsNullOrEmpty(s.Banner) ? null : s.Banner;
@@ -846,6 +853,7 @@ namespace Metadream.Shoot
 
             ApplyMirrorMap(s.MapIndex, s.IncomingMap);
             if (CurrentMap != null && !_sliding) CurrentMap.ApplyBoxes(s.Boxes);
+            if (CurrentMap != null && !_sliding) CurrentMap.ApplyObjects(s.MapObjects);
             int n = Mathf.Min(Fighters.Count, s.Fighters.Count);
             for (int i = 0; i < n; i++) Fighters[i].ApplySnapshot(s.Fighters[i]);
             foreach (var e in s.Fx) Fx.Play(e);

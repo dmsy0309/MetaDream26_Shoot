@@ -7,6 +7,7 @@ using UnityEngine;
 using Metadream.Shoot.Abilities;
 using Metadream.Shoot.Cards;
 using Metadream.Shoot.Maps;
+using Metadream.Shoot.Maps.Scripting;
 
 namespace Metadream.Shoot.Content
 {
@@ -43,6 +44,8 @@ namespace Metadream.Shoot.Content
         public float x, y, w, h;
         /// <summary>Rotation in degrees (counter-clockwise), optional.</summary>
         public float r;
+        /// <summary>Optional object name for map scripts (Docs/MAP_SCRIPTING.md).</summary>
+        public string name = "";
     }
 
     [Serializable]
@@ -59,6 +62,7 @@ namespace Metadream.Shoot.Content
         public PointData[] path = new PointData[0];
         public float speed = 6f;
         public float wait = 1f;
+        public string name = "";
     }
 
     [Serializable]
@@ -71,6 +75,18 @@ namespace Metadream.Shoot.Content
         public float dps = 40f;
         /// <summary>Wind: acceleration (units/s²).</summary>
         public float fx, fy;
+        public string name = "";
+    }
+
+    /// <summary>Named trigger rectangle for map scripts. Invisible unless show = true.</summary>
+    [Serializable]
+    public sealed class AreaData
+    {
+        public float x, y, w, h, r;
+        public string name = "";
+        public bool show;
+        /// <summary>Fill colour when shown ("#rrggbbaa" or a colour name).</summary>
+        public string color = "#ffffff26";
     }
 
     [Serializable]
@@ -87,6 +103,12 @@ namespace Metadream.Shoot.Content
         public ZoneData[] pads = new ZoneData[0];
         public ZoneData[] hazards = new ZoneData[0];
         public ZoneData[] winds = new ZoneData[0];
+        /// <summary>Named trigger rectangles for map scripts.</summary>
+        public AreaData[] areas = new AreaData[0];
+        /// <summary>Map script, one line per string (Docs/MAP_SCRIPTING.md).</summary>
+        public string[] script = new string[0];
+        /// <summary>C# map behaviors ([MapBehavior] classes) with their parameters.</summary>
+        public MapBehaviorSpec[] behaviors = new MapBehaviorSpec[0];
         /// <summary>Free text, e.g. "ROUNDS level12".</summary>
         public string origin = "";
     }
@@ -394,6 +416,7 @@ namespace Metadream.Shoot.Content
             var pads = d.pads ?? new ZoneData[0];
             var hazards = d.hazards ?? new ZoneData[0];
             var winds = d.winds ?? new ZoneData[0];
+            var areas = d.areas ?? new AreaData[0];
             if (string.IsNullOrWhiteSpace(d.name)) Warn("\"name\" is empty");
             if (solids.Length == 0 && movers.Length == 0) Error("needs at least one entry in \"solids\" (or \"movers\")");
             if (spawns.Length < 2) Error("needs at least 2 spawns (team 0 = spawns[0], team 1 = spawns[1])");
@@ -439,6 +462,47 @@ namespace Metadream.Shoot.Content
                 CheckArea("winds", i, winds[i].x, winds[i].y, winds[i].w, winds[i].h);
                 if (winds[i].fx == 0f && winds[i].fy == 0f) Warn("winds[" + i + "] has no force (fx, fy)");
             }
+            for (int i = 0; i < areas.Length; i++)
+            {
+                if (areas[i] == null) { Error("areas[" + i + "] is null"); continue; }
+                CheckArea("areas", i, areas[i].x, areas[i].y, areas[i].w, areas[i].h);
+                if (string.IsNullOrEmpty(areas[i].name)) Warn("areas[" + i + "] has no \"name\" (scripts cannot use it)");
+            }
+
+            // ---- object names (map scripts)
+            var objectNames = new List<string>();
+            void Named(string list, int i, string name)
+            {
+                if (string.IsNullOrEmpty(name)) return;
+                if (!IsIdentifier(name)) { Error(list + "[" + i + "].name '" + name + "' must use letters, digits and _ only and not start with a digit"); return; }
+                if (MdsLibrary.Signatures.ContainsKey(name) || ReservedScriptWords.Contains(name)) { Error(list + "[" + i + "].name '" + name + "' is a reserved script word"); return; }
+                if (objectNames.Contains(name)) { Error(list + "[" + i + "].name '" + name + "' is used twice (names must be unique in a map)"); return; }
+                objectNames.Add(name);
+            }
+            for (int i = 0; i < solids.Length; i++) if (solids[i] != null) Named("solids", i, solids[i].name);
+            for (int i = 0; i < boxes.Length; i++) if (boxes[i] != null) Named("boxes", i, boxes[i].name);
+            for (int i = 0; i < movers.Length; i++) if (movers[i] != null) Named("movers", i, movers[i].name);
+            for (int i = 0; i < pads.Length; i++) if (pads[i] != null) Named("pads", i, pads[i].name);
+            for (int i = 0; i < hazards.Length; i++) if (hazards[i] != null) Named("hazards", i, hazards[i].name);
+            for (int i = 0; i < winds.Length; i++) if (winds[i] != null) Named("winds", i, winds[i].name);
+            for (int i = 0; i < areas.Length; i++) if (areas[i] != null) Named("areas", i, areas[i].name);
+            if (objectNames.Count > MapRoot.MaxNamedObjects) Error("at most " + MapRoot.MaxNamedObjects + " named objects per map (network snapshot size), got " + objectNames.Count);
+
+            MdsProgram program = null;
+            var scriptLines = d.script ?? new string[0];
+            if (scriptLines.Length > 0)
+            {
+                var scriptErrors = new List<MdsError>();
+                program = MdsProgram.Parse(scriptLines, objectNames, scriptErrors);
+                foreach (var e in scriptErrors) Error(e.ToString() + " → " + ScriptLine(scriptLines, e.Line));
+                if (program != null && program.Handlers.Count == 0) Warn("script has no handlers (on start / every / on enter …), it does nothing");
+            }
+            var behaviors = d.behaviors ?? new MapBehaviorSpec[0];
+            for (int i = 0; i < behaviors.Length; i++)
+            {
+                string err = MapBehaviorRegistry.Validate(behaviors[i], objectNames);
+                if (err != null) Error("behaviors[" + i + "]: " + err);
+            }
 
             for (int s = 0; s < spawns.Length; s++)
             {
@@ -463,7 +527,7 @@ namespace Metadream.Shoot.Content
 
             MapZone Zone(ZoneKind kind, ZoneData z) => new MapZone
             {
-                Kind = kind, Block = new MapBlock(z.x, z.y, z.w, z.h, z.r), Power = z.power, Dps = z.dps, Force = new Vector2(z.fx, z.fy)
+                Kind = kind, Block = new MapBlock(z.x, z.y, z.w, z.h, z.r), Power = z.power, Dps = z.dps, Force = new Vector2(z.fx, z.fy), Name = z.name ?? ""
             };
             var zones = new List<MapZone>();
             foreach (var z in pads) zones.Add(Zone(ZoneKind.JumpPad, z));
@@ -482,13 +546,42 @@ namespace Metadream.Shoot.Content
                     Block = new MapBlock(m.x, m.y, m.w, m.h, m.r),
                     Path = Array.ConvertAll(m.path, p => new Vector2(p.x, p.y)),
                     Speed = m.speed,
-                    Wait = m.wait
+                    Wait = m.wait,
+                    Name = m.name ?? ""
                 }),
                 Zones = zones.ToArray(),
+                Areas = Array.ConvertAll(areas, a => new MapArea
+                {
+                    Name = a.name ?? "",
+                    Block = new MapBlock(a.x, a.y, a.w, a.h, a.r),
+                    Show = a.show,
+                    Color = ColorUtility.TryParseHtmlString(a.color ?? "", out var ac) ? ac : new Color(1f, 1f, 1f, 0.15f)
+                }),
+                SolidNames = Array.ConvertAll(solids, r => r.name ?? ""),
+                BoxNames = Array.ConvertAll(boxes, r => r.name ?? ""),
+                ObjectNames = objectNames.ToArray(),
+                Script = program,
+                ScriptSource = scriptLines,
+                Behaviors = behaviors,
                 Source = source
             };
             return def;
         }
+
+        private static readonly HashSet<string> ReservedScriptWords = new HashSet<string>
+        {
+            "on", "every", "after", "var", "if", "elif", "else", "end", "repeat", "foreach", "stop", "and", "or", "not",
+            "true", "false", "none", "player", "time", "dt", "event_x", "event_y", "start", "tick", "enter", "exit", "inside", "death", "shot"
+        };
+
+        private static bool IsIdentifier(string s)
+        {
+            if (string.IsNullOrEmpty(s) || char.IsDigit(s[0])) return false;
+            foreach (char c in s) if (!char.IsLetterOrDigit(c) && c != '_') return false;
+            return true;
+        }
+
+        private static string ScriptLine(string[] lines, int line) => line >= 1 && line <= lines.Length ? "\"" + (lines[line - 1] ?? "").Trim() + "\"" : "";
 
         // ---------------------------------------------------------------- hash
 

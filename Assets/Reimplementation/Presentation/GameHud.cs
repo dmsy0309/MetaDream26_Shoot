@@ -19,6 +19,7 @@ namespace Metadream.Shoot.Presentation
             Begin();
             DrawOverlays(flow);
             if (!flow.IsSandbox) DrawScore(flow); // the tutorial draws its own panel in that area
+            DrawMapHud(flow);
             DrawCardBars(flow);
             UpdatePickAnimation(flow);
             if (flow.IsPicking) DrawPick(flow);
@@ -54,6 +55,16 @@ namespace Metadream.Shoot.Presentation
                     Disc(new Vector2(x, 112), 7, got ? c : new Color(1, 1, 1, 0.22f));
                 }
             }
+        }
+
+        /// <summary>Map script "hud(…)" line, centred under the score.</summary>
+        private static void DrawMapHud(GameFlow flow)
+        {
+            string hud = flow.MapHud;
+            if (string.IsNullOrEmpty(hud) || flow.IsPicking) return;
+            var r = new Rect(W / 2 - 420, flow.IsSandbox ? 18 : 128, 840, 38);
+            Fill(r, new Color(0f, 0f, 0f, 0.45f));
+            Shadowed(r, hud, new GUIStyle(Small) { alignment = TextAnchor.MiddleCenter }, new Color(1f, 0.88f, 0.45f));
         }
 
         private void DrawOverlays(GameFlow flow)

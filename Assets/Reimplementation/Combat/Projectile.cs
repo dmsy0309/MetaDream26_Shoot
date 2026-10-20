@@ -14,6 +14,9 @@ namespace Metadream.Shoot.Combat
     {
         public const float MoveTransformGravity = 30f; // MoveTransform..ctor
         public const float MaxLifetime = 8f;
+
+        /// <summary>A projectile touched terrain / a box / a platform (collider, contact point). Used by map scripts ("on shot").</summary>
+        public static event System.Action<Projectile, Collider2D, Vector2> SurfaceHit;
         public static readonly List<Projectile> Active = new List<Projectile>();
         private static int _nextId = 1;
 
@@ -177,6 +180,7 @@ namespace Metadream.Shoot.Combat
                 var body = hit.rigidbody;
                 if (body != null && body.bodyType == RigidbodyType2D.Dynamic)
                     body.AddForceAtPosition(Velocity.normalized * _damage * 0.09f * _knockback, hit.point, ForceMode2D.Impulse);
+                SurfaceHit?.Invoke(this, hit.collider, hit.point);
                 if (_ignoreWalls) continue;
 
                 if (_reflectsLeft > 0)

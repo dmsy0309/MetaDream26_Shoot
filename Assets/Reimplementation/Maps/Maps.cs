@@ -36,6 +36,7 @@ namespace Metadream.Shoot.Maps
     public sealed class MapMover
     {
         public MapBlock Block;
+        public string Name = "";
         public Vector2[] Path = new Vector2[0];
         public float Speed = 6f;
         public float Wait = 1f;
@@ -76,9 +77,19 @@ namespace Metadream.Shoot.Maps
     {
         public ZoneKind Kind;
         public MapBlock Block;
+        public string Name = "";
         public float Power;
         public float Dps;
         public Vector2 Force;
+    }
+
+    /// <summary>Named trigger rectangle for map scripts ("areas" in map JSON). Invisible unless Show.</summary>
+    public sealed class MapArea
+    {
+        public string Name = "";
+        public MapBlock Block;
+        public bool Show;
+        public Color Color = new Color(1f, 1f, 1f, 0.15f);
     }
 
     /// <summary>
@@ -97,6 +108,16 @@ namespace Metadream.Shoot.Maps
         public Vector2[] Spawns = new Vector2[0];
         public MapMover[] Movers = new MapMover[0];
         public MapZone[] Zones = new MapZone[0];
+        public MapArea[] Areas = new MapArea[0];
+        /// <summary>Object "name" per solid / box (empty = unnamed).</summary>
+        public string[] SolidNames = new string[0];
+        public string[] BoxNames = new string[0];
+        /// <summary>Every named object in build order (solids, boxes, movers, zones, areas). Index = network/script id.</summary>
+        public string[] ObjectNames = new string[0];
+        /// <summary>Parsed "script" (null when the map has none). See Docs/MAP_SCRIPTING.md.</summary>
+        public Scripting.MdsProgram Script;
+        public string[] ScriptSource = new string[0];
+        public Scripting.MapBehaviorSpec[] Behaviors = new Scripting.MapBehaviorSpec[0];
     }
 
     public static class MapCatalog

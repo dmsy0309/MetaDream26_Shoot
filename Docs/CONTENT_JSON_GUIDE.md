@@ -2,6 +2,7 @@
 
 새 맵과 새 스킬(카드)은 **JSON 파일 하나**로 추가합니다. C# 코드는 새로운 *동작*(효과)이 필요할 때만 씁니다 ([EXTENDING.md](EXTENDING.md) 3.2).
 이 문서는 JSON만 다룹니다. 바로 복사해 쓸 수 있는 템플릿은 맨 아래에 있습니다.
+맵 하나에서만 동작하는 기믹(스크립트 `"script"`, C# 맵 동작 `"behaviors"`, 트리거 영역 `"areas"`, 오브젝트 `"name"`)은 [MAP_SCRIPTING.md](MAP_SCRIPTING.md)를 보세요.
 
 ## 1. 파일을 두는 곳
 
@@ -203,6 +204,10 @@
 | `spawns` | 최소 2개. `spawns[0]` = 주황 팀, `spawns[1]` = 파랑 팀. 2대2에서 팀원은 같은 위치 옆에 섬 |
 | `tutorialOnly` | true면 일반 게임 맵 순환에서 제외 |
 | `disabled` | true면 불러오지 않음 |
+| `name` (각 오브젝트) | 맵 스크립트에서 부를 이름 (선택). [MAP_SCRIPTING.md](MAP_SCRIPTING.md) |
+| `areas` | 보이지 않는 트리거 사각형 `{name, x, y, w, h, r, show, color}` |
+| `script` | 맵 스크립트 (문자열 배열, 한 줄 = 한 문장). 빌드 없이 수정 가능 |
+| `behaviors` | C# 맵 동작 `[{ "type": "spin", "target": "blade", "speed": 40 }]` |
 
 ### 3.1 좌표계
 
