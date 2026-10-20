@@ -420,6 +420,7 @@ namespace Metadream.Shoot.Content
             if (string.IsNullOrWhiteSpace(d.name)) Warn("\"name\" is empty");
             if (solids.Length == 0 && movers.Length == 0) Error("needs at least one entry in \"solids\" (or \"movers\")");
             if (spawns.Length < 2) Error("needs at least 2 spawns (team 0 = spawns[0], team 1 = spawns[1])");
+            if (spawns.Length > 4) Warn("spawns[4] and later are unused (2 teams × 2 players)");
 
             for (int i = 0; i < solids.Length; i++) CheckRect("solids", i, solids[i]);
             for (int i = 0; i < boxes.Length; i++) CheckRect("boxes", i, boxes[i]);

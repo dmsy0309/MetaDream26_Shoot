@@ -181,7 +181,7 @@ namespace Metadream.Shoot.Abilities
 |---|---|
 | `solids` | 고정 지형 사각형. `x, y` = 중심, `w, h` = 크기 (월드 단위) |
 | `boxes` | 움직이는 물리 상자 (플레이어와 탄이 밀 수 있음) |
-| `spawns` | `spawns[0]` = 팀 0, `spawns[1]` = 팀 1. 2대2에서 같은 팀 두 번째 사람은 옆으로 비켜서 등장 (`MapRoot.SpawnPoint`) |
+| `spawns` | `spawns[0]` = 팀 0, `spawns[1]` = 팀 1. 2대2에서 같은 팀 두 번째 사람은 `spawns[2]`(팀 0)·`spawns[3]`(팀 1)이 있으면 그곳, 없으면 팀 스폰에서 중앙 쪽으로 2.6 비켜서 등장 (`MapRoot.SpawnPoint`: 포인트 시작 "준비" 배치, 자유 테스트·튜토리얼, F2 맵 넘기기 모두 같은 규칙) |
 | `tutorialOnly` | true면 일반 로테이션에서 제외 (튜토리얼 맵 `training`) |
 
 좌표계: 원점 = 화면 중앙, 위가 +y. 경기장 경계(벗어나면 사망) = x ±35.56, y ±20. 플레이어 지름 ≈ 1.24. 점프로 오를 수 있는 높이는 기존 맵(`steps`, `twin_towers`)의 발판 간격을 참고하고, 디버그 모드에서 직접 확인합니다.

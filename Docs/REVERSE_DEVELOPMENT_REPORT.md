@@ -158,6 +158,11 @@
 - 함께 고친 것: 서버 빌드 후 에디터가 Server 서브타깃(UNITY_SERVER)에 남아 Play Mode 테스트가 헤드리스로 돌던 문제 → 빌드 후와 Setup에서 Player로 복구.
 - 검증: EditMode 68/68(새 `MapScriptTests` 5개), PlayMode 12/12(새 `MapScriptPlayModeTests` 3개: 이동·숨김·영역 피해·HUD·스냅샷 반영, 폭주 스크립트 정지, C# 동작과 `on shot`).
 
+### 10.15 2대2 팀원 개별 스폰 (2026-10-20, Map Maker 수정 지시서 GAME_PATCH_TEAM_SPAWNS.md)
+
+- 원작에 없는 개발 결정: 맵 `spawns[2]`(주황 2번)·`spawns[3]`(파랑 2번)이 있으면 2대2 두 번째 팀원이 포인트 시작 "준비" 배치부터 그 위치에 섬(`MapRoot.SpawnPoint`). 없으면 기존처럼 팀 스폰에서 중앙 쪽 2.6. F2 맵 넘기기도 팀 안 순서를 사용. `spawns` 5개 이상은 경고. 내장 맵 46개는 모두 스폰 2개라 배치 변화 없음. 네트워크·리플레이 형식 변경 없음(프로토콜 v8 유지).
+- 검증: EditMode 73/73(새 `TeamSpawnTests` 5개), PlayMode 13/13(새 `TeamSpawnPlayModeTests`: 외부 콘텐츠 4스폰 맵, CPU 2대2 "준비" 순간 네 명 위치 ±0.3).
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

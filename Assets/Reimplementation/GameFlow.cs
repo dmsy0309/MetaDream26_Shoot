@@ -965,12 +965,15 @@ namespace Metadream.Shoot
             if (CurrentMap != null && next == CurrentMap.Definition) next = _rotation.Next();
             LoadMapImmediate(next);
             CurrentMap.SetSimulated(true);
+            var perTeam = new int[2];
             foreach (var f in Fighters)
             {
-                if (IsSandbox) SandboxRespawn(f);
-                else if (!f.IsDead)
+                if (IsSandbox) { SandboxRespawn(f); continue; }
+                int team = Mathf.Clamp(f.TeamId, 0, 1);
+                int index = f.Absent ? 0 : perTeam[team]++; // same in-team order as BeginBattle
+                if (!f.IsDead)
                 {
-                    f.Revive(CurrentMap.SpawnPoint(f.TeamId, 0), false);
+                    f.Revive(CurrentMap.SpawnPoint(f.TeamId, index), false);
                     f.SetPlaying(Phase == MatchPhase.Battle);
                 }
             }

@@ -49,10 +49,16 @@ namespace Metadream.Shoot.Maps
         public MapObject FindObject(string name) => name != null && _byName.TryGetValue(name, out var o) ? o : null;
         public MapObject NamedObject(int index) => index >= 0 && index < _named.Length ? _named[index] : null;
 
-        /// <summary>Team spawn; additional teammates step 2.6 units toward the arena centre.</summary>
+        /// <summary>
+        /// Team spawn. The n-th teammate (n ≥ 1) uses spawns[team + 2n] when the map has it
+        /// (spawns[2] = orange #2, spawns[3] = blue #2); otherwise it steps 2.6 units toward the arena centre.
+        /// </summary>
         public Vector2 SpawnPoint(int team, int indexInTeam = 0)
         {
             var spawns = Definition.Spawns;
+            int custom = team + 2 * indexInTeam;
+            if (indexInTeam > 0 && team >= 0 && custom < spawns.Length)
+                return (Vector2)transform.position + spawns[custom];
             Vector2 p = spawns[team % spawns.Length];
             if (indexInTeam > 0) p.x += (p.x < 0f ? 1f : -1f) * 2.6f * indexInTeam;
             return (Vector2)transform.position + p;
