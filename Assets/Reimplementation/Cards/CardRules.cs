@@ -80,6 +80,10 @@ namespace Metadream.Shoot.Cards
         /// <summary>Abilities beyond stat changes (Abilities/*.cs, matched by EffectSpec.type).</summary>
         public EffectSpec[] Effects = Array.Empty<EffectSpec>();
         public CardStatLine[] Lines = Array.Empty<CardStatLine>();
+        /// <summary>Card image name in CardArt folders (empty = use the card id). See Presentation/CardArt.cs.</summary>
+        public string Image = "";
+        /// <summary>"fill" (default: image fills the art rectangle) or "icon" (image inside the emblem circle).</summary>
+        public string ImageMode = "fill";
         /// <summary>File the card was loaded from (for error messages).</summary>
         public string Source = "";
 

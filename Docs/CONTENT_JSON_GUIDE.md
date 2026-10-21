@@ -121,6 +121,8 @@
 | `modifiers` | 객체 | | 변화 없음 | 능력치 변경 (2.2) |
 | `effects` | 배열 | | [] | 특수 효과 (2.3) |
 | `lines` | 배열 | 권장 | [] | 카드 앞면 수치 줄 `{label, amount, positive}`. **표시 전용**이므로 실제 값과 맞춰 적기 |
+| `image` | 문자열 | | 카드 id | 카드 그림 파일 이름 (`Content/CardArt/<이름>.png`). 규격 260×112(권장 1040×448)은 [CARD_ART.md](CARD_ART.md) |
+| `imageMode` | `fill` · `icon` | | fill | fill = 그림 영역 전체, icon = 가운데 원 안 80×80(투명 PNG 권장 320×320) |
 | `disabled` | true/false | | false | true면 불러오지 않음 |
 
 ### 2.2 `modifiers` (생략한 키 = 변화 없음)

@@ -36,6 +36,10 @@ namespace Metadream.Shoot.Content
         public CardModifiers modifiers = new CardModifiers();
         public EffectSpec[] effects = new EffectSpec[0];
         public CardLineData[] lines = new CardLineData[0];
+        /// <summary>Optional image name in Content/CardArt (default: the card id). Docs/CARD_ART.md.</summary>
+        public string image = "";
+        /// <summary>"fill" (art rectangle, default) or "icon" (inside the emblem circle).</summary>
+        public string imageMode = "";
     }
 
     [Serializable]
@@ -239,6 +243,8 @@ namespace Metadream.Shoot.Content
                 var card = ParseCard(kv.Value.Key, kv.Key, kv.Value.Value, _issues);
                 if (card == null) continue;
                 if (cards.Exists(c => c.Id == card.Id)) { _issues.Add(new ContentIssue(ContentSeverity.Error, card.Source, "duplicate card id '" + card.Id + "'")); continue; }
+                if (card.Image.Length > 0 && !Presentation.CardArt.Exists(card.Image, external))
+                    _issues.Add(new ContentIssue(ContentSeverity.Warning, card.Source, "image '" + card.Image + "' not found (Content/CardArt/" + card.Image + ".png or Resources/Content/CardArt): the card shows its letter emblem"));
                 cards.Add(card);
             }
             cards.Sort((a, b) => string.CompareOrdinal(a.Id, b.Id));
@@ -358,6 +364,11 @@ namespace Metadream.Shoot.Content
                 if (problem != null) Error("effects[" + i + "]: " + problem);
             }
             if (d.lines == null || d.lines.Length == 0) Warn("no \"lines\": the card face will show no numbers");
+            string imageMode = string.IsNullOrWhiteSpace(d.imageMode) ? Presentation.CardArt.ModeFill : d.imageMode.Trim().ToLowerInvariant();
+            if (imageMode != Presentation.CardArt.ModeFill && imageMode != Presentation.CardArt.ModeIcon) Error("imageMode must be \"fill\" or \"icon\", got '" + d.imageMode + "'");
+            string image = (d.image ?? "").Trim();
+            if (image.Length > 0 && !Presentation.CardArt.IsSafeName(image))
+                Error("image '" + image + "' must be a file name without extension or folders (letters, digits, _ and -), e.g. \"ice_rounds\"");
             if (!ok) return null;
 
             var lines = new List<CardStatLine>();
@@ -375,6 +386,8 @@ namespace Metadream.Shoot.Content
                 Modifiers = m,
                 Effects = effects,
                 Lines = lines.ToArray(),
+                Image = image,
+                ImageMode = imageMode,
                 Source = source
             };
         }

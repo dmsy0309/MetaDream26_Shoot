@@ -163,6 +163,12 @@
 - 원작에 없는 개발 결정: 맵 `spawns[2]`(주황 2번)·`spawns[3]`(파랑 2번)이 있으면 2대2 두 번째 팀원이 포인트 시작 "준비" 배치부터 그 위치에 섬(`MapRoot.SpawnPoint`). 없으면 기존처럼 팀 스폰에서 중앙 쪽 2.6. F2 맵 넘기기도 팀 안 순서를 사용. `spawns` 5개 이상은 경고. 내장 맵 46개는 모두 스폰 2개라 배치 변화 없음. 네트워크·리플레이 형식 변경 없음(프로토콜 v8 유지).
 - 검증: EditMode 73/73(새 `TeamSpawnTests` 5개), PlayMode 13/13(새 `TeamSpawnPlayModeTests`: 외부 콘텐츠 4스폰 맵, CPU 2대2 "준비" 순간 네 명 위치 ±0.3).
 
+### 10.16 카드 이미지 구조 (2026-10-21)
+
+- 카드 그림 영역 규격 확인(기준 1920×1080): 카드 300×480, 그림 영역 (20, 60) 260×112, 문양 원 지름 96/80. `Presentation/CardArt.cs` 상수로 정리하고 `GameHud.DrawCard`가 사용.
+- 이미지: 카드 JSON `image`(기본 카드 id)·`imageMode`(`fill` 그림 영역 전체 / `icon` 원 안 80×80). 게임 폴더 `Content/CardArt/<이름>.png|jpg`(빌드 불필요) → `Resources/Content/CardArt`. 이름은 폴더/확장자 없는 파일 이름만 허용. 없으면 기존 글자 문양. 권장 1040×448 / 320×320. 내장 PNG 가져오기 설정 `Editor/CardArtImporter.cs`. 문서 `Docs/CARD_ART.md`, 템플릿 `Docs/card-art/`.
+- 네트워크 형식 변경 없음(프로토콜 v8). 검증: EditMode 76/76(새 `CardArtTests` 3개), PlayMode 13/13, 빌드한 게임에서 fill·icon·템플릿 표시 확인.
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

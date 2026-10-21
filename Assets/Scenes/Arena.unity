@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &365482551
+--- !u!1 &641034380
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,10 +127,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 365482555}
-  - component: {fileID: 365482554}
-  - component: {fileID: 365482553}
-  - component: {fileID: 365482552}
+  - component: {fileID: 641034384}
+  - component: {fileID: 641034383}
+  - component: {fileID: 641034382}
+  - component: {fileID: 641034381}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -138,33 +138,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &365482552
+--- !u!114 &641034381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365482551}
+  m_GameObject: {fileID: 641034380}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ebc7de7311be64600a47847a926bbab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metadream.Shoot::Metadream.Shoot.Presentation.CameraRig
---- !u!81 &365482553
+--- !u!81 &641034382
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365482551}
+  m_GameObject: {fileID: 641034380}
   m_Enabled: 1
---- !u!20 &365482554
+--- !u!20 &641034383
 Camera:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365482551}
+  m_GameObject: {fileID: 641034380}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
@@ -209,13 +209,13 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!4 &365482555
+--- !u!4 &641034384
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 365482551}
+  m_GameObject: {fileID: 641034380}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
@@ -224,7 +224,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1877124497
+--- !u!1 &1688092470
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,8 +232,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1877124499}
-  - component: {fileID: 1877124498}
+  - component: {fileID: 1688092472}
+  - component: {fileID: 1688092471}
   m_Layer: 0
   m_Name: GameBootstrap
   m_TagString: Untagged
@@ -241,26 +241,26 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1877124498
+--- !u!114 &1688092471
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877124497}
+  m_GameObject: {fileID: 1688092470}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 520508aaf47e54b0ba2bf2bbc7182290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Metadream.Shoot::Metadream.Shoot.GameBootstrap
   spriteMaterial: {fileID: 2100000, guid: f17d5014645e9487c8e9ab48ad104b31, type: 2}
---- !u!4 &1877124499
+--- !u!4 &1688092472
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877124497}
+  m_GameObject: {fileID: 1688092470}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -273,5 +273,5 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 365482555}
-  - {fileID: 1877124499}
+  - {fileID: 641034384}
+  - {fileID: 1688092472}

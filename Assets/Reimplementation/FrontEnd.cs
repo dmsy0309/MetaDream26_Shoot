@@ -504,7 +504,12 @@ namespace Metadream.Shoot
         public void OpenCodexPage(string tab)
         {
             OpenCodex();
+            // "-codex cards:homing" opens the card tab with a search query (screenshots / quick checks).
+            string query = null;
+            int colon = tab != null ? tab.IndexOf(':') : -1;
+            if (colon >= 0) { query = tab.Substring(colon + 1); tab = tab.Substring(0, colon); }
             _codex.Current = tab == "maps" ? ContentBrowser.Tab.Maps : ContentBrowser.Tab.Cards;
+            if (query != null) _codex.Query = query;
             _codex.SelectFirst();
         }
 

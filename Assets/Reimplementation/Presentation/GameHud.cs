@@ -424,10 +424,11 @@ namespace Metadream.Shoot.Presentation
                 Fill(new Rect(r.x - 6, r.y - 6, r.width + 12, r.height + 12), accent);
             }
             Fill(r, new Color(0.11f, 0.11f, 0.14f));
-            var inner = new Rect(r.x + 6, r.y + 6, r.width - 12, r.height - 12);
+            const float border = CardArt.Border;
+            var inner = new Rect(r.x + border, r.y + border, r.width - 2f * border, r.height - 2f * border);
             Fill(inner, new Color(0.97f, 0.96f, 0.93f));
             // rarity band
-            var band = new Rect(inner.x, inner.y, inner.width, 44);
+            var band = new Rect(inner.x, inner.y, inner.width, CardArt.BandHeight);
             Fill(band, rc);
             Fill(new Rect(band.x, band.yMax - 6, band.width, 6), Color.Lerp(rc, Color.black, 0.25f));
             Text(new Rect(band.x + 14, band.y, 120, band.height), RarityLabel(card.Rarity), new GUIStyle(Tiny) { fontStyle = FontStyle.Bold, fontSize = 20 }, Palette.Ink);
@@ -438,16 +439,41 @@ namespace Metadream.Shoot.Presentation
                 Fill(badge, new Color(0.1f, 0.1f, 0.12f, 0.85f));
                 Text(badge, "ROUNDS", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 15, fontStyle = FontStyle.Bold }, Color.white);
             }
-            // emblem art
-            var art = new Rect(inner.x + 14, band.yMax + 10, inner.width - 28, 112);
-            Fill(art, Color.Lerp(rc, Palette.Ink, 0.62f));
-            for (int s = 0; s < 6; s++)
-                Fill(new Rect(art.x, art.y + s * 20 + 6, art.width, 2), new Color(1, 1, 1, 0.05f));
+            // art area (CardArt: 260×112 rectangle, emblem circle 96 Ø in its centre). Docs/CARD_ART.md
+            var art = new Rect(inner.x + CardArt.ArtInsetX, band.yMax + CardArt.ArtGapY, inner.width - 2f * CardArt.ArtInsetX, CardArt.ArtHeight);
+            var image = CardArt.Get(card);
+            bool icon = CardArt.IsIcon(card);
             Vector2 c = art.center;
-            Disc(c, 48, Color.Lerp(rc, Color.white, 0.25f));
-            Disc(c, 40, Color.Lerp(rc, Palette.Ink, 0.35f));
-            string glyph = Emblem(card);
-            Text(new Rect(c.x - 50, c.y - 32, 100, 64), glyph, new GUIStyle(Mid) { fontSize = glyph.Length > 2 ? 26 : 36 }, Color.white);
+            if (image != null && !icon)
+            {
+                // Fill mode: the image covers the whole art rectangle (centre-cropped to 260:112).
+                var oldColor = GUI.color;
+                GUI.color = Color.white;
+                GUI.DrawTexture(art, image, ScaleMode.ScaleAndCrop, true);
+                GUI.color = oldColor;
+                Fill(new Rect(art.x, art.yMax - 3, art.width, 3), Color.Lerp(rc, Palette.Ink, 0.3f));
+            }
+            else
+            {
+                Fill(art, Color.Lerp(rc, Palette.Ink, 0.62f));
+                for (int s = 0; s < 6; s++)
+                    Fill(new Rect(art.x, art.y + s * 20 + 6, art.width, 2), new Color(1, 1, 1, 0.05f));
+                Disc(c, CardArt.EmblemOuterRadius, Color.Lerp(rc, Color.white, 0.25f));
+                Disc(c, CardArt.EmblemInnerRadius, Color.Lerp(rc, Palette.Ink, 0.35f));
+                if (image != null)
+                {
+                    // Icon mode: a (transparent) image fitted into the 80×80 square inside the circle.
+                    var oldColor = GUI.color;
+                    GUI.color = Color.white;
+                    GUI.DrawTexture(new Rect(c.x - CardArt.IconSize / 2f, c.y - CardArt.IconSize / 2f, CardArt.IconSize, CardArt.IconSize), image, ScaleMode.ScaleToFit, true);
+                    GUI.color = oldColor;
+                }
+                else
+                {
+                    string glyph = Emblem(card);
+                    Text(new Rect(c.x - 50, c.y - 32, 100, 64), glyph, new GUIStyle(Mid) { fontSize = glyph.Length > 2 ? 26 : 36 }, Color.white);
+                }
+            }
             int fx = card.Effects != null ? card.Effects.Length : 0;
             for (int e = 0; e < fx; e++) Disc(new Vector2(art.xMax - 16 - e * 18, art.yMax - 14), 6, new Color(1f, 0.85f, 0.3f));
             // text

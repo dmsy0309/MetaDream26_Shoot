@@ -113,6 +113,9 @@ namespace Metadream.Shoot.Presentation
                 "id: " + _card.Id,
                 "희귀도: " + _card.Rarity + " · 중복 획득 " + (_card.AllowMultiple ? "가능" : "불가"),
                 "분류: " + Join(_card.Categories) + " · 제외 분류: " + Join(_card.BlacklistedCategories),
+                "이미지: " + (CardArt.OriginOf(_card) ?? "없음 (글자 문양) → Content/CardArt/" + CardArt.NameOf(_card) + ".png")
+                    + " · " + (CardArt.IsIcon(_card) ? "icon 모드 (원 안 80×80, 권장 " + CardArt.RecommendedIconSize + "×" + CardArt.RecommendedIconSize + ")"
+                                                     : "fill 모드 (260×112, 권장 " + CardArt.RecommendedFillWidth + "×" + CardArt.RecommendedFillHeight + ")"),
                 "",
                 "능력치 변경 (modifiers):"
             };
