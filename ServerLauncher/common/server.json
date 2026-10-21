@@ -28,9 +28,10 @@
         "cardPool": [],
         "rerollsAtStart": 3,
         "rerollsPerRound": 0,
+        "pickTimeLimit": 15,
         "stats": {
-            "maxHealth": 100.0,
-            "bulletDamage": 55.0,
+            "maxHealth": 150.0,
+            "bulletDamage": 50.0,
             "bulletSpeed": 70.0,
             "bulletGravity": 1.0,
             "attackCooldown": 0.3,

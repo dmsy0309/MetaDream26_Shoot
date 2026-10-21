@@ -59,6 +59,7 @@ namespace Metadream.Shoot.Online
             s.cardsPerPick = Mathf.Clamp(s.cardsPerPick, 1, 10);
             s.rerollsAtStart = Mathf.Clamp(s.rerollsAtStart, 0, 20);
             s.rerollsPerRound = Mathf.Clamp(s.rerollsPerRound, 0, 10);
+            s.pickTimeLimit = Mathf.Clamp(s.pickTimeLimit, 0, 120);
             s.mapPool = s.mapPool ?? new string[0];
             s.cardPool = s.cardPool ?? new string[0];
             var b = s.stats ?? new BaseStats();
@@ -224,6 +225,7 @@ namespace Metadream.Shoot.Online
             c.rules.cardsPerPick = (int)FloatArg(args, "-cards", c.rules.cardsPerPick);
             c.rules.rerollsAtStart = (int)FloatArg(args, "-rerolls", c.rules.rerollsAtStart);
             c.rules.rerollsPerRound = (int)FloatArg(args, "-rerollsround", c.rules.rerollsPerRound);
+            c.rules.pickTimeLimit = (int)FloatArg(args, "-picktime", c.rules.pickTimeLimit);
             c.rematchDelay = FloatArg(args, "-rematch", c.rematchDelay);
             c.targetFrameRate = (int)FloatArg(args, "-fps", c.targetFrameRate);
             c.statusInterval = FloatArg(args, "-status", c.statusInterval);
@@ -333,7 +335,15 @@ namespace Metadream.Shoot.Online
             switch (cmd)
             {
                 case "help":
-                    Log("commands: status | start | lobby | teamsize 1|2 | rounds N | points N | rerolls START [PER_ROUND] | countdown S | rules | master | content | quit");
+                    Log("commands: status | start | lobby | teamsize 1|2 | rounds N | points N | rerolls START [PER_ROUND] | picktime S | countdown S | rules | master | content | quit");
+                    break;
+                case "picktime":
+                    if (int.TryParse(arg, out int pickSeconds))
+                    {
+                        Config.rules.pickTimeLimit = Mathf.Clamp(pickSeconds, 0, 120);
+                        _host.SetPickTime(Config.rules.pickTimeLimit);
+                        Log("card pick time limit " + (Config.rules.pickTimeLimit > 0 ? Config.rules.pickTimeLimit + "s" : "unlimited") + " (next match)");
+                    }
                     break;
                 case "rerolls":
                 {

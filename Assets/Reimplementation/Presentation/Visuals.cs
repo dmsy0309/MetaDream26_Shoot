@@ -6,7 +6,7 @@ namespace Metadream.Shoot.Presentation
     /// <summary>Procedural sprites so the project ships no third-party art.</summary>
     public static class SpriteFactory
     {
-        private static Sprite _circle, _ring, _square;
+        private static Sprite _circle, _ring, _square, _triangle;
         private static Material _material;
 
         public static Material Material
@@ -27,6 +27,26 @@ namespace Metadream.Shoot.Presentation
         public static Sprite Circle => _circle != null ? _circle : (_circle = MakeDisc(128, 0f));
         public static Sprite Ring => _ring != null ? _ring : (_ring = MakeDisc(128, 0.82f));
         public static Sprite Square => _square != null ? _square : (_square = MakeSquare());
+        /// <summary>Isosceles triangle pointing up (+y), centred, base = height = 1 unit.</summary>
+        public static Sprite Triangle => _triangle != null ? _triangle : (_triangle = MakeTriangle(128));
+
+        private static Sprite MakeTriangle(int size)
+        {
+            var tex = new Texture2D(size, size, TextureFormat.RGBA32, false) { filterMode = FilterMode.Bilinear, wrapMode = TextureWrapMode.Clamp };
+            var px = new Color32[size * size];
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                float u = (x + 0.5f) / size, v = (y + 0.5f) / size;      // v = 0 bottom, 1 apex
+                float half = 0.5f * (1f - v);                              // half width at this height
+                float edge = Mathf.Min(half - Mathf.Abs(u - 0.5f), v) * size; // distance to the nearest edge in pixels (approx.)
+                byte a = (byte)(Mathf.Clamp01(edge + 0.5f) * 255);
+                px[y * size + x] = new Color32(255, 255, 255, a);
+            }
+            tex.SetPixels32(px);
+            tex.Apply(false, true);
+            return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), size);
+        }
 
         private static Sprite MakeDisc(int size, float inner)
         {

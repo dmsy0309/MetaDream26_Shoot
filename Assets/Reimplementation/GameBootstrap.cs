@@ -49,6 +49,13 @@ namespace Metadream.Shoot
             if (!IsServer) DevSettings.ApplyCommandLine(args);
             string nickname = StringArg(args, "-nickname");
             if (nickname != null) Online.PlayerProfile.SessionOverride = Online.PlayerProfile.Sanitize(nickname);
+            string lookArg = StringArg(args, "-look"); // -look HAT,EXPRESSION,ACCESSORY (this run only)
+            if (lookArg != null)
+            {
+                var p = lookArg.Split(',');
+                int Part(int i) => i < p.Length && int.TryParse(p[i], out int v) ? v : 0;
+                Online.PlayerProfile.SessionLook = new Player.CharacterLook(Part(0), Part(1), Part(2));
+            }
             if (spriteMaterial != null) SpriteFactory.Material = spriteMaterial;
             Application.targetFrameRate = 120;
             Application.runInBackground = true;
@@ -86,6 +93,8 @@ namespace Metadream.Shoot
             bool autoplay = HasArg(args, "-autoplay");
             var settings = new MatchSettings();
             if (HasArg(args, "-quick")) settings.roundsToWinGame = 2;
+            float pickTime = FloatArg(args, "-picktime", -1f);
+            if (pickTime >= 0f) settings.pickTimeLimit = (int)pickTime;
             string onlyMap = StringArg(args, "-map");
             if (!string.IsNullOrEmpty(onlyMap)) settings.mapPool = new[] { onlyMap }; // e.g. -cheat 1 -map script_rising_lava
             var flow = GetComponent<GameFlow>();
@@ -118,6 +127,10 @@ namespace Metadream.Shoot
             else if (HasArg(args, "-settings"))
             {
                 GetComponent<FrontEnd>().OpenSettingsPage();
+            }
+            else if (HasArg(args, "-lookpage"))
+            {
+                GetComponent<FrontEnd>().OpenLook();
             }
             else if (HasArg(args, "-browse"))
             {

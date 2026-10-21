@@ -37,6 +37,9 @@ namespace Metadream.Shoot.Cards
     {
         public const float BaseMaxHealth = 100f; // CharacterData..ctor
         public float maxHealth = BaseMaxHealth;
+        /// <summary>Health before cards (match base stats). Size and mass grow with maxHealth relative to this,
+        /// so raising the base health (rules.stats.maxHealth) does not make every fighter bigger.</summary>
+        public float startHealth = BaseMaxHealth;
         public float sizeMultiplier = 1f;
         public float movementSpeed = 1f;
         public float jump = 1f;
@@ -98,6 +101,7 @@ namespace Metadream.Shoot.Cards
             if (b != null)
             {
                 s.character.maxHealth = Mathf.Max(1f, b.maxHealth);
+                s.character.startHealth = s.character.maxHealth;
                 s.gun.baseDamage = Mathf.Max(0f, b.bulletDamage);
                 s.gun.baseProjectileSpeed = Mathf.Max(1f, b.bulletSpeed);
                 s.gun.gravity = Mathf.Max(0f, b.bulletGravity);

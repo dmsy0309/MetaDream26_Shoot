@@ -46,6 +46,8 @@ namespace Metadream.Shoot.Online
         private readonly string[] _names = new string[MaxSlots];
         private readonly string[] _devices = new string[MaxSlots];
         private readonly string[] _addresses = new string[MaxSlots];
+        private readonly Player.CharacterLook[] _looks = new Player.CharacterLook[MaxSlots];
+        private Player.CharacterLook _pendingLook;
         private Replay.ReplayRecorder _recorder;
         private int _recMatches;
         private float _finishAt = -1f;
@@ -139,6 +141,7 @@ namespace Metadream.Shoot.Online
                 s._kinds[0] = SlotKind.Host;
                 s._names[0] = PlayerProfile.Nickname;
                 s._devices[0] = PlayerProfile.DeviceName;
+                s._looks[0] = PlayerProfile.Look;
                 s._addresses[0] = s.Address;
             }
             if (s._options.LanBroadcast) s._broadcaster = new LanBroadcaster();
@@ -182,6 +185,7 @@ namespace Metadream.Shoot.Online
             _kinds[to] = _kinds[from];
             _names[to] = _names[from];
             _devices[to] = _devices[from];
+            _looks[to] = _looks[from];
             _addresses[to] = _addresses[from];
             _peerOfSlot[to] = peer;
             _kinds[from] = SlotKind.Empty;
@@ -328,6 +332,8 @@ namespace Metadream.Shoot.Online
                             }
                             string nick = PlayerProfile.Sanitize(r.ReadString());
                             string device = r.ReadString();
+                            var look = r.BaseStream.Position + 3 <= r.BaseStream.Length ? new Player.CharacterLook(r.ReadByte(), r.ReadByte(), r.ReadByte()) : Player.CharacterLook.Default;
+                            _pendingLook = look.Sanitized;
                             AssignSlot(peer, nick, device.Length > 40 ? device.Substring(0, 40) : device);
                             break;
                         case MsgType.Input:
@@ -414,6 +420,7 @@ namespace Metadream.Shoot.Online
             _kinds[slot] = SlotKind.Remote;
             _names[slot] = UniqueName(nick ?? "P" + (slot + 1), slot);
             _devices[slot] = device ?? "";
+            _looks[slot] = _pendingLook;
             _addresses[slot] = _server.RemoteOf(peer);
             _peerOfSlot[slot] = peer;
             _slotOfPeer[peer] = slot;
@@ -472,6 +479,7 @@ namespace Metadream.Shoot.Online
                 LeaderSlot = LeaderSlot, Countdown = Countdown, PointsToWin = Settings.pointsToWinRound,
                 RoundsToWin = Settings.roundsToWinGame, FillWithCpu = FillWithCpu
                 , RerollsAtStart = Settings.rerollsAtStart, RerollsPerRound = Settings.rerollsPerRound
+                , PickTimeLimit = Settings.pickTimeLimit
             };
             for (int i = 0; i < SlotCount; i++) l.Slots.Add(new LobbySlot { Kind = _kinds[i], Name = _names[i] });
             return l;
@@ -487,6 +495,14 @@ namespace Metadream.Shoot.Online
             if (InMatch) return;
             Settings.rerollsAtStart = Mathf.Clamp(atStart, 0, 20);
             Settings.rerollsPerRound = Mathf.Clamp(perRound, 0, 10);
+            _lobbyDirty = true;
+        }
+
+        /// <summary>Room setting: seconds to pick a card, 0 = unlimited (applies to the next match).</summary>
+        public void SetPickTime(int seconds)
+        {
+            if (InMatch) return;
+            Settings.pickTimeLimit = Mathf.Clamp(seconds, 0, 120);
             _lobbyDirty = true;
         }
 
@@ -515,7 +531,8 @@ namespace Metadream.Shoot.Online
                     input = new BotInput(_rng.Next(), _names[i]);
                 }
                 string name = _names[i];
-                slots.Add(new SlotSpec { Name = name, Team = i % 2, Color = Palette.SlotColor(i), Input = input });
+                Player.CharacterLook? look = _kinds[i] == SlotKind.Host ? PlayerProfile.Look : _kinds[i] == SlotKind.Remote ? _looks[i] : (Player.CharacterLook?)null;
+                slots.Add(new SlotSpec { Name = name, Team = i % 2, Color = Palette.SlotColor(i), Input = input, Look = look });
             }
             InMatch = true;
             Countdown = -1f;

@@ -82,8 +82,8 @@ namespace Metadream.Shoot.Tests
             Assert.AreEqual(5f, door.Center.y, 0.01f, "move_by tween finished");
             Assert.IsFalse(door.Visible);
             Assert.IsFalse(door.Collider.enabled, "hidden solids do not collide");
-            Assert.AreEqual(70f, flow.Fighters[1].Health, 0.6f, "B stood in the trap once");
-            Assert.AreEqual(100f, flow.Fighters[0].Health, 0.01f);
+            Assert.AreEqual(flow.Fighters[1].MaxHealth - 30f, flow.Fighters[1].Health, 0.6f, "B stood in the trap once");
+            Assert.AreEqual(flow.Fighters[0].MaxHealth, flow.Fighters[0].Health, 0.01f);
             Assert.AreEqual("hello 2", flow.MapHud);
             StringAssert.Contains("entered=1", map.Script.VariableSummary());
 

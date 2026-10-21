@@ -31,9 +31,7 @@ namespace Metadream.Shoot.Player
         private SpriteRenderer _barrelTip;
         private SpriteRenderer _outline;
         private SpriteRenderer _shine;
-        private Transform _eyeL, _eyeR, _pupilL, _pupilR;
-        private float _blinkAt = 2f;
-        private float _blinkUntil;
+        private CharacterFace _face;
         private SpriteRenderer _ring;
         private SpriteRenderer _cooldownRing;
         private Transform _barrelPivot;
@@ -238,15 +236,8 @@ namespace Metadream.Shoot.Player
             _shine = MakeChildSprite("Shine", SpriteFactory.Circle, 0.34f, 11);
             _shine.transform.localPosition = new Vector3(-0.17f, 0.2f, 0f);
             _shine.color = new Color(1f, 1f, 1f, 0.32f);
-            _eyeL = MakeChildSprite("EyeL", SpriteFactory.Circle, 0.25f, 13).transform;
-            _eyeR = MakeChildSprite("EyeR", SpriteFactory.Circle, 0.25f, 13).transform;
-            _eyeL.localPosition = new Vector3(-0.13f, 0.1f, 0f);
-            _eyeR.localPosition = new Vector3(0.13f, 0.1f, 0f);
-            var pl = MakeChildSprite("PupilL", SpriteFactory.Circle, 0.12f, 14);
-            var pr = MakeChildSprite("PupilR", SpriteFactory.Circle, 0.12f, 14);
-            pl.color = pr.color = Palette.Ink;
-            _pupilL = pl.transform;
-            _pupilR = pr.transform;
+            // Eyes, expression and decorations (CharacterLook, chosen in the main menu).
+            _face = new CharacterFace(transform, Color);
 
             _ring = MakeChildSprite("BlockRing", SpriteFactory.Ring, 1.9f, 15);
             _ring.color = new Color(1f, 1f, 1f, 0f);
@@ -264,6 +255,15 @@ namespace Metadream.Shoot.Player
             sr.sharedMaterial = SpriteFactory.Material;
             sr.sortingOrder = order;
             return sr;
+        }
+
+        /// <summary>Cosmetic look (head decoration, expression, face accessory). No gameplay effect.</summary>
+        public CharacterLook Look => _face != null ? _face.Look : CharacterLook.Default;
+
+        public void SetLook(CharacterLook look)
+        {
+            if (_face == null || _face.Look == look.Sanitized) return;
+            _face.Apply(look, IsVisible);
         }
 
         // ---------------------------------------------------------------- lifecycle
@@ -344,6 +344,7 @@ namespace Metadream.Shoot.Player
             {
                 foreach (var sr in GetComponentsInChildren<SpriteRenderer>(true)) sr.enabled = present;
             }
+            _face?.SetVisible(present);
             if (_rb != null) _rb.simulated = present && !Puppet;
             if (!present) IsPlaying = false;
         }
@@ -729,18 +730,8 @@ namespace Metadream.Shoot.Player
             if (_outline != null)
             {
                 _outline.color = Color.Lerp(Color.Lerp(Color, Color.white, 0.6f), Color.white, _flash * 0.5f);
-                Vector2 look = AimDirection.sqrMagnitude > 0.01f ? AimDirection.normalized : Vector2.right;
-                Vector3 pupil = new Vector3(look.x, look.y, 0f) * 0.05f;
-                _eyeL.localPosition = new Vector3(-0.13f + look.x * 0.08f, 0.1f + look.y * 0.06f, 0f);
-                _eyeR.localPosition = new Vector3(0.13f + look.x * 0.08f, 0.1f + look.y * 0.06f, 0f);
-                _pupilL.localPosition = _eyeL.localPosition + pupil;
-                _pupilR.localPosition = _eyeR.localPosition + pupil;
-                if (Time.time > _blinkAt) { _blinkUntil = Time.time + 0.11f; _blinkAt = Time.time + UnityEngine.Random.Range(2f, 5f); }
-                bool blink = Time.time < _blinkUntil || IsDead;
-                float ey = blink ? 0.04f : 0.25f;
-                _eyeL.localScale = _eyeR.localScale = new Vector3(0.25f, ey, 1f);
-                float py = blink ? 0.02f : 0.12f;
-                _pupilL.localScale = _pupilR.localScale = new Vector3(0.12f, py, 1f);
+                _face.Tick(AimDirection, IsDead);
+                _face.TintCovers(_body.color);
             }
             float blockAlpha = Block.IsBlocking ? Mathf.Clamp01(1f - Block.sinceBlock / CombatRules.BlockWindow) : 0f;
             _ring.color = new Color(1f, 1f, 1f, blockAlpha);

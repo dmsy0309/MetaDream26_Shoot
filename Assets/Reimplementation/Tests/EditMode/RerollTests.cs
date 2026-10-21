@@ -44,15 +44,25 @@ namespace Metadream.Shoot.Tests
             var back = new MatchSnapshot();
             using (var r = new BinaryReader(new MemoryStream(bytes))) back.Read(r);
             Assert.AreEqual(2, back.PickerRerolls);
+            // v9 tail (no looks): pick time left (4) + limit (1) + look count (1).
+            const int v9Tail = 6;
+            // v8 replays end after the map script data.
+            var v8 = new byte[bytes.Length - v9Tail];
+            System.Array.Copy(bytes, v8, v8.Length);
+            var eight = new MatchSnapshot();
+            using (var r = new BinaryReader(new MemoryStream(v8))) eight.Read(r);
+            Assert.AreEqual(2, eight.PickerRerolls);
+            Assert.Less(eight.PickTimeLeft, 0f, "no pick timer in v8 replays");
+            Assert.AreEqual(0, eight.Looks.Count);
             // v6/v7 replays end after the rerolls byte (no v8 map script data: 1 count byte + 1 empty-string byte).
-            var v7 = new byte[bytes.Length - 2];
+            var v7 = new byte[bytes.Length - v9Tail - 2];
             System.Array.Copy(bytes, v7, v7.Length);
             var seven = new MatchSnapshot();
             using (var r = new BinaryReader(new MemoryStream(v7))) seven.Read(r);
             Assert.AreEqual(2, seven.PickerRerolls);
             Assert.AreEqual(0, seven.MapObjects.Count);
             // Replays recorded before v6 have no rerolls byte either.
-            var old = new byte[bytes.Length - 3];
+            var old = new byte[bytes.Length - v9Tail - 3];
             System.Array.Copy(bytes, old, old.Length);
             var legacy = new MatchSnapshot();
             using (var r = new BinaryReader(new MemoryStream(old))) legacy.Read(r);

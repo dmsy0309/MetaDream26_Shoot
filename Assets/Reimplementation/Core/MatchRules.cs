@@ -43,6 +43,8 @@ namespace Metadream.Shoot.Core
         public int rerollsAtStart = 3;
         /// <summary>Rerolls added to every player after each round.</summary>
         public int rerollsPerRound = 0;
+        /// <summary>Seconds a player has to pick a card (0 = unlimited). When it runs out the highlighted card is taken.</summary>
+        public int pickTimeLimit = 15;
         /// <summary>Map ids used in rotation (empty = every non-tutorial map).</summary>
         public string[] mapPool = new string[0];
         /// <summary>Card ids that can be offered (empty = every card).</summary>
@@ -58,8 +60,10 @@ namespace Metadream.Shoot.Core
     [Serializable]
     public sealed class BaseStats
     {
-        public float maxHealth = 100f;
-        public float bulletDamage = 55f;
+        // Development decision (2026-10-22): more health and slightly weaker bullets than the observed ROUNDS
+        // values (CharacterData 100 HP, provisional 55 damage) so a fighter survives 3 basic hits instead of 2.
+        public float maxHealth = 150f;
+        public float bulletDamage = 50f;
         public float bulletSpeed = 70f;
         public float bulletGravity = 1f;
         public float attackCooldown = 0.3f;

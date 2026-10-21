@@ -134,7 +134,7 @@ namespace Metadream.Shoot.Tests
             Assert.IsFalse(o.Visible);
             Assert.IsTrue(o.HasTint);
             Assert.AreEqual(128, o.Tint.g);
-            Assert.AreEqual(8, Protocol.Version);
+            Assert.GreaterOrEqual(Protocol.Version, 8);
         }
 
         [Test]

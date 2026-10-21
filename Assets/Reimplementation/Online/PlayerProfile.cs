@@ -9,6 +9,26 @@ namespace Metadream.Shoot.Online
     {
         public const int MaxLength = 12;
         private const string Key = "player.nickname";
+        private const string LookKey = "player.look";
+
+        /// <summary>-look H,E,A: this run only (not saved), for screenshots and several test instances on one PC.</summary>
+        public static Player.CharacterLook? SessionLook { get; set; }
+
+        /// <summary>Character look chosen in the main menu (캐릭터 꾸미기), saved in PlayerPrefs.</summary>
+        public static Player.CharacterLook Look
+        {
+            get
+            {
+                if (SessionLook.HasValue) return SessionLook.Value;
+                return Player.CharacterLook.Unpack(PlayerPrefs.GetInt(LookKey, 0)).Sanitized;
+            }
+            set
+            {
+                if (SessionLook.HasValue) { SessionLook = value.Sanitized; return; }
+                PlayerPrefs.SetInt(LookKey, value.Sanitized.Pack());
+                PlayerPrefs.Save();
+            }
+        }
 
         public static bool HasNickname => !string.IsNullOrEmpty(PlayerPrefs.GetString(Key, ""));
 

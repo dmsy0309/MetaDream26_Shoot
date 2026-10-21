@@ -67,7 +67,8 @@ namespace Metadream.Shoot.Cards
         /// <summary>CharacterStatModifiers.ConfigureMassAndSize (0x060000ee).</summary>
         public static void ConfigureMassAndSize(CharacterStats c)
         {
-            float q = c.maxHealth / CharacterStats.BaseMaxHealth * 1.2f;
+            // ROUNDS uses maxHealth / 100; relative to the match base health so the default body size stays the same.
+            float q = c.maxHealth / Mathf.Max(1f, c.startHealth) * 1.2f;
             c.scale = 1.2f * Mathf.Pow(q, 0.2f) * c.sizeMultiplier;
             c.mass = 100f * Mathf.Pow(q, 0.8f) * c.sizeMultiplier;
         }

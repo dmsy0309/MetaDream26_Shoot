@@ -37,8 +37,9 @@ namespace Metadream.Shoot.Network
     public static class Protocol
     {
         /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks. v6: card rerolls.</summary>
-        /// <summary>v7: sound events (FxType.Sound) in snapshots. v8: map script state (named objects + HUD text).</summary>
-        public const int Version = 8;
+        /// <summary>v7: sound events (FxType.Sound) in snapshots. v8: map script state (named objects + HUD text).
+        /// v9: card pick time limit (lobby + snapshot), character looks (Hello + snapshot).</summary>
+        public const int Version = 9;
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;
@@ -132,6 +133,7 @@ namespace Metadream.Shoot.Network
         public bool FillWithCpu = true;
         public int RerollsAtStart = 3;
         public int RerollsPerRound;
+        public int PickTimeLimit = 15;
         public readonly List<LobbySlot> Slots = new List<LobbySlot>();
 
         public void Write(BinaryWriter w)
@@ -154,6 +156,7 @@ namespace Metadream.Shoot.Network
             }
             w.Write((byte)Mathf.Clamp(RerollsAtStart, 0, 255));
             w.Write((byte)Mathf.Clamp(RerollsPerRound, 0, 255));
+            w.Write((byte)Mathf.Clamp(PickTimeLimit, 0, 255));
         }
 
         public static LobbyInfo Read(BinaryReader r)
@@ -168,6 +171,7 @@ namespace Metadream.Shoot.Network
             int n = r.ReadByte();
             for (int i = 0; i < n; i++) l.Slots.Add(new LobbySlot { Kind = (SlotKind)r.ReadByte(), Name = r.ReadString() });
             if (r.BaseStream.Position < r.BaseStream.Length) { l.RerollsAtStart = r.ReadByte(); l.RerollsPerRound = r.ReadByte(); }
+            if (r.BaseStream.Position < r.BaseStream.Length) l.PickTimeLimit = r.ReadByte();
             return l;
         }
     }
@@ -279,6 +283,11 @@ namespace Metadream.Shoot.Network
         /// <summary>v8: named map objects changed by map scripts, and the script HUD line (written after PickerRerolls).</summary>
         public readonly List<MapObjectState> MapObjects = new List<MapObjectState>();
         public string ScriptHud = "";
+        /// <summary>v9: seconds left to pick (negative = no limit) and the limit, written after ScriptHud.</summary>
+        public float PickTimeLeft = -1f;
+        public int PickTimeLimit;
+        /// <summary>v9: cosmetic look per fighter (same order as Fighters).</summary>
+        public readonly List<CharacterLook> Looks = new List<CharacterLook>();
 
         public void Clear()
         {
@@ -289,6 +298,9 @@ namespace Metadream.Shoot.Network
             Fx.Clear();
             MapObjects.Clear();
             ScriptHud = "";
+            PickTimeLeft = -1f;
+            PickTimeLimit = 0;
+            Looks.Clear();
         }
 
         public void Write(BinaryWriter w)
@@ -345,6 +357,10 @@ namespace Metadream.Shoot.Network
                 w.Write(o.Tint.r); w.Write(o.Tint.g); w.Write(o.Tint.b); w.Write(o.Tint.a);
             }
             w.Write(ScriptHud ?? "");
+            w.Write(PickTimeLeft);
+            w.Write((byte)Mathf.Clamp(PickTimeLimit, 0, 255));
+            w.Write((byte)Mathf.Min(Looks.Count, 255));
+            for (int i = 0; i < Looks.Count && i < 255; i++) { w.Write(Looks[i].Hat); w.Write(Looks[i].Expression); w.Write(Looks[i].Accessory); }
         }
 
         public void Read(BinaryReader r)
@@ -407,6 +423,13 @@ namespace Metadream.Shoot.Network
                     MapObjects.Add(o);
                 }
                 ScriptHud = r.ReadString();
+            }
+            if (r.BaseStream.Position < r.BaseStream.Length)
+            {
+                PickTimeLeft = r.ReadSingle();
+                PickTimeLimit = r.ReadByte();
+                int nl = r.ReadByte();
+                for (int i = 0; i < nl; i++) Looks.Add(new CharacterLook(r.ReadByte(), r.ReadByte(), r.ReadByte()));
             }
         }
     }

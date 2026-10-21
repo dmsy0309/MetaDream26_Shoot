@@ -169,6 +169,14 @@
 - 이미지: 카드 JSON `image`(기본 카드 id)·`imageMode`(`fill` 그림 영역 전체 / `icon` 원 안 80×80). 게임 폴더 `Content/CardArt/<이름>.png|jpg`(빌드 불필요) → `Resources/Content/CardArt`. 이름은 폴더/확장자 없는 파일 이름만 허용. 없으면 기존 글자 문양. 권장 1040×448 / 320×320. 내장 PNG 가져오기 설정 `Editor/CardArtImporter.cs`. 문서 `Docs/CARD_ART.md`, 템플릿 `Docs/card-art/`.
 - 네트워크 형식 변경 없음(프로토콜 v8). 검증: EditMode 76/76(새 `CardArtTests` 3개), PlayMode 13/13, 빌드한 게임에서 fill·icon·템플릿 표시 확인.
 
+### 10.17 카드 선택 제한 시간 · 캐릭터 꾸미기 · 체력/피해 조정 (2026-10-22)
+
+- 카드 선택 제한 시간(개발 결정): 규칙 `pickTimeLimit` 기본 15초(0 = 무제한, 0~120). 방 대기실에서 5초 단위 −/+, 전용 서버 `server.json rules.pickTimeLimit`·`-picktime`·콘솔 `picktime N`. 시간이 다 되면 선택 중(강조된) 카드를 고름. 오프라인에서 나가기 확인 창/치트 검색이 열려 있는 동안은 멈춤. 튜토리얼 카드 선택에는 없음. 카드 화면 상단 중앙에 남은 시간·진행 바, 5초 이하에서 숫자가 0.5초 주기로 빨갛게 점멸(빨간 쪽 0.25초)하고 화면 테두리가 함께 빨갛게 맥동, 1초마다 `timer_tick` 효과음.
+- 캐릭터 꾸미기: 메인 메뉴 "캐릭터 꾸미기". 머리 장식 10종(없음·왕관·고깔모자·고양이 귀·악마 뿔·새싹·리본·천사 고리·신사 모자·더듬이), 표정 8종(기본·화남·졸림·놀람·행복·자신만만·슬픔·윙크), 얼굴 장식 7종(없음·볼터치·안경·선글라스·콧수염·반창고·외알 안경). 몸 색은 팀 색 그대로. `PlayerProfile.Look`(PlayerPrefs) 저장, 미리보기는 별도 카메라→RenderTexture(`Player/CharacterPreview.cs`)로 게임과 같은 `Player/CharacterFace.cs`를 그림. CPU는 시드별 무작위 외형. 이름표/체력바를 머리 위 1.6으로 올려 장식이 가리지 않게 함. 실행 인자 `-look H,E,A`, `-lookpage`.
+- 네트워크(프로토콜 v9): Hello 끝에 외형 3바이트, 대기실 정보 끝에 제한 시간, 스냅샷 끝에 남은 시간·제한·외형 목록. v8 이하 리플레이는 타이머·외형 없이(기본 외형) 재생.
+- 체력/피해(개발 결정, 원작 관찰값 아님): 기본 체력 100 → 150, 기본 탄 피해 55 → 50. 기본 탄 2발 → 3발에 쓰러짐. 몸 크기·질량은 원작 공식(체력 비례)을 '시작 체력 대비' 비율로 계산하도록 바꿔 기본 크기는 그대로(`CharacterStats.startHealth`).
+- 검증: EditMode 80/80(새 `PickTimerAndLookTests` 4개), PlayMode 16/16(새 `PickTimerPlayModeTests` 3개: 시간 초과 시 강조 카드 선택·스냅샷 전달, 0 = 무제한, 미리보기 렌더/외형 재구성).
+
 ## 2. 이번 세션의 REA 증거
 
 | ID | 내용 |

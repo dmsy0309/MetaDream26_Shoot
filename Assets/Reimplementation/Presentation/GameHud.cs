@@ -75,7 +75,8 @@ namespace Metadream.Shoot.Presentation
             foreach (var f in flow.Fighters)
             {
                 if (f.IsDead || !f.IsVisible) continue;
-                Vector2 top = WorldToGui(cam, f.Position + Vector2.up * (f.Radius + 1.1f));
+                // 1.6 units above the body edge: leaves room for tall head decorations (CharacterLook hats).
+                Vector2 top = WorldToGui(cam, f.Position + Vector2.up * (f.Radius + 1.6f));
                 float w = 96f;
                 if (names)
                 {
@@ -331,6 +332,50 @@ namespace Metadream.Shoot.Presentation
             }
         }
 
+        public const float UrgentSeconds = 5f, BlinkPeriod = 0.5f;
+        private int _lastTickSecond = -1;
+
+        /// <summary>True during the "on" (red) half of the 0.5 s blink cycle in the last 5 seconds.</summary>
+        public static bool TimerBlinkOn(float left) => left > 0f && left <= UrgentSeconds && Mathf.Repeat(left, BlinkPeriod) >= BlinkPeriod * 0.5f;
+
+        /// <summary>Card pick time limit at the top of the card screen; the last 5 seconds blink red (0.5 s cycle).</summary>
+        private void DrawPickTimer(GameFlow flow)
+        {
+            float left = flow.PickTimeLeft;
+            int limit = flow.PickTimeLimit;
+            if (left < 0f || limit <= 0) { _lastTickSecond = -1; return; }
+            int shown = Mathf.CeilToInt(left);
+            bool urgent = left <= UrgentSeconds;
+            bool on = TimerBlinkOn(left);
+            if (urgent && Event.current.type == EventType.Repaint && shown != _lastTickSecond && shown > 0)
+            {
+                _lastTickSecond = shown;
+                Audio.Sfx.Play("timer_tick");
+            }
+            var red = new Color(1f, 0.22f, 0.18f);
+            if (urgent)
+            {
+                // red screen edge pulsing with the number
+                float a = on ? 0.45f : 0.15f;
+                var edge = new Color(red.r, red.g, red.b, a);
+                Fill(new Rect(0, 0, W, 10), edge);
+                Fill(new Rect(0, H - 10, W, 10), edge);
+                Fill(new Rect(0, 0, 10, H), edge);
+                Fill(new Rect(W - 10, 0, 10, H), edge);
+            }
+            var panel = new Rect(W / 2 - 150, 20, 300, 100);
+            Fill(new Rect(panel.x - 3, panel.y - 3, panel.width + 6, panel.height + 6), urgent && on ? red : new Color(1f, 1f, 1f, 0.35f));
+            Fill(panel, new Color(0.04f, 0.045f, 0.06f, 0.96f));
+            Text(new Rect(panel.x, panel.y + 4, panel.width, 26), "남은 시간", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 18 }, new Color(1, 1, 1, 0.65f));
+            int size = urgent ? (on ? 60 : 52) : 50;
+            Color numberColor = urgent ? (on ? red : new Color(1f, 0.92f, 0.9f)) : Color.white;
+            Shadowed(new Rect(panel.x, panel.y + 26, panel.width, 60), shown + "초", new GUIStyle(Big) { fontSize = size, alignment = TextAnchor.MiddleCenter }, numberColor);
+            float k = Mathf.Clamp01(left / limit);
+            var bar = new Rect(panel.x + 16, panel.yMax - 12, panel.width - 32, 6);
+            Fill(bar, new Color(1, 1, 1, 0.12f));
+            Fill(new Rect(bar.x, bar.y, bar.width * k, bar.height), urgent ? red : new Color(1f, 0.85f, 0.4f));
+        }
+
         private static void DrawPickerBall(Color c)
         {
             float pulse = 1f + 0.04f * Mathf.Sin(Time.unscaledTime * 4f);
@@ -358,6 +403,7 @@ namespace Metadream.Shoot.Presentation
             Fill(new Rect(0, 0, W, H), new Color(0.03f, 0.035f, 0.05f, 0.82f));
             string phase = flow.Phase == MatchPhase.InitialCardPick ? "시작 카드" : "라운드 패배 보상";
             Shadowed(new Rect(0, 130, W, 70), picker.DisplayName + " — " + phase, Big, picker.Color);
+            DrawPickTimer(flow);
             DrawPickerBall(picker.Color);
             int sel = Mathf.Clamp(flow.OfferIndex, 0, Mathf.Max(0, n - 1));
             for (int pass = 0; pass < 2; pass++)

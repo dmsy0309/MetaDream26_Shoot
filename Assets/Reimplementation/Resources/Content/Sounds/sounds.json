@@ -518,6 +518,37 @@
       ]
     },
     {
+      "id": "timer_tick",
+      "description": "카드 선택 남은 시간 5초 이하에서 1초마다",
+      "clip": "",
+      "volume": 0.4,
+      "pitch": 1,
+      "pitchJitter": 0,
+      "cooldown": 0.2,
+      "layers": [
+        {
+          "wave": "square",
+          "freq": 1320,
+          "freqEnd": 1320,
+          "duration": 0.05,
+          "volume": 0.45,
+          "delay": 0,
+          "attack": 0.002,
+          "curve": 2
+        },
+        {
+          "wave": "sine",
+          "freq": 660,
+          "freqEnd": 600,
+          "duration": 0.09,
+          "volume": 0.5,
+          "delay": 0,
+          "attack": 0.002,
+          "curve": 2
+        }
+      ]
+    },
+    {
       "id": "fight",
       "description": "라운드 시작 (싸워라!)",
       "clip": "",

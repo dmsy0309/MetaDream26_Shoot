@@ -84,6 +84,8 @@ namespace Metadream.Shoot.Online
                     w.Write(Content.ContentDatabase.Hash ?? "");
                     w.Write(PlayerProfile.Nickname);
                     w.Write(PlayerProfile.DeviceName);
+                    var look = PlayerProfile.Look;
+                    w.Write(look.Hat); w.Write(look.Expression); w.Write(look.Accessory);
                 }));
             }
             if (_conn.State == TcpClientConnection.ConnState.Failed)

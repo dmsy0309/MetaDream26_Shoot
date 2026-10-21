@@ -14,7 +14,7 @@ namespace Metadream.Shoot.Tests
             SoundBank.Reload();
             Assert.IsEmpty(SoundBank.Issues, string.Join("\n", SoundBank.Issues));
             foreach (var id in new[] { "shoot", "hit", "impact", "bounce", "jump", "block", "reflect", "reload", "death", "edge", "explosion",
-                                       "shockwave", "pad", "card_pick", "reroll", "card_deal", "card_switch", "fight", "point", "round", "victory", "defeat", "ui_click" })
+                                       "shockwave", "pad", "card_pick", "reroll", "card_deal", "card_switch", "timer_tick", "fight", "point", "round", "victory", "defeat", "ui_click" })
             {
                 var def = SoundBank.Find(id);
                 Assert.IsNotNull(def, id);

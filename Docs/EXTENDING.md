@@ -204,6 +204,8 @@ namespace Metadream.Shoot.Abilities
 
 ## 5. 개발자 디버그 모드
 
+> 캐릭터 외형(꾸미기) 옵션을 추가하려면: `Player/CharacterLook.cs`의 이름 배열 끝에 항목을 추가하고 `Player/CharacterFace.cs`의 `BuildHat`/`BuildExpression`(+`EyeShape`)/`BuildAccessory`에 같은 번호의 case를 만듭니다. 몸 반지름 0.5 기준 좌표, 정렬 순서는 몸 10·눈 13·눈동자 14·장식 16~18. 번호를 바꾸거나 중간에 끼우면 저장된 외형과 리플레이가 달라지므로 **끝에만 추가**하세요. 옛 버전은 모르는 번호를 0(없음)으로 그립니다.
+
 켜는 방법: 게임 → **설정** → **개발자 디버그 모드** (저장됨), 또는 실행 인자 `-debug`(이번 실행만). 전용 서버는 `"debugLog": true` 또는 `-debug`.
 
 | 기능 | 설명 |

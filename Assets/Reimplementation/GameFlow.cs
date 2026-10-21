@@ -43,6 +43,8 @@ namespace Metadream.Shoot
         public int Team;
         public Color Color;
         public IInputSource Input;
+        /// <summary>Cosmetic look; null = the profile look for local players, a random look for CPUs.</summary>
+        public CharacterLook? Look;
     }
 
     /// <summary>
@@ -92,6 +94,31 @@ namespace Metadream.Shoot
 
         private List<CardDefinition> _offer;
         private float _pickOpenedAt;
+        private float _pickElapsed;
+        private float _mPickTimeLeft = -1f;
+        private int _mPickTimeLimit;
+
+        /// <summary>Card pick time limit in seconds (0 = unlimited). Room setting / server.json rules.pickTimeLimit.</summary>
+        public int PickTimeLimit => Role == NetRole.Client ? _mPickTimeLimit : (IsSandbox ? 0 : Settings.pickTimeLimit);
+
+        /// <summary>Seconds left to pick, or a negative value when the current pick has no time limit.</summary>
+        public float PickTimeLeft
+        {
+            get
+            {
+                if (Role == NetRole.Client) return IsPicking ? _mPickTimeLeft : -1f;
+                if (!IsPicking || PickTimeLimit <= 0) return -1f;
+                return Mathf.Max(0f, PickTimeLimit - _pickElapsed);
+            }
+        }
+
+        /// <summary>Look for a slot: explicit, else the saved profile look for local devices, else random (stable per seed and slot).</summary>
+        private static CharacterLook ResolveLook(SlotSpec spec, int slot, int seed)
+        {
+            if (spec.Look.HasValue) return spec.Look.Value;
+            if (spec.Input is DeviceInput) return Online.PlayerProfile.Look;
+            return CharacterLook.Random(new System.Random(seed * 31 + slot * 7919 + 17));
+        }
         private float _gameOverAt;
         private System.Random _rng = new System.Random(1);
         private MapRotation _rotation;
@@ -319,6 +346,7 @@ namespace Metadream.Shoot
                 f.ResetForMatch();
                 if (spec.Input is BotInput bot) bot.Self = f;
                 f.Died += OnFighterDied;
+                f.SetLook(ResolveLook(spec, i, seed));
                 Fighters.Add(f);
             }
 
@@ -531,6 +559,18 @@ namespace Metadream.Shoot
         private void UpdatePick()
         {
             if (Picker == null) return;
+            if (PickTimeLimit > 0)
+            {
+                // The offline game is paused while the quit dialog / cheat search is open; online the clock keeps running.
+                bool paused = Role == NetRole.Offline && Fighter.InputSuspended;
+                if (!paused) _pickElapsed += Time.unscaledDeltaTime;
+                if (_pickElapsed >= PickTimeLimit)
+                {
+                    Log("pick timeout " + Picker.DisplayName + " → " + _offer[Mathf.Clamp(OfferIndex, 0, _offer.Count - 1)].Id);
+                    ConfirmPick(Mathf.Clamp(OfferIndex, 0, _offer.Count - 1));
+                    return;
+                }
+            }
             float open = Time.unscaledTime - _pickOpenedAt;
             if (Fighter.InputSuspended && !Picker.IsBot && !(Picker.Input is Network.NetworkInput)) return;
             if (Picker.IsBot || Picker.Absent || Picker.Input == null)
@@ -607,6 +647,7 @@ namespace Metadream.Shoot
             _offer = CardRules.DrawOffer(CardCatalog.Pool(Settings.cardPool), Picker.Cards, Settings.cardsPerPick, _rng);
             OfferIndex = _offer.Count / 2;
             _pickOpenedAt = Time.unscaledTime;
+            _pickElapsed = 0f;
             if (_offer.Count == 0)
             {
                 // Pool exhausted for this player: skip the pick (original behaviour unknown).
@@ -737,6 +778,9 @@ namespace Metadream.Shoot
             if (IsPicking) foreach (var c in _offer) s.Offer.Add((byte)c.Index);
             s.OfferIndex = OfferIndex;
             s.PickerRerolls = IsPicking ? RerollsLeft(Picker) : 0;
+            s.PickTimeLeft = PickTimeLeft;
+            s.PickTimeLimit = PickTimeLimit;
+            foreach (var f in Fighters) s.Looks.Add(f.Look);
             s.Banner = Banner ?? "";
             s.SubBanner = SubBanner ?? "";
             s.BannerColor = BannerColor;
@@ -828,6 +872,9 @@ namespace Metadream.Shoot
             for (int t = 0; t < 2; t++) { _mPoints[t] = s.Points[t]; _mRounds[t] = s.Rounds[t]; }
             _mWinning = s.WinningTeam;
             _mPickerRerolls = s.PickerRerolls;
+            _mPickTimeLeft = s.PickTimeLeft;
+            _mPickTimeLimit = s.PickTimeLimit;
+            for (int i = 0; i < Fighters.Count && i < s.Looks.Count; i++) Fighters[i].SetLook(s.Looks[i]);
             _mScriptHud = s.ScriptHud ?? "";
             Time.timeScale = Mathf.Clamp(s.TimeScale, 0.05f, 8f);
 
@@ -913,6 +960,7 @@ namespace Metadream.Shoot
                 f.BaseStats = Settings.stats;
                 f.ResetForMatch();
                 if (spec.Input is BotInput bot) bot.Self = f;
+                f.SetLook(ResolveLook(spec, i, Environment.TickCount));
                 Fighters.Add(f);
             }
             LoadMapImmediate(map ?? ContentDatabase.DefaultMap);
@@ -942,6 +990,7 @@ namespace Metadream.Shoot
             Picker = picker;
             OfferIndex = offer.Count / 2;
             _pickOpenedAt = Time.unscaledTime;
+            _pickElapsed = 0f;
             _sandboxPicked = done;
         }
 

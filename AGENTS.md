@@ -5,6 +5,8 @@ Metadream Shoot — ROUNDS를 정적 분석(REA)해 Unity 6000.6.6f1로 재구�
 - 맵/카드/능력 추가·수정: **Docs/CONTENT_JSON_GUIDE.md** (JSON 작성법·템플릿·검증 메시지)와 **Docs/EXTENDING.md** (효과 클래스, 디버그 모드, 테스트/빌드)를 먼저 읽으세요.
 - 맵 고유 기믹(맵 스크립트 `"script"`, C# 맵 동작 `"behaviors"`, `"areas"`, 오브젝트 `"name"`): **Docs/MAP_SCRIPTING.md** (Maps/Scripting/).
 - 카드 이미지(그림 영역 260×112·문양 원 규격, `Content/CardArt/<id>.png`, 카드 JSON `image`/`imageMode`): **Docs/CARD_ART.md** (Presentation/CardArt.cs).
+- 캐릭터 꾸미기(머리 장식·표정·얼굴 장식): Player/CharacterLook.cs(옵션 목록·저장 형식) · Player/CharacterFace.cs(그리기, 게임·메뉴 미리보기 공용). 옵션은 배열 끝에만 추가.
+- 카드 선택 제한 시간: MatchSettings.pickTimeLimit(기본 15초) · GameFlow.UpdatePick · GameHud.DrawPickTimer.
 - 리플레이: Replay/ (ReplayFile 형식, ReplayRecorder 방장/서버 녹화, ReplayUploader → 메인 서버 POST /replays, ReplayPlayer 재생 UI).
 - 효과음: **Docs/SOUNDS.md** (sounds.json 정의, Content/Sounds/*.wav 교체, Fx.Sound/Sfx.Play).
 - 디버그 모드 개발자 메뉴(설정): 콘텐츠 도감(Presentation/ContentBrowser.cs), 치트 대전 1대1·2대2(GameMode.CheatDuel/CheatTeams), 카드 검색 치트(Presentation/CheatPanel.cs, F8).

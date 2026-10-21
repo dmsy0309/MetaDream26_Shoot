@@ -23,7 +23,8 @@ namespace Metadream.Shoot
             Settings,
             Nickname,
             Replays,
-            Codex
+            Codex,
+            Look
         }
 
         private struct Item
@@ -66,6 +67,8 @@ namespace Metadream.Shoot
         private int _replayIndex;
         private string _replayPath = "";
         private string _replayMessage;
+        private int _lookCategory;
+        private int _lookTeam;
 
         private static GameFlow Flow => GameFlow.Instance;
 
@@ -80,11 +83,12 @@ namespace Metadream.Shoot
                 new Item { Label = "CPU 관전 2대2", Hint = "데모", Run = () => Flow.StartMatch(GameMode.CpuDemoTeams) },
                 new Item { Label = "방 만들기", Hint = "온라인 1대1 / 2대2 호스트", Run = () => AskNickname(HostRoom) },
                 new Item { Label = "방 참가", Hint = "서버 목록 · 같은 네트워크의 방 · 방 코드 · IP", Run = () => AskNickname(OpenJoin) },
+                new Item { Label = "캐릭터 꾸미기", Hint = "머리 장식 · 표정 · 얼굴 장식", Run = OpenLook },
                 new Item { Label = "설정", Hint = "디버그 모드 · 전체 화면 · 서버 목록", Run = OpenSettings },
                 new Item { Label = "게임 종료", Hint = "", Run = QuitGame },
             };
             var list = new List<Item>(_baseItems);
-            list.Insert(6, new Item { Label = "리플레이", Hint = "디버그 모드 · 저장된 게임 재생 · 불러오기", Run = OpenReplaysPage });
+            list.Insert(7, new Item { Label = "리플레이", Hint = "디버그 모드 · 저장된 게임 재생 · 불러오기", Run = OpenReplaysPage });
             _debugItems = list.ToArray();
             _items = _baseItems;
         }
@@ -188,8 +192,34 @@ namespace Metadream.Shoot
         public void ShowTitle()
         {
             CloseListener();
+            CharacterPreview.Hide();
             _page = Page.Title;
         }
+
+        // ------------------------------------------------------------ character look (캐릭터 꾸미기)
+
+        public void OpenLook()
+        {
+            CloseListener();
+            _lookCategory = 0;
+            _page = Page.Look;
+        }
+
+        private static int LookOptionCount(int category) => category == 0 ? CharacterLook.HatNames.Length : category == 1 ? CharacterLook.ExpressionNames.Length : CharacterLook.AccessoryNames.Length;
+
+        private static int LookValue(CharacterLook look, int category) => category == 0 ? look.Hat : category == 1 ? look.Expression : look.Accessory;
+
+        private static void SetLookValue(int category, int value)
+        {
+            var l = PlayerProfile.Look;
+            int n = LookOptionCount(category);
+            value = ((value % n) + n) % n;
+            PlayerProfile.Look = category == 0 ? new CharacterLook(value, l.Expression, l.Accessory)
+                : category == 1 ? new CharacterLook(l.Hat, value, l.Accessory)
+                : new CharacterLook(l.Hat, l.Expression, value);
+        }
+
+        private static void RandomLook() => PlayerProfile.Look = CharacterLook.Random(new System.Random(Environment.TickCount));
 
         private void HostRoom()
         {
@@ -392,6 +422,19 @@ namespace Metadream.Shoot
                 case Page.Codex:
                     if (back) _page = Page.Settings;
                     break;
+                case Page.Look:
+                {
+                    bool lk = Down(kb, UnityEngine.InputSystem.Key.LeftArrow) || Down(kb, UnityEngine.InputSystem.Key.A) || padLeft;
+                    bool rk = Down(kb, UnityEngine.InputSystem.Key.RightArrow) || Down(kb, UnityEngine.InputSystem.Key.D) || padRight;
+                    if (arrowUp || Down(kb, UnityEngine.InputSystem.Key.W)) _lookCategory = (_lookCategory + 2) % 3;
+                    if (arrowDown || Down(kb, UnityEngine.InputSystem.Key.S)) _lookCategory = (_lookCategory + 1) % 3;
+                    if (lk) SetLookValue(_lookCategory, LookValue(PlayerProfile.Look, _lookCategory) - 1);
+                    if (rk) SetLookValue(_lookCategory, LookValue(PlayerProfile.Look, _lookCategory) + 1);
+                    if (Down(kb, UnityEngine.InputSystem.Key.R)) RandomLook();
+                    if (Down(kb, UnityEngine.InputSystem.Key.T)) _lookTeam = 1 - _lookTeam;
+                    if (enter || back) ShowTitle();
+                    break;
+                }
             }
         }
 
@@ -566,7 +609,68 @@ namespace Metadream.Shoot
                 case Page.Nickname: DrawNickname(); break;
                 case Page.Replays: DrawReplays(); break;
                 case Page.Codex: _codex.Draw(); break;
+                case Page.Look: DrawLook(); break;
             }
+        }
+
+        private void DrawLook()
+        {
+            var look = PlayerProfile.Look;
+            Shadowed(new Rect(0, 50, W, 80), "캐릭터 꾸미기", Big, Palette.PlayerOne);
+            Text(new Rect(0, 128, W, 32), "모든 게임(온라인·리플레이 포함)에서 다른 플레이어에게도 이 모습으로 보입니다. 몸 색은 팀 색입니다.", Small, new Color(1, 1, 1, 0.65f));
+
+            // live preview (same face code as in-game fighters, rendered to a texture)
+            var box = new Rect(W / 2 - 760, 190, 560, 560);
+            Fill(new Rect(box.x - 6, box.y - 6, box.width + 12, box.height + 12), new Color(1, 1, 1, 0.15f));
+            Vector2 mouse = Event.current.mousePosition;
+            Vector2 aim = new Vector2(mouse.x - box.center.x, -(mouse.y - box.center.y));
+            if (aim.sqrMagnitude < 400f) aim = new Vector2(Mathf.Cos(Time.unscaledTime * 0.8f), 0.35f * Mathf.Sin(Time.unscaledTime * 1.3f));
+            Color body = _lookTeam == 0 ? Palette.SlotColor(0) : Palette.SlotColor(1);
+            if (Event.current.type == EventType.Repaint) CharacterPreview.Show(look, body, aim);
+            var tex = CharacterPreview.Texture;
+            if (tex != null) GUI.DrawTexture(box, tex, ScaleMode.ScaleToFit, false);
+            Text(new Rect(box.x, box.yMax + 14, box.width, 34), look.Describe(), new GUIStyle(Small) { fontStyle = FontStyle.Bold }, Color.white);
+            for (int t = 0; t < 2; t++)
+            {
+                var tb = new Rect(box.x + t * 290, box.yMax + 60, 270, 50);
+                Fill(tb, _lookTeam == t ? Palette.TeamColor(t) : new Color(1, 1, 1, 0.12f));
+                Text(tb, Palette.TeamName(t) + " 색으로 보기", new GUIStyle(Small) { fontSize = 21 }, _lookTeam == t ? Palette.Ink : Color.white);
+                if (Clicked(tb)) { int k = t; _deferred = () => _lookTeam = k; }
+            }
+
+            // option chips per category
+            string[] titles = { "머리 장식", "표정", "얼굴 장식" };
+            float x0 = W / 2 - 150, y = 190;
+            for (int c = 0; c < 3; c++)
+            {
+                bool active = c == _lookCategory;
+                var head = new Rect(x0, y, 900, 40);
+                if (active) Fill(new Rect(x0 - 16, y + 6, 6, 28), Palette.PlayerOne);
+                Text(head, titles[c], new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft, fontSize = 28 }, active ? Palette.PlayerOne : Color.white);
+                if (Clicked(head)) { int k = c; _deferred = () => _lookCategory = k; }
+                y += 48;
+                string[] names = c == 0 ? CharacterLook.HatNames : c == 1 ? CharacterLook.ExpressionNames : CharacterLook.AccessoryNames;
+                int current = LookValue(look, c);
+                for (int i = 0; i < names.Length; i++)
+                {
+                    var chip = new Rect(x0 + (i % 5) * 180, y + (i / 5) * 58, 168, 50);
+                    bool sel = i == current;
+                    Fill(chip, sel ? new Color(1, 1, 1, 0.95f) : new Color(1, 1, 1, active ? 0.16f : 0.1f));
+                    Text(chip, names[i], new GUIStyle(Small) { fontSize = 21 }, sel ? Palette.Ink : Color.white);
+                    if (Clicked(chip)) { int cat = c, v = i; _deferred = () => { _lookCategory = cat; SetLookValue(cat, v); }; }
+                }
+                y += ((names.Length + 4) / 5) * 58 + 22;
+            }
+
+            var rnd = new Rect(x0, 790, 260, 62);
+            Fill(rnd, new Color(1, 1, 1, 0.15f));
+            Text(rnd, "무작위 (R)", Mid, Color.white);
+            if (Clicked(rnd)) _deferred = RandomLook;
+            var done = new Rect(x0 + 280, 790, 300, 62);
+            Fill(done, Palette.PlayerOne);
+            Text(done, "완료 (Enter/Esc)", Mid, Palette.Ink);
+            if (Clicked(done)) _deferred = ShowTitle;
+            Text(new Rect(0, 900, W, 30), "↑/↓ 항목 · ←/→ 바꾸기 · R 무작위 · T 팀 색 바꿔 보기 · 마우스를 움직이면 캐릭터가 바라봅니다 · 선택은 바로 저장됩니다", Small, new Color(1, 1, 1, 0.6f));
         }
 
         private void DrawNickname()
@@ -630,7 +734,7 @@ namespace Metadream.Shoot
             RefreshItems();
             Shadowed(new Rect(0, 90, W, 120), "METADREAM SHOOT", Title, Palette.PlayerOne);
             Text(new Rect(0, 212, W, 40), "1대1 · 2대2 카드 슈터 · ROUNDS 정적 분석 기반 재구현", Small, new Color(1, 1, 1, 0.75f));
-            float step = _items.Length > 8 ? 57f : 64f;
+            float step = _items.Length > 9 ? 52f : _items.Length > 8 ? 57f : 64f;
             for (int i = 0; i < _items.Length; i++)
             {
                 bool sel = i == _index;
@@ -731,25 +835,28 @@ namespace Metadream.Shoot
             var start = new Rect(W / 2 - 330, 700, 420, 70);
             // Room settings: card rerolls
             {
-                float y = 672;
+                float y = 664;
                 Text(new Rect(W / 2 - 520, y, 260, 46), "카드 새로고침", new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold }, Color.white);
                 SettingStepper(new Rect(W / 2 - 280, y, 340, 46), "시작 시", host.Settings.rerollsAtStart, v => host.SetRerolls(v, host.Settings.rerollsPerRound));
                 SettingStepper(new Rect(W / 2 + 90, y, 400, 46), "라운드마다 +", host.Settings.rerollsPerRound, v => host.SetRerolls(host.Settings.rerollsAtStart, v));
+                y += 54;
+                Text(new Rect(W / 2 - 520, y, 260, 46), "카드 선택 시간", new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft, fontStyle = FontStyle.Bold }, Color.white);
+                SettingStepper(new Rect(W / 2 - 280, y, 340, 46), "제한", host.Settings.pickTimeLimit, v => host.SetPickTime(v), 5, v => v <= 0 ? "무제한" : v + "초");
             }
-            start = new Rect(W / 2 - 330, 740, 420, 70);
+            start = new Rect(W / 2 - 330, 782, 420, 64);
             Fill(start, Palette.PlayerOne);
             Text(start, "시작 (Enter)", Mid, Palette.Ink);
             if (Clicked(start)) _deferred = () => host.StartMatch();
-            var close = new Rect(W / 2 + 110, 740, 220, 70);
+            var close = new Rect(W / 2 + 110, 782, 220, 64);
             Fill(close, new Color(1, 1, 1, 0.15f));
             Text(close, "방 닫기 (Esc)", Small, Color.white);
             if (Clicked(close)) _deferred = () => { host.Close(); ShowTitle(); };
-            Text(new Rect(0, 830, W, 30), "←/→ 1대1·2대2 전환 · 호스트는 P1 조작키로 플레이합니다", Small, new Color(1, 1, 1, 0.6f));
-            Text(new Rect(0, 870, W, 30), "인터넷 너머의 친구와 하려면 공유기에서 TCP " + host.Port + " 포트 포워딩이 필요합니다. 처음 실행 시 방화벽 허용을 눌러 주세요.", Small, new Color(1, 1, 1, 0.45f));
+            Text(new Rect(0, 864, W, 30), "←/→ 1대1·2대2 전환 · 호스트는 P1 조작키로 플레이합니다", Small, new Color(1, 1, 1, 0.6f));
+            Text(new Rect(0, 902, W, 30), "인터넷 너머의 친구와 하려면 공유기에서 TCP " + host.Port + " 포트 포워딩이 필요합니다. 처음 실행 시 방화벽 허용을 눌러 주세요.", Small, new Color(1, 1, 1, 0.45f));
         }
 
         /// <summary>"label  [−] value [+]" control; changes are deferred to Update like other buttons.</summary>
-        private void SettingStepper(Rect r, string label, int value, Action<int> set)
+        private void SettingStepper(Rect r, string label, int value, Action<int> set, int step = 1, Func<int, string> format = null)
         {
             Fill(r, new Color(1, 1, 1, 0.1f));
             Text(new Rect(r.x + 14, r.y, r.width - 170, r.height), label, new GUIStyle(Small) { alignment = TextAnchor.MiddleLeft }, new Color(1, 1, 1, 0.8f));
@@ -759,9 +866,10 @@ namespace Metadream.Shoot
             Fill(plus, new Color(1, 1, 1, 0.2f));
             Text(minus, "−", Mid, Color.white);
             Text(plus, "+", Mid, Color.white);
-            Text(new Rect(r.xMax - 132, r.y, 82, r.height), value + "회", new GUIStyle(Mid) { fontSize = 28 }, Palette.PlayerOne);
-            if (Clicked(minus)) _deferred = () => set(value - 1);
-            if (Clicked(plus)) _deferred = () => set(value + 1);
+            string shown = format != null ? format(value) : value + "회";
+            Text(new Rect(r.xMax - 132, r.y, 82, r.height), shown, new GUIStyle(Mid) { fontSize = shown.Length > 3 ? 22 : 28 }, Palette.PlayerOne);
+            if (Clicked(minus)) _deferred = () => set(value - step);
+            if (Clicked(plus)) _deferred = () => set(value + step);
         }
 
         private void DrawClient(NetClientSession client)
@@ -778,6 +886,7 @@ namespace Metadream.Shoot
             string kind = lobby.Dedicated ? "전용 서버" : "방 코드 " + lobby.Code;
             Text(new Rect(0, 180, W, 40), kind + " · " + lobby.TeamSize + "대" + lobby.TeamSize + " · " + lobby.PointsToWin + "포인트=1라운드, " + lobby.RoundsToWin + "라운드 선승", Mid, new Color(1, 1, 1, 0.8f));
             Text(new Rect(0, 222, W, 34), "카드 새로고침: 시작 " + lobby.RerollsAtStart + "회 · 라운드마다 +" + lobby.RerollsPerRound + "회", Small, new Color(1f, 0.85f, 0.4f));
+            Text(new Rect(0, 250, W, 30), "카드 선택 시간: " + (lobby.PickTimeLimit > 0 ? lobby.PickTimeLimit + "초" : "무제한"), new GUIStyle(Small) { fontSize = 20 }, new Color(1f, 0.85f, 0.4f));
             for (int t = 0; t < 2; t++)
             {
                 float x = W / 2 + (t == 0 ? -520 : 40);

@@ -79,11 +79,12 @@ cd MetadreamShootServer
 | `rules.cardsPerPick` | 5 | 카드 선택 화면에 보이는 카드 수 (1~10) |
 | `rules.rerollsAtStart` | 3 | 게임 시작 시 플레이어마다 주는 카드 새로고침 횟수 (0~20) |
 | `rules.rerollsPerRound` | 0 | 라운드가 끝날 때마다 모두에게 추가하는 새로고침 횟수 (0~10) |
+| `rules.pickTimeLimit` | 15 | 카드 선택 제한 시간(초, 0~120, 0 = 무제한). 시간이 다 되면 선택 중인 카드를 고릅니다. 실행 인자 `-picktime`, 콘솔 `picktime N` |
 | `rules.pickPhase` | true | false면 카드 선택 없이 계속 대결 |
 | `rules.mapPool` | [] | 사용할 맵 id 목록 (예: `["plateau","cage"]`). 비우면 튜토리얼 맵을 뺀 전체 |
 | `rules.cardPool` | [] | 등장할 카드 id 목록. 비우면 전체 |
-| `rules.stats.maxHealth` | 100 | 시작 체력 |
-| `rules.stats.bulletDamage` / `bulletSpeed` / `bulletGravity` | 55 / 70 / 1 | 기본 탄 피해 · 속도 · 중력 배율 |
+| `rules.stats.maxHealth` | 150 | 시작 체력 (몸 크기는 그대로, 카드로 늘린 비율만큼 커짐) |
+| `rules.stats.bulletDamage` / `bulletSpeed` / `bulletGravity` | 50 / 70 / 1 | 기본 탄 피해 · 속도 · 중력 배율 |
 | `rules.stats.attackCooldown` / `maxAmmo` / `reloadTime` | 0.3 / 3 / 1.5 | 연사 간격(초) · 탄창 · 재장전(초) |
 | `rules.stats.blockCooldown` | 4 | 방어 재사용 대기(초) |
 | `rules.stats.movementSpeed` / `jumps` | 1 / 1 | 이동 속도 배율 · 점프 횟수 |
@@ -94,7 +95,7 @@ cd MetadreamShootServer
 예: 3라운드 선승, 체력 150, 탄창 5발, 맵 두 개만:
 
 ```json
-"rules": { "roundsToWinGame": 3, "mapPool": ["plateau", "cage"], "stats": { "maxHealth": 150, "maxAmmo": 5 } }
+"rules": { "roundsToWinGame": 3, "mapPool": ["plateau", "cage"], "stats": { "maxHealth": 200, "maxAmmo": 5 } }
 ```
 
 (`rules` 안에서 생략한 값은 기본값이 됩니다.)
