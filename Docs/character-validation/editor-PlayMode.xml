@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="9" result="Passed" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.9321331">
+  <test-suite type="TestSuite" id="1018" name="Metadream Shoot Map Maker" fullname="Metadream Shoot Map Maker" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.932133" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1029" name="Metadream.MapEditor.Tests.PlayMode.dll" fullname="~/UnityProjects/Metadream26_Shoot 복사본/MapEditorProject/Library/ScriptAssemblies/Metadream.MapEditor.Tests.PlayMode.dll" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.926495" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="22201" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1030" name="Metadream" fullname="Metadream" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.925960" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1031" name="MapEditor" fullname="Metadream.MapEditor" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.925453" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1032" name="Tests" fullname="Metadream.MapEditor.Tests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.924804" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1019" name="PlaytestPlayModeTests" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:08Z" duration="12.923586" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1022" name="CpuMatchUsesOnlyTheEditedMap" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.CpuMatchUsesOnlyTheEditedMap" methodname="CpuMatchUsesOnlyTheEditedMap" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="609586235" result="Passed" start-time="2026-10-22 13:56:55Z" end-time="2026-10-22 13:57:00Z" duration="4.280609" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/editor_sample.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/editor_sample.json
+[Content] 91 cards, 47 maps, hash ca4a18a27f82, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash ca4a18a27f82, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] match start mode=CpuDemo players=2 points=2 rounds=2
+[Match] match start mode=CpuDemo players=2 points=2 rounds=2
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[MapEditor] playtest start CpuDemo opponent=None map=editor_sample content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest start CpuDemo opponent=None map=editor_sample content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[Match] pick CPU 1 second_wind
+[Match] pick CPU 1 second_wind
+[Match] pick CPU 2 rounds_teleport
+[Match] pick CPU 2 rounds_teleport
+[Match] phase InitialCardPick -> Battle
+[Match] phase InitialCardPick -> Battle
+[Match] death CPU 2 (edge)
+[Match] death CPU 2 (edge)
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 0)
+[Match] result Point(team 0)
+[MapEditor] playtest stop
+[MapEditor] playtest stop
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1026" name="DragSelectGroupsMoveDuplicateAndDelete" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.DragSelectGroupsMoveDuplicateAndDelete" methodname="DragSelectGroupsMoveDuplicateAndDelete" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="1906012102" result="Passed" start-time="2026-10-22 13:57:00Z" end-time="2026-10-22 13:57:00Z" duration="0.052758" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] 3개 선택 (완전히 들어간 것) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 3개 선택 (완전히 들어간 것) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 4개 선택 (닿은 것 포함) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 4개 선택 (닿은 것 포함) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 3개 선택 (완전히 들어간 것) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 3개 선택 (완전히 들어간 것) · 끌어서 함께 이동 · Delete 삭제 · Ctrl/⌘+D 복제
+[MapEditor] 3개 삭제
+[MapEditor] 3개 삭제
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1020" name="EditorPreviewIsTheGamesMapRoot" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.EditorPreviewIsTheGamesMapRoot" methodname="EditorPreviewIsTheGamesMapRoot" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="156961057" result="Passed" start-time="2026-10-22 13:57:00Z" end-time="2026-10-22 13:57:00Z" duration="0.051305" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1024" name="EditPreviewDoesNotRunScripts" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.EditPreviewDoesNotRunScripts" methodname="EditPreviewDoesNotRunScripts" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="1477093564" result="Passed" start-time="2026-10-22 13:57:00Z" end-time="2026-10-22 13:57:01Z" duration="1.052014" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1023" name="InvalidMapDoesNotStart" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.InvalidMapDoesNotStart" methodname="InvalidMapDoesNotStart" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="1881303369" result="Passed" start-time="2026-10-22 13:57:01Z" end-time="2026-10-22 13:57:01Z" duration="0.050388" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+
+IgnoreFailingMessages:true
+
+IgnoreFailingMessages:true
+[MapEditor] 검증 오류가 있어 게임이 이 맵을 불러오지 않습니다. 오른쪽 '검증' 목록을 먼저 고치세요.
+[MapEditor] 검증 오류가 있어 게임이 이 맵을 불러오지 않습니다. 오른쪽 '검증' 목록을 먼저 고치세요.
+
+IgnoreFailingMessages:false
+
+IgnoreFailingMessages:false
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1028" name="ReadyBannerAlreadyShowsTeammatesAtTheirSpawns" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.ReadyBannerAlreadyShowsTeammatesAtTheirSpawns" methodname="ReadyBannerAlreadyShowsTeammatesAtTheirSpawns" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="121273217" result="Passed" start-time="2026-10-22 13:57:01Z" end-time="2026-10-22 13:57:04Z" duration="3.652374" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_ready.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_ready.json
+[Content] 91 cards, 47 maps, hash d07057d1faab, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash d07057d1faab, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=2
+[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=2
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[MapEditor] playtest start CpuDemoTeams opponent=None map=playmode_ready content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest start CpuDemoTeams opponent=None map=playmode_ready content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[Match] pick CPU 1 rounds_refresh
+[Match] pick CPU 1 rounds_refresh
+[Match] pick CPU 2 rounds_parasite
+[Match] pick CPU 2 rounds_parasite
+[Match] pick CPU 3 explosive_rounds
+[Match] pick CPU 3 explosive_rounds
+[Match] pick CPU 4 second_wind
+[Match] pick CPU 4 second_wind
+[Match] phase InitialCardPick -> Battle
+[Match] phase InitialCardPick -> Battle
+[MapEditor] playtest stop
+[MapEditor] playtest stop
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1021" name="SandboxPlaytestRunsGameCodeAndFighterLandsOnTheFloor" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.SandboxPlaytestRunsGameCodeAndFighterLandsOnTheFloor" methodname="SandboxPlaytestRunsGameCodeAndFighterLandsOnTheFloor" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="42030357" result="Passed" start-time="2026-10-22 13:57:04Z" end-time="2026-10-22 13:57:07Z" duration="2.600104" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_flat.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_flat.json
+[Content] 91 cards, 47 maps, hash 38f7c89305dd, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash 38f7c89305dd, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] sandbox start map=playmode_flat players=2
+[Match] sandbox start map=playmode_flat players=2
+[MapEditor] playtest start Sandbox opponent=Dummy map=playmode_flat content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest start Sandbox opponent=Dummy map=playmode_flat content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest stop
+[MapEditor] playtest stop
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1025" name="ScriptAndBehaviorRunInPlaytestThroughTheGame" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.ScriptAndBehaviorRunInPlaytestThroughTheGame" methodname="ScriptAndBehaviorRunInPlaytestThroughTheGame" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="229141949" result="Passed" start-time="2026-10-22 13:57:07Z" end-time="2026-10-22 13:57:08Z" duration="1.058915" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/editor_script_sample.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/editor_script_sample.json
+[Content] 91 cards, 47 maps, hash 70528acdd3ab, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash 70528acdd3ab, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] sandbox start map=editor_script_sample players=2
+[Match] sandbox start map=editor_script_sample players=2
+[MapEditor] playtest start Sandbox opponent=Dummy map=editor_script_sample content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest start Sandbox opponent=Dummy map=editor_script_sample content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest stop
+[MapEditor] playtest stop
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1027" name="TwoVsTwoTeammatesStartAtTheirOwnSpawns" fullname="Metadream.MapEditor.Tests.PlaytestPlayModeTests.TwoVsTwoTeammatesStartAtTheirOwnSpawns" methodname="TwoVsTwoTeammatesStartAtTheirOwnSpawns" classname="Metadream.MapEditor.Tests.PlaytestPlayModeTests" runstate="Runnable" seed="1121145718" result="Passed" start-time="2026-10-22 13:57:08Z" end-time="2026-10-22 13:57:08Z" duration="0.113041" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] start 1.0.0 · 게임 런타임 b1b75db · 파일 924 · 6d6164040e57
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_teams.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent/Maps/playmode_teams.json
+[Content] 91 cards, 47 maps, hash d21027faf76f, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash d21027faf76f, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] sandbox start map=playmode_teams players=4
+[Match] sandbox start map=playmode_teams players=4
+[MapEditor] playtest start Sandbox opponent=Teams map=playmode_teams content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest start Sandbox opponent=Teams map=playmode_teams content=~/Library/Application Support/Metadream/Metadream Shoot Map Maker/PlaytestContent
+[MapEditor] playtest stop
+[MapEditor] playtest stop
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 095935f5a7b3, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/TestResults.xml
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

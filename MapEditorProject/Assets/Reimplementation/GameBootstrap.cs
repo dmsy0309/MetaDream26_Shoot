@@ -49,12 +49,12 @@ namespace Metadream.Shoot
             if (!IsServer) DevSettings.ApplyCommandLine(args);
             string nickname = StringArg(args, "-nickname");
             if (nickname != null) Online.PlayerProfile.SessionOverride = Online.PlayerProfile.Sanitize(nickname);
-            string lookArg = StringArg(args, "-look"); // -look HAT,EXPRESSION,ACCESSORY (this run only)
+            string lookArg = StringArg(args, "-look"); // -look HAT,EXPRESSION,ACCESSORY[,MOUTH,ACCESSORY2] (this run only)
             if (lookArg != null)
             {
                 var p = lookArg.Split(',');
                 int Part(int i) => i < p.Length && int.TryParse(p[i], out int v) ? v : 0;
-                Online.PlayerProfile.SessionLook = new Player.CharacterLook(Part(0), Part(1), Part(2));
+                Online.PlayerProfile.SessionLook = new Player.CharacterLook(Part(0), Part(1), Part(2)) { Mouth = (byte)Mathf.Clamp(Part(3),0,255), Accessory2 = (byte)Mathf.Clamp(Part(4),0,255) }.Sanitized;
             }
             if (spriteMaterial != null) SpriteFactory.Material = spriteMaterial;
             Application.targetFrameRate = 120;

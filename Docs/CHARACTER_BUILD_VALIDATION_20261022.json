@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-22",
+  "unity": "6000.6.6f1",
+  "baseline": "3f08c13",
+  "backup_tag": "backup/pre-character-model-20261022",
+  "runtime_commit": "b1b75dbd8c6dd18d4522a2226f3a96875e954ca3",
+  "tests": [
+    {
+      "file": "Docs/character-validation/game-EditMode.xml",
+      "result": "Passed",
+      "total": "87",
+      "passed": "87",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/character-validation/game-PlayMode.xml",
+      "result": "Passed",
+      "total": "20",
+      "passed": "20",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/character-validation/editor-EditMode.xml",
+      "result": "Passed",
+      "total": "29",
+      "passed": "29",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/character-validation/editor-PlayMode.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "skipped": "0"
+    }
+  ],
+  "builds": [
+    {
+      "log": "Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX subtarget=Player result=Succeeded size=501650931 errors=0 path=Builds/macOS/MetadreamShoot.app",
+      "sha256": "e7f2684f4529f69e4c2825f8c8d5a8068c186d1492fde6db641dd4ecec092412"
+    },
+    {
+      "log": "Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Player result=Succeeded size=528492541 errors=0 path=Builds/Windows/MetadreamShoot/MetadreamShoot.exe",
+      "sha256": "c8e297ef440aa5d79c15de2ed97b08000379026454b207b88cd92b4e8596d3cc"
+    },
+    {
+      "log": "Logs/release-BuildServerLinux.log",
+      "summary": "[Build] target=StandaloneLinux64 subtarget=Server result=Succeeded size=1076021575 errors=0 path=Builds/Server/Linux/MetadreamShootServer/MetadreamShootServer.x86_64",
+      "sha256": "235bcabe96cef7a7f71afc4d8c472ac0e427efdc1996f390e93e5123c2f463fa"
+    },
+    {
+      "log": "Logs/release-BuildServerWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Server result=Succeeded size=102335619 errors=0 path=Builds/Server/Windows/MetadreamShootServer/MetadreamShootServer.exe",
+      "sha256": "6e1918f7dca7414a16017fa90b075a5305713f2dcc23d378889ea5fdb9a960e0"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX result=Succeeded size=501815816 errors=0 warnings=3 path=Builds/macOS/MetadreamShootMapMaker.app",
+      "sha256": "01b574ce2bf73af729e19a2ed7c1d4fe96b9324c0fb152412063d1d33eb48f1d"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 result=Succeeded size=528659365 errors=0 warnings=3 path=Builds/Windows/MetadreamShootMapMaker/MetadreamShootMapMaker.exe",
+      "sha256": "c2652990e23f795c42eaea95352fd9699fb1b07f4d7014fcf9289b3bfbbf1c42"
+    }
+  ],
+  "install": [
+    {
+      "installed": "~/Applications/MetadreamShoot.app",
+      "verifiedFiles": 205,
+      "runtimeCommit": "b1b75db"
+    },
+    {
+      "installed": "~/Applications/MetadreamShootMapMaker.app",
+      "verifiedFiles": 204,
+      "runtimeCommit": "b1b75db"
+    }
+  ],
+  "runtime_checks": [
+    {
+      "log": "Logs/character-installed-battle.log",
+      "assertions": [
+        "phase InitialCardPick -> Battle",
+        "picks=4"
+      ],
+      "sha256": "09c9dd7f709b3ee45becf977bf46625b2d03955d1fe6ca98dd8135f364851cce"
+    },
+    {
+      "log": "Logs/character-installed-editor.log",
+      "assertions": [
+        "[SelfTest] result PASS",
+        "builtin round trip 46/46"
+      ],
+      "sha256": "c9e32a9085cdbdeee7476566046922151ff6ff907e1ec6b08a7f44e600b7a4fb"
+    },
+    {
+      "log": "Logs/character-editor-playtest.log",
+      "assertions": [
+        "playtest start Sandbox opponent=Cpu"
+      ],
+      "sha256": "da941696a923d6baf62dc6e15ff2404b932e27b4586db4eeb3ddcbcf721dda2b"
+    },
+    {
+      "log": "Logs/character-installed-look.log",
+      "assertions": [
+        "[UI] capture"
+      ],
+      "sha256": "05a186859563a2211c04efdd4298eda48102f09bdd2e119a34d18c1aeee4bee8"
+    },
+    {
+      "log": "Logs/character-chat-server.log",
+      "assertions": [
+        "peer 2 joined slot 1"
+      ],
+      "sha256": "4814f1c1ac38b1382d2798710155e291a1f2bd1129dfc7404f4673b8882c8f1d"
+    }
+  ],
+  "chat": [
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    },
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    }
+  ],
+  "original_art": {
+    "eyes": 85,
+    "mouths": 58,
+    "accessories": 54,
+    "sprites": 246,
+    "child_nodes": 162
+  },
+  "cross_build_only": [
+    "Windows game",
+    "Windows dedicated server",
+    "Linux dedicated server",
+    "Windows map editor"
+  ],
+  "retry_note": "One earlier Windows server build crashed inside Unity Analytics native WebRequestRestClient::PerformPost; final rerun succeeded with exit 0 and errors=0."
+}

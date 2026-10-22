@@ -25,3 +25,31 @@
 ## 동일성의 범위
 
 원작의 실제 장식 그림과 합성 수치는 추출해 사용했다. 팔다리·손·총의 동작은 기존 게임 시뮬레이션 위에 구현한 시각 리그다. 원작의 별도 무기 Rigidbody/전체 IK 시뮬레이터나 조명·SpriteMask 시스템을 통째로 이식하지 않았다. 기존 피격 판정과 탄환 생성 위치를 바꾸지 않았으며, 원작 실행 화면과 모든 프레임의 픽셀/물리 결과가 완전히 같다고 검증한 것은 아니다. 숫자 탄약 표시는 사용자가 요청한 식별성을 위해 아이콘 위에 함께 표시한다.
+
+## 실제 화면 검증에서 반영한 보정
+
+- 위쪽 조준 시 총 위 숫자가 잘리지 않도록 미리보기 카메라와 드래그 변환 비율을 보정했다. `PreviewAmmoRemainsInsideFrameWhenAimingUp`이 텍스트 경계의 카메라 프레임 포함 여부를 검사한다.
+- Unity 직렬화 깊이 경고를 피하도록 장식 트리의 자식 162개를 인덱스 배열로 저장한다. 변경 전후 197개 항목의 모든 그림, Transform, 애니메이션 계수를 재귀 복원해 동일함을 확인했다.
+- 스크롤 영역에서 GUI 변환 행렬을 변경하면 썸네일이 잘리는 문제를 수정했다. 설치본에서 눈/표정·장식 탭을 직접 조작해 원작 목록 썸네일과 선택 미리보기를 확인했다.
+- 최종 게임 런타임 커밋: `b1b75db`. 맵 에디터는 이 커밋의 런타임 파일 924개를 GameSync로 복사하고 Verify를 통과했다.
+
+
+## 최종 검증 및 배포
+
+- 게임 EditMode 87/87, PlayMode 20/20, 맵 에디터 EditMode 29/29, PlayMode 9/9: 총 145/145 통과. 결과 XML은 `Docs/character-validation/`.
+- macOS 게임, Windows 게임, Linux 전용 서버, Windows 전용 서버, macOS 맵 에디터, Windows 맵 에디터: 6개 빌드 모두 Succeeded, errors=0. 중간 Windows 서버 빌드 1회가 Unity Analytics 네이티브 작업에서 충돌했으나 최종 재실행은 정상 종료했다.
+- macOS 게임은 `~/Applications/MetadreamShoot.app`, 맵 에디터는 `~/Applications/MetadreamShootMapMaker.app`에 설치했다. 게임 205개·에디터 204개 파일을 빌드와 SHA-256으로 대조했다.
+- 설치본에서 꾸미기 탭/썸네일, 2대2 카드 선택·전투, 맵 에디터 자체 검사 PASS(기본 맵 46/46), 내부 CPU 테스트 플레이를 검증했다. 로컬 서버에 TCP 클라이언트 2개를 접속해 한글 채팅과 발신자 표시의 정상 전달을 확인했다.
+- Windows/Linux 결과는 이 Mac에서의 크로스 빌드·파일 형식·압축 무결성 검증이다. 해당 OS에서 직접 실행한 증거는 없다.
+- 상세 검증: `Docs/CHARACTER_BUILD_VALIDATION_20261022.json`. 배포 파일 크기와 SHA-256: `Docs/CHARACTER_RELEASE_PACKAGES_20261022.json`.
+
+| 대상 | 실행 폴더 | 배포 압축 파일 |
+| --- | --- | --- |
+| Windows 게임 | `Builds/Windows/MetadreamShoot/` | `Builds/Windows/MetadreamShoot-Windows-x64.zip` |
+| Windows 서버 | `Builds/Server/Windows/MetadreamShootServer/` | `Builds/Server/MetadreamShootServer-Windows-x64.zip` |
+| Linux 서버 | `Builds/Server/Linux/MetadreamShootServer/` | `Builds/Server/MetadreamShootServer-Linux-x64.tar.gz` |
+| Windows 맵 에디터 | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker/` | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker-Windows-x64.zip` |
+
+![복원한 캐릭터 미리보기](screenshots/character-previews/look-1.png)
+
+설치본 화면은 `Docs/screenshots/character-installed-look/`, `character-installed-battle/`, `character-installed-editor/`, `character-editor-playtest/`에 있다.

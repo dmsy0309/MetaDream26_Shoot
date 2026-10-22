@@ -46,6 +46,11 @@ namespace Metadream.Shoot.Player
             _following.Clear();
             _covers.Clear();
 
+            _eyeL = _eyeR = _pupilL = _pupilR = null;
+            bool originalEyes = AddOriginal(1, look.Expression, look.EyeOffset);
+            bool originalMouth = (look.Expression == 0 || look.Expression >= OriginalCharacterArt.EyeStart || look.Mouth >= OriginalCharacterArt.MouthStart) && AddOriginal(3, look.Mouth, look.MouthOffset);
+            if (!originalEyes)
+            {
             _partOffset = look.EyeOffset;
             _eyeL = Part("EyeL", SpriteFactory.Circle, new Vector2(-0.13f, 0.1f), new Vector2(0.25f, 0.25f), 0f, Color.white, 13, true).transform;
             _eyeR = Part("EyeR", SpriteFactory.Circle, new Vector2(0.13f, 0.1f), new Vector2(0.25f, 0.25f), 0f, Color.white, 13, true).transform;
@@ -54,18 +59,28 @@ namespace Metadream.Shoot.Player
 
             _partOffset = Vector2.zero;
             BuildExpression(look.Expression);
+            }
             _partOffset = look.MouthOffset;
-            if (look.Mouth > 0) BuildMouth(look.Mouth);
-            _partOffset = look.AccessoryOffset; BuildAccessory(look.Accessory);
-            _partOffset = look.Accessory2Offset; BuildAccessory(look.Accessory2);
+            if (!originalMouth && look.Mouth > 0) BuildMouth(look.Mouth);
+            _partOffset = look.AccessoryOffset; if (!AddOriginal(2, look.Accessory, look.AccessoryOffset)) BuildAccessory(look.Accessory);
+            _partOffset = look.Accessory2Offset; if (!AddOriginal(4, look.Accessory2, look.Accessory2Offset)) BuildAccessory(look.Accessory2);
             _partOffset = Vector2.zero; BuildHat(look.Hat);
+        }
+
+        private bool AddOriginal(int category, int value, Vector2 offset)
+        {
+            var item = OriginalCharacterArt.Resolve(category, value);
+            if (item == null) return false;
+            var go = OriginalCharacterArt.Create(item, _root, offset, _visible);
+            _parts.Add(go);
+            return true;
         }
 
         public void SetVisible(bool visible)
         {
             _visible = visible;
             foreach (var go in _parts)
-                if (go != null) go.GetComponent<SpriteRenderer>().enabled = visible;
+                if (go != null) foreach (var sr in go.GetComponentsInChildren<SpriteRenderer>(true)) sr.enabled = visible;
         }
 
         public void SetBodyColor(Color c)
@@ -88,6 +103,7 @@ namespace Metadream.Shoot.Player
             var shift = new Vector3(look.x * 0.08f, look.y * 0.06f, 0f);
             foreach (var kv in _following) if (kv.Key != null) kv.Key.localPosition = kv.Value + shift;
 
+            if (_eyeL == null) return;
             if (Time.time > _blinkAt) { _blinkUntil = Time.time + 0.11f; _blinkAt = Time.time + Random.Range(2f, 5f); }
             bool blink = Time.time < _blinkUntil || dead;
             EyeShape(Look.Expression, out float eyeL, out float eyeR, out float pupil, out float pupilDrop);
