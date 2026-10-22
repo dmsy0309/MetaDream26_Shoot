@@ -44,7 +44,7 @@ namespace Metadream.Shoot.Tests
             Assert.AreEqual(15, back.PickTimeLimit);
             Assert.AreEqual(2, back.Looks.Count);
             Assert.AreEqual(new CharacterLook(0, 7, 6), back.Looks[1]);
-            Assert.AreEqual(9, Protocol.Version);
+            Assert.AreEqual(10, Protocol.Version);
 
             var l = new LobbyInfo { PickTimeLimit = 30 };
             var lm = new MemoryStream();

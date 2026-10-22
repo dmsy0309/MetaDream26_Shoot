@@ -19,6 +19,7 @@ namespace Metadream.Shoot.Player
         private Color _bodyColor;
         private float _blinkAt = 2f, _blinkUntil;
         private bool _visible = true;
+        private Vector2 _partOffset;
 
         public CharacterLook Look { get; private set; }
 
@@ -45,14 +46,19 @@ namespace Metadream.Shoot.Player
             _following.Clear();
             _covers.Clear();
 
+            _partOffset = look.EyeOffset;
             _eyeL = Part("EyeL", SpriteFactory.Circle, new Vector2(-0.13f, 0.1f), new Vector2(0.25f, 0.25f), 0f, Color.white, 13, true).transform;
             _eyeR = Part("EyeR", SpriteFactory.Circle, new Vector2(0.13f, 0.1f), new Vector2(0.25f, 0.25f), 0f, Color.white, 13, true).transform;
             _pupilL = Part("PupilL", SpriteFactory.Circle, new Vector2(-0.13f, 0.1f), new Vector2(0.12f, 0.12f), 0f, Ink, 14, false).transform;
             _pupilR = Part("PupilR", SpriteFactory.Circle, new Vector2(0.13f, 0.1f), new Vector2(0.12f, 0.12f), 0f, Ink, 14, false).transform;
 
+            _partOffset = Vector2.zero;
             BuildExpression(look.Expression);
-            BuildAccessory(look.Accessory);
-            BuildHat(look.Hat);
+            _partOffset = look.MouthOffset;
+            if (look.Mouth > 0) BuildMouth(look.Mouth);
+            _partOffset = look.AccessoryOffset; BuildAccessory(look.Accessory);
+            _partOffset = look.Accessory2Offset; BuildAccessory(look.Accessory2);
+            _partOffset = Vector2.zero; BuildHat(look.Hat);
         }
 
         public void SetVisible(bool visible)
@@ -248,8 +254,20 @@ namespace Metadream.Shoot.Player
             }
         }
 
+        private void BuildMouth(int mouth)
+        {
+            if (mouth == 1) return;
+            Vector2 size = mouth == 3 ? new Vector2(0.23f,0.16f) : mouth == 4 ? new Vector2(0.11f,0.14f) : mouth == 7 ? new Vector2(0.07f,0.05f) : new Vector2(0.2f,0.04f);
+            var sprite = mouth == 5 || mouth == 6 ? SpriteFactory.Square : SpriteFactory.Circle;
+            Part("CustomMouth", sprite, new Vector2(0,-0.17f), size, mouth == 6 ? -15 : 0, Ink, 14, true);
+            if (mouth == 2) Part("CustomMouthCover", SpriteFactory.Circle, new Vector2(0,-0.145f), new Vector2(0.21f,0.035f), 0, _bodyColor, 15, true);
+        }
+
         private GameObject Part(string name, Sprite sprite, Vector2 pos, Vector2 size, float angle, Color color, int order, bool followsAim)
         {
+            if (name.StartsWith("Mouth")) { if (Look.Mouth > 0) size = Vector2.zero; pos += Look.MouthOffset; }
+            else if (name.StartsWith("Brow")) pos += Look.EyeOffset;
+            pos += _partOffset;
             var go = new GameObject(name);
             go.transform.SetParent(_root, false);
             go.transform.localPosition = pos;

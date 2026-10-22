@@ -73,6 +73,7 @@ namespace Metadream.Shoot
             if (GetComponent<GameHud>() == null) gameObject.AddComponent<GameHud>();
             if (GetComponent<DebugOverlay>() == null) gameObject.AddComponent<DebugOverlay>();
             if (GetComponent<CheatPanel>() == null) gameObject.AddComponent<CheatPanel>();
+            if (GetComponent<ChatPanel>() == null) gameObject.AddComponent<ChatPanel>();
             if (GetComponent<QuitConfirm>() == null) gameObject.AddComponent<QuitConfirm>();
         }
 

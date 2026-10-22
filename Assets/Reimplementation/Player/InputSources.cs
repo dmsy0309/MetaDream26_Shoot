@@ -20,6 +20,7 @@ namespace Metadream.Shoot.Player
         public bool NavDown;
         /// <summary>Card reroll request: 0 none, 1..n = card index + 1, 255 = the selected card.</summary>
         public int Reroll;
+        public int SelectCard; // 0 none, otherwise offer index + 1
     }
 
     public struct InputContext
@@ -61,7 +62,7 @@ namespace Metadream.Shoot.Player
         private readonly bool _useMouse;
         private readonly int _gamepadIndex;
         private Vector2 _lastAim = Vector2.right;
-        private float _lastMouseActivity = -100f;
+        private bool _mouseAimActive = true;
         private float _prevStickX;
         private float _prevStickY;
 
@@ -82,6 +83,7 @@ namespace Metadream.Shoot.Player
         public InputFrame Read(in InputContext context)
         {
             var frame = new InputFrame();
+            if (Online.ChatPanel.BlocksInput) return frame;
             var kb = Keyboard.current;
             var gp = _gamepadIndex >= 0 && _gamepadIndex < Gamepad.all.Count ? Gamepad.all[_gamepadIndex] : null;
             Vector2 keyDir = Vector2.zero;
@@ -101,7 +103,7 @@ namespace Metadream.Shoot.Player
                 frame.NavRight = Pressed(kb, _keys.Right);
                 frame.NavUp = Pressed(kb, _keys.Up);
                 frame.NavDown = Pressed(kb, _keys.Down);
-                frame.ConfirmPressed = frame.ShootPressed || Pressed(kb, _keys.AltJump);
+                frame.ConfirmPressed = frame.ShootPressed || Pressed(kb, _keys.AltJump) || Pressed(kb, Key.Enter) || Pressed(kb, Key.NumpadEnter);
                 if (Pressed(kb, Key.R)) frame.Reroll = 255;
             }
 
@@ -116,7 +118,7 @@ namespace Metadream.Shoot.Player
                 Vector2 pad = stick + dpad;
                 if (pad.sqrMagnitude > 0f) move = Vector2.ClampMagnitude(move + pad, 1.5f);
                 Vector2 right = gp.rightStick.ReadValue();
-                if (right.magnitude > 0.4f) aim = right;
+                if (right.magnitude > 0.4f) { aim = right; _mouseAimActive = false; }
                 else if (pad.sqrMagnitude > 0.05f) aim = pad;
 
                 frame.JumpPressed |= gp.buttonSouth.wasPressedThisFrame;
@@ -144,11 +146,11 @@ namespace Metadream.Shoot.Player
                 if (mouse != null)
                 {
                     if (mouse.delta.ReadValue().sqrMagnitude > 0.5f || mouse.leftButton.wasPressedThisFrame)
-                        _lastMouseActivity = Time.unscaledTime;
+                        _mouseAimActive = true;
                     frame.ShootPressed |= mouse.leftButton.wasPressedThisFrame;
                     frame.ShootHeld |= mouse.leftButton.isPressed;
                     frame.BlockPressed |= mouse.rightButton.wasPressedThisFrame;
-                    if (aim == Vector2.zero && context.Camera != null && Time.unscaledTime - _lastMouseActivity < 2.5f)
+                    if (_mouseAimActive && context.Camera != null)
                     {
                         Vector3 world = context.Camera.ScreenToWorldPoint(mouse.position.ReadValue());
                         Vector2 d = (Vector2)world - context.Position;

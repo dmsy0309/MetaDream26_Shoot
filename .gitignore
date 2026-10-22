@@ -29,3 +29,10 @@ __pycache__/
 MasterServer/replays/
 MasterServer/admin_token.txt
 
+
+/.Recovery/
+/MapEditorProject/Library/
+/MapEditorProject/Builds/
+/MapEditorProject/Logs/
+/MapEditorProject/Temp/
+/MapEditorProject/UserSettings/

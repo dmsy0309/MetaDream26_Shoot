@@ -432,11 +432,18 @@ namespace Metadream.Shoot.Presentation
                         if (ft < 0.5f && _flipFrom[i] != null) face = _flipFrom[i];
                     }
                     DrawCardAt(face, pos, scale, sx, angle, i == sel, picker.Color, _dim[i]);
+                    var hit = new Rect(pos.x - CardW * scale / 2, pos.y - CardH * scale / 2, CardW * scale, CardH * scale);
+                    if (flow.LocalPicker && !Online.ChatPanel.BlocksInput && d >= 1f && hit.Contains(Event.current.mousePosition))
+                    {
+                        if (Event.current.type == EventType.MouseMove || (Event.current.type == EventType.Repaint && UnityEngine.InputSystem.Mouse.current != null && UnityEngine.InputSystem.Mouse.current.delta.ReadValue().sqrMagnitude > 0.5f)) flow.RequestCardPointer(i, false);
+                        if (Event.current.type == EventType.MouseDown && Event.current.button == 0)
+                        { flow.RequestCardPointer(i, true); Event.current.Use(); return; }
+                    }
                 }
             }
             // Reroll button under every card (only the player who is picking can press it).
             int left = flow.PickerRerolls;
-            bool usable = flow.LocalPicker && left > 0;
+            bool usable = flow.LocalPicker && left > 0 && !Online.ChatPanel.BlocksInput;
             for (int i = 0; i < n; i++)
             {
                 if (now < DealStart(i) + DealTime) continue;
@@ -452,7 +459,7 @@ namespace Metadream.Shoot.Presentation
             if (picker.IsBot) help = "CPU가 고르는 중…";
             else if (flow.Role == NetRole.Client && picker.PlayerId != flow.LocalSlot) help = picker.DisplayName + " 플레이어가 고르는 중…";
             else if (flow.Role == NetRole.Host && picker.Input is NetworkInput) help = picker.DisplayName + " 플레이어가 원격으로 고르는 중…";
-            else help = "← / → 로 고르고 사격 키(F · . · 패드 X/RT)로 결정";
+            else help = "← / → 또는 마우스로 선택 · Enter / 사격 키 / 카드 클릭으로 결정";
             Text(new Rect(0, 868, W, 36), help, Small, new Color(1, 1, 1, 0.8f));
             string rerollText = "남은 새로고침: " + left + "회" + (flow.LocalPicker ? "  ·  카드 아래 버튼 또는 R / 패드 Y (선택한 카드)" : "");
             Text(new Rect(0, 906, W, 40), rerollText, new GUIStyle(Mid) { fontSize = 28 }, left > 0 ? new Color(1f, 0.85f, 0.4f) : new Color(1, 1, 1, 0.5f));

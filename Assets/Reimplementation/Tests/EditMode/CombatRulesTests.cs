@@ -108,7 +108,7 @@ namespace Metadream.Shoot.Tests
             var down = MotionModel.MoveDelta(new Vector2(0f, -1f), 5000f, 1f, 0f, 1f);
             Assert.AreEqual(-2f, down.y, 1e-5f);
             Assert.AreEqual(0f, MotionModel.MoveDelta(new Vector2(0f, 1f), 5000f, 1f, 0f, 1f).y, 1e-6f);
-            Assert.AreEqual(0.3f, MotionModel.Multiplier(false), 1e-6f);
+            Assert.AreEqual(0.8f, MotionModel.Multiplier(false), 1e-6f);
             Assert.AreEqual(0.4f, MotionModel.BaseGravityDelta(0.02f).magnitude, 1e-5f);
             Assert.AreEqual(22f, MotionModel.JumpImpulse(Vector2.up, 1f, 0f, 2200f).y, 1e-4f);
             var wall = MotionModel.WallJumpDirection(Vector2.right);

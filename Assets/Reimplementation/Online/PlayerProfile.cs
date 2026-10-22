@@ -20,15 +20,23 @@ namespace Metadream.Shoot.Online
             get
             {
                 if (SessionLook.HasValue) return SessionLook.Value;
+                string json = PlayerPrefs.GetString(LookKey + ".v2", "");
+                if (!string.IsNullOrEmpty(json)) { try { return JsonUtility.FromJson<Player.CharacterLook>(json).Sanitized; } catch (ArgumentException) { } }
                 return Player.CharacterLook.Unpack(PlayerPrefs.GetInt(LookKey, 0)).Sanitized;
             }
             set
             {
                 if (SessionLook.HasValue) { SessionLook = value.Sanitized; return; }
                 PlayerPrefs.SetInt(LookKey, value.Sanitized.Pack());
+                PlayerPrefs.SetString(LookKey + ".v2", JsonUtility.ToJson(value.Sanitized));
                 PlayerPrefs.Save();
             }
         }
+
+        public static void SavePortrait(int slot) { PlayerPrefs.SetString("portrait." + Mathf.Clamp(slot, 0, 9), JsonUtility.ToJson(Look)); PlayerPrefs.Save(); }
+        public static bool HasPortrait(int slot) => PlayerPrefs.HasKey("portrait." + slot);
+        public static void LoadPortrait(int slot)
+        { if (HasPortrait(slot)) Look = JsonUtility.FromJson<Player.CharacterLook>(PlayerPrefs.GetString("portrait." + slot)).Sanitized; }
 
         public static bool HasNickname => !string.IsNullOrEmpty(PlayerPrefs.GetString(Key, ""));
 

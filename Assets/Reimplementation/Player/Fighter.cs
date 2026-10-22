@@ -384,6 +384,7 @@ namespace Metadream.Shoot.Player
 
             if (_frame.Aim.sqrMagnitude > 0.001f) AimDirection = _frame.Aim.normalized;
             if (_frame.JumpPressed) TryJump();
+            _rb.linearVelocity += MotionModel.HeldJumpDelta(_frame.JumpHeld, _sinceJump, dt, Stats.character.jump * SpeedFactor, Tuning.upForce);
             if (_frame.ShootHeld || _frame.ShootPressed) TryAttack();
             if (_frame.BlockPressed) TryBlock();
 
@@ -442,7 +443,7 @@ namespace Metadream.Shoot.Player
                     // TouchGround restores jumps (not during the 0.1 s jump lockout).
                     if (_sinceJump > MotionModel.JumpCooldown) _currentJumps = Stats.character.jumps;
                 }
-                else if (Mathf.Abs(normal.x) > 0.65f)
+                else if (Mathf.Abs(normal.x) > 0.65f && _sinceJump >= 0.15f)
                 {
                     _wallNormal = new Vector2(Mathf.Sign(normal.x), 0f);
                     _sinceWallGrab = 0f;

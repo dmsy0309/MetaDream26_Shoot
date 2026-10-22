@@ -34,7 +34,15 @@ namespace Metadream.Shoot.Online
         private float _autoPickAt = -1f;
         private float _logTimer;
         private float _gameOverSeen = -1f;
-        private int _pendingReroll;
+        private int _pendingReroll, _pendingCard;
+        private bool _pendingConfirm;
+        public readonly ChatHistory Chat = new ChatHistory();
+        public void QueueCardPointer(int index, bool confirm) { _pendingCard = index + 1; _pendingConfirm |= confirm; }
+        public void SendChat(string text)
+        {
+            text = ChatRules.Clean(text);
+            if (MySlot >= 0 && text.Length > 0) _conn.Send(Protocol.Pack(MsgType.ChatSubmit, w => w.Write(text)));
+        }
 
         /// <summary>Mouse click on a reroll button: sent with the next input packet.</summary>
         public void QueueReroll(int index) => _pendingReroll = index + 1;
@@ -86,6 +94,7 @@ namespace Metadream.Shoot.Online
                     w.Write(PlayerProfile.DeviceName);
                     var look = PlayerProfile.Look;
                     w.Write(look.Hat); w.Write(look.Expression); w.Write(look.Accessory);
+                    look.WriteDetails(w);
                 }));
             }
             if (_conn.State == TcpClientConnection.ConnState.Failed)
@@ -113,7 +122,7 @@ namespace Metadream.Shoot.Online
             {
                 if (_gameOverSeen < 0f) _gameOverSeen = Time.unscaledTime;
                 var kb = UnityEngine.InputSystem.Keyboard.current;
-                bool ok = kb != null && (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame);
+                bool ok = !ChatPanel.BlocksInput && kb != null && (kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame);
                 foreach (var gp in UnityEngine.InputSystem.Gamepad.all) ok |= gp.buttonSouth.wasPressedThisFrame || gp.startButton.wasPressedThisFrame;
                 if ((ok && Time.unscaledTime - _gameOverSeen > 1.5f) || (Autoplay && Time.unscaledTime - _gameOverSeen > 3f)) { Leave(null); return; }
             }
@@ -143,6 +152,9 @@ namespace Metadream.Shoot.Online
             {
                 switch (Protocol.Peek(data))
                 {
+                    case MsgType.ChatMessage:
+                        Chat.Add(ChatEntry.Read(r));
+                        break;
                     case MsgType.Welcome:
                         MySlot = r.ReadByte();
                         if (State == ClientState.Connecting) State = ClientState.Lobby;
@@ -234,6 +246,8 @@ namespace Metadream.Shoot.Online
             if (_local == null || flow == null || MySlot < 0 || MySlot >= flow.Fighters.Count) return;
             var me = flow.Fighters[MySlot];
             var frame = _local.Read(new InputContext { Position = me.Position, Camera = Camera.main });
+            if (_pendingCard > 0) { frame.SelectCard = _pendingCard; frame.ConfirmPressed |= _pendingConfirm; _pendingCard = 0; _pendingConfirm = false; }
+            if (ChatPanel.BlocksInput) frame = default;
             if (_pendingReroll > 0) { frame.Reroll = _pendingReroll; _pendingReroll = 0; }
             if (Fighter.InputSuspended) { int reroll = frame.Reroll; frame = default; frame.Reroll = reroll; }
 

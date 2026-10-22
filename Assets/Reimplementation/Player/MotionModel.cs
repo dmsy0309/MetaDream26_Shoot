@@ -12,8 +12,8 @@ namespace Metadream.Shoot.Player
         public const float ForceModeScale = 0.02f;
         /// <summary>PlayerVelocity.FixedUpdate (0x060008d0): velocity += down * fixedDeltaTime * timeScale * 20.</summary>
         public const float BaseGravity = 20f;
-        /// <summary>PlayerMovement..ctor airControl = 0.3; UpdateMultiplier uses it while airborne.</summary>
-        public const float AirControl = 0.3f;
+        /// <summary>Player prefab sharedassets0.assets pathID 10619 overrides ctor 0.3 with airControl 0.8.</summary>
+        public const float AirControl = 0.8f;
         /// <summary>PlayerVelocity..ctor mass = 100.</summary>
         public const float BaseMass = 100f;
         public const float JumpCooldown = 0.1f;
@@ -21,6 +21,10 @@ namespace Metadream.Shoot.Player
         public const float GroundedCoyoteTime = 0.05f;
         public static readonly Vector2 WallJumpUp = Vector2.up * 0.8f;
         public const float WallJumpNormal = 0.4f;
+
+        /// <summary>PlayerJump.Update: holding jump for the first 0.2 s adds up * dt * 2 * jump * upForce * 0.02 (mass cancels).</summary>
+        public static Vector2 HeldJumpDelta(bool held, float sinceJump, float dt, float jump, float upForce)
+            => held && sinceJump < 0.2f ? Vector2.up * dt * 2f * jump * upForce * ForceModeScale : Vector2.zero;
 
         public static float Multiplier(bool grounded) => grounded ? 1f : AirControl;
 
@@ -71,17 +75,17 @@ namespace Metadream.Shoot.Player
     }
 
     /// <summary>
-    /// Serialized movement values are not readable without a type tree (UNKNOWN-01/02).
-    /// These are PROVISIONAL development values chosen by simulation, not original data.
+    /// Serialized Player prefab values verified against sharedassets0.assets raw bytes.
+    /// See ReverseAnalysis/evidence/parity-serialized.json; arena edge impulses remain project tuning.
     /// </summary>
     [System.Serializable]
     public sealed class MotionTuning
     {
-        public float force = 5200f;
-        public float extraDrag = 80f;
-        public float upForce = 2200f;
-        public float gravityForce = 25f;
-        public float gravityExponent = 1.2f;
+        public float force = 17000f;
+        public float extraDrag = 200f;
+        public float upForce = 5500f;
+        public float gravityForce = 1000f;
+        public float gravityExponent = 1.5f;
         public float edgeImpulse = 45f;        // original constant 200 (Impulse) is paired with an unknown drag
         public float edgeImpulseBlocking = 70f; // original constant 400 while blocking
         public float edgeDamage = 51f;         // OutOfBoundsHandler.LateUpdate: 51

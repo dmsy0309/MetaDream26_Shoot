@@ -494,7 +494,7 @@ namespace Metadream.Shoot
         private void Update()
         {
             var kb = Keyboard.current;
-            if (!InMenu && kb != null && kb.escapeKey.wasPressedThisFrame)
+            if (!Online.ChatPanel.BlocksInput && !InMenu && kb != null && kb.escapeKey.wasPressedThisFrame)
             {
                 if (Presentation.CheatPanel.IsOpen) return; // the panel closes itself
                 if (Presentation.QuitConfirm.IsOpen) { Presentation.QuitConfirm.Close(); return; }
@@ -556,6 +556,14 @@ namespace Metadream.Shoot
             else if (result.Kind == PointResultKind.Round) Fx.Sound("round", Vector2.zero);
         }
 
+        public void RequestCardPointer(int index, bool confirm)
+        {
+            if (!LocalPicker || Online.ChatPanel.BlocksInput || Fighter.InputSuspended || index < 0 || index >= _offer.Count) return;
+            if (Role == NetRole.Client) { Online.NetClientSession.Active?.QueueCardPointer(index, confirm); return; }
+            OfferIndex = index;
+            if (confirm) ConfirmPick(index);
+        }
+
         private void UpdatePick()
         {
             if (Picker == null) return;
@@ -581,8 +589,9 @@ namespace Metadream.Shoot
             if (open < 0.3f || Picker.Input == null) return;
             var frame = Picker.Input.Read(new InputContext { Position = Vector2.zero, Camera = Camera.main });
             int n = _offer.Count;
-            if (frame.NavLeft) OfferIndex = (OfferIndex - 1 + n) % n;
-            if (frame.NavRight) OfferIndex = (OfferIndex + 1) % n;
+            if (frame.SelectCard > 0 && frame.SelectCard <= n) OfferIndex = frame.SelectCard - 1;
+            if (frame.NavLeft) OfferIndex = Mathf.Max(0, OfferIndex - 1);
+            if (frame.NavRight) OfferIndex = Mathf.Min(n - 1, OfferIndex + 1);
             if (frame.Reroll > 0 && Match != null) Reroll(frame.Reroll == 255 ? OfferIndex : frame.Reroll - 1);
             if (frame.ConfirmPressed) ConfirmPick(OfferIndex);
         }

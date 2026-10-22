@@ -1,0 +1,890 @@
+[
+  {
+    "file": "sharedassets0.assets",
+    "sha256": "bdeb21d9015b8d92118954d98206c55a7003f5cb960134c9b68f51b33960d23a",
+    "id": 10207,
+    "type": "PlayerJump",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2724
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 31557943296
+      },
+      "m_Name": "",
+      "upForce": 5500.0,
+      "jumpPart": [
+        {
+          "m_FileID": 0,
+          "m_PathID": 6101
+        },
+        {
+          "m_FileID": 0,
+          "m_PathID": 6115
+        }
+      ],
+      "sideForce": 1.0
+    }
+  },
+  {
+    "file": "sharedassets0.assets",
+    "sha256": "bdeb21d9015b8d92118954d98206c55a7003f5cb960134c9b68f51b33960d23a",
+    "id": 10617,
+    "type": "Gravity",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2724
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 25283264512
+      },
+      "m_Name": "",
+      "gravityForce": 1000.0,
+      "exponent": 1.5
+    }
+  },
+  {
+    "file": "sharedassets0.assets",
+    "sha256": "bdeb21d9015b8d92118954d98206c55a7003f5cb960134c9b68f51b33960d23a",
+    "id": 10619,
+    "type": "PlayerMovement",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2724
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 18404605952
+      },
+      "m_Name": "",
+      "force": 17000.0,
+      "airControl": 0.800000011920929,
+      "extraDrag": 200.0,
+      "extraAngularDrag": 250.0,
+      "wallGrabDrag": 5.0
+    }
+  },
+  {
+    "file": "sharedassets0.assets",
+    "sha256": "bdeb21d9015b8d92118954d98206c55a7003f5cb960134c9b68f51b33960d23a",
+    "id": 12032,
+    "type": "PlayerVelocity",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2724
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 6140461056
+      },
+      "m_Name": ""
+    }
+  },
+  {
+    "file": "level0",
+    "sha256": "76e48672f3d05858ea1c997e806ed08c7f5e1c3d85ab2d3a4202e639bed5cb6d",
+    "id": 3706,
+    "type": "CharacterCreatorHandler",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 400
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 23622320128
+      },
+      "m_Name": "",
+      "playerFaces": [
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        }
+      ],
+      "selectedPlayerFaces": [
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        },
+        {
+          "eyeID": 0,
+          "eyeOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "mouthID": 0,
+          "mouthOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detailID": 0,
+          "detailOffset": {
+            "x": 0.0,
+            "y": 0.0
+          },
+          "detail2ID": 0,
+          "detail2Offset": {
+            "x": 0.0,
+            "y": 0.0
+          }
+        }
+      ],
+      "selectedFaceID": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "lockedPortraits": []
+    }
+  },
+  {
+    "file": "level0",
+    "sha256": "76e48672f3d05858ea1c997e806ed08c7f5e1c3d85ab2d3a4202e639bed5cb6d",
+    "id": 3810,
+    "type": "CardChoice",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 493
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 30383538176
+      },
+      "m_Name": "",
+      "pickrID": -1,
+      "cardPickArt": {
+        "profile": {
+          "m_FileID": 2,
+          "m_PathID": 9435
+        },
+        "parts": []
+      },
+      "cards": [
+        {
+          "m_FileID": 2,
+          "m_PathID": 10170
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10156
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10147
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10159
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10121
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10157
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10133
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10172
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10120
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10150
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10141
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10162
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10164
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10112
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10158
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10131
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10145
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10122
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10123
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10148
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10119
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10107
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10140
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10110
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10124
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10155
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10149
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10144
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10108
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10109
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10136
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10167
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10163
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10113
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10111
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10153
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10116
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10115
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10165
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10152
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10024
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10127
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10137
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10130
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10166
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10117
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10114
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10126
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10161
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10129
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10139
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10169
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10125
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10171
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10146
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10151
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10168
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10143
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10134
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10142
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10128
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10132
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10160
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10138
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10135
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10154
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10118
+        }
+      ],
+      "picks": 6,
+      "IsPicking": 0,
+      "curve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          },
+          {
+            "time": 1.0,
+            "value": 0.5020599365234375,
+            "inSlope": 2.914050340652466,
+            "outSlope": 0.0272920411080122,
+            "weightedMode": 0,
+            "inWeight": 0.044418275356292725,
+            "outWeight": 0.36399513483047485
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "cardThemes": [
+        {
+          "themeType": 0,
+          "targetColor": {
+            "r": 0.801886796951294,
+            "g": 0.2761213779449463,
+            "b": 0.2761213779449463,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.17924529314041138,
+            "g": 0.06341224908828735,
+            "b": 0.06341224908828735,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 1,
+          "targetColor": {
+            "r": 0.7924528121948242,
+            "g": 0.7338101863861084,
+            "b": 0.22801706194877625,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.19811320304870605,
+            "g": 0.18164271116256714,
+            "b": 0.06634923815727234,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 2,
+          "targetColor": {
+            "r": 0.31372544169425964,
+            "g": 0.5154672265052795,
+            "b": 0.8196078538894653,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.05250978469848633,
+            "g": 0.10634423792362213,
+            "b": 0.18867921829223633,
+            "a": 0.0
+          }
+        },
+        {
+          "themeType": 3,
+          "targetColor": {
+            "r": 0.6792452931404114,
+            "g": 0.6792452931404114,
+            "b": 0.6792452931404114,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.15094339847564697,
+            "g": 0.15094339847564697,
+            "b": 0.15094339847564697,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 4,
+          "targetColor": {
+            "r": 0.4777492582798004,
+            "g": 0.31372544169425964,
+            "b": 0.8196078538894653,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.0,
+            "g": 0.0,
+            "b": 0.0,
+            "a": 0.0
+          }
+        },
+        {
+          "themeType": 5,
+          "targetColor": {
+            "r": 0.0,
+            "g": 0.5754716992378235,
+            "b": 0.2995144724845886,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.02981487475335598,
+            "g": 0.09433960914611816,
+            "b": 0.051323115825653076,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 6,
+          "targetColor": {
+            "r": 0.571200966835022,
+            "g": 0.801886796951294,
+            "b": 0.12482201308012009,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.10474637895822525,
+            "g": 0.15094339847564697,
+            "b": 0.040583837777376175,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 7,
+          "targetColor": {
+            "r": 0.31372544169425964,
+            "g": 0.7368662357330322,
+            "b": 0.8196078538894653,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.025943398475646973,
+            "g": 0.09110355377197266,
+            "b": 0.10377359390258789,
+            "a": 1.0
+          }
+        },
+        {
+          "themeType": 8,
+          "targetColor": {
+            "r": 0.8196078538894653,
+            "g": 0.31372544169425964,
+            "b": 0.5343812704086304,
+            "a": 1.0
+          },
+          "bgColor": {
+            "r": 0.1320754885673523,
+            "g": 0.03551086038351059,
+            "b": 0.077430360019207,
+            "a": 1.0
+          }
+        }
+      ]
+    }
+  }
+]

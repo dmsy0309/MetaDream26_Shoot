@@ -82,6 +82,20 @@ namespace Metadream.Shoot.Online
         /// <summary>Seconds until an automatic start (set by DedicatedServer); negative when idle.</summary>
         public float Countdown { get; set; } = -1f;
 
+        public readonly ChatHistory Chat = new ChatHistory();
+        private readonly ChatRateLimit _chatRate = new ChatRateLimit();
+        public bool SendChat(string text) => !Dedicated && PublishChat(0, text);
+        private bool PublishChat(int slot, string text)
+        {
+            text = ChatRules.Clean(text);
+            if (text.Length == 0 || !_chatRate.Allow(slot, Time.realtimeSinceStartup)) return false;
+            var entry = new ChatEntry { Slot = slot, Name = _names[slot], Text = text };
+            Chat.Add(entry);
+            var payload = Protocol.Pack(MsgType.ChatMessage, w => entry.Write(w));
+            foreach (var peer in _slotOfPeer.Keys) _server.Send(peer, payload);
+            return true;
+        }
+
         public event Action<string> StartRequested;
 
         public SlotKind KindOf(int slot) => _kinds[slot];
@@ -333,8 +347,12 @@ namespace Metadream.Shoot.Online
                             string nick = PlayerProfile.Sanitize(r.ReadString());
                             string device = r.ReadString();
                             var look = r.BaseStream.Position + 3 <= r.BaseStream.Length ? new Player.CharacterLook(r.ReadByte(), r.ReadByte(), r.ReadByte()) : Player.CharacterLook.Default;
-                            _pendingLook = look.Sanitized;
+                            _pendingLook = look.ReadDetails(r);
                             AssignSlot(peer, nick, device.Length > 40 ? device.Substring(0, 40) : device);
+                            break;
+                        case MsgType.ChatSubmit:
+                            if (_slotOfPeer.TryGetValue(peer, out int chatSlot) && data.Length <= 1024)
+                                PublishChat(chatSlot, r.ReadString());
                             break;
                         case MsgType.Input:
                             if (_slotOfPeer.TryGetValue(peer, out int slot) && _inputs[slot] != null)

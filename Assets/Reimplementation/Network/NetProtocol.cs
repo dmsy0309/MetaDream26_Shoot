@@ -21,7 +21,9 @@ namespace Metadream.Shoot.Network
         /// <summary>Room leader asks a dedicated server to start now.</summary>
         StartRequest = 9,
         /// <summary>Room leader asks for 1v1 (1) or 2v2 (2).</summary>
-        TeamSizeRequest = 10
+        TeamSizeRequest = 10,
+        ChatSubmit = 11,
+        ChatMessage = 12
     }
 
     public enum SlotKind : byte
@@ -39,7 +41,7 @@ namespace Metadream.Shoot.Network
         /// <summary>v3: content hash in Hello. v4: nickname + computer name. v5: Disconnected slots, no rematch, map gimmicks. v6: card rerolls.</summary>
         /// <summary>v7: sound events (FxType.Sound) in snapshots. v8: map script state (named objects + HUD text).
         /// v9: card pick time limit (lobby + snapshot), character looks (Hello + snapshot).</summary>
-        public const int Version = 9;
+        public const int Version = 10; // chat, pointer card selection, independent face parts
         public const int DefaultPort = 7777;
         /// <summary>Same rate as the original PhotonNetwork.SerializationRate (NetworkSettings.Start).</summary>
         public const float SnapshotRate = 30f;
@@ -91,6 +93,7 @@ namespace Metadream.Shoot.Network
             if (f.NavDown) flags |= 512;
             w.Write((ushort)flags);
             w.Write((byte)Mathf.Clamp(f.Reroll, 0, 255));
+            w.Write((byte)Mathf.Clamp(f.SelectCard, 0, 255));
         }
 
         public static InputFrame ReadInput(BinaryReader r)
@@ -108,6 +111,7 @@ namespace Metadream.Shoot.Network
             f.NavUp = (flags & 256) != 0;
             f.NavDown = (flags & 512) != 0;
             f.Reroll = r.ReadByte();
+            f.SelectCard = r.ReadByte();
             return f;
         }
     }
@@ -361,6 +365,7 @@ namespace Metadream.Shoot.Network
             w.Write((byte)Mathf.Clamp(PickTimeLimit, 0, 255));
             w.Write((byte)Mathf.Min(Looks.Count, 255));
             for (int i = 0; i < Looks.Count && i < 255; i++) { w.Write(Looks[i].Hat); w.Write(Looks[i].Expression); w.Write(Looks[i].Accessory); }
+            for (int i = 0; i < Looks.Count && i < 255; i++) Looks[i].WriteDetails(w);
         }
 
         public void Read(BinaryReader r)
@@ -430,6 +435,9 @@ namespace Metadream.Shoot.Network
                 PickTimeLimit = r.ReadByte();
                 int nl = r.ReadByte();
                 for (int i = 0; i < nl; i++) Looks.Add(new CharacterLook(r.ReadByte(), r.ReadByte(), r.ReadByte()));
+                // v9 replays end after the three original cosmetic bytes.
+                if (r.BaseStream.Position < r.BaseStream.Length)
+                    for (int i = 0; i < nl; i++) Looks[i] = Looks[i].ReadDetails(r);
             }
         }
     }
@@ -442,7 +450,7 @@ namespace Metadream.Shoot.Network
     {
         private InputFrame _latest;
         private bool _jump, _shoot, _block, _confirm, _left, _right, _up, _down;
-        private int _reroll;
+        private int _reroll, _selectCard;
 
         public NetworkInput(string label)
         {
@@ -464,6 +472,7 @@ namespace Metadream.Shoot.Network
             _up |= f.NavUp;
             _down |= f.NavDown;
             if (f.Reroll != 0) _reroll = f.Reroll;
+            if (f.SelectCard != 0) _selectCard = f.SelectCard;
             LastReceived = Time.unscaledTime;
         }
 
@@ -478,6 +487,7 @@ namespace Metadream.Shoot.Network
             f.NavRight = _right;
             f.NavUp = _up;
             f.NavDown = _down;
+            f.SelectCard = _selectCard; _selectCard = 0;
             f.Reroll = _reroll;
             _reroll = 0;
             _jump = _shoot = _block = _confirm = _left = _right = _up = _down = false;
