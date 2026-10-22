@@ -1,0 +1,19 @@
+{
+    "name": "Metadream.MapEditor.Editor",
+    "rootNamespace": "Metadream.MapEditor.EditorTools",
+    "references": [
+        "Metadream.Shoot",
+        "Metadream.MapEditor"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

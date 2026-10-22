@@ -1,0 +1,35 @@
+{
+    "id": "rounds_shockwave",
+    "title": "충격파",
+    "subtitle": "SHOCKWAVE",
+    "description": "방어하면 주변 적을 밀어낸다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.5,
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "shockwave_on_block",
+            "radius": 8,
+            "amount": 35
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+50%",
+            "positive": true
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "id": "rounds_toxic_cloud",
+    "title": "독구름",
+    "subtitle": "TOXIC CLOUD",
+    "description": "맞은 적을 중독시키고 느리게 만든다. (원작: 착탄 지점에 독구름)",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.75,
+        "attackSpeed": 1.2,
+        "reloadTimeAdd": 0.5
+    },
+    "effects": [
+        {
+            "type": "poison_on_hit",
+            "damage": 12,
+            "duration": 3
+        },
+        {
+            "type": "slow_on_hit",
+            "amount": 0.4,
+            "duration": 1.5
+        }
+    ],
+    "lines": [
+        {
+            "label": "공격 속도",
+            "amount": "-20%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

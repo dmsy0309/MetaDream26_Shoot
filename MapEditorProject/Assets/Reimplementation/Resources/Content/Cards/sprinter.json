@@ -1,0 +1,27 @@
+{
+    "id": "sprinter",
+    "title": "질주",
+    "subtitle": "SPRINTER",
+    "description": "더 빠르게 달린다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "movementSpeed": 1.25,
+        "health": 0.9
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "이동 속도",
+            "amount": "+25%",
+            "positive": true
+        },
+        {
+            "label": "최대 체력",
+            "amount": "-10%",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "id": "glass_cannon",
+    "title": "유리 대포",
+    "subtitle": "GLASS CANNON",
+    "description": "피해 두 배, 체력 절반.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 2,
+        "health": 0.5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "최대 체력",
+            "amount": "-50%",
+            "positive": false
+        }
+    ]
+}

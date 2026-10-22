@@ -1,0 +1,36 @@
+{
+    "id": "scatter",
+    "title": "산탄",
+    "subtitle": "SCATTER",
+    "description": "한 번에 세 발을 부채꼴로 쏜다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "multishot"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "numberOfProjectiles": 2,
+        "spread": 0.18,
+        "damage": 0.45,
+        "ammo": 3
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "투사체",
+            "amount": "+2",
+            "positive": true
+        },
+        {
+            "label": "탄약",
+            "amount": "+3",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "보정 적용",
+            "positive": false
+        }
+    ]
+}

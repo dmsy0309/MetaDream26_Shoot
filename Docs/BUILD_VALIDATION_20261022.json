@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-22",
+  "unity": "6000.6.6f1",
+  "baseline": "d9d3d23",
+  "runtime_commit": "0345334",
+  "tests": [
+    {
+      "file": "Logs/release-EditMode.xml",
+      "result": "Passed",
+      "total": "84",
+      "passed": "84",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Logs/parity-playmode.xml",
+      "result": "Passed",
+      "total": "17",
+      "passed": "17",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "MapEditorProject/Logs/release-EditMode.xml",
+      "result": "Passed",
+      "total": "29",
+      "passed": "29",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "MapEditorProject/Logs/release-PlayMode.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "skipped": "0"
+    }
+  ],
+  "builds": [
+    {
+      "log": "Logs/release-BuildMac.log",
+      "result": "[Build] target=StandaloneOSX subtarget=Player result=Succeeded size=89205393 errors=0 path=Builds/macOS/MetadreamShoot.app"
+    },
+    {
+      "log": "Logs/release-BuildServerLinux.log",
+      "result": "[Build] target=StandaloneLinux64 subtarget=Server result=Succeeded size=1074836038 errors=0 path=Builds/Server/Linux/MetadreamShootServer/MetadreamShootServer.x86_64"
+    },
+    {
+      "log": "Logs/release-BuildServerWindows.log",
+      "result": "[Build] target=StandaloneWindows64 subtarget=Server result=Succeeded size=101860579 errors=0 path=Builds/Server/Windows/MetadreamShootServer/MetadreamShootServer.exe"
+    },
+    {
+      "log": "Logs/release-BuildWindows.log",
+      "result": "[Build] target=StandaloneWindows64 subtarget=Player result=Succeeded size=116047261 errors=0 path=Builds/Windows/MetadreamShoot/MetadreamShoot.exe"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildMac.log",
+      "result": "[Build] target=StandaloneOSX result=Succeeded size=89370036 errors=0 warnings=2 path=Builds/macOS/MetadreamShootMapMaker.app"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildWindows.log",
+      "result": "[Build] target=StandaloneWindows64 result=Succeeded size=116214085 errors=0 warnings=2 path=Builds/Windows/MetadreamShootMapMaker/MetadreamShootMapMaker.exe"
+    }
+  ],
+  "runtime_checks": [
+    "macOS installed game: 2v2 card picks and combat",
+    "macOS installed map editor: selftest PASS, 46/46 built-in map roundtrips",
+    "Two TCP clients: Korean room chat relayed with authenticated sender name",
+    "macOS GUI client: Korean chat rendered"
+  ],
+  "cross_build_only": [
+    "Windows game",
+    "Windows server",
+    "Linux server",
+    "Windows map editor"
+  ]
+}

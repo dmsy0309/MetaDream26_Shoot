@@ -1,0 +1,29 @@
+{
+    "id": "rounds_dazzle",
+    "title": "현혹",
+    "subtitle": "DAZZLE",
+    "description": "탄에 맞은 적을 잠시 기절시킨다(거의 정지).",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "slow_on_hit",
+            "amount": 0.9,
+            "duration": 0.6
+        }
+    ],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

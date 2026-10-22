@@ -1,0 +1,45 @@
+{
+    "id": "rounds_buckshot",
+    "title": "벅샷",
+    "subtitle": "BUCKSHOT",
+    "description": "산탄총처럼 여러 발을 쏜다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.4,
+        "projectileSpeed": 3.5,
+        "gravity": 0.0,
+        "knockback": 2.5,
+        "reloadTimeAdd": 0.25,
+        "spread": 0.5,
+        "ammo": 5,
+        "numberOfProjectiles": 4
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄 수",
+            "amount": "+4 ",
+            "positive": true
+        },
+        {
+            "label": "탄창",
+            "amount": "+5",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-60%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

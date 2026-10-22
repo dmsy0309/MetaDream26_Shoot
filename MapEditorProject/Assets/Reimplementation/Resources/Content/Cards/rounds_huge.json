@@ -1,0 +1,23 @@
+{
+    "id": "rounds_huge",
+    "title": "거대화",
+    "subtitle": "HUGE",
+    "description": "체력이 크게 늘고 몸이 커진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.8
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+80%",
+            "positive": true
+        }
+    ]
+}

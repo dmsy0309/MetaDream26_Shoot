@@ -1,0 +1,30 @@
+{
+    "id": "rounds_lifestealer",
+    "title": "흡혈귀",
+    "subtitle": "LIFESTEALER",
+    "description": "가까운 적의 체력을 빼앗는다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.25
+    },
+    "effects": [
+        {
+            "type": "drain_aura",
+            "radius": 5,
+            "damage": 12,
+            "amount": 1
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+25%",
+            "positive": true
+        }
+    ]
+}

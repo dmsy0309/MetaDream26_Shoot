@@ -1,0 +1,43 @@
+{
+    "id": "rounds_burst",
+    "title": "점사",
+    "subtitle": "BURST",
+    "description": "세 발씩 연속으로 쏜다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.6,
+        "reloadTimeAdd": 0.25,
+        "spread": 0.04,
+        "timeBetweenBullets": 0.025,
+        "ammo": 3,
+        "bursts": 3
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄 수",
+            "amount": "+2",
+            "positive": true
+        },
+        {
+            "label": "탄창",
+            "amount": "+3",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-60%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

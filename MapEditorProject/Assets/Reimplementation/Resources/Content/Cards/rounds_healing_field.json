@@ -1,0 +1,34 @@
+{
+    "id": "rounds_healing_field",
+    "title": "치유의 장",
+    "subtitle": "HEALING FIELD",
+    "description": "방어하면 체력을 회복한다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.3,
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "heal_on_block",
+            "amount": 30
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+30%",
+            "positive": true
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

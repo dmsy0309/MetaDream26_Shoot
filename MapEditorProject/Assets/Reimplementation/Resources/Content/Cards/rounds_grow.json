@@ -1,0 +1,28 @@
+{
+    "id": "rounds_grow",
+    "title": "성장",
+    "subtitle": "GROW",
+    "description": "탄이 오래 날아갈수록 피해가 커진다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "grow_damage",
+            "amount": 0.6
+        }
+    ],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

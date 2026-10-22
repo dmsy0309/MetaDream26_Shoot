@@ -1,0 +1,121 @@
+{
+  "id": "script_switch_gate",
+  "name": "스위치 성문",
+  "tutorialOnly": false,
+  "origin": "Metadream 맵 스크립트 예시",
+  "solids": [
+    {
+      "x": -18,
+      "y": -12,
+      "w": 34,
+      "h": 3
+    },
+    {
+      "x": 18,
+      "y": -12,
+      "w": 34,
+      "h": 3
+    },
+    {
+      "name": "gate",
+      "x": 0,
+      "y": -1,
+      "w": 2,
+      "h": 19
+    },
+    {
+      "x": -20,
+      "y": 2,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "x": 20,
+      "y": 2,
+      "w": 8,
+      "h": 1.2
+    },
+    {
+      "name": "bell",
+      "x": 0,
+      "y": 12,
+      "w": 2,
+      "h": 2
+    }
+  ],
+  "spawns": [
+    {
+      "x": -14,
+      "y": -8
+    },
+    {
+      "x": 14,
+      "y": -8
+    }
+  ],
+  "areas": [
+    {
+      "name": "plate_left",
+      "x": -29,
+      "y": -10,
+      "w": 4,
+      "h": 1,
+      "show": true,
+      "color": "#40ff9060"
+    },
+    {
+      "name": "plate_right",
+      "x": 29,
+      "y": -10,
+      "w": 4,
+      "h": 1,
+      "show": true,
+      "color": "#40ff9060"
+    }
+  ],
+  "script": [
+    "# 발판을 밟으면 4초, 종을 쏘면 6초 동안 가운데 성문이 바닥으로 내려간다",
+    "var open_until = 0",
+    "var opened = false",
+    "",
+    "on enter plate_left",
+    "  open_until = max(open_until, time + 4)",
+    "  color(plate_left, \"#7cff9a\")",
+    "end",
+    "on exit plate_left",
+    "  reset_color(plate_left)",
+    "end",
+    "on enter plate_right",
+    "  open_until = max(open_until, time + 4)",
+    "  color(plate_right, \"#7cff9a\")",
+    "end",
+    "on exit plate_right",
+    "  reset_color(plate_right)",
+    "end",
+    "",
+    "on shot bell",
+    "  open_until = max(open_until, time + 6)",
+    "  effect(\"ring\", bell.x, bell.y, 4, \"#ffd040\")",
+    "  sound(\"round\", bell.x, bell.y)",
+    "end",
+    "",
+    "on tick",
+    "  if time < open_until and not opened",
+    "    opened = true",
+    "    move(gate, 0, -20, 0.6)",
+    "    color(bell, \"#ffd040\")",
+    "    sound(\"pad\")",
+    "  elif time >= open_until and opened",
+    "    opened = false",
+    "    move(gate, 0, -1, 0.6)",
+    "    reset_color(bell)",
+    "    sound(\"block\")",
+    "  end",
+    "  if opened",
+    "    hud(\"성문 열림 · \" + text(open_until - time, 1) + \"초\")",
+    "  else",
+    "    hud(\"발판을 밟거나 종을 쏘면 성문이 열립니다\")",
+    "  end",
+    "end"
+  ]
+}

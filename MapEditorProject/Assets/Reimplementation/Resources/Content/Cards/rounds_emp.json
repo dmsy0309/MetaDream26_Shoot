@@ -1,0 +1,36 @@
+{
+    "id": "rounds_emp",
+    "title": "EMP",
+    "subtitle": "EMP",
+    "description": "방어하면 주변 적을 크게 느리게 만든다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.3,
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "slow_on_block",
+            "radius": 10,
+            "amount": 0.5,
+            "duration": 2.5
+        }
+    ],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "+30%",
+            "positive": true
+        },
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

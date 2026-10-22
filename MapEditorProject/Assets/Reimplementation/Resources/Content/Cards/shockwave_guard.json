@@ -1,0 +1,34 @@
+{
+    "id": "shockwave_guard",
+    "title": "충격 방패",
+    "subtitle": "SHOCKWAVE GUARD",
+    "description": "방어하는 순간 주변 적을 밀쳐 낸다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "block"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdAdd": 0.5
+    },
+    "effects": [
+        {
+            "type": "shockwave_on_block",
+            "radius": 7,
+            "amount": 30
+        }
+    ],
+    "lines": [
+        {
+            "label": "밀쳐내기",
+            "amount": "반경 7",
+            "positive": true
+        },
+        {
+            "label": "방어 쿨다운",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

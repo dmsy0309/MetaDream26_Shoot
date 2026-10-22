@@ -1,0 +1,29 @@
+{
+    "id": "rounds_drill_ammo",
+    "title": "관통탄",
+    "subtitle": "DRILL AMMO",
+    "description": "탄이 벽을 뚫고 지나간다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25,
+        "ignoreWalls": true
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "벽 관통",
+            "amount": "+7",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "id": "phase_rounds",
+    "title": "위상탄",
+    "subtitle": "PHASE ROUNDS",
+    "description": "탄이 지형을 통과한다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "pierce"
+    ],
+    "blacklistedCategories": [
+        "bounce"
+    ],
+    "modifiers": {
+        "ignoreWalls": true,
+        "damage": 0.75
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "지형 관통",
+            "amount": "ON",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-25%",
+            "positive": false
+        }
+    ]
+}

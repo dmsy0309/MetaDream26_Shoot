@@ -1,0 +1,25 @@
+{
+    "id": "rounds_refresh",
+    "title": "재충전",
+    "subtitle": "REFRESH",
+    "description": "피해를 주면 방어를 바로 다시 쓸 수 있다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {},
+    "effects": [
+        {
+            "type": "block_on_damage"
+        }
+    ],
+    "lines": [
+        {
+            "label": "특수",
+            "amount": "효과",
+            "positive": true
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Builds/Windows/MetadreamShoot-Windows-x64.zip",
+    "bytes": 47199741,
+    "sha256": "921ec21d93d6d63020c137a5bacd536535858ccd11ed3f5a7b2bfddebbcdc531"
+  },
+  {
+    "path": "Builds/Server/MetadreamShootServer-Windows-x64.zip",
+    "bytes": 39141291,
+    "sha256": "aceefc5c8152ad8bdec98f307a4cea928542a615fdd053274d3ca2066757f5bd"
+  },
+  {
+    "path": "Builds/Server/MetadreamShootServer-Linux-x64.tar.gz",
+    "bytes": 264593679,
+    "sha256": "cf284382e7d949e1e3ab9e2252cae6048e636554b3f84f79e002df4d615c0704"
+  },
+  {
+    "path": "MapEditorProject/Builds/Windows/MetadreamShootMapMaker-Windows-x64.zip",
+    "bytes": 47281572,
+    "sha256": "f2f9a1b93d6c493bf19ba4c332c837bda3343d3631106604e90ccf9d11ec72f4"
+  }
+]

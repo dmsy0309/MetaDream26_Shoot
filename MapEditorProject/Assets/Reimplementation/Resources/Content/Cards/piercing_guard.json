@@ -1,0 +1,27 @@
+{
+    "id": "piercing_guard",
+    "title": "뚫는 탄",
+    "subtitle": "GUARD BREAKER",
+    "description": "탄을 방어할 수 없다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "unblockable": true,
+        "attackSpeed": 1.3
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "방어 불가",
+            "amount": "ON",
+            "positive": true
+        },
+        {
+            "label": "공격 간격",
+            "amount": "+30%",
+            "positive": false
+        }
+    ]
+}

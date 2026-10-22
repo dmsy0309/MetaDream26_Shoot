@@ -1,0 +1,21 @@
+{
+    "id": "snap_reload",
+    "title": "순간 장전",
+    "subtitle": "SNAP RELOAD",
+    "description": "장전이 훨씬 빨라진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeMultiplier": 0.6
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "재장전",
+            "amount": "-40%",
+            "positive": true
+        }
+    ]
+}

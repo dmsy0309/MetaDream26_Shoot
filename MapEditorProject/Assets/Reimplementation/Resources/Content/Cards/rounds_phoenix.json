@@ -1,0 +1,24 @@
+{
+    "id": "rounds_phoenix",
+    "title": "불사조",
+    "subtitle": "PHOENIX",
+    "description": "한 번 부활한다. 대신 체력이 줄어든다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 0.65,
+        "respawns": 1
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "체력",
+            "amount": "-35%",
+            "positive": false
+        }
+    ]
+}

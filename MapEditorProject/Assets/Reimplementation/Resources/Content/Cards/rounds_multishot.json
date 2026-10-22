@@ -1,0 +1,42 @@
+{
+    "id": "rounds_multishot",
+    "title": "다중 사격",
+    "subtitle": "MULTISHOT",
+    "description": "한 번에 여러 발을 넓게 쏜다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.3,
+        "attackSpeed": 1.3,
+        "spread": 0.16,
+        "ammo": 9,
+        "numberOfProjectiles": 6
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄 수",
+            "amount": "+6",
+            "positive": true
+        },
+        {
+            "label": "탄창",
+            "amount": "+9",
+            "positive": true
+        },
+        {
+            "label": "공격 속도",
+            "amount": "-30%",
+            "positive": false
+        },
+        {
+            "label": "피해",
+            "amount": "-70%",
+            "positive": false
+        }
+    ]
+}

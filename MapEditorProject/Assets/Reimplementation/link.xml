@@ -1,0 +1,4 @@
+<!-- Keep reflection-discovered CardEffect classes and JSON DTOs in IL2CPP builds (Linux server). -->
+<linker>
+  <assembly fullname="Metadream.Shoot" preserve="all" />
+</linker>

@@ -1,0 +1,29 @@
+{
+    "id": "heavy_plating",
+    "title": "중장갑",
+    "subtitle": "HEAVY PLATING",
+    "description": "체력이 크게 늘고 몸집도 커진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "survival"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.6,
+        "movementSpeed": 0.92
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "최대 체력",
+            "amount": "+60%",
+            "positive": true
+        },
+        {
+            "label": "이동 속도",
+            "amount": "-8%",
+            "positive": false
+        }
+    ]
+}

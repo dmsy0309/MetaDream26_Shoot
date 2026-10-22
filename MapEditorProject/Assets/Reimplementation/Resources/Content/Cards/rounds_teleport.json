@@ -1,0 +1,28 @@
+{
+    "id": "rounds_teleport",
+    "title": "순간이동",
+    "subtitle": "TELEPORT",
+    "description": "방어하면 조준 방향으로 순간이동한다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdMultiplier": 0.7
+    },
+    "effects": [
+        {
+            "type": "teleport_on_block",
+            "amount": 10
+        }
+    ],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "-30%",
+            "positive": true
+        }
+    ]
+}

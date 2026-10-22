@@ -1,0 +1,41 @@
+{
+    "id": "rounds_target_bounce",
+    "title": "표적 도탄",
+    "subtitle": "TARGET BOUNCE",
+    "description": "튕긴 탄이 보이는 적을 향한다. (근사: 약한 유도)",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.8,
+        "reloadTimeAdd": 0.25,
+        "reflects": 1
+    },
+    "effects": [
+        {
+            "type": "homing",
+            "amount": 120,
+            "radius": 20
+        }
+    ],
+    "lines": [
+        {
+            "label": "탄 튕김",
+            "amount": "+1",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-20%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "id": "rounds_ensnare",
+    "title": "속박",
+    "subtitle": "ENSNARE",
+    "description": "탄에 맞은 적을 잠시 거의 움직이지 못하게 묶는다.",
+    "rarity": "Rare",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {},
+    "effects": [
+        {
+            "type": "slow_on_hit",
+            "amount": 0.8,
+            "duration": 1.0
+        }
+    ],
+    "lines": [
+        {
+            "label": "특수",
+            "amount": "효과",
+            "positive": true
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+{
+    "id": "rounds_glass_cannon",
+    "title": "유리 대포",
+    "subtitle": "GLASS CANNON",
+    "description": "피해가 두 배가 되지만 체력이 절반이 된다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 2.0,
+        "reloadTimeAdd": 0.25,
+        "health": 0.5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "체력",
+            "amount": "-100%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

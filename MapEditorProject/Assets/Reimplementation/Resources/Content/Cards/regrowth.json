@@ -1,0 +1,29 @@
+{
+    "id": "regrowth",
+    "title": "재생",
+    "subtitle": "REGROWTH",
+    "description": "시간이 지나면 체력이 차오른다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "survival"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "regen": 7,
+        "health": 1.1
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "재생",
+            "amount": "+7/s",
+            "positive": true
+        },
+        {
+            "label": "최대 체력",
+            "amount": "+10%",
+            "positive": true
+        }
+    ]
+}

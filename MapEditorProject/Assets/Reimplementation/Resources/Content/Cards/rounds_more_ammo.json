@@ -1,0 +1,23 @@
+{
+    "id": "rounds_more_ammo",
+    "title": "탄약 추가",
+    "subtitle": "MORE AMMO",
+    "description": "탄창이 늘어난다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "ammo": 6
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄창",
+            "amount": "+6",
+            "positive": true
+        }
+    ]
+}

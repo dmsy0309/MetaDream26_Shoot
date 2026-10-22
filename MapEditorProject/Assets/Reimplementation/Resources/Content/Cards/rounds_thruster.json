@@ -1,0 +1,28 @@
+{
+    "id": "rounds_thruster",
+    "title": "추진기",
+    "subtitle": "THRUSTER",
+    "description": "탄에 맞은 적을 탄 방향으로 밀어낸다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "push_on_hit",
+            "amount": 25
+        }
+    ],
+    "lines": [
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "id": "rounds_static_field",
+    "title": "정전기장",
+    "subtitle": "STATIC FIELD",
+    "description": "방어하면 주변 적에게 피해를 주고 느리게 만든다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "blast_on_block",
+            "radius": 7,
+            "damage": 15,
+            "amount": 2
+        },
+        {
+            "type": "slow_on_block",
+            "radius": 7,
+            "amount": 0.5,
+            "duration": 2
+        }
+    ],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

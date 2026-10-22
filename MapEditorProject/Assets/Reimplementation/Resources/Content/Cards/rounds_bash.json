@@ -1,0 +1,33 @@
+{
+    "id": "rounds_bash",
+    "title": "강타",
+    "subtitle": "BASH",
+    "description": "탄에 맞은 적을 세게 밀쳐낸다.",
+    "rarity": "Common",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "push_on_hit",
+            "amount": 18
+        }
+    ],
+    "lines": [
+        {
+            "label": "명중 시 기절",
+            "amount": "+약간",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

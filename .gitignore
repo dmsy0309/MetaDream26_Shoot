@@ -36,3 +36,11 @@ MasterServer/admin_token.txt
 /MapEditorProject/Logs/
 /MapEditorProject/Temp/
 /MapEditorProject/UserSettings/
+
+# Unity test runner generates these transient scenes
+**/Assets/InitTestScene*.unity
+**/Assets/InitTestScene*.unity.meta
+mono_crash.*
+
+**/Assets/Resources/PerformanceTestRun*.json
+**/Assets/Resources/PerformanceTestRun*.json.meta

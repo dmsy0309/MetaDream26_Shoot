@@ -1,0 +1,23 @@
+{
+    "id": "leech_rounds",
+    "title": "흡혈탄",
+    "subtitle": "LEECH ROUNDS",
+    "description": "준 피해의 절반을 회복한다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "survival"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "lifeSteal": 0.5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "흡혈",
+            "amount": "+50%",
+            "positive": true
+        }
+    ]
+}

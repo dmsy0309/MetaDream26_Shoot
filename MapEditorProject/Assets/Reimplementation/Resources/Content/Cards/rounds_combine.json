@@ -1,0 +1,35 @@
+{
+    "id": "rounds_combine",
+    "title": "결합",
+    "subtitle": "COMBINE",
+    "description": "탄창이 줄지만 한 발이 두 배로 강하다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 2.0,
+        "reloadTimeAdd": 0.5,
+        "ammo": -2
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "+100%",
+            "positive": true
+        },
+        {
+            "label": "탄창",
+            "amount": "-2",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

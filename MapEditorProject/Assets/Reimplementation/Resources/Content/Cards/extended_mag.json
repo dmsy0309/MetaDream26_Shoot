@@ -1,0 +1,27 @@
+{
+    "id": "extended_mag",
+    "title": "확장 탄창",
+    "subtitle": "EXTENDED MAG",
+    "description": "탄창을 늘린다. 장전은 조금 느려진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "ammo": 3,
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄약",
+            "amount": "+3",
+            "positive": true
+        },
+        {
+            "label": "재장전",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

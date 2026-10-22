@@ -1,0 +1,35 @@
+{
+    "id": "heavy_shell",
+    "title": "대구경",
+    "subtitle": "HEAVY SHELL",
+    "description": "느리지만 묵직한 탄.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 1.6,
+        "attackSpeed": 1.25,
+        "projectileSpeed": 0.85,
+        "projectileSize": 1.5,
+        "knockback": 1.4
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "피해",
+            "amount": "+60%",
+            "positive": true
+        },
+        {
+            "label": "공격 간격",
+            "amount": "+25%",
+            "positive": false
+        },
+        {
+            "label": "탄속",
+            "amount": "-15%",
+            "positive": false
+        }
+    ]
+}

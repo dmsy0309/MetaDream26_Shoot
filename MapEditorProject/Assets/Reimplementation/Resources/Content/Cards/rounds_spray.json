@@ -1,0 +1,42 @@
+{
+    "id": "rounds_spray",
+    "title": "난사",
+    "subtitle": "SPRAY",
+    "description": "아주 빠르게 쏘지만 한 발은 약하다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.25,
+        "attackSpeed": 0.0909,
+        "reloadTimeAdd": 0.25,
+        "spread": 0.1,
+        "ammo": 12
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "공격 속도",
+            "amount": "+1000%",
+            "positive": true
+        },
+        {
+            "label": "탄창",
+            "amount": "+12",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-75%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

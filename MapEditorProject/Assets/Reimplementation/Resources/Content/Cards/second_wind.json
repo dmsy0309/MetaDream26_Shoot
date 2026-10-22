@@ -1,0 +1,29 @@
+{
+    "id": "second_wind",
+    "title": "두 번째 숨",
+    "subtitle": "SECOND WIND",
+    "description": "포인트마다 한 번 되살아난다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "survival"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "respawns": 1,
+        "health": 0.8
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "부활",
+            "amount": "+1",
+            "positive": true
+        },
+        {
+            "label": "최대 체력",
+            "amount": "-20%",
+            "positive": false
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "id": "quick_guard",
+    "title": "빠른 방패",
+    "subtitle": "QUICK GUARD",
+    "description": "방어를 더 자주 쓴다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "block"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdMultiplier": 0.65
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "방어 쿨다운",
+            "amount": "-35%",
+            "positive": true
+        }
+    ]
+}

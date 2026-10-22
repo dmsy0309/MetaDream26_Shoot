@@ -1,0 +1,27 @@
+{
+    "id": "rounds_tactical_reload",
+    "title": "전술 재장전",
+    "subtitle": "TACTICAL RELOAD",
+    "description": "방어하면 즉시 재장전한다.",
+    "rarity": "Rare",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "blockCdAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "reload_on_block"
+        }
+    ],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

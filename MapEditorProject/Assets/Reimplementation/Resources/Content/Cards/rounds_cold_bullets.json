@@ -1,0 +1,34 @@
+{
+    "id": "rounds_cold_bullets",
+    "title": "냉기탄",
+    "subtitle": "COLD BULLETS",
+    "description": "탄에 맞은 적이 느려진다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "reloadTimeAdd": 0.25
+    },
+    "effects": [
+        {
+            "type": "slow_on_hit",
+            "amount": 0.7,
+            "duration": 1.5
+        }
+    ],
+    "lines": [
+        {
+            "label": "명중 시 감속",
+            "amount": "+70%",
+            "positive": true
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.25s",
+            "positive": false
+        }
+    ]
+}

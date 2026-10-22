@@ -1,0 +1,35 @@
+{
+    "id": "rounds_mayhem",
+    "title": "대혼란",
+    "subtitle": "MAYHEM",
+    "description": "탄이 5번 튕긴다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "damage": 0.85,
+        "reloadTimeAdd": 0.5,
+        "reflects": 5
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "탄 튕김",
+            "amount": "+5",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-15%",
+            "positive": false
+        },
+        {
+            "label": "재장전 시간",
+            "amount": "+0.5s",
+            "positive": false
+        }
+    ]
+}

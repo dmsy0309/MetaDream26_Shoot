@@ -1,0 +1,27 @@
+{
+    "id": "rapid_fire",
+    "title": "속사",
+    "subtitle": "RAPID FIRE",
+    "description": "더 빠르게 쏜다.",
+    "rarity": "Common",
+    "allowMultiple": true,
+    "categories": [],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "attackSpeed": 0.6,
+        "damage": 0.8
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "공격 간격",
+            "amount": "-40%",
+            "positive": true
+        },
+        {
+            "label": "피해",
+            "amount": "-20%",
+            "positive": false
+        }
+    ]
+}

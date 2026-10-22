@@ -1,0 +1,29 @@
+{
+    "id": "rounds_defender",
+    "title": "수비수",
+    "subtitle": "DEFENDER",
+    "description": "체력이 늘고 방어 재사용 대기가 짧아진다.",
+    "rarity": "Uncommon",
+    "allowMultiple": true,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "health": 1.3,
+        "blockCdMultiplier": 0.7
+    },
+    "effects": [],
+    "lines": [
+        {
+            "label": "방어 대기",
+            "amount": "-30%",
+            "positive": true
+        },
+        {
+            "label": "체력",
+            "amount": "+30%",
+            "positive": true
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "id": "rounds_taste_of_blood",
+    "title": "피의 맛",
+    "subtitle": "TASTE OF BLOOD",
+    "description": "흡혈 30%. 피해를 주면 3초 동안 이동 속도 +50%.",
+    "rarity": "Uncommon",
+    "allowMultiple": false,
+    "categories": [
+        "rounds"
+    ],
+    "blacklistedCategories": [],
+    "modifiers": {
+        "lifeSteal": 0.3
+    },
+    "effects": [
+        {
+            "type": "speed_after_damage",
+            "amount": 0.5,
+            "duration": 3
+        }
+    ],
+    "lines": [
+        {
+            "label": "흡혈",
+            "amount": "+30%",
+            "positive": true
+        }
+    ]
+}
