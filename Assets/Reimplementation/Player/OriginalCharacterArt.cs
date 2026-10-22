@@ -73,28 +73,30 @@ namespace Metadream.Shoot.Player
         }
         public static void DrawThumbnail(Rect rect, Item item)
         {
-            var matrix = GUI.matrix; var color = GUI.color;
-            GUI.matrix = matrix * Matrix4x4.TRS(new Vector3(rect.center.x,rect.center.y,0),Quaternion.identity,new Vector3(rect.width/9f,rect.height/9f,1));
-            DrawNode(item.node,true);
-            GUI.matrix=matrix;GUI.color=color;
+            var color = GUI.color;
+            // Keep GUI.matrix unchanged inside BeginScrollView: changing it moves Unity's clip rectangle too.
+            var matrix=Matrix4x4.TRS(new Vector3(rect.center.x,rect.center.y,0),Quaternion.identity,new Vector3(rect.width/9f,rect.height/9f,1));
+            DrawNode(item.node,matrix,true);
+            GUI.color=color;
         }
-        private static void DrawNode(Node node,bool root=false)
+        private static void DrawNode(Node node,Matrix4x4 matrix,bool root=false)
         {
             if (!root && !node.active) return;
-            var matrix=GUI.matrix;
             if(!root)
             {
                 float angle=node.rotation.eulerAngles.z;
-                GUI.matrix=matrix*Matrix4x4.TRS(new Vector3(node.position.x,-node.position.y,0),Quaternion.Euler(0,0,-angle),new Vector3(node.size.x,node.size.y,1));
+                matrix=matrix*Matrix4x4.TRS(new Vector3(node.position.x,-node.position.y,0),Quaternion.Euler(0,0,-angle),new Vector3(node.size.x,node.size.y,1));
             }
             if(node.sprite!=0)
             {
                 var sprite=GetSprite(node.sprite);float w=sprite.rect.width/sprite.pixelsPerUnit,h=sprite.rect.height/sprite.pixelsPerUnit;
                 GUI.color=node.color;
-                GUI.DrawTexture(new Rect(-sprite.pivot.x/sprite.pixelsPerUnit,-h+sprite.pivot.y/sprite.pixelsPerUnit,w,h),sprite.texture);
+                float x=-sprite.pivot.x/sprite.pixelsPerUnit,y=-h+sprite.pivot.y/sprite.pixelsPerUnit;
+                var a=matrix.MultiplyPoint3x4(new Vector3(x,y,0));var b=matrix.MultiplyPoint3x4(new Vector3(x+w,y+h,0));
+                var bounds=Rect.MinMaxRect(Mathf.Min(a.x,b.x),Mathf.Min(a.y,b.y),Mathf.Max(a.x,b.x),Mathf.Max(a.y,b.y));
+                GUI.DrawTextureWithTexCoords(bounds,sprite.texture,new Rect(node.flipX?1:0,node.flipY?1:0,node.flipX?-1:1,node.flipY?-1:1));
             }
-            foreach(var child in node.children)DrawNode(Data.nodes[child]);
-            GUI.matrix=matrix;
+            foreach(var child in node.children)DrawNode(Data.nodes[child],matrix);
         }
 
         public static float Evaluate(Key[] keys, float time)

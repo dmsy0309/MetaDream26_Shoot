@@ -673,7 +673,7 @@ namespace Metadream.Shoot
             // Original creator places the selected face part by dragging it in the live portrait.
             if (_lookCategory != 0 && box.Contains(Event.current.mousePosition) && Event.current.type == EventType.MouseDrag && Event.current.button == 0)
             {
-                var delta=Event.current.delta*(3.3f/box.width/1.2f);delta.y=-delta.y;
+                var delta=Event.current.delta*(CharacterPreview.ViewHeight/box.width/1.2f);delta.y=-delta.y;
                 var l=PlayerProfile.Look;
                 switch(_lookCategory){case 1:l.EyeOffset+=delta;break;case 2:l.AccessoryOffset+=delta;break;case 3:l.MouthOffset+=delta;break;case 4:l.Accessory2Offset+=delta;break;}
                 PlayerProfile.Look=l.Sanitized;Event.current.Use();

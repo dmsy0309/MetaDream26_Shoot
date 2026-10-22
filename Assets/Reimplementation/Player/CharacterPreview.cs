@@ -8,6 +8,7 @@ namespace Metadream.Shoot.Player
     /// </summary>
     public sealed class CharacterPreview : MonoBehaviour
     {
+        public const float ViewHeight = 3.9f;
         private static readonly Vector3 Origin = new Vector3(10000f, 10000f, 0f);
         private static CharacterPreview _instance;
 
@@ -60,7 +61,7 @@ namespace Metadream.Shoot.Player
             camGo.transform.localPosition = new Vector3(0.1f, 0.35f, -10f);
             _camera = camGo.AddComponent<Camera>();
             _camera.orthographic = true;
-            _camera.orthographicSize = 1.95f;
+            _camera.orthographicSize = ViewHeight * 0.5f;
             _camera.clearFlags = CameraClearFlags.SolidColor;
             _camera.backgroundColor = new Color(0.13f, 0.14f, 0.19f, 1f);
             _camera.targetTexture = _texture;
