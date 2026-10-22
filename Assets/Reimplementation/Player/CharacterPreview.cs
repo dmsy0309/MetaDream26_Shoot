@@ -57,10 +57,10 @@ namespace Metadream.Shoot.Player
             _texture = new RenderTexture(512, 512, 16, RenderTextureFormat.ARGB32) { name = "CharacterPreviewRT", antiAliasing = 4 };
             var camGo = new GameObject("PreviewCamera");
             camGo.transform.SetParent(transform, false);
-            camGo.transform.localPosition = new Vector3(0.1f, -0.08f, -10f);
+            camGo.transform.localPosition = new Vector3(0.1f, 0.35f, -10f);
             _camera = camGo.AddComponent<Camera>();
             _camera.orthographic = true;
-            _camera.orthographicSize = 1.65f;
+            _camera.orthographicSize = 1.95f;
             _camera.clearFlags = CameraClearFlags.SolidColor;
             _camera.backgroundColor = new Color(0.13f, 0.14f, 0.19f, 1f);
             _camera.targetTexture = _texture;

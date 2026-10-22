@@ -10,10 +10,11 @@ namespace Metadream.Shoot.Player
     {
         public const int EyeStart = 8, MouthStart = 8, AccessoryStart = 7;
         public const float FaceScale = 0.16f * 1.05f;
-        [Serializable] public sealed class Catalog { public Item[] eyes, mouths, accessories; public SpriteInfo[] sprites; }
+        [Serializable] public sealed class Catalog { public Item[] eyes, mouths, accessories; public SpriteInfo[] sprites; public Node[] nodes; }
         [Serializable] public sealed class Item { public int id, sprite, order; public string name; public float scale, healthBarUp; public Vector2 offset; public Color color; public Node node; }
         [Serializable] public sealed class SpriteInfo { public int id, width, height; public string name; public float ppu; public Vector2 pivot; }
-        [Serializable] public sealed class Node { public string name; public Vector3 position, size; public Quaternion rotation; public bool active, enabled, flipX, flipY; public int sprite, order; public Color color; public Node[] children; public Motion[] animations; }
+        // Child indices keep Unity's serializer from recursively expanding the type beyond its depth limit.
+        [Serializable] public sealed class Node { public string name; public Vector3 position, size; public Quaternion rotation; public bool active, enabled, flipX, flipY; public int sprite, order; public Color color; public int[] children; public Motion[] animations; }
         [Serializable] public sealed class Motion { public string name; public float duration; public Channel[] channels; }
         [Serializable] public sealed class Channel { public string property; public Key[] keys; }
         [Serializable] public sealed class Key { public float time, a, b, c, d; }
@@ -66,7 +67,7 @@ namespace Metadream.Shoot.Player
                 sr.sharedMaterial = SpriteFactory.Material; sr.color = node.color; sr.sortingOrder = 12 + node.order;
                 sr.flipX = node.flipX; sr.flipY = node.flipY; sr.enabled = visible;
             }
-            foreach (var child in node.children) CreateNode(child, t, visible);
+            foreach (var child in node.children) CreateNode(Data.nodes[child], t, visible);
             if (node.animations.Length > 0) go.AddComponent<OriginalPartMotion>().Motion = node.animations[0];
             go.SetActive(node.active); return go;
         }
@@ -92,7 +93,7 @@ namespace Metadream.Shoot.Player
                 GUI.color=node.color;
                 GUI.DrawTexture(new Rect(-sprite.pivot.x/sprite.pixelsPerUnit,-h+sprite.pivot.y/sprite.pixelsPerUnit,w,h),sprite.texture);
             }
-            foreach(var child in node.children)DrawNode(child);
+            foreach(var child in node.children)DrawNode(Data.nodes[child]);
             GUI.matrix=matrix;
         }
 

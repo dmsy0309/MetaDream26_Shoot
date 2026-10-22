@@ -45,5 +45,16 @@ namespace Metadream.Shoot.Tests
                 File.WriteAllBytes("Logs/character-previews/look-"+i+".png",image.EncodeToPNG());Object.Destroy(image);
             }
         }
+        [UnityTest] public IEnumerator PreviewAmmoRemainsInsideFrameWhenAimingUp()
+        {
+            CharacterPreview.Show(CharacterLook.Default,Color.yellow,Vector2.up);
+            yield return null;yield return null;
+            var preview=Object.FindFirstObjectByType<CharacterPreview>();
+            var camera=preview.GetComponentInChildren<Camera>();
+            var bounds=preview.GetComponentInChildren<TextMesh>().GetComponent<MeshRenderer>().bounds;
+            var lower=camera.WorldToViewportPoint(bounds.min);var upper=camera.WorldToViewportPoint(bounds.max);
+            Assert.That(lower.x,Is.InRange(0f,1f));Assert.That(lower.y,Is.InRange(0f,1f));
+            Assert.That(upper.x,Is.InRange(0f,1f));Assert.That(upper.y,Is.InRange(0f,1f));
+        }
     }
 }

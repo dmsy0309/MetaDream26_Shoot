@@ -65,6 +65,14 @@ for kind in ['eyes','mouths','accessories']:
   hierarchy=node(go,True);hierarchy['sprite']=sid;hierarchy['active']=True
   catalog[kind].append({'id':index,'name':go.m_Name,'sprite':sid,'scale':d['scale'],'offset':d['offset'],'order':sr.m_SortingOrder,'color':{k:getattr(sr.m_Color,k) for k in 'rgba'},'healthBarUp':d['moveHealthBarUp'],'node':hierarchy})
 for id in [1979,1981,2076,2375]:sprite(id)
+# Preserve the exact tree using child indices; recursive field types exceed Unity's serializer depth limit.
+catalog['nodes']=[]
+def flatten(n):
+ children=n['children'];n['children']=[]
+ for child in children:
+  index=len(catalog['nodes']);catalog['nodes'].append(child);n['children'].append(index);flatten(child)
+for kind in ['eyes','mouths','accessories']:
+ for item in catalog[kind]:flatten(item['node'])
 (OUT/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
 evidence={'source':str(SOURCE),'files':{n:hashlib.sha256((SOURCE/n).read_bytes()).hexdigest() for n in ['sharedassets0.assets','level0','Managed/Assembly-CSharp.dll']},'counts':{k:len(catalog[k]) for k in ['eyes','mouths','accessories']},'sprite_count':len(exported),'method':'Native MonoBehaviour header resolves script/game object; generated type tree fields follow byte 32. Original trimmed sprite restored in its original rectangle with textureRectOffset; original pivot and pixels-per-unit retained.'}
 (ROOT/'ReverseAnalysis/evidence/character-art-extraction.json').write_text(json.dumps(evidence,indent=2)+'\n')

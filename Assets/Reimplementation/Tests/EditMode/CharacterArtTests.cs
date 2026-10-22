@@ -12,6 +12,8 @@ namespace Metadream.Shoot.Tests
             var d=OriginalCharacterArt.Data;
             Assert.AreEqual(85,d.eyes.Length);Assert.AreEqual(58,d.mouths.Length);Assert.AreEqual(54,d.accessories.Length);
             Assert.AreEqual(246,d.sprites.Length);
+            Assert.AreEqual(162,d.nodes.Length);
+            foreach(var node in d.nodes)foreach(var child in node.children)Assert.That(child,Is.InRange(0,d.nodes.Length-1));
             Assert.AreEqual("화남",CharacterLook.ExpressionNames[1]);Assert.AreEqual("안경",CharacterLook.AccessoryNames[2]);
             Assert.AreEqual("왕관",CharacterLook.HatNames[1]);
             foreach(var info in d.sprites)
