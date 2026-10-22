@@ -2,7 +2,7 @@
     "id": "rounds_remnant",
     "title": "잔해",
     "subtitle": "REMNANT",
-    "description": "방어하면 주변에 폭발을 일으킨다. (원작: 남겨진 잔해가 다가온 적 근처에서 폭발)",
+    "description": "방어하면 주변에 폭발을 일으킨다.",
     "rarity": "Common",
     "allowMultiple": true,
     "categories": [

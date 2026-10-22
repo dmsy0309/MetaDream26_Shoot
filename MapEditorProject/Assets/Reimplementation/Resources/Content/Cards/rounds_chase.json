@@ -2,7 +2,7 @@
     "id": "rounds_chase",
     "title": "추격",
     "subtitle": "CHASE",
-    "description": "이동 속도가 빨라진다. (원작: 상대에게 다가갈 때 +60%)",
+    "description": "이동 속도가 빨라진다.",
     "rarity": "Uncommon",
     "allowMultiple": false,
     "categories": [

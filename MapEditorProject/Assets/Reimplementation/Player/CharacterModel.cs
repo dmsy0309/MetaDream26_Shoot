@@ -7,25 +7,18 @@ namespace Metadream.Shoot.Player
     /// Does not add colliders or forces, or change the authoritative projectile origin.</summary>
     public sealed class CharacterModel
     {
-        private readonly Transform _root, _gun, _shield, _ammoRoot;
+        private readonly Transform _root, _gun, _shield;
         private readonly Limb _leftArm, _rightArm, _leftLeg, _rightLeg;
         private readonly SpriteRenderer _shieldDisc, _shieldEdge, _gunBarrel, _gunGrip;
-        private readonly SpriteRenderer[] _bullets = new SpriteRenderer[99];
-        private readonly LineRenderer _reloadArc;
-        private readonly TextMesh _ammoText;
-        private readonly MeshRenderer _ammoRenderer;
         private readonly RaycastHit2D[] _groundHits = new RaycastHit2D[16];
         private float _step, _kick;
-        private int _lastAmmo = -1, _lastMax = -1;
+        private int _lastAmmo = -1;
         private Color _color;
         public Transform GunHand { get; }
         public Transform ShieldHand { get; }
         public SpriteRenderer Body { get; }
         public SpriteRenderer Outline { get; }
         public CharacterFace Face { get; }
-        public int VisibleAmmo { get; private set; }
-        public Vector3 AmmoPosition => _ammoRoot.position;
-
         public CharacterModel(Transform root, Color color, SpriteRenderer body = null)
         {
             _root = root; _color = color;
@@ -47,21 +40,7 @@ namespace Metadream.Shoot.Player
             _shield = Child(ShieldHand,"ShieldStone");
             _shieldDisc = Make(_shield,"Shield",OriginalCharacterArt.GetSprite(1979),Vector2.zero,Vector2.one*0.05f,Color.white,12);
             _shieldEdge = Make(_shield,"ShieldRecharge",SpriteFactory.Ring,Vector2.zero,Vector2.one*0.38f,Color.white,13);
-            _ammoRoot = Child(root,"GunAmmo");
-            for (int i=0;i<_bullets.Length;i++)
-            {
-                _bullets[i]=Make(_ammoRoot,"Bullet"+i,SpriteFactory.Circle,Vector2.zero,Vector2.one*0.095f,Color.white,22);
-                _bullets[i].gameObject.SetActive(false);
-            }
-            var count = Child(_ammoRoot,"AmmoCount"); count.localPosition = new Vector3(0,0.16f,0);
-            _ammoText = count.gameObject.AddComponent<TextMesh>();
-            _ammoText.font = Resources.Load<Font>("Fonts/NotoSansKR-Bold");
-            _ammoText.fontSize=40; _ammoText.characterSize=0.035f; _ammoText.anchor=TextAnchor.MiddleCenter; _ammoText.alignment=TextAlignment.Center;
-            _ammoRenderer = count.GetComponent<MeshRenderer>(); _ammoRenderer.sharedMaterial=_ammoText.font.material; _ammoRenderer.sortingOrder=23;
-            var ring = Child(_ammoRoot,"ReloadProgress"); _reloadArc=ring.gameObject.AddComponent<LineRenderer>();
-            _reloadArc.useWorldSpace=false; _reloadArc.sharedMaterial=SpriteFactory.Material; _reloadArc.startWidth=_reloadArc.endWidth=0.035f;
-            _reloadArc.sortingOrder=24; _reloadArc.numCapVertices=3; _reloadArc.startColor=_reloadArc.endColor=Color.white;
-            Face = new CharacterFace(root,color);
+            Face = new CharacterFace(root);
         }
         private static Sprite _unitBody;
         private static Sprite UnitBody()
@@ -72,7 +51,6 @@ namespace Metadream.Shoot.Player
         }
         public void SetVisible(bool visible)
         {
-            _ammoRenderer.enabled=visible; _reloadArc.enabled=visible;
             Face.SetVisible(visible);
         }
         public void Tick(Vector2 aim, Vector2 velocity, bool grounded, bool dead, int ammo, int maxAmmo, bool reloading, float reload, float blockReady, bool blocking, Color tint, bool preview=false)
@@ -95,30 +73,9 @@ namespace Metadream.Shoot.Player
             _shield.localScale=Vector3.one*(blocking?1.55f:1);
             _shieldEdge.color=new Color(1,1,1,blocking?1:0.15f+0.45f*blockReady);
             _gunBarrel.color=_gunGrip.color=Dark(tint); Outline.color=Dark(tint);
-            _ammoRoot.localPosition=(Vector3)gunHand + new Vector3(aim.x*0.3f,0.54f+Mathf.Max(0,aim.y*0.5f),0);
-            maxAmmo=Mathf.Clamp(maxAmmo,1,99);ammo=Mathf.Clamp(ammo,0,maxAmmo);VisibleAmmo=ammo;
-            if (ammo!=_lastAmmo || maxAmmo!=_lastMax)
-            {
-                _ammoText.text=ammo+" / "+maxAmmo;
-                float spacing=Mathf.Min(0.15f,1.7f/maxAmmo),size=Mathf.Min(0.095f,spacing*0.7f);
-                for(int i=0;i<_bullets.Length;i++)
-                {
-                    _bullets[i].gameObject.SetActive(i<maxAmmo);
-                    _bullets[i].transform.localPosition=new Vector3((i-(maxAmmo-1)*0.5f)*spacing,0,0);
-                    _bullets[i].transform.localScale=Vector3.one*size;
-                    _bullets[i].color=i<ammo?Color.white:new Color(1,1,1,0.12f);
-                }
-                _lastAmmo=ammo;_lastMax=maxAmmo;
-            }
-            _ammoRenderer.enabled=Body.enabled;
-            _reloadArc.enabled=Body.enabled && reloading;
-            if(reloading)
-            {
-                _reloadArc.positionCount=33;
-                for(int i=0;i<33;i++) {float a=(90-i/32f*Mathf.Clamp01(reload)*360)*Mathf.Deg2Rad;_reloadArc.SetPosition(i,new Vector3(Mathf.Cos(a),Mathf.Sin(a),0)*0.15f);}
-            }
-            Face.Tick(aim,dead);Face.TintCovers(tint);
+            _lastAmmo=ammo;
         }
+
         private void DrawLeg(Limb limb,float side,Vector2 velocity,bool grounded,bool dead,bool preview,Color tint)
         {
             float stride=Mathf.Sin(_step+(side<0?0:Mathf.PI))*Mathf.Clamp01(Mathf.Abs(velocity.x)/3);

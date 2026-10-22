@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="20" result="Passed" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.7069149">
+  <test-suite type="TestSuite" id="1037" name="Metadream Shoot" fullname="Metadream Shoot" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.706915" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1067" name="Metadream.Shoot.Tests.PlayMode.dll" fullname="~/UnityProjects/Metadream26_Shoot 복사본/Library/ScriptAssemblies/Metadream.Shoot.Tests.PlayMode.dll" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.701841" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="24889" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1068" name="Metadream" fullname="Metadream" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.701223" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1069" name="Shoot" fullname="Metadream.Shoot" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.700817" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1070" name="Tests" fullname="Metadream.Shoot.Tests" runstate="Runnable" testcasecount="20" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:30:41Z" duration="88.700358" total="20" passed="20" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1038" name="CharacterModelPlayModeTests" fullname="Metadream.Shoot.Tests.CharacterModelPlayModeTests" classname="Metadream.Shoot.Tests.CharacterModelPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:29:13Z" duration="0.977997" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1040" name="All197OriginalPartsInstantiateAndPreviewRenders" fullname="Metadream.Shoot.Tests.CharacterModelPlayModeTests.All197OriginalPartsInstantiateAndPreviewRenders" methodname="All197OriginalPartsInstantiateAndPreviewRenders" classname="Metadream.Shoot.Tests.CharacterModelPlayModeTests" runstate="Runnable" seed="821263414" result="Passed" start-time="2026-10-22 14:29:12Z" end-time="2026-10-22 14:29:13Z" duration="0.948012" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1041" name="PreviewHasNoGunAmmoVisuals" fullname="Metadream.Shoot.Tests.CharacterModelPlayModeTests.PreviewHasNoGunAmmoVisuals" methodname="PreviewHasNoGunAmmoVisuals" classname="Metadream.Shoot.Tests.CharacterModelPlayModeTests" runstate="Runnable" seed="1578177768" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.009917" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="RigTracksAimWithoutGunAmmoDisplayOrAddedPhysics" fullname="Metadream.Shoot.Tests.CharacterModelPlayModeTests.RigTracksAimWithoutGunAmmoDisplayOrAddedPhysics" methodname="RigTracksAimWithoutGunAmmoDisplayOrAddedPhysics" classname="Metadream.Shoot.Tests.CharacterModelPlayModeTests" runstate="Runnable" seed="101826048" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.010154" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1042" name="ChatPlayModeTests" fullname="Metadream.Shoot.Tests.ChatPlayModeTests" classname="Metadream.Shoot.Tests.ChatPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.064389" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1043" name="DedicatedServerRelaysAuthenticatedKoreanChatToBothPeers" fullname="Metadream.Shoot.Tests.ChatPlayModeTests.DedicatedServerRelaysAuthenticatedKoreanChatToBothPeers" methodname="DedicatedServerRelaysAuthenticatedKoreanChatToBothPeers" classname="Metadream.Shoot.Tests.ChatPlayModeTests" runstate="Runnable" seed="370291451" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.062392" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Net] dedicated server open 172.30.1.57:18980 code=5C3R0-KJJH4 teamSize=1
+[Net] dedicated server open 172.30.1.57:18980 code=5C3R0-KJJH4 teamSize=1
+[Net] peer 1 connected
+[Net] peer 1 connected
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Net] slot 0 = 보낸이 (보낸이-device, 127.0.0.1:53825)
+[Net] slot 0 = 보낸이 (보낸이-device, 127.0.0.1:53825)
+[Net] peer 1 joined slot 0
+[Net] peer 1 joined slot 0
+[Net] peer 2 connected
+[Net] peer 2 connected
+[Net] slot 1 = 받는이 (받는이-device, 127.0.0.1:53826)
+[Net] slot 1 = 받는이 (받는이-device, 127.0.0.1:53826)
+[Net] peer 2 joined slot 1
+[Net] peer 2 joined slot 1
+[Net] host close snapshots=0 inputs=0
+[Net] host close snapshots=0 inputs=0
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1044" name="CheatMatchPlayModeTests" fullname="Metadream.Shoot.Tests.CheatMatchPlayModeTests" classname="Metadream.Shoot.Tests.CheatMatchPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.048849" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1045" name="CheatTeamsGivesSearchedCardToPlayerOneOnly" fullname="Metadream.Shoot.Tests.CheatMatchPlayModeTests.CheatTeamsGivesSearchedCardToPlayerOneOnly" methodname="CheatTeamsGivesSearchedCardToPlayerOneOnly" classname="Metadream.Shoot.Tests.CheatMatchPlayModeTests" runstate="Runnable" seed="1895905836" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:13Z" duration="0.047621" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=CheatTeams players=4 points=2 rounds=5
+[Match] match start mode=CheatTeams players=4 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] debug give rounds_homing to P1
+[Match] debug give rounds_homing to P1
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1046" name="MapScriptPlayModeTests" fullname="Metadream.Shoot.Tests.MapScriptPlayModeTests" classname="Metadream.Shoot.Tests.MapScriptPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:16Z" duration="3.128690" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1049" name="CSharpBehaviorsRunAndShootingANamedObjectFiresOnShot" fullname="Metadream.Shoot.Tests.MapScriptPlayModeTests.CSharpBehaviorsRunAndShootingANamedObjectFiresOnShot" methodname="CSharpBehaviorsRunAndShootingANamedObjectFiresOnShot" classname="Metadream.Shoot.Tests.MapScriptPlayModeTests" runstate="Runnable" seed="651528473" result="Passed" start-time="2026-10-22 14:29:13Z" end-time="2026-10-22 14:29:15Z" duration="1.641004" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] sandbox start map=script_turret_core players=2
+[Match] sandbox start map=script_turret_core players=2
+]]></output>
+              </test-case>
+              <test-case id="1048" name="RunawayScriptIsStoppedAndTheMatchContinues" fullname="Metadream.Shoot.Tests.MapScriptPlayModeTests.RunawayScriptIsStoppedAndTheMatchContinues" methodname="RunawayScriptIsStoppedAndTheMatchContinues" classname="Metadream.Shoot.Tests.MapScriptPlayModeTests" runstate="Runnable" seed="492480458" result="Passed" start-time="2026-10-22 14:29:15Z" end-time="2026-10-22 14:29:15Z" duration="0.441467" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] sandbox start map=t players=2
+[Match] sandbox start map=t players=2
+[MapScript] t stopped — script line 4: too many steps (limit 5000 per handler, 30000 per frame) — check repeat counts and every-intervals
+[MapScript] t stopped — script line 4: too many steps (limit 5000 per handler, 30000 per frame) — check repeat counts and every-intervals
+]]></output>
+              </test-case>
+              <test-case id="1047" name="ScriptMovesObjectsHurtsPlayersInAreasAndIsSentToClients" fullname="Metadream.Shoot.Tests.MapScriptPlayModeTests.ScriptMovesObjectsHurtsPlayersInAreasAndIsSentToClients" methodname="ScriptMovesObjectsHurtsPlayersInAreasAndIsSentToClients" classname="Metadream.Shoot.Tests.MapScriptPlayModeTests" runstate="Runnable" seed="1796633330" result="Passed" start-time="2026-10-22 14:29:15Z" end-time="2026-10-22 14:29:16Z" duration="1.041460" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] sandbox start map=t players=2
+[Match] sandbox start map=t players=2
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1050" name="MatchPlayModeTests" fullname="Metadream.Shoot.Tests.MatchPlayModeTests" classname="Metadream.Shoot.Tests.MatchPlayModeTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-22 14:29:16Z" end-time="2026-10-22 14:30:28Z" duration="71.392662" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1051" name="CpuMatchPlaysToCompletionWithLoserOnlyPicks" fullname="Metadream.Shoot.Tests.MatchPlayModeTests.CpuMatchPlaysToCompletionWithLoserOnlyPicks" methodname="CpuMatchPlaysToCompletionWithLoserOnlyPicks" classname="Metadream.Shoot.Tests.MatchPlayModeTests" runstate="Runnable" seed="1163787364" result="Passed" start-time="2026-10-22 14:29:16Z" end-time="2026-10-22 14:29:43Z" duration="27.059772" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=CpuDemo players=2 points=2 rounds=2
+[Match] match start mode=CpuDemo players=2 points=2 rounds=2
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] pick CPU 1 rounds_barrage
+[Match] pick CPU 1 rounds_barrage
+[Match] pick CPU 2 rounds_emp
+[Match] pick CPU 2 rounds_emp
+[Match] phase InitialCardPick -> Battle
+[Match] phase InitialCardPick -> Battle
+[Match] death CPU 1 (edge)
+[Match] death CPU 1 (edge)
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 1)
+[Match] result Point(team 1)
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Match] death CPU 1 by CPU 2
+[Match] death CPU 1 by CPU 2
+[Match] phase Battle -> RoundTransition
+[Match] phase Battle -> RoundTransition
+[Match] result Round(team 1)
+[Match] result Round(team 1)
+[Match] phase RoundTransition -> LoserCardPick
+[Match] phase RoundTransition -> LoserCardPick
+[Match] pick CPU 1 spring_boots
+[Match] pick CPU 1 spring_boots
+[Match] phase LoserCardPick -> Battle
+[Match] phase LoserCardPick -> Battle
+[Match] death CPU 1 by CPU 2
+[Match] death CPU 1 by CPU 2
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 1)
+[Match] result Point(team 1)
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Match] death CPU 1 (edge)
+[Match] death CPU 1 (edge)
+[Match] phase Battle -> GameOver
+[Match] phase Battle -> GameOver
+[Match] game over winner=CPU 2 cards=CPU 1[rounds_barrage,spring_boots] CPU 2[rounds_emp]
+[Match] game over winner=CPU 2 cards=CPU 1[rounds_barrage,spring_boots] CPU 2[rounds_emp]
+[Match] result Match(team 1)
+[Match] result Match(team 1)
+[Test] points=3 CPU 1[rounds_barrage,spring_boots] CPU 2[rounds_emp] history=CPU 1 ← 연발 사격 | CPU 2 ← EMP | CPU 2 포인트 | CPU 2 라운드 승리 | CPU 1 ← 스프링 부츠 | CPU 2 포인트 | CPU 2 매치 승리
+[Test] points=3 CPU 1[rounds_barrage,spring_boots] CPU 2[rounds_emp] history=CPU 1 ← 연발 사격 | CPU 2 ← EMP | CPU 2 포인트 | CPU 2 라운드 승리 | CPU 1 ← 스프링 부츠 | CPU 2 포인트 | CPU 2 매치 승리
+]]></output>
+              </test-case>
+              <test-case id="1052" name="ProjectileDamagesAndBlockReflects" fullname="Metadream.Shoot.Tests.MatchPlayModeTests.ProjectileDamagesAndBlockReflects" methodname="ProjectileDamagesAndBlockReflects" classname="Metadream.Shoot.Tests.MatchPlayModeTests" runstate="Runnable" seed="1160272659" result="Passed" start-time="2026-10-22 14:29:43Z" end-time="2026-10-22 14:29:44Z" duration="0.498249" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="TeammateBulletsPassThrough" fullname="Metadream.Shoot.Tests.MatchPlayModeTests.TeammateBulletsPassThrough" methodname="TeammateBulletsPassThrough" classname="Metadream.Shoot.Tests.MatchPlayModeTests" runstate="Runnable" seed="325850203" result="Passed" start-time="2026-10-22 14:29:44Z" end-time="2026-10-22 14:29:44Z" duration="0.349770" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1053" name="TwoVersusTwoCpuMatchCompletes" fullname="Metadream.Shoot.Tests.MatchPlayModeTests.TwoVersusTwoCpuMatchCompletes" methodname="TwoVersusTwoCpuMatchCompletes" classname="Metadream.Shoot.Tests.MatchPlayModeTests" runstate="Runnable" seed="1662407438" result="Passed" start-time="2026-10-22 14:29:44Z" end-time="2026-10-22 14:30:28Z" duration="43.476125" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=2
+[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=2
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] pick CPU 1 burst
+[Match] pick CPU 1 burst
+[Match] pick CPU 2 explosive_rounds
+[Match] pick CPU 2 explosive_rounds
+[Match] pick CPU 3 glass_cannon
+[Match] pick CPU 3 glass_cannon
+[Match] pick CPU 4 regrowth
+[Match] pick CPU 4 regrowth
+[Match] phase InitialCardPick -> Battle
+[Match] phase InitialCardPick -> Battle
+[Effect] explosion at (12.9, -8.4) r=3.5 dmg=25 hits=0
+[Effect] explosion at (12.9, -8.4) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-15.3, 4.5) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-15.3, 4.5) r=3.5 dmg=25 hits=0
+[Match] death CPU 4 by CPU 1
+[Match] death CPU 4 by CPU 1
+[Match] death CPU 2 by CPU 1
+[Match] death CPU 2 by CPU 1
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 0)
+[Match] result Point(team 0)
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Effect] explosion at (-29.2, -12.7) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-29.2, -12.7) r=3.5 dmg=25 hits=0
+[Effect] explosion at (12.7, -4.5) r=3.5 dmg=25 hits=0
+[Effect] explosion at (12.7, -4.5) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-1.4, -6.4) r=3.5 dmg=25 hits=2
+[Effect] explosion at (-1.4, -6.4) r=3.5 dmg=25 hits=2
+[Effect] explosion at (2.1, -6.9) r=3.5 dmg=25 hits=1
+[Effect] explosion at (2.1, -6.9) r=3.5 dmg=25 hits=1
+[Effect] explosion at (3.1, -7.8) r=3.5 dmg=25 hits=1
+[Effect] explosion at (3.1, -7.8) r=3.5 dmg=25 hits=1
+[Effect] explosion at (1.7, -6.5) r=3.5 dmg=25 hits=1
+[Effect] explosion at (1.7, -6.5) r=3.5 dmg=25 hits=1
+[Match] death CPU 1 by CPU 4
+[Match] death CPU 1 by CPU 4
+[Effect] explosion at (12.7, -3.7) r=3.5 dmg=25 hits=1
+[Effect] explosion at (12.7, -3.7) r=3.5 dmg=25 hits=1
+[Effect] explosion at (19.8, -8.0) r=3.5 dmg=25 hits=0
+[Effect] explosion at (19.8, -8.0) r=3.5 dmg=25 hits=0
+[Match] death CPU 4 by CPU 3
+[Match] death CPU 4 by CPU 3
+[Match] death CPU 3 by CPU 4
+[Match] death CPU 3 by CPU 4
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 1)
+[Match] result Point(team 1)
+[Effect] explosion at (17.8, -13.4) r=3.5 dmg=25 hits=0
+[Effect] explosion at (17.8, -13.4) r=3.5 dmg=25 hits=0
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Effect] explosion at (8.2, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (8.2, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (17.0, -15.6) r=3.5 dmg=25 hits=0
+[Effect] explosion at (17.0, -15.6) r=3.5 dmg=25 hits=0
+[Effect] explosion at (8.9, -15.6) r=3.5 dmg=25 hits=0
+[Effect] explosion at (8.9, -15.6) r=3.5 dmg=25 hits=0
+[Effect] explosion at (30.5, -2.0) r=3.5 dmg=25 hits=1
+[Effect] explosion at (30.5, -2.0) r=3.5 dmg=25 hits=1
+[Effect] explosion at (18.2, -1.1) r=3.5 dmg=25 hits=0
+[Effect] explosion at (18.2, -1.1) r=3.5 dmg=25 hits=0
+[Match] death CPU 1 by CPU 1
+[Match] death CPU 1 by CPU 1
+[Effect] explosion at (30.5, 1.9) r=3.5 dmg=25 hits=0
+[Effect] explosion at (30.5, 1.9) r=3.5 dmg=25 hits=0
+[Match] death CPU 3 by CPU 2
+[Match] death CPU 3 by CPU 2
+[Effect] explosion at (-14.5, -2.1) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-14.5, -2.1) r=3.5 dmg=25 hits=0
+[Match] phase Battle -> RoundTransition
+[Match] phase Battle -> RoundTransition
+[Match] result Round(team 1)
+[Match] result Round(team 1)
+[Match] phase RoundTransition -> LoserCardPick
+[Match] phase RoundTransition -> LoserCardPick
+[Match] pick CPU 1 scatter
+[Match] pick CPU 1 scatter
+[Match] pick CPU 3 burst
+[Match] pick CPU 3 burst
+[Match] phase LoserCardPick -> Battle
+[Match] phase LoserCardPick -> Battle
+[Match] death CPU 3 (edge)
+[Match] death CPU 3 (edge)
+[Effect] explosion at (3.4, 2.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (3.4, 2.3) r=3.5 dmg=25 hits=0
+[Match] death CPU 4 by CPU 4
+[Match] death CPU 4 by CPU 4
+[Effect] explosion at (3.1, 2.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (3.1, 2.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-24.5, -1.4) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-24.5, -1.4) r=3.5 dmg=25 hits=0
+[Match] death CPU 1 by CPU 2
+[Match] death CPU 1 by CPU 2
+[Effect] explosion at (-7.5, 0.0) r=3.5 dmg=25 hits=1
+[Effect] explosion at (-7.5, 0.0) r=3.5 dmg=25 hits=1
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 1)
+[Match] result Point(team 1)
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Effect] explosion at (19.6, -4.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (19.6, -4.3) r=3.5 dmg=25 hits=0
+[Match] death CPU 4 by CPU 4
+[Match] death CPU 4 by CPU 4
+[Effect] explosion at (8.6, 1.9) r=3.5 dmg=25 hits=0
+[Effect] explosion at (8.6, 1.9) r=3.5 dmg=25 hits=0
+[Match] death CPU 3 (edge)
+[Match] death CPU 3 (edge)
+[Match] death CPU 2 (edge)
+[Match] death CPU 2 (edge)
+[Match] phase Battle -> PointTransition
+[Match] phase Battle -> PointTransition
+[Match] result Point(team 0)
+[Match] result Point(team 0)
+[Match] phase PointTransition -> Battle
+[Match] phase PointTransition -> Battle
+[Effect] explosion at (13.4, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (13.4, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (11.0, -5.4) r=3.5 dmg=25 hits=1
+[Effect] explosion at (11.0, -5.4) r=3.5 dmg=25 hits=1
+[Match] death CPU 3 by CPU 2
+[Match] death CPU 3 by CPU 2
+[Effect] explosion at (24.5, -9.4) r=3.5 dmg=25 hits=1
+[Effect] explosion at (24.5, -9.4) r=3.5 dmg=25 hits=1
+[Effect] explosion at (4.9, -5.9) r=3.5 dmg=25 hits=1
+[Effect] explosion at (4.9, -5.9) r=3.5 dmg=25 hits=1
+[Effect] explosion at (11.7, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (11.7, -5.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-11.6, -4.5) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-11.6, -4.5) r=3.5 dmg=25 hits=0
+[Match] death CPU 1 by CPU 2
+[Match] death CPU 1 by CPU 2
+[Effect] explosion at (-9.4, -4.3) r=3.5 dmg=25 hits=0
+[Effect] explosion at (-9.4, -4.3) r=3.5 dmg=25 hits=0
+[Match] phase Battle -> GameOver
+[Match] phase Battle -> GameOver
+[Match] game over winner=파랑 팀 cards=CPU 1[burst,scatter] CPU 2[explosive_rounds] CPU 3[glass_cannon,burst] CPU 4[regrowth]
+[Match] game over winner=파랑 팀 cards=CPU 1[burst,scatter] CPU 2[explosive_rounds] CPU 3[glass_cannon,burst] CPU 4[regrowth]
+[Match] result Match(team 1)
+[Match] result Match(team 1)
+[Test] 2v2 points=5 CPU 1[burst,scatter] CPU 2[explosive_rounds] CPU 3[glass_cannon,burst] CPU 4[regrowth]
+[Test] 2v2 points=5 CPU 1[burst,scatter] CPU 2[explosive_rounds] CPU 3[glass_cannon,burst] CPU 4[regrowth]
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1055" name="PickTimerPlayModeTests" fullname="Metadream.Shoot.Tests.PickTimerPlayModeTests" classname="Metadream.Shoot.Tests.PickTimerPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-22 14:30:28Z" end-time="2026-10-22 14:30:31Z" duration="3.123919" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1058" name="PreviewRendersTheChosenLook" fullname="Metadream.Shoot.Tests.PickTimerPlayModeTests.PreviewRendersTheChosenLook" methodname="PreviewRendersTheChosenLook" classname="Metadream.Shoot.Tests.PickTimerPlayModeTests" runstate="Runnable" seed="2021979212" result="Passed" start-time="2026-10-22 14:30:28Z" end-time="2026-10-22 14:30:28Z" duration="0.050368" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1056" name="TimeLimitPicksTheHighlightedCardWhenItRunsOut" fullname="Metadream.Shoot.Tests.PickTimerPlayModeTests.TimeLimitPicksTheHighlightedCardWhenItRunsOut" methodname="TimeLimitPicksTheHighlightedCardWhenItRunsOut" classname="Metadream.Shoot.Tests.PickTimerPlayModeTests" runstate="Runnable" seed="1201603268" result="Passed" start-time="2026-10-22 14:30:28Z" end-time="2026-10-22 14:30:30Z" duration="2.033649" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] reroll P1 rounds_bash -> velocity_rounds
+[Match] reroll P1 rounds_bash -> velocity_rounds
+[Match] pick timeout P1 → velocity_rounds
+[Match] pick timeout P1 → velocity_rounds
+[Match] pick P1 velocity_rounds
+[Match] pick P1 velocity_rounds
+]]></output>
+              </test-case>
+              <test-case id="1057" name="ZeroMeansNoTimeLimit" fullname="Metadream.Shoot.Tests.PickTimerPlayModeTests.ZeroMeansNoTimeLimit" methodname="ZeroMeansNoTimeLimit" classname="Metadream.Shoot.Tests.PickTimerPlayModeTests" runstate="Runnable" seed="627368259" result="Passed" start-time="2026-10-22 14:30:30Z" end-time="2026-10-22 14:30:31Z" duration="1.032445" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1059" name="RerollPlayModeTests" fullname="Metadream.Shoot.Tests.RerollPlayModeTests" classname="Metadream.Shoot.Tests.RerollPlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-22 14:30:31Z" end-time="2026-10-22 14:30:34Z" duration="3.277747" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1060" name="HumanPickerCanRerollThreeTimes" fullname="Metadream.Shoot.Tests.RerollPlayModeTests.HumanPickerCanRerollThreeTimes" methodname="HumanPickerCanRerollThreeTimes" classname="Metadream.Shoot.Tests.RerollPlayModeTests" runstate="Runnable" seed="1248324876" result="Passed" start-time="2026-10-22 14:30:31Z" end-time="2026-10-22 14:30:31Z" duration="0.034105" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] reroll P1 quick_guard -> rounds_dazzle
+[Match] reroll P1 quick_guard -> rounds_dazzle
+[Match] reroll P1 toxic_rounds -> scatter
+[Match] reroll P1 toxic_rounds -> scatter
+[Match] reroll P1 scatter -> rounds_echo
+[Match] reroll P1 scatter -> rounds_echo
+]]></output>
+              </test-case>
+              <test-case id="1061" name="QuitConfirmLocksYesForThreeSecondsAndClosesOnNo" fullname="Metadream.Shoot.Tests.RerollPlayModeTests.QuitConfirmLocksYesForThreeSecondsAndClosesOnNo" methodname="QuitConfirmLocksYesForThreeSecondsAndClosesOnNo" classname="Metadream.Shoot.Tests.RerollPlayModeTests" runstate="Runnable" seed="392665595" result="Passed" start-time="2026-10-22 14:30:31Z" end-time="2026-10-22 14:30:34Z" duration="3.235217" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] match start mode=VersusCpu players=2 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1062" name="TeamSpawnPlayModeTests" fullname="Metadream.Shoot.Tests.TeamSpawnPlayModeTests" classname="Metadream.Shoot.Tests.TeamSpawnPlayModeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-10-22 14:30:34Z" end-time="2026-10-22 14:30:38Z" duration="3.666114" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1063" name="TeammatesStandOnTheirOwnSpawnsFromTheReadyBanner" fullname="Metadream.Shoot.Tests.TeamSpawnPlayModeTests.TeammatesStandOnTheirOwnSpawnsFromTheReadyBanner" methodname="TeammatesStandOnTheirOwnSpawnsFromTheReadyBanner" classname="Metadream.Shoot.Tests.TeamSpawnPlayModeTests" runstate="Runnable" seed="1150158651" result="Passed" start-time="2026-10-22 14:30:34Z" end-time="2026-10-22 14:30:38Z" duration="3.658063" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 47 maps, hash 9debb941e1a0, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_teamspawn_2393cd6ef9f54c5e8bef6401f2dad6fa, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash 9debb941e1a0, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_teamspawn_2393cd6ef9f54c5e8bef6401f2dad6fa, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=5
+[Match] match start mode=CpuDemoTeams players=4 points=2 rounds=5
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] phase WaitingForPlayers -> InitialCardPick
+[Match] pick CPU 1 rounds_defender
+[Match] pick CPU 1 rounds_defender
+[Match] pick CPU 2 rounds_emp
+[Match] pick CPU 2 rounds_emp
+[Match] pick CPU 3 rounds_thruster
+[Match] pick CPU 3 rounds_thruster
+[Match] pick CPU 4 extended_mag
+[Match] pick CPU 4 extended_mag
+[Match] phase InitialCardPick -> Battle
+[Match] phase InitialCardPick -> Battle
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1064" name="TutorialAndEffectPlayModeTests" fullname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests" classname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-22 14:30:38Z" end-time="2026-10-22 14:30:41Z" duration="3.018256" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1066" name="ExplosionAndPoisonHurtEnemiesOnly" fullname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests.ExplosionAndPoisonHurtEnemiesOnly" methodname="ExplosionAndPoisonHurtEnemiesOnly" classname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests" runstate="Runnable" seed="1622079105" result="Passed" start-time="2026-10-22 14:30:38Z" end-time="2026-10-22 14:30:40Z" duration="1.941120" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] sandbox start map=plateau players=2
+[Match] sandbox start map=plateau players=2
+[Effect] explosion at (13.0, -11.4) r=3 dmg=25 hits=1
+[Effect] explosion at (13.0, -11.4) r=3 dmg=25 hits=1
+]]></output>
+              </test-case>
+              <test-case id="1065" name="TutorialStartsOnTrainingMapAndEscapeReturnsToTitle" fullname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests.TutorialStartsOnTrainingMapAndEscapeReturnsToTitle" methodname="TutorialStartsOnTrainingMapAndEscapeReturnsToTitle" classname="Metadream.Shoot.Tests.TutorialAndEffectPlayModeTests" runstate="Runnable" seed="484190033" result="Passed" start-time="2026-10-22 14:30:40Z" end-time="2026-10-22 14:30:41Z" duration="1.074778" asserts="0">
+                <properties>
+                  <property name="_JOINTYPE" value="UnityCombinatorial" />
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Match] sandbox start map=training players=2
+[Match] sandbox start map=training players=2
+[Tutorial] step Move
+[Tutorial] step Move
+[Tutorial] start map=training
+[Tutorial] start map=training
+[Tutorial] exit at Move
+[Tutorial] exit at Move
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot/TestResults.xml
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

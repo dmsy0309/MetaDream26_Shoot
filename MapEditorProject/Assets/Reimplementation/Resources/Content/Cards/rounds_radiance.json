@@ -2,7 +2,7 @@
     "id": "rounds_radiance",
     "title": "광휘",
     "subtitle": "RADIANCE",
-    "description": "주변 적에게 계속 피해를 준다. (원작: 재장전 중 태양파)",
+    "description": "주변 적에게 계속 피해를 준다.",
     "rarity": "Rare",
     "allowMultiple": true,
     "categories": [

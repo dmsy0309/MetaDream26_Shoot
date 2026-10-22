@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="29" result="Passed" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="2.0031924">
+  <test-suite type="TestSuite" id="1000" name="Metadream Shoot Map Maker" fullname="Metadream Shoot Map Maker" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="2.003192" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1033" name="Metadream.MapEditor.Tests.EditMode.dll" fullname="~/UnityProjects/Metadream26_Shoot 복사본/MapEditorProject/Library/ScriptAssemblies/Metadream.MapEditor.Tests.EditMode.dll" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.994633" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="25674" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1034" name="Metadream" fullname="Metadream" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.993956" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1035" name="MapEditor" fullname="Metadream.MapEditor" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.993613" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1036" name="Tests" fullname="Metadream.MapEditor.Tests" runstate="Runnable" testcasecount="29" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.993188" total="29" passed="29" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="MapDocumentTests" fullname="Metadream.MapEditor.Tests.MapDocumentTests" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.954818" total="14" passed="14" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1005" name="BackgroundIsKeptInTheFileAndIgnoredByTheGame" fullname="Metadream.MapEditor.Tests.MapDocumentTests.BackgroundIsKeptInTheFileAndIgnoredByTheGame" methodname="BackgroundIsKeptInTheFileAndIgnoredByTheGame" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1879017816" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.117467" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1002" name="BuiltinMapsRoundTripLosslesslyThroughTheGameLoader" fullname="Metadream.MapEditor.Tests.MapDocumentTests.BuiltinMapsRoundTripLosslesslyThroughTheGameLoader" methodname="BuiltinMapsRoundTripLosslesslyThroughTheGameLoader" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="513968743" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.034452" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1012" name="EditedBuiltinMapOverridesTheBuiltinInTheGame" fullname="Metadream.MapEditor.Tests.MapDocumentTests.EditedBuiltinMapOverridesTheBuiltinInTheGame" methodname="EditedBuiltinMapOverridesTheBuiltinInTheGame" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1673179269" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.075294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content/Maps/plateau.json
+[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content/Maps/plateau.json
+[Content] 91 cards, 46 maps, hash ed9b38e74f91, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash ed9b38e74f91, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-6867e1d731b24099a28533a14a88181e/Content, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1008" name="EditingOperations" fullname="Metadream.MapEditor.Tests.MapDocumentTests.EditingOperations" methodname="EditingOperations" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="861558946" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.015864" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1013" name="ExclusiveGameContentLeavesOnlyThisMapPlayable" fullname="Metadream.MapEditor.Tests.MapDocumentTests.ExclusiveGameContentLeavesOnlyThisMapPlayable" methodname="ExclusiveGameContentLeavesOnlyThisMapPlayable" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1533344863" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.046861" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/GameTestContent/Maps/editor_sample.json
+[MapEditor] installed ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/GameTestContent/Maps/editor_sample.json
+[Content] 91 cards, 2 maps, hash f7521b235e77, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/GameTestContent, 0 errors, 0 warnings
+[Content] 91 cards, 2 maps, hash f7521b235e77, external ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/GameTestContent, 0 errors, 0 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1011" name="GameRootResolution" fullname="Metadream.MapEditor.Tests.MapDocumentTests.GameRootResolution" methodname="GameRootResolution" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="500500471" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:34Z" duration="0.014638" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1015" name="GameRuntimeCopyIsByteIdenticalToTheGameProject" fullname="Metadream.MapEditor.Tests.MapDocumentTests.GameRuntimeCopyIsByteIdenticalToTheGameProject" methodname="GameRuntimeCopyIsByteIdenticalToTheGameProject" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="423481041" result="Passed" start-time="2026-10-22 14:32:34Z" end-time="2026-10-22 14:32:36Z" duration="1.450646" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1010" name="InstallIntoGameContentFolderIsLoadedByTheGame" fullname="Metadream.MapEditor.Tests.MapDocumentTests.InstallIntoGameContentFolderIsLoadedByTheGame" methodname="InstallIntoGameContentFolderIsLoadedByTheGame" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1673379843" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.029373" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content/Maps/editor_sample.json
+[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content/Maps/editor_sample.json
+[Content] 91 cards, 47 maps, hash 6d7264aff664, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content, 0 errors, 3 warnings
+[Content] 91 cards, 47 maps, hash 6d7264aff664, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content/Maps/editor_sample.json (replaced)
+[MapEditor] installed /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-150a3834a6294193a7050b394f83d4b9/Content/Maps/editor_sample.json (replaced)
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1007" name="InvalidIdIsReportedAndSanitized" fullname="Metadream.MapEditor.Tests.MapDocumentTests.InvalidIdIsReportedAndSanitized" methodname="InvalidIdIsReportedAndSanitized" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1745976744" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.020729" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1009" name="NumbersRoundTripExactly" fullname="Metadream.MapEditor.Tests.MapDocumentTests.NumbersRoundTripExactly" methodname="NumbersRoundTripExactly" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="436189609" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.019775" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1014" name="PackageContainsContentMapsFile" fullname="Metadream.MapEditor.Tests.MapDocumentTests.PackageContainsContentMapsFile" methodname="PackageContainsContentMapsFile" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="266079117" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.043355" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[MapEditor] package /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-f62ecc27dc0e4f9dac67140e2e56903b/p.zip
+[MapEditor] package /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/mapmaker-tests-f62ecc27dc0e4f9dac67140e2e56903b/p.zip
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1003" name="PreviewDefinitionEqualsGameParseForBuiltins" fullname="Metadream.MapEditor.Tests.MapDocumentTests.PreviewDefinitionEqualsGameParseForBuiltins" methodname="PreviewDefinitionEqualsGameParseForBuiltins" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="43103380" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.025847" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1004" name="SampleUsesEveryObjectTypeAndLoadsInGame" fullname="Metadream.MapEditor.Tests.MapDocumentTests.SampleUsesEveryObjectTypeAndLoadsInGame" methodname="SampleUsesEveryObjectTypeAndLoadsInGame" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="1053808206" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.022869" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1006" name="ValidationIsTheGameLoader" fullname="Metadream.MapEditor.Tests.MapDocumentTests.ValidationIsTheGameLoader" methodname="ValidationIsTheGameLoader" classname="Metadream.MapEditor.Tests.MapDocumentTests" runstate="Runnable" seed="473140015" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.019121" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1016" name="MapScriptEditorTests" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.013770" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1022" name="BehaviorJsonOmitsOnlyDefaults" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.BehaviorJsonOmitsOnlyDefaults" methodname="BehaviorJsonOmitsOnlyDefaults" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="1097342785" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000379" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1021" name="DuplicateAndPasteKeepNamesUnique" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.DuplicateAndPasteKeepNamesUnique" methodname="DuplicateAndPasteKeepNamesUnique" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="2085370015" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.003113" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="EveryBuiltinBehaviorIsKnownToTheEditor" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.EveryBuiltinBehaviorIsKnownToTheEditor" methodname="EveryBuiltinBehaviorIsKnownToTheEditor" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="46470079" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.001484" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1020" name="NamesAreValidatedByTheGame" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.NamesAreValidatedByTheGame" methodname="NamesAreValidatedByTheGame" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="958780355" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000867" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="PreviewNeverCarriesScriptsButKeepsNamesAndAreas" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.PreviewNeverCarriesScriptsButKeepsNamesAndAreas" methodname="PreviewNeverCarriesScriptsButKeepsNamesAndAreas" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="1980918846" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000322" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="ScriptErrorsComeFromTheGameParserWithLineNumbers" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.ScriptErrorsComeFromTheGameParserWithLineNumbers" methodname="ScriptErrorsComeFromTheGameParserWithLineNumbers" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="388995409" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000903" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="ScriptMapRoundTripsExactly" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.ScriptMapRoundTripsExactly" methodname="ScriptMapRoundTripsExactly" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="831415100" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000694" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1017" name="ScriptSampleLoadsWithScriptBehaviorAndNames" fullname="Metadream.MapEditor.Tests.MapScriptEditorTests.ScriptSampleLoadsWithScriptBehaviorAndNames" methodname="ScriptSampleLoadsWithScriptBehaviorAndNames" classname="Metadream.MapEditor.Tests.MapScriptEditorTests" runstate="Runnable" seed="1909920192" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000567" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1025" name="TeamSpawnTests" fullname="Metadream.MapEditor.Tests.TeamSpawnTests" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.022447" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1026" name="EnablingAddsTeammateSpawnsAtTheGameDefaultAndAValidScript" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.EnablingAddsTeammateSpawnsAtTheGameDefaultAndAValidScript" methodname="EnablingAddsTeammateSpawnsAtTheGameDefaultAndAValidScript" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="968144149" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.002564" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="MovingASpawnRegeneratesTheBlockAndDisablingRemovesIt" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.MovingASpawnRegeneratesTheBlockAndDisablingRemovesIt" methodname="MovingASpawnRegeneratesTheBlockAndDisablingRemovesIt" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="1673290176" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000528" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="SwapSpawnsChangesRoles" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.SwapSpawnsChangesRoles" methodname="SwapSpawnsChangesRoles" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="1468697836" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000445" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="SyncedGameRuntimeHasNativeTeamSpawns" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.SyncedGameRuntimeHasNativeTeamSpawns" methodname="SyncedGameRuntimeHasNativeTeamSpawns" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="47896339" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.015361" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="TeammateSpawnInsideTerrainIsAGameValidationError" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.TeammateSpawnInsideTerrainIsAGameValidationError" methodname="TeammateSpawnInsideTerrainIsAGameValidationError" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="1791409338" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000581" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1031" name="TwoSpawnMapsKeepTheOldPlacement" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.TwoSpawnMapsKeepTheOldPlacement" methodname="TwoSpawnMapsKeepTheOldPlacement" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="328151527" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000826" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="WithNativeSupportNoScriptIsGeneratedAndOldBlocksAreRemoved" fullname="Metadream.MapEditor.Tests.TeamSpawnTests.WithNativeSupportNoScriptIsGeneratedAndOldBlocksAreRemoved" methodname="WithNativeSupportNoScriptIsGeneratedAndOldBlocksAreRemoved" classname="Metadream.MapEditor.Tests.TeamSpawnTests" runstate="Runnable" seed="142437843" result="Passed" start-time="2026-10-22 14:32:36Z" end-time="2026-10-22 14:32:36Z" duration="0.000357" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/TestResults.xml
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot Map Maker/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

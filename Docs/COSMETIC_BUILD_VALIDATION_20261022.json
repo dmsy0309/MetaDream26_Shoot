@@ -1,0 +1,163 @@
+{
+  "date": "2026-10-22",
+  "unity": "6000.6.6f1",
+  "baseline": "cce4f79",
+  "backup_tag": "backup/pre-cosmetic-cleanup-20261022",
+  "runtime_commit": "a7d01bc574d23d3dd9dd86ec9ff7a5801de4ab7e",
+  "tests": [
+    {
+      "file": "Docs/cosmetic-validation/game-EditMode.xml",
+      "result": "Passed",
+      "total": "87",
+      "passed": "87",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/cosmetic-validation/game-PlayMode.xml",
+      "result": "Passed",
+      "total": "20",
+      "passed": "20",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/cosmetic-validation/editor-EditMode.xml",
+      "result": "Passed",
+      "total": "29",
+      "passed": "29",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/cosmetic-validation/editor-PlayMode.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "skipped": "0"
+    }
+  ],
+  "builds": [
+    {
+      "log": "Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX subtarget=Player result=Succeeded size=501643955 errors=0 path=Builds/macOS/MetadreamShoot.app",
+      "sha256": "a90cc19448642ff52537d767dbde6db575975365d77c569939120765796445d2"
+    },
+    {
+      "log": "Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Player result=Succeeded size=528486077 errors=0 path=Builds/Windows/MetadreamShoot/MetadreamShoot.exe",
+      "sha256": "70b77cd4f67670799f8165bce781b56a8f6176080874c6ce5ea39b43369b26a3"
+    },
+    {
+      "log": "Logs/release-BuildServerLinux.log",
+      "summary": "[Build] target=StandaloneLinux64 subtarget=Server result=Succeeded size=1074620936 errors=0 path=Builds/Server/Linux/MetadreamShootServer/MetadreamShootServer.x86_64",
+      "sha256": "99f6b73a2fa69817ec8968c6f10bd93e728d092f3cb1e8edba8e7bdc5e223b61"
+    },
+    {
+      "log": "Logs/release-BuildServerWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Server result=Succeeded size=102329123 errors=0 path=Builds/Server/Windows/MetadreamShootServer/MetadreamShootServer.exe",
+      "sha256": "c6a2e6c6d7bcb04c2bc3011b42d73f1fe0617578df17258be1247d82e50a0430"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX result=Succeeded size=501808808 errors=0 warnings=3 path=Builds/macOS/MetadreamShootMapMaker.app",
+      "sha256": "772af35d8729192d530368f9a31fa8a7bd30bd6441e1b27b56fbf10aed6dcc70"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 result=Succeeded size=528652869 errors=0 warnings=3 path=Builds/Windows/MetadreamShootMapMaker/MetadreamShootMapMaker.exe",
+      "sha256": "2e128850f7d4b171e0d2723b7b3c85e924e06a5568e22bf070f9d0c2a8ea2702"
+    }
+  ],
+  "install": [
+    {
+      "installed": "~/Applications/MetadreamShoot.app",
+      "verifiedFiles": 205,
+      "runtimeCommit": "a7d01bc"
+    },
+    {
+      "installed": "~/Applications/MetadreamShootMapMaker.app",
+      "verifiedFiles": 204,
+      "runtimeCommit": "a7d01bc"
+    }
+  ],
+  "runtime_checks": [
+    {
+      "log": "Logs/cosmetic-installed-battle.log",
+      "assertions": [
+        "phase InitialCardPick -> Battle",
+        "picks=4"
+      ],
+      "sha256": "27aac5903510041d465ce514fd18797f2742330a5b05697bf831a56f8c6ba4f2"
+    },
+    {
+      "log": "Logs/cosmetic-installed-editor.log",
+      "assertions": [
+        "[SelfTest] result PASS",
+        "builtin round trip 46/46"
+      ],
+      "sha256": "ba914f234dae454766a16999dfda7ca38f4f76536ac1af0040516e92c1df0503"
+    },
+    {
+      "log": "Logs/cosmetic-editor-playtest.log",
+      "assertions": [
+        "playtest start Sandbox opponent=Cpu"
+      ],
+      "sha256": "180772f829182f41284ce1f7696cdb6cac51fe946c4167262f6e4882e94e6a78"
+    },
+    {
+      "log": "Logs/cosmetic-installed-look.log",
+      "assertions": [
+        "[UI] capture"
+      ],
+      "sha256": "1b7bb09a3c11841f2c327fcef7fcb24a5b5bc6b60403f796ea908788ff943276"
+    },
+    {
+      "log": "Logs/cosmetic-installed-card.log",
+      "assertions": [
+        "[UI] capture"
+      ],
+      "sha256": "0a9fa281b1c6b640e32a34a2414498276416357a084196a22e3c8c5576402b90"
+    },
+    {
+      "log": "Logs/cosmetic-chat-server.log",
+      "assertions": [
+        "peer 2 joined slot 1"
+      ],
+      "sha256": "43cffb8d4c9ea24f42ad91411d44ad262512f0e7364d7297ca1981e889dc553a"
+    }
+  ],
+  "chat": [
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    },
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    }
+  ],
+  "localized_items": {
+    "eyes": 85,
+    "mouths": 58,
+    "accessories": 54
+  },
+  "content_hash": "73ff3bf6ad97",
+  "cross_build_only": [
+    "Windows game",
+    "Windows dedicated server",
+    "Linux dedicated server",
+    "Windows map editor"
+  ],
+  "recovery": {
+    "folder": ".Recovery/cosmetic-before-cce4f79",
+    "tracked_files": 2231,
+    "changed_source_files_match_baseline": true,
+    "tag_matches_baseline": true
+  }
+}

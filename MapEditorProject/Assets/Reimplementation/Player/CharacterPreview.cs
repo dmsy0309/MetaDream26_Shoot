@@ -35,7 +35,6 @@ namespace Metadream.Shoot.Player
             {
                 p._color = color;
                 p._model.Body.color = color;
-                p._model.Face.SetBodyColor(color);
             }
             if (p._model.Face.Look != look.Sanitized) p._model.Face.Apply(look, true);
             if (aim.sqrMagnitude > 0.0001f) p._aim = aim.normalized;
