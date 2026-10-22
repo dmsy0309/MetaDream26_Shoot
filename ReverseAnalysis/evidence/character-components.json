@@ -1,0 +1,2185 @@
+{
+  "sharedassets0.assets:9969": {
+    "type": "FollowInactiveHand",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2513
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 15032385536
+      },
+      "m_Name": "",
+      "offSet": {
+        "x": 0.0,
+        "y": 0.10000000149011612,
+        "z": 0.0
+      },
+      "leftHand": {
+        "m_FileID": 0,
+        "m_PathID": 2721
+      },
+      "rightHand": {
+        "m_FileID": 0,
+        "m_PathID": 3609
+      }
+    }
+  },
+  "sharedassets0.assets:10017": {
+    "type": "IKArmMove",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2589
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 12968787968
+      },
+      "m_Name": "",
+      "target": {
+        "m_FileID": 0,
+        "m_PathID": 4873
+      }
+    }
+  },
+  "sharedassets0.assets:10426": {
+    "type": "IkLeg",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2709
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 27799846912
+      },
+      "m_Name": "",
+      "soundCharacterStep": {
+        "m_FileID": 0,
+        "m_PathID": 9654
+      },
+      "soundCharacterStepBig": {
+        "m_FileID": 0,
+        "m_PathID": 9650
+      },
+      "legRoot": {
+        "m_FileID": 0,
+        "m_PathID": 4915
+      },
+      "footTarget": {
+        "m_FileID": 0,
+        "m_PathID": 4819
+      },
+      "mask": {
+        "m_Bits": 161591
+      },
+      "upCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": 2.5539603233337402,
+            "outSlope": 2.5539603233337402,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.10389610379934311
+          },
+          {
+            "time": 0.5,
+            "value": 0.5,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.3333333432674408
+          },
+          {
+            "time": 1.0,
+            "value": 0.0,
+            "inSlope": -2.1581106185913086,
+            "outSlope": -2.1581106185913086,
+            "weightedMode": 0,
+            "inWeight": 0.06331169605255127,
+            "outWeight": 0.3333333432674408
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "forwardCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": -0.0760161280632019,
+            "outSlope": -0.0760161280632019,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.2452239990234375
+          },
+          {
+            "time": 0.4981895089149475,
+            "value": 0.4981895089149475,
+            "inSlope": 1.53412663936615,
+            "outSlope": 1.53412663936615,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.08286642283201218
+          },
+          {
+            "time": 1.0,
+            "value": 1.0,
+            "inSlope": -0.029872843995690346,
+            "outSlope": -0.029872843995690346,
+            "weightedMode": 0,
+            "inWeight": 0.15452151000499725,
+            "outWeight": 0.3333333432674408
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "moveDeltaTransform": {
+        "m_FileID": 0,
+        "m_PathID": 4806
+      },
+      "stepTime": 0.0,
+      "stepSpeed": 10.0,
+      "footDown": 1,
+      "otherLeg": {
+        "m_FileID": 0,
+        "m_PathID": 10463
+      },
+      "prediction": 6.0
+    }
+  },
+  "sharedassets0.assets:10463": {
+    "type": "IkLeg",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2568
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 27799846912
+      },
+      "m_Name": "",
+      "soundCharacterStep": {
+        "m_FileID": 0,
+        "m_PathID": 9656
+      },
+      "soundCharacterStepBig": {
+        "m_FileID": 0,
+        "m_PathID": 9652
+      },
+      "legRoot": {
+        "m_FileID": 0,
+        "m_PathID": 5663
+      },
+      "footTarget": {
+        "m_FileID": 0,
+        "m_PathID": 5084
+      },
+      "mask": {
+        "m_Bits": 161591
+      },
+      "upCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": 2.5539603233337402,
+            "outSlope": 2.5539603233337402,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.10389610379934311
+          },
+          {
+            "time": 0.5,
+            "value": 0.5,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.3333333432674408
+          },
+          {
+            "time": 1.0,
+            "value": 0.0,
+            "inSlope": -2.1581106185913086,
+            "outSlope": -2.1581106185913086,
+            "weightedMode": 0,
+            "inWeight": 0.06331169605255127,
+            "outWeight": 0.3333333432674408
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "forwardCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": -0.0760161280632019,
+            "outSlope": -0.0760161280632019,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.2452239990234375
+          },
+          {
+            "time": 0.4981895089149475,
+            "value": 0.4981895089149475,
+            "inSlope": 1.53412663936615,
+            "outSlope": 1.53412663936615,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.08286642283201218
+          },
+          {
+            "time": 1.0,
+            "value": 1.0,
+            "inSlope": -0.029872843995690346,
+            "outSlope": -0.029872843995690346,
+            "weightedMode": 0,
+            "inWeight": 0.15452151000499725,
+            "outWeight": 0.3333333432674408
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "moveDeltaTransform": {
+        "m_FileID": 0,
+        "m_PathID": 4806
+      },
+      "stepTime": 0.0,
+      "stepSpeed": 10.0,
+      "footDown": 1,
+      "otherLeg": {
+        "m_FileID": 0,
+        "m_PathID": 10426
+      },
+      "prediction": 6.0
+    }
+  },
+  "sharedassets0.assets:10476": {
+    "type": "IKArmMove",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2679
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 12968787968
+      },
+      "m_Name": "",
+      "target": {
+        "m_FileID": 0,
+        "m_PathID": 4823
+      }
+    }
+  },
+  "sharedassets0.assets:10568": {
+    "type": "HoldingObject",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2656
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 8707375104
+      },
+      "m_Name": "",
+      "holder": {
+        "m_FileID": 0,
+        "m_PathID": 10244
+      }
+    }
+  },
+  "sharedassets0.assets:10609": {
+    "type": "LegRaycasters",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 2713
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 5133828096
+      },
+      "m_Name": "",
+      "mask": {
+        "m_Bits": 145207
+      },
+      "force": 1000.0,
+      "drag": 100.0,
+      "legCastPositions": [
+        {
+          "m_FileID": 0,
+          "m_PathID": 4884
+        },
+        {
+          "m_FileID": 0,
+          "m_PathID": 4892
+        }
+      ],
+      "animationCurve": {
+        "m_Curve": [
+          {
+            "time": -0.18370652198791504,
+            "value": 0.1583661139011383,
+            "inSlope": -0.2703888714313507,
+            "outSlope": -0.2703888714313507,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.3333333432674408
+          },
+          {
+            "time": 0.401991069316864,
+            "value": 0.0,
+            "inSlope": -0.2703888714313507,
+            "outSlope": -0.2703888714313507,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.0
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "wobbleCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": 0.0,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.3333333432674408
+          },
+          {
+            "time": 1.0,
+            "value": 0.0,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.0
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "forceCurve": {
+        "m_Curve": [
+          {
+            "time": 0.0,
+            "value": -99.64622497558594,
+            "inSlope": -1.5805219411849976,
+            "outSlope": -1.5805219411849976,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 1.0
+          },
+          {
+            "time": 0.5,
+            "value": 70.53636169433594,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "weightedMode": 0,
+            "inWeight": 0.3333333432674408,
+            "outWeight": 0.3333333432674408
+          },
+          {
+            "time": 1.0,
+            "value": -99.64622497558594,
+            "inSlope": 1.0154832601547241,
+            "outSlope": 1.0154832601547241,
+            "weightedMode": 0,
+            "inWeight": 1.0,
+            "outWeight": 0.0
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      }
+    }
+  },
+  "sharedassets0.assets:11650": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 3319
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 3319
+      },
+      "defaultEyes": {
+        "m_FileID": 0,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 0,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0499999523162842
+    }
+  },
+  "sharedassets0.assets:13091": {
+    "type": "GunAmmo",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 4052
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 26055016448
+      },
+      "m_Name": "",
+      "soundReloadInProgressLoop": {
+        "m_FileID": 0,
+        "m_PathID": 9638
+      },
+      "soundReloadComplete": {
+        "m_FileID": 0,
+        "m_PathID": 9636
+      },
+      "maxAmmo": 3,
+      "reloadTime": 2.0,
+      "reloadTimeMultiplier": 1.0,
+      "reloadTimeAdd": 0.0,
+      "reloadAnim": {
+        "m_FileID": 0,
+        "m_PathID": 12702
+      },
+      "cooldownRing": {
+        "m_FileID": 0,
+        "m_PathID": 11265
+      },
+      "populate": {
+        "m_FileID": 0,
+        "m_PathID": 11870
+      },
+      "ammoReg": 0.0
+    }
+  },
+  "level0:3393": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 105
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 437
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:3500": {
+    "type": "IKArmMove",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 204
+      },
+      "m_Enabled": 0,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 12968787968
+      },
+      "m_Name": "",
+      "target": {
+        "m_FileID": 0,
+        "m_PathID": 1144
+      }
+    }
+  },
+  "level0:3562": {
+    "type": "CharacterCreatorButtonSpawner",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 259
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21927821312
+      },
+      "m_Name": "",
+      "sourceButton": {
+        "m_FileID": 0,
+        "m_PathID": 325
+      }
+    }
+  },
+  "level0:3563": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 259
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 287
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:3617": {
+    "type": "IKArmMove",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 323
+      },
+      "m_Enabled": 0,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 12968787968
+      },
+      "m_Name": "",
+      "target": {
+        "m_FileID": 0,
+        "m_PathID": 1275
+      }
+    }
+  },
+  "level0:3707": {
+    "type": "CharacterCreatorItemLoader",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 400
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 12348030976
+      },
+      "m_Name": "",
+      "eyes": [
+        {
+          "m_FileID": 2,
+          "m_PathID": 10318
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10340
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10296
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10308
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10358
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10337
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10353
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10285
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10331
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10333
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10307
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10342
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10309
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10338
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10341
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10281
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10323
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10287
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10321
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10339
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10310
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10297
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10279
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10343
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10317
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10329
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10351
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10288
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10312
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10280
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10356
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10315
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10320
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10325
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10311
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10304
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10314
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10286
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10322
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10332
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10316
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10347
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10359
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10295
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10350
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10335
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11497
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12684
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11588
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13013
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11290
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12418
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11294
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12441
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11550
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11441
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12098
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11429
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11438
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11423
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11431
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11432
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11434
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11425
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11421
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11430
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11436
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11422
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11427
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11435
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11424
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11433
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11428
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11437
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11426
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11439
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11440
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13146
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10882
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10790
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11293
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13417
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13318
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11813
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10794
+        }
+      ],
+      "mouths": [
+        {
+          "m_FileID": 2,
+          "m_PathID": 10417
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10410
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10411
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10412
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10408
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10420
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10415
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10423
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10422
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10421
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10413
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10424
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10409
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10414
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10416
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10418
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10419
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11377
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11631
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12300
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12192
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11472
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11455
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11257
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11334
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11910
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10932
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12225
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10301
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10926
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11909
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11911
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11912
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10931
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10934
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10929
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10933
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11916
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10936
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10937
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10935
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11913
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10927
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10930
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11914
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11917
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11915
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10925
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10928
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11845
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13071
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12577
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12609
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11272
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11899
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10880
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12573
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10797
+        }
+      ],
+      "accessories": [
+        {
+          "m_FileID": 2,
+          "m_PathID": 10300
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10330
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10306
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10346
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10352
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10319
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10336
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10290
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10348
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10324
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10344
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10278
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10305
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10839
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11806
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11890
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12242
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12599
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12481
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11214
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12187
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11282
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12181
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10291
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10313
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10327
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10292
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10355
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10303
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11278
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10282
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10284
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10283
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10299
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10298
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10345
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10293
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10294
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10334
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11280
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10302
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10328
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10354
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10357
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11279
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10289
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10349
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 10326
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11281
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11379
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11677
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 11296
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 12598
+        },
+        {
+          "m_FileID": 2,
+          "m_PathID": 13311
+        }
+      ]
+    }
+  },
+  "level0:3802": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 680
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 584
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:3846": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 699
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 573
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4010": {
+    "type": "CharacterCreatorButtonSpawner",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 630
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21927821312
+      },
+      "m_Name": "",
+      "sourceButton": {
+        "m_FileID": 0,
+        "m_PathID": 642
+      }
+    }
+  },
+  "level0:4011": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 630
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 635
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4044": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 651
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 656
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4045": {
+    "type": "CharacterCreatorButtonSpawner",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 651
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21927821312
+      },
+      "m_Name": "",
+      "sourceButton": {
+        "m_FileID": 0,
+        "m_PathID": 663
+      }
+    }
+  },
+  "level0:4077": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 505
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 552
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4101": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 524
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 541
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4131": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 805
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 788
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4142": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 795
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 781
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4157": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 822
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 776
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4236": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 783
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 801
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4287": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 751
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 703
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4303": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 712
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 767
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4325": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 707
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 756
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4331": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 727
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 744
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4337": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 736
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 746
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4380": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 954
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 923
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4392": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 938
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 918
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4412": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 956
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 900
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4450": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 921
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 941
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4560": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 852
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 872
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4571": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 862
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 873
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4621": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 1076
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 1033
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4624": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 1080
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 1032
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4767": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 975
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 1023
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4803": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 992
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 1009
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  },
+  "level0:4805": {
+    "type": "CharacterCreatorItemEquipper",
+    "data": {
+      "m_GameObject": {
+        "m_FileID": 0,
+        "m_PathID": 996
+      },
+      "m_Enabled": 1,
+      "m_Script": {
+        "m_FileID": 16777216,
+        "m_PathID": 21105737728
+      },
+      "m_Name": "",
+      "itemParent": {
+        "m_FileID": 0,
+        "m_PathID": 1008
+      },
+      "defaultEyes": {
+        "m_FileID": 2,
+        "m_PathID": 4651
+      },
+      "defaultMouth": {
+        "m_FileID": 2,
+        "m_PathID": 4650
+      },
+      "scaleM": 1.0
+    }
+  }
+}

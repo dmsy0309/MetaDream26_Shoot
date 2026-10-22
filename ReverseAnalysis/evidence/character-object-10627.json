@@ -1,0 +1,2198 @@
+{
+  "id": 2586,
+  "name": "WeaponBase",
+  "active": true,
+  "components": [
+    {
+      "id": 4815,
+      "type": "Transform",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2586
+        },
+        "m_LocalRotation": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": -0.7071068286895752,
+          "w": 0.7071068286895752
+        },
+        "m_LocalPosition": {
+          "x": -18.92978858947754,
+          "y": 14.960026741027832,
+          "z": 4.901531219482422
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 4871
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 5530
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "id": 5710,
+      "type": "Rigidbody2D",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2586
+        },
+        "m_BodyType": 0,
+        "m_Simulated": true,
+        "m_UseFullKinematicContacts": false,
+        "m_UseAutoMass": false,
+        "m_Mass": 5.0,
+        "m_LinearDrag": 0.0,
+        "m_AngularDrag": 0.05000000074505806,
+        "m_GravityScale": 0.0,
+        "m_Material": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "m_IncludeLayers": {
+          "m_Bits": 0
+        },
+        "m_ExcludeLayers": {
+          "m_Bits": 0
+        },
+        "m_Interpolate": 2,
+        "m_SleepingMode": 1,
+        "m_CollisionDetection": 0,
+        "m_Constraints": 0
+      }
+    },
+    {
+      "id": 10627,
+      "type": "Holdable",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2586
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 16777216,
+          "m_PathID": 9143582720
+        },
+        "m_Name": "",
+        "rig": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "holder": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        }
+      }
+    },
+    {
+      "id": 10618,
+      "type": "Gun",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 2586
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 16777216,
+          "m_PathID": 18119393280
+        },
+        "m_Name": "",
+        "holdable": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "sinceAttack": 10.0,
+        "soundGun": {
+          "howManyShotModifiers": 3,
+          "shotModifierLowerVolumeDbIf2": -3.0,
+          "shotModifierLowerVolumeDbIf3": -6.0,
+          "soundShotModifierBasic": {
+            "m_FileID": 0,
+            "m_PathID": 9463
+          },
+          "howManyImpactModifiers": 2,
+          "impactModifierLowerVolumeDbIf2": -3.0,
+          "impactModifierLowerVolumeDbIf3": -6.0,
+          "soundImpactModifierBasic": {
+            "m_FileID": 0,
+            "m_PathID": 9451
+          },
+          "soundImpactModifierDamageToExplosionMedium": {
+            "m_FileID": 0,
+            "m_PathID": 9460
+          },
+          "soundImpactModifierDamageToExplosionHuge": {
+            "m_FileID": 0,
+            "m_PathID": 9462
+          },
+          "soundImpactBounce": {
+            "m_FileID": 0,
+            "m_PathID": 9702
+          },
+          "soundImpactBullet": {
+            "m_FileID": 0,
+            "m_PathID": 9700
+          }
+        },
+        "soundShotModifier": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "soundImpactModifier": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "soundDisableRayHitBulletSound": 0,
+        "recoil": 150.0,
+        "bodyRecoil": 0.0,
+        "shake": 1.0,
+        "forceSpecificShake": 0,
+        "projectiles": [
+          {
+            "objectToSpawn": {
+              "m_FileID": 0,
+              "m_PathID": 2699
+            },
+            "numberOfSpawns": 1
+          }
+        ],
+        "shootPosition": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "player": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "isReloading": 0,
+        "damage": 1.0,
+        "reloadTime": 1.0,
+        "reloadTimeAdd": 0.0,
+        "recoilMuiltiplier": 1.0,
+        "knockback": 1.0,
+        "attackSpeed": 0.30000001192092896,
+        "projectileSpeed": 1.0,
+        "projectielSimulatonSpeed": 1.0,
+        "gravity": 1.0,
+        "damageAfterDistanceMultiplier": 1.0,
+        "bulletDamageMultiplier": 1.0,
+        "multiplySpread": 1.0,
+        "shakeM": 1.0,
+        "ammo": 0,
+        "ammoReg": 0.0,
+        "size": 0.0,
+        "overheatMultiplier": 0.0,
+        "timeToReachFullMovementMultiplier": 0.0,
+        "numberOfProjectiles": 1,
+        "bursts": 0,
+        "reflects": 0,
+        "smartBounce": 0,
+        "bulletPortal": 0,
+        "randomBounces": 0,
+        "timeBetweenBullets": 0.0,
+        "projectileSize": 0.0,
+        "speedMOnBounce": 1.0,
+        "dmgMOnBounce": 1.0,
+        "drag": 0.0,
+        "dragMinSpeed": 1.0,
+        "spread": 0.0,
+        "evenSpread": 0.0,
+        "percentageDamage": 0.0,
+        "cos": 0.0,
+        "slow": 0.0,
+        "chargeDamageMultiplier": 1.0,
+        "chargeSpreadTo": 0.0,
+        "chargeEvenSpreadTo": 0.0,
+        "chargeSpeedTo": 0.0,
+        "chargeRecoilTo": 0.0,
+        "chargeNumberOfProjectilesTo": 0.0,
+        "destroyBulletAfter": 0.0,
+        "forceSpecificAttackSpeed": 0.0,
+        "lockGunToDefault": 0,
+        "unblockable": 0,
+        "ignoreWalls": 0,
+        "currentCharge": 0.0,
+        "useCharge": 0,
+        "dontAllowAutoFire": 0,
+        "objectsToSpawn": [],
+        "projectileColor": {
+          "r": 0.0,
+          "g": 0.0,
+          "b": 0.0,
+          "a": 1.0
+        },
+        "waveMovement": 0,
+        "teleport": 0,
+        "spawnSkelletonSquare": 0,
+        "explodeNearEnemyRange": 0.0,
+        "explodeNearEnemyDamage": 0.0,
+        "hitMovementMultiplier": 1.0,
+        "isProjectileGun": 0,
+        "defaultCooldown": 1.0,
+        "attackID": -1,
+        "attackSpeedMultiplier": 1.0,
+        "dontAllowBeekeeperAchievement": 0
+      }
+    }
+  ],
+  "children": [
+    {
+      "id": 2796,
+      "name": "ShootPosition",
+      "active": true,
+      "components": [
+        {
+          "id": 4871,
+          "type": "Transform",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2796
+            },
+            "m_LocalRotation": {
+              "x": -0.4999994933605194,
+              "y": 0.5000000596046448,
+              "z": 0.5,
+              "w": 0.5000004172325134
+            },
+            "m_LocalPosition": {
+              "x": -0.14100000262260437,
+              "y": 0.7400000095367432,
+              "z": -0.0
+            },
+            "m_LocalScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "m_Children": [],
+            "m_Father": {
+              "m_FileID": 0,
+              "m_PathID": 4815
+            }
+          }
+        },
+        {
+          "id": 10259,
+          "type": "ShootPos",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2796
+            },
+            "m_Enabled": 1,
+            "m_Script": {
+              "m_FileID": 16777216,
+              "m_PathID": 21458059264
+            },
+            "m_Name": ""
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": 4034,
+      "name": "Spring",
+      "active": true,
+      "components": [
+        {
+          "id": 5530,
+          "type": "Transform",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 4034
+            },
+            "m_LocalRotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "m_LocalPosition": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "m_LocalScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "m_Children": [
+              {
+                "m_FileID": 0,
+                "m_PathID": 4972
+              },
+              {
+                "m_FileID": 0,
+                "m_PathID": 5652
+              },
+              {
+                "m_FileID": 0,
+                "m_PathID": 4793
+              },
+              {
+                "m_FileID": 0,
+                "m_PathID": 4868
+              }
+            ],
+            "m_Father": {
+              "m_FileID": 0,
+              "m_PathID": 4815
+            }
+          }
+        }
+      ],
+      "children": [
+        {
+          "id": 2585,
+          "name": "Charge",
+          "active": false,
+          "components": [
+            {
+              "id": 4972,
+              "type": "Transform",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2585
+                },
+                "m_LocalRotation": {
+                  "x": -0.5000007152557373,
+                  "y": 0.5000007152557373,
+                  "z": 0.49999943375587463,
+                  "w": 0.49999913573265076
+                },
+                "m_LocalPosition": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "m_LocalScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "m_Children": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 4928
+                  },
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 4926
+                  }
+                ],
+                "m_Father": {
+                  "m_FileID": 0,
+                  "m_PathID": 5530
+                }
+              }
+            }
+          ],
+          "children": [
+            {
+              "id": 2590,
+              "name": "ChargeUp",
+              "active": true,
+              "components": [
+                {
+                  "id": 4928,
+                  "type": "Transform",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2590
+                    },
+                    "m_LocalRotation": {
+                      "x": 7.00589737334667e-07,
+                      "y": -1.8334583273826865e-06,
+                      "z": -0.0,
+                      "w": 1.0
+                    },
+                    "m_LocalPosition": {
+                      "x": -0.0,
+                      "y": 0.14900000393390656,
+                      "z": -0.9139999747276306
+                    },
+                    "m_LocalScale": {
+                      "x": 1.0,
+                      "y": 1.0,
+                      "z": 1.0
+                    },
+                    "m_Children": [
+                      {
+                        "m_FileID": 0,
+                        "m_PathID": 4849
+                      }
+                    ],
+                    "m_Father": {
+                      "m_FileID": 0,
+                      "m_PathID": 4972
+                    }
+                  }
+                },
+                {
+                  "id": 10428,
+                  "type": "ChargeFeedback",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2590
+                    },
+                    "m_Enabled": 1,
+                    "m_Script": {
+                      "m_FileID": 16777216,
+                      "m_PathID": 18085838848
+                    },
+                    "m_Name": "",
+                    "drag": 25.0,
+                    "spring": 500.0,
+                    "angle": -45.0,
+                    "chargeAngle": 10.0,
+                    "charge": 1.0
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "id": 2591,
+                  "name": "Sprite",
+                  "active": true,
+                  "components": [
+                    {
+                      "id": 4849,
+                      "type": "Transform",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_LocalRotation": {
+                          "x": 0.27059805393218994,
+                          "y": -0.6532815098762512,
+                          "z": -0.27059805393218994,
+                          "w": 0.6532815098762512
+                        },
+                        "m_LocalPosition": {
+                          "x": -0.0,
+                          "y": -0.15000000596046448,
+                          "z": 1.7000000476837158
+                        },
+                        "m_LocalScale": {
+                          "x": 0.12999999523162842,
+                          "y": 0.21740779280662537,
+                          "z": 1.0
+                        },
+                        "m_Children": [],
+                        "m_Father": {
+                          "m_FileID": 0,
+                          "m_PathID": 4928
+                        }
+                      }
+                    },
+                    {
+                      "id": 6389,
+                      "type": "SpriteRenderer",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_Enabled": true,
+                        "m_CastShadows": 0,
+                        "m_ReceiveShadows": 0,
+                        "m_DynamicOccludee": 1,
+                        "m_StaticShadowCaster": 0,
+                        "m_MotionVectors": 1,
+                        "m_LightProbeUsage": 1,
+                        "m_ReflectionProbeUsage": 1,
+                        "m_RayTracingMode": 0,
+                        "m_RayTraceProcedural": 0,
+                        "m_RenderingLayerMask": 4294967295,
+                        "m_RendererPriority": 0,
+                        "m_LightmapIndex": 65535,
+                        "m_LightmapIndexDynamic": 65535,
+                        "m_LightmapTilingOffset": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_LightmapTilingOffsetDynamic": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_Materials": [
+                          {
+                            "m_FileID": 0,
+                            "m_PathID": 61
+                          }
+                        ],
+                        "m_StaticBatchInfo": {
+                          "firstSubMesh": 0,
+                          "subMeshCount": 0
+                        },
+                        "m_StaticBatchRoot": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_ProbeAnchor": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_LightProbeVolumeOverride": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_SortingLayerID": 0,
+                        "m_SortingLayer": 0,
+                        "m_SortingOrder": 0,
+                        "m_Sprite": {
+                          "m_FileID": 0,
+                          "m_PathID": 2375
+                        },
+                        "m_Color": {
+                          "r": 0.6320754289627075,
+                          "g": 0.3505733013153076,
+                          "b": 0.27131539583206177,
+                          "a": 1.0
+                        },
+                        "m_FlipX": false,
+                        "m_FlipY": false,
+                        "m_DrawMode": 0,
+                        "m_Size": {
+                          "x": 1.0,
+                          "y": 1.0
+                        },
+                        "m_AdaptiveModeThreshold": 0.5,
+                        "m_SpriteTileMode": 0,
+                        "m_WasSpriteAssigned": true,
+                        "m_MaskInteraction": 0,
+                        "m_SpriteSortPoint": 0
+                      }
+                    },
+                    {
+                      "id": 10271,
+                      "type": "SFPolygon",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_Enabled": 1,
+                        "m_Script": {
+                          "m_FileID": 16777216,
+                          "m_PathID": 1979711488
+                        },
+                        "m_Name": "",
+                        "_verts": [
+                          {
+                            "x": 0.49994251132011414,
+                            "y": 0.4998379945755005
+                          },
+                          {
+                            "x": 0.49998700618743896,
+                            "y": -0.49969983100891113
+                          },
+                          {
+                            "x": -0.4997354745864868,
+                            "y": -0.499489963054657
+                          },
+                          {
+                            "x": -0.5000523924827576,
+                            "y": 0.49843722581863403
+                          }
+                        ],
+                        "_activePath": 0,
+                        "_looped": 1,
+                        "_shadowLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "_lightPenetration": 0.0,
+                        "_opacity": 1.0
+                      }
+                    },
+                    {
+                      "id": 5717,
+                      "type": "BoxCollider2D",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_Enabled": 0,
+                        "m_Density": 1.0,
+                        "m_Material": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_IncludeLayers": {
+                          "m_Bits": 0
+                        },
+                        "m_ExcludeLayers": {
+                          "m_Bits": 0
+                        },
+                        "m_LayerOverridePriority": 0,
+                        "m_ForceSendLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_ForceReceiveLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_ContactCaptureLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_CallbackLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_IsTrigger": false,
+                        "m_UsedByEffector": false,
+                        "m_UsedByComposite": false,
+                        "m_Offset": {
+                          "x": 0.0,
+                          "y": 0.0
+                        },
+                        "m_SpriteTilingProperty": {
+                          "border": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0
+                          },
+                          "pivot": {
+                            "x": 0.5,
+                            "y": 0.5
+                          },
+                          "oldSize": {
+                            "x": 1.0,
+                            "y": 1.0
+                          },
+                          "newSize": {
+                            "x": 1.0,
+                            "y": 1.0
+                          },
+                          "adaptiveTilingThreshold": 0.5,
+                          "drawMode": 0,
+                          "adaptiveTiling": false
+                        },
+                        "m_AutoTiling": false,
+                        "m_Size": {
+                          "x": 1.0,
+                          "y": 1.0
+                        },
+                        "m_EdgeRadius": 0.0
+                      }
+                    },
+                    {
+                      "id": 10231,
+                      "type": "SetTeamColor",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_Enabled": 1,
+                        "m_Script": {
+                          "m_FileID": 16777216,
+                          "m_PathID": 15938355200
+                        },
+                        "m_Name": "",
+                        "SetColorEvent": {
+                          "m_PersistentCalls": {
+                            "m_Calls": []
+                          }
+                        },
+                        "colorType": 0
+                      }
+                    },
+                    {
+                      "id": 9409,
+                      "type": "SpriteMask",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2591
+                        },
+                        "m_Enabled": true,
+                        "m_CastShadows": 1,
+                        "m_ReceiveShadows": 1,
+                        "m_DynamicOccludee": 1,
+                        "m_StaticShadowCaster": 0,
+                        "m_MotionVectors": 1,
+                        "m_LightProbeUsage": 1,
+                        "m_ReflectionProbeUsage": 1,
+                        "m_RayTracingMode": 0,
+                        "m_RayTraceProcedural": 0,
+                        "m_RenderingLayerMask": 4294967295,
+                        "m_RendererPriority": 0,
+                        "m_LightmapIndex": 65535,
+                        "m_LightmapIndexDynamic": 65535,
+                        "m_LightmapTilingOffset": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_LightmapTilingOffsetDynamic": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_Materials": [
+                          {
+                            "m_FileID": 0,
+                            "m_PathID": 5
+                          }
+                        ],
+                        "m_StaticBatchInfo": {
+                          "firstSubMesh": 0,
+                          "subMeshCount": 0
+                        },
+                        "m_StaticBatchRoot": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_ProbeAnchor": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_LightProbeVolumeOverride": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_SortingLayerID": 0,
+                        "m_SortingLayer": 0,
+                        "m_SortingOrder": 0,
+                        "m_Sprite": {
+                          "m_FileID": 0,
+                          "m_PathID": 2375
+                        },
+                        "m_MaskAlphaCutoff": 0.20000000298023224,
+                        "m_FrontSortingLayerID": -1698888699,
+                        "m_BackSortingLayerID": -1698888699,
+                        "m_FrontSortingLayer": 2,
+                        "m_BackSortingLayer": 2,
+                        "m_FrontSortingOrder": 1,
+                        "m_BackSortingOrder": 0,
+                        "m_IsCustomRangeActive": true,
+                        "m_SpriteSortPoint": 0
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": 2613,
+              "name": "ChargeDown",
+              "active": true,
+              "components": [
+                {
+                  "id": 4926,
+                  "type": "Transform",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2613
+                    },
+                    "m_LocalRotation": {
+                      "x": 7.006240707596589e-07,
+                      "y": -1.8335481399844866e-06,
+                      "z": -0.0,
+                      "w": 1.0
+                    },
+                    "m_LocalPosition": {
+                      "x": -0.0,
+                      "y": 0.14900000393390656,
+                      "z": -0.9139999747276306
+                    },
+                    "m_LocalScale": {
+                      "x": 1.0,
+                      "y": 1.0,
+                      "z": 1.0
+                    },
+                    "m_Children": [
+                      {
+                        "m_FileID": 0,
+                        "m_PathID": 4859
+                      }
+                    ],
+                    "m_Father": {
+                      "m_FileID": 0,
+                      "m_PathID": 4972
+                    }
+                  }
+                },
+                {
+                  "id": 10232,
+                  "type": "ChargeFeedback",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2613
+                    },
+                    "m_Enabled": 1,
+                    "m_Script": {
+                      "m_FileID": 16777216,
+                      "m_PathID": 18085838848
+                    },
+                    "m_Name": "",
+                    "drag": 25.0,
+                    "spring": 500.0,
+                    "angle": 45.0,
+                    "chargeAngle": -10.0,
+                    "charge": 1.0
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "id": 2559,
+                  "name": "Sprite",
+                  "active": true,
+                  "components": [
+                    {
+                      "id": 4859,
+                      "type": "Transform",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_LocalRotation": {
+                          "x": -0.27059805393218994,
+                          "y": -0.6532815098762512,
+                          "z": 0.27059802412986755,
+                          "w": 0.6532815098762512
+                        },
+                        "m_LocalPosition": {
+                          "x": -1.4901161193847656e-08,
+                          "y": 0.15000000596046448,
+                          "z": 1.7000000476837158
+                        },
+                        "m_LocalScale": {
+                          "x": 0.12999999523162842,
+                          "y": 0.21740883588790894,
+                          "z": 1.0
+                        },
+                        "m_Children": [],
+                        "m_Father": {
+                          "m_FileID": 0,
+                          "m_PathID": 4926
+                        }
+                      }
+                    },
+                    {
+                      "id": 6390,
+                      "type": "SpriteRenderer",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_Enabled": true,
+                        "m_CastShadows": 0,
+                        "m_ReceiveShadows": 0,
+                        "m_DynamicOccludee": 1,
+                        "m_StaticShadowCaster": 0,
+                        "m_MotionVectors": 1,
+                        "m_LightProbeUsage": 1,
+                        "m_ReflectionProbeUsage": 1,
+                        "m_RayTracingMode": 0,
+                        "m_RayTraceProcedural": 0,
+                        "m_RenderingLayerMask": 4294967295,
+                        "m_RendererPriority": 0,
+                        "m_LightmapIndex": 65535,
+                        "m_LightmapIndexDynamic": 65535,
+                        "m_LightmapTilingOffset": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_LightmapTilingOffsetDynamic": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_Materials": [
+                          {
+                            "m_FileID": 0,
+                            "m_PathID": 61
+                          }
+                        ],
+                        "m_StaticBatchInfo": {
+                          "firstSubMesh": 0,
+                          "subMeshCount": 0
+                        },
+                        "m_StaticBatchRoot": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_ProbeAnchor": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_LightProbeVolumeOverride": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_SortingLayerID": 0,
+                        "m_SortingLayer": 0,
+                        "m_SortingOrder": 0,
+                        "m_Sprite": {
+                          "m_FileID": 0,
+                          "m_PathID": 2375
+                        },
+                        "m_Color": {
+                          "r": 0.6320754289627075,
+                          "g": 0.3505733013153076,
+                          "b": 0.27131539583206177,
+                          "a": 1.0
+                        },
+                        "m_FlipX": false,
+                        "m_FlipY": false,
+                        "m_DrawMode": 0,
+                        "m_Size": {
+                          "x": 1.0,
+                          "y": 1.0
+                        },
+                        "m_AdaptiveModeThreshold": 0.5,
+                        "m_SpriteTileMode": 0,
+                        "m_WasSpriteAssigned": true,
+                        "m_MaskInteraction": 0,
+                        "m_SpriteSortPoint": 0
+                      }
+                    },
+                    {
+                      "id": 10220,
+                      "type": "SFPolygon",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_Enabled": 1,
+                        "m_Script": {
+                          "m_FileID": 16777216,
+                          "m_PathID": 1979711488
+                        },
+                        "m_Name": "",
+                        "_verts": [
+                          {
+                            "x": 0.49994251132011414,
+                            "y": 0.4998379945755005
+                          },
+                          {
+                            "x": 0.49998700618743896,
+                            "y": -0.49969983100891113
+                          },
+                          {
+                            "x": -0.4997354745864868,
+                            "y": -0.499489963054657
+                          },
+                          {
+                            "x": -0.5000523924827576,
+                            "y": 0.49843722581863403
+                          }
+                        ],
+                        "_activePath": 0,
+                        "_looped": 1,
+                        "_shadowLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "_lightPenetration": 0.0,
+                        "_opacity": 1.0
+                      }
+                    },
+                    {
+                      "id": 5718,
+                      "type": "BoxCollider2D",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_Enabled": 0,
+                        "m_Density": 1.0,
+                        "m_Material": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_IncludeLayers": {
+                          "m_Bits": 0
+                        },
+                        "m_ExcludeLayers": {
+                          "m_Bits": 0
+                        },
+                        "m_LayerOverridePriority": 0,
+                        "m_ForceSendLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_ForceReceiveLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_ContactCaptureLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_CallbackLayers": {
+                          "m_Bits": 4294967295
+                        },
+                        "m_IsTrigger": false,
+                        "m_UsedByEffector": false,
+                        "m_UsedByComposite": false,
+                        "m_Offset": {
+                          "x": 0.0,
+                          "y": 0.0
+                        },
+                        "m_SpriteTilingProperty": {
+                          "border": {
+                            "x": 0.0,
+                            "y": 0.0,
+                            "z": 0.0,
+                            "w": 0.0
+                          },
+                          "pivot": {
+                            "x": 0.5,
+                            "y": 0.5
+                          },
+                          "oldSize": {
+                            "x": 1.0,
+                            "y": 1.0
+                          },
+                          "newSize": {
+                            "x": 1.0,
+                            "y": 1.0
+                          },
+                          "adaptiveTilingThreshold": 0.5,
+                          "drawMode": 0,
+                          "adaptiveTiling": false
+                        },
+                        "m_AutoTiling": false,
+                        "m_Size": {
+                          "x": 1.0,
+                          "y": 1.0
+                        },
+                        "m_EdgeRadius": 0.0
+                      }
+                    },
+                    {
+                      "id": 10560,
+                      "type": "SetTeamColor",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_Enabled": 1,
+                        "m_Script": {
+                          "m_FileID": 16777216,
+                          "m_PathID": 15938355200
+                        },
+                        "m_Name": "",
+                        "SetColorEvent": {
+                          "m_PersistentCalls": {
+                            "m_Calls": []
+                          }
+                        },
+                        "colorType": 0
+                      }
+                    },
+                    {
+                      "id": 9407,
+                      "type": "SpriteMask",
+                      "data": {
+                        "m_GameObject": {
+                          "m_FileID": 0,
+                          "m_PathID": 2559
+                        },
+                        "m_Enabled": true,
+                        "m_CastShadows": 1,
+                        "m_ReceiveShadows": 1,
+                        "m_DynamicOccludee": 1,
+                        "m_StaticShadowCaster": 0,
+                        "m_MotionVectors": 1,
+                        "m_LightProbeUsage": 1,
+                        "m_ReflectionProbeUsage": 1,
+                        "m_RayTracingMode": 0,
+                        "m_RayTraceProcedural": 0,
+                        "m_RenderingLayerMask": 4294967295,
+                        "m_RendererPriority": 0,
+                        "m_LightmapIndex": 65535,
+                        "m_LightmapIndexDynamic": 65535,
+                        "m_LightmapTilingOffset": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_LightmapTilingOffsetDynamic": {
+                          "x": 1.0,
+                          "y": 1.0,
+                          "z": 0.0,
+                          "w": 0.0
+                        },
+                        "m_Materials": [
+                          {
+                            "m_FileID": 0,
+                            "m_PathID": 5
+                          }
+                        ],
+                        "m_StaticBatchInfo": {
+                          "firstSubMesh": 0,
+                          "subMeshCount": 0
+                        },
+                        "m_StaticBatchRoot": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_ProbeAnchor": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_LightProbeVolumeOverride": {
+                          "m_FileID": 0,
+                          "m_PathID": 0
+                        },
+                        "m_SortingLayerID": 0,
+                        "m_SortingLayer": 0,
+                        "m_SortingOrder": 0,
+                        "m_Sprite": {
+                          "m_FileID": 0,
+                          "m_PathID": 2375
+                        },
+                        "m_MaskAlphaCutoff": 0.20000000298023224,
+                        "m_FrontSortingLayerID": -1698888699,
+                        "m_BackSortingLayerID": -1698888699,
+                        "m_FrontSortingLayer": 2,
+                        "m_BackSortingLayer": 2,
+                        "m_FrontSortingOrder": 1,
+                        "m_BackSortingOrder": 0,
+                        "m_IsCustomRangeActive": true,
+                        "m_SpriteSortPoint": 0
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4052,
+          "name": "Ammo",
+          "active": true,
+          "components": [
+            {
+              "id": 5652,
+              "type": "Transform",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 4052
+                },
+                "m_LocalRotation": {
+                  "x": -0.0,
+                  "y": -0.0,
+                  "z": -0.0,
+                  "w": 1.0
+                },
+                "m_LocalPosition": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "m_LocalScale": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                "m_Children": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 5346
+                  },
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 8844
+                  }
+                ],
+                "m_Father": {
+                  "m_FileID": 0,
+                  "m_PathID": 5530
+                }
+              }
+            },
+            {
+              "id": 13091,
+              "type": "GunAmmo",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 4052
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 26055016448
+                },
+                "m_Name": "",
+                "soundReloadInProgressLoop": {
+                  "m_FileID": 0,
+                  "m_PathID": 9638
+                },
+                "soundReloadComplete": {
+                  "m_FileID": 0,
+                  "m_PathID": 9636
+                },
+                "maxAmmo": 3,
+                "reloadTime": 2.0,
+                "reloadTimeMultiplier": 1.0,
+                "reloadTimeAdd": 0.0,
+                "reloadAnim": {
+                  "m_FileID": 0,
+                  "m_PathID": 12702
+                },
+                "cooldownRing": {
+                  "m_FileID": 0,
+                  "m_PathID": 11265
+                },
+                "populate": {
+                  "m_FileID": 0,
+                  "m_PathID": 11870
+                },
+                "ammoReg": 0.0
+              }
+            }
+          ],
+          "children": [
+            {
+              "id": 3790,
+              "name": "Ammo",
+              "active": true,
+              "components": [
+                {
+                  "id": 5346,
+                  "type": "Transform",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 3790
+                    },
+                    "m_LocalRotation": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0,
+                      "w": 1.0
+                    },
+                    "m_LocalPosition": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    },
+                    "m_LocalScale": {
+                      "x": 1.0,
+                      "y": 1.0,
+                      "z": 1.0
+                    },
+                    "m_Children": [],
+                    "m_Father": {
+                      "m_FileID": 0,
+                      "m_PathID": 5652
+                    }
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": 2970,
+              "name": "Canvas",
+              "active": true,
+              "components": [
+                {
+                  "id": 8844,
+                  "type": "RectTransform",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2970
+                    },
+                    "m_LocalRotation": {
+                      "x": 6.989271810198261e-07,
+                      "y": -6.919187285348016e-07,
+                      "z": 0.707105815410614,
+                      "w": 0.7071077823638916
+                    },
+                    "m_LocalPosition": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    },
+                    "m_LocalScale": {
+                      "x": 0.0018415844533592463,
+                      "y": 0.0018415844533592463,
+                      "z": 0.0018415844533592463
+                    },
+                    "m_Children": [
+                      {
+                        "m_FileID": 0,
+                        "m_PathID": 8233
+                      },
+                      {
+                        "m_FileID": 0,
+                        "m_PathID": 8732
+                      },
+                      {
+                        "m_FileID": 0,
+                        "m_PathID": 8375
+                      }
+                    ],
+                    "m_Father": {
+                      "m_FileID": 0,
+                      "m_PathID": 5652
+                    },
+                    "m_AnchorMin": {
+                      "x": 0.0,
+                      "y": 0.0
+                    },
+                    "m_AnchorMax": {
+                      "x": 0.0,
+                      "y": 0.0
+                    },
+                    "m_AnchoredPosition": {
+                      "x": 0.0,
+                      "y": 0.0
+                    },
+                    "m_SizeDelta": {
+                      "x": 1920.0,
+                      "y": 1080.0
+                    },
+                    "m_Pivot": {
+                      "x": 0.5,
+                      "y": 0.5
+                    }
+                  }
+                },
+                {
+                  "id": 8017,
+                  "type": "Canvas",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2970
+                    },
+                    "m_Enabled": 1,
+                    "m_RenderMode": 2,
+                    "m_Camera": {
+                      "m_FileID": 0,
+                      "m_PathID": 0
+                    },
+                    "m_PlaneDistance": 100.0,
+                    "m_PixelPerfect": false,
+                    "m_ReceivesEvents": true,
+                    "m_OverrideSorting": false,
+                    "m_OverridePixelPerfect": false,
+                    "m_SortingBucketNormalizedSize": 0.0,
+                    "m_VertexColorAlwaysGammaSpace": false,
+                    "m_AdditionalShaderChannelsFlag": 0,
+                    "m_UpdateRectTransformForStandalone": 0,
+                    "m_SortingLayerID": 0,
+                    "m_SortingOrder": 0,
+                    "m_TargetDisplay": 0
+                  }
+                },
+                {
+                  "id": 11688,
+                  "type": "CanvasScaler",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2970
+                    },
+                    "m_Enabled": 1,
+                    "m_Script": {
+                      "m_FileID": 16777216,
+                      "m_PathID": 1677721600
+                    },
+                    "m_Name": "",
+                    "m_UiScaleMode": 0,
+                    "m_ReferencePixelsPerUnit": 100.0,
+                    "m_ScaleFactor": 1.0,
+                    "m_ReferenceResolution": {
+                      "x": 800.0,
+                      "y": 600.0
+                    },
+                    "m_ScreenMatchMode": 0,
+                    "m_MatchWidthOrHeight": 0.0,
+                    "m_PhysicalUnit": 3,
+                    "m_FallbackScreenDPI": 96.0,
+                    "m_DefaultSpriteDPI": 96.0,
+                    "m_DynamicPixelsPerUnit": 1.0,
+                    "m_PresetInfoIsWorld": 0
+                  }
+                },
+                {
+                  "id": 12009,
+                  "type": "GraphicRaycaster",
+                  "data": {
+                    "m_GameObject": {
+                      "m_FileID": 0,
+                      "m_PathID": 2970
+                    },
+                    "m_Enabled": 1,
+                    "m_Script": {
+                      "m_FileID": 16777216,
+                      "m_PathID": 30534533120
+                    },
+                    "m_Name": "",
+                    "m_IgnoreReversedGraphics": 1,
+                    "m_BlockingObjects": 0,
+                    "m_BlockingMask": {
+                      "m_Bits": 4294967295
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2518,
+          "name": "Handle",
+          "active": true,
+          "components": [
+            {
+              "id": 4793,
+              "type": "Transform",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_LocalRotation": {
+                  "x": -9.192978041028255e-07,
+                  "y": -1.2102829316518182e-07,
+                  "z": -0.13052745163440704,
+                  "w": 0.9914447069168091
+                },
+                "m_LocalPosition": {
+                  "x": 0.009999999776482582,
+                  "y": 0.11999999731779099,
+                  "z": 0.0
+                },
+                "m_LocalScale": {
+                  "x": 0.3524685204029083,
+                  "y": 0.15028053522109985,
+                  "z": 0.8299999833106995
+                },
+                "m_Children": [],
+                "m_Father": {
+                  "m_FileID": 0,
+                  "m_PathID": 5530
+                }
+              }
+            },
+            {
+              "id": 6368,
+              "type": "SpriteRenderer",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": false,
+                "m_CastShadows": 0,
+                "m_ReceiveShadows": 0,
+                "m_DynamicOccludee": 1,
+                "m_StaticShadowCaster": 0,
+                "m_MotionVectors": 1,
+                "m_LightProbeUsage": 1,
+                "m_ReflectionProbeUsage": 1,
+                "m_RayTracingMode": 0,
+                "m_RayTraceProcedural": 0,
+                "m_RenderingLayerMask": 4294967295,
+                "m_RendererPriority": 0,
+                "m_LightmapIndex": 65535,
+                "m_LightmapIndexDynamic": 65535,
+                "m_LightmapTilingOffset": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_LightmapTilingOffsetDynamic": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_Materials": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 61
+                  }
+                ],
+                "m_StaticBatchInfo": {
+                  "firstSubMesh": 0,
+                  "subMeshCount": 0
+                },
+                "m_StaticBatchRoot": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_ProbeAnchor": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_LightProbeVolumeOverride": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_SortingLayerID": 0,
+                "m_SortingLayer": 0,
+                "m_SortingOrder": 0,
+                "m_Sprite": {
+                  "m_FileID": 0,
+                  "m_PathID": 2375
+                },
+                "m_Color": {
+                  "r": 0.6320754289627075,
+                  "g": 0.3505733013153076,
+                  "b": 0.27131539583206177,
+                  "a": 1.0
+                },
+                "m_FlipX": false,
+                "m_FlipY": false,
+                "m_DrawMode": 0,
+                "m_Size": {
+                  "x": 1.0,
+                  "y": 1.0
+                },
+                "m_AdaptiveModeThreshold": 0.5,
+                "m_SpriteTileMode": 0,
+                "m_WasSpriteAssigned": true,
+                "m_MaskInteraction": 0,
+                "m_SpriteSortPoint": 0
+              }
+            },
+            {
+              "id": 9974,
+              "type": "SFPolygon",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 1979711488
+                },
+                "m_Name": "",
+                "_verts": [
+                  {
+                    "x": 0.49994251132011414,
+                    "y": 0.4998379945755005
+                  },
+                  {
+                    "x": 0.49998700618743896,
+                    "y": -0.49969983100891113
+                  },
+                  {
+                    "x": -0.4997354745864868,
+                    "y": -0.499489963054657
+                  },
+                  {
+                    "x": -0.5000523924827576,
+                    "y": 0.49843722581863403
+                  }
+                ],
+                "_activePath": 0,
+                "_looped": 1,
+                "_shadowLayers": {
+                  "m_Bits": 4294967295
+                },
+                "_lightPenetration": 0.0,
+                "_opacity": 1.0
+              }
+            },
+            {
+              "id": 5714,
+              "type": "BoxCollider2D",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": 0,
+                "m_Density": 1.0,
+                "m_Material": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_IncludeLayers": {
+                  "m_Bits": 0
+                },
+                "m_ExcludeLayers": {
+                  "m_Bits": 0
+                },
+                "m_LayerOverridePriority": 0,
+                "m_ForceSendLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_ForceReceiveLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_ContactCaptureLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_CallbackLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_IsTrigger": false,
+                "m_UsedByEffector": false,
+                "m_UsedByComposite": false,
+                "m_Offset": {
+                  "x": 0.0,
+                  "y": 0.0
+                },
+                "m_SpriteTilingProperty": {
+                  "border": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                  },
+                  "pivot": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "oldSize": {
+                    "x": 1.0,
+                    "y": 1.0
+                  },
+                  "newSize": {
+                    "x": 1.0,
+                    "y": 1.0
+                  },
+                  "adaptiveTilingThreshold": 0.5,
+                  "drawMode": 0,
+                  "adaptiveTiling": false
+                },
+                "m_AutoTiling": false,
+                "m_Size": {
+                  "x": 1.0,
+                  "y": 1.0
+                },
+                "m_EdgeRadius": 0.0
+              }
+            },
+            {
+              "id": 9973,
+              "type": "SetTeamColor",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 15938355200
+                },
+                "m_Name": "",
+                "SetColorEvent": {
+                  "m_PersistentCalls": {
+                    "m_Calls": []
+                  }
+                },
+                "colorType": 0
+              }
+            },
+            {
+              "id": 9400,
+              "type": "SpriteMask",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": true,
+                "m_CastShadows": 1,
+                "m_ReceiveShadows": 1,
+                "m_DynamicOccludee": 1,
+                "m_StaticShadowCaster": 0,
+                "m_MotionVectors": 1,
+                "m_LightProbeUsage": 1,
+                "m_ReflectionProbeUsage": 1,
+                "m_RayTracingMode": 0,
+                "m_RayTraceProcedural": 0,
+                "m_RenderingLayerMask": 4294967295,
+                "m_RendererPriority": 0,
+                "m_LightmapIndex": 65535,
+                "m_LightmapIndexDynamic": 65535,
+                "m_LightmapTilingOffset": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_LightmapTilingOffsetDynamic": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_Materials": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 5
+                  }
+                ],
+                "m_StaticBatchInfo": {
+                  "firstSubMesh": 0,
+                  "subMeshCount": 0
+                },
+                "m_StaticBatchRoot": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_ProbeAnchor": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_LightProbeVolumeOverride": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_SortingLayerID": 0,
+                "m_SortingLayer": 0,
+                "m_SortingOrder": 0,
+                "m_Sprite": {
+                  "m_FileID": 0,
+                  "m_PathID": 2375
+                },
+                "m_MaskAlphaCutoff": 0.20000000298023224,
+                "m_FrontSortingLayerID": -1698888699,
+                "m_BackSortingLayerID": -1698888699,
+                "m_FrontSortingLayer": 2,
+                "m_BackSortingLayer": 2,
+                "m_FrontSortingOrder": 1,
+                "m_BackSortingOrder": 0,
+                "m_IsCustomRangeActive": true,
+                "m_SpriteSortPoint": 0
+              }
+            },
+            {
+              "id": 12081,
+              "type": "RightLeftMirrorSpring",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2518
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 24360517632
+                },
+                "m_Name": "",
+                "leftPos": {
+                  "x": -0.009999999776482582,
+                  "y": 0.11999999731779099,
+                  "z": 0.0
+                },
+                "leftRot": 15.0,
+                "rightRot": -15.0,
+                "drag": 15.0,
+                "spring": 35.0
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": 2705,
+          "name": "Barrel",
+          "active": true,
+          "components": [
+            {
+              "id": 4868,
+              "type": "Transform",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_LocalRotation": {
+                  "x": -6.556511493727157e-07,
+                  "y": 6.556512630595535e-07,
+                  "z": 0.7071064710617065,
+                  "w": 0.7071071863174438
+                },
+                "m_LocalPosition": {
+                  "x": -0.15000000596046448,
+                  "y": 0.4000000059604645,
+                  "z": 0.0
+                },
+                "m_LocalScale": {
+                  "x": 0.6403860449790955,
+                  "y": 0.15028050541877747,
+                  "z": 0.8299999833106995
+                },
+                "m_Children": [],
+                "m_Father": {
+                  "m_FileID": 0,
+                  "m_PathID": 5530
+                }
+              }
+            },
+            {
+              "id": 6384,
+              "type": "SpriteRenderer",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": false,
+                "m_CastShadows": 0,
+                "m_ReceiveShadows": 0,
+                "m_DynamicOccludee": 1,
+                "m_StaticShadowCaster": 0,
+                "m_MotionVectors": 1,
+                "m_LightProbeUsage": 1,
+                "m_ReflectionProbeUsage": 1,
+                "m_RayTracingMode": 0,
+                "m_RayTraceProcedural": 0,
+                "m_RenderingLayerMask": 4294967295,
+                "m_RendererPriority": 0,
+                "m_LightmapIndex": 65535,
+                "m_LightmapIndexDynamic": 65535,
+                "m_LightmapTilingOffset": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_LightmapTilingOffsetDynamic": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_Materials": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 61
+                  }
+                ],
+                "m_StaticBatchInfo": {
+                  "firstSubMesh": 0,
+                  "subMeshCount": 0
+                },
+                "m_StaticBatchRoot": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_ProbeAnchor": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_LightProbeVolumeOverride": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_SortingLayerID": 0,
+                "m_SortingLayer": 0,
+                "m_SortingOrder": 0,
+                "m_Sprite": {
+                  "m_FileID": 0,
+                  "m_PathID": 2375
+                },
+                "m_Color": {
+                  "r": 0.6320754289627075,
+                  "g": 0.3505733013153076,
+                  "b": 0.27131539583206177,
+                  "a": 1.0
+                },
+                "m_FlipX": false,
+                "m_FlipY": false,
+                "m_DrawMode": 0,
+                "m_Size": {
+                  "x": 1.0,
+                  "y": 1.0
+                },
+                "m_AdaptiveModeThreshold": 0.5,
+                "m_SpriteTileMode": 0,
+                "m_WasSpriteAssigned": true,
+                "m_MaskInteraction": 0,
+                "m_SpriteSortPoint": 0
+              }
+            },
+            {
+              "id": 10098,
+              "type": "SFPolygon",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 1979711488
+                },
+                "m_Name": "",
+                "_verts": [
+                  {
+                    "x": 0.49994251132011414,
+                    "y": 0.4998379945755005
+                  },
+                  {
+                    "x": 0.49998700618743896,
+                    "y": -0.49969983100891113
+                  },
+                  {
+                    "x": -0.4997354745864868,
+                    "y": -0.499489963054657
+                  },
+                  {
+                    "x": -0.5000523924827576,
+                    "y": 0.49843722581863403
+                  }
+                ],
+                "_activePath": 0,
+                "_looped": 1,
+                "_shadowLayers": {
+                  "m_Bits": 4294967295
+                },
+                "_lightPenetration": 0.0,
+                "_opacity": 1.0
+              }
+            },
+            {
+              "id": 5715,
+              "type": "BoxCollider2D",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": 0,
+                "m_Density": 1.0,
+                "m_Material": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_IncludeLayers": {
+                  "m_Bits": 0
+                },
+                "m_ExcludeLayers": {
+                  "m_Bits": 0
+                },
+                "m_LayerOverridePriority": 0,
+                "m_ForceSendLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_ForceReceiveLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_ContactCaptureLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_CallbackLayers": {
+                  "m_Bits": 4294967295
+                },
+                "m_IsTrigger": false,
+                "m_UsedByEffector": false,
+                "m_UsedByComposite": false,
+                "m_Offset": {
+                  "x": 0.0,
+                  "y": 0.0
+                },
+                "m_SpriteTilingProperty": {
+                  "border": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 0.0
+                  },
+                  "pivot": {
+                    "x": 0.5,
+                    "y": 0.5
+                  },
+                  "oldSize": {
+                    "x": 1.0,
+                    "y": 1.0
+                  },
+                  "newSize": {
+                    "x": 1.0,
+                    "y": 1.0
+                  },
+                  "adaptiveTilingThreshold": 0.5,
+                  "drawMode": 0,
+                  "adaptiveTiling": false
+                },
+                "m_AutoTiling": false,
+                "m_Size": {
+                  "x": 1.0,
+                  "y": 1.0
+                },
+                "m_EdgeRadius": 0.0
+              }
+            },
+            {
+              "id": 10105,
+              "type": "SetTeamColor",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 15938355200
+                },
+                "m_Name": "",
+                "SetColorEvent": {
+                  "m_PersistentCalls": {
+                    "m_Calls": []
+                  }
+                },
+                "colorType": 0
+              }
+            },
+            {
+              "id": 9403,
+              "type": "SpriteMask",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": true,
+                "m_CastShadows": 1,
+                "m_ReceiveShadows": 1,
+                "m_DynamicOccludee": 1,
+                "m_StaticShadowCaster": 0,
+                "m_MotionVectors": 1,
+                "m_LightProbeUsage": 1,
+                "m_ReflectionProbeUsage": 1,
+                "m_RayTracingMode": 0,
+                "m_RayTraceProcedural": 0,
+                "m_RenderingLayerMask": 4294967295,
+                "m_RendererPriority": 0,
+                "m_LightmapIndex": 65535,
+                "m_LightmapIndexDynamic": 65535,
+                "m_LightmapTilingOffset": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_LightmapTilingOffsetDynamic": {
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 0.0,
+                  "w": 0.0
+                },
+                "m_Materials": [
+                  {
+                    "m_FileID": 0,
+                    "m_PathID": 5
+                  }
+                ],
+                "m_StaticBatchInfo": {
+                  "firstSubMesh": 0,
+                  "subMeshCount": 0
+                },
+                "m_StaticBatchRoot": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_ProbeAnchor": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_LightProbeVolumeOverride": {
+                  "m_FileID": 0,
+                  "m_PathID": 0
+                },
+                "m_SortingLayerID": 0,
+                "m_SortingLayer": 0,
+                "m_SortingOrder": 0,
+                "m_Sprite": {
+                  "m_FileID": 0,
+                  "m_PathID": 2375
+                },
+                "m_MaskAlphaCutoff": 0.20000000298023224,
+                "m_FrontSortingLayerID": -1698888699,
+                "m_BackSortingLayerID": -1698888699,
+                "m_FrontSortingLayer": 2,
+                "m_BackSortingLayer": 2,
+                "m_FrontSortingOrder": 1,
+                "m_BackSortingOrder": 0,
+                "m_IsCustomRangeActive": true,
+                "m_SpriteSortPoint": 0
+              }
+            },
+            {
+              "id": 11288,
+              "type": "RightLeftMirrorSpring",
+              "data": {
+                "m_GameObject": {
+                  "m_FileID": 0,
+                  "m_PathID": 2705
+                },
+                "m_Enabled": 1,
+                "m_Script": {
+                  "m_FileID": 16777216,
+                  "m_PathID": 24360517632
+                },
+                "m_Name": "",
+                "leftPos": {
+                  "x": 0.15000000596046448,
+                  "y": 0.4000000059604645,
+                  "z": 0.0
+                },
+                "leftRot": 90.0,
+                "rightRot": 90.0,
+                "drag": 15.0,
+                "spring": 35.0
+              }
+            }
+          ],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

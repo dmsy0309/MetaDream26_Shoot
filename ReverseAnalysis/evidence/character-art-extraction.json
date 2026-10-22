@@ -1,0 +1,15 @@
+{
+  "source": "~/Library/Application Support/Steam/steamapps/common/ROUNDS/ROUNDS.app/Contents/Resources/Data",
+  "files": {
+    "sharedassets0.assets": "bdeb21d9015b8d92118954d98206c55a7003f5cb960134c9b68f51b33960d23a",
+    "level0": "76e48672f3d05858ea1c997e806ed08c7f5e1c3d85ab2d3a4202e639bed5cb6d",
+    "Managed/Assembly-CSharp.dll": "4509e77d6af4d0a9934d39c664531585df0a740c9569b3838fc2e11fd9aa8f2a"
+  },
+  "counts": {
+    "eyes": 85,
+    "mouths": 58,
+    "accessories": 54
+  },
+  "sprite_count": 246,
+  "method": "Native MonoBehaviour header resolves script/game object; generated type tree fields follow byte 32. Original trimmed sprite restored in its original rectangle with textureRectOffset; original pivot and pixels-per-unit retained."
+}

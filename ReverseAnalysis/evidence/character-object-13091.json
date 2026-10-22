@@ -1,0 +1,279 @@
+{
+  "id": 4052,
+  "name": "Ammo",
+  "active": true,
+  "components": [
+    {
+      "id": 5652,
+      "type": "Transform",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4052
+        },
+        "m_LocalRotation": {
+          "x": -0.0,
+          "y": -0.0,
+          "z": -0.0,
+          "w": 1.0
+        },
+        "m_LocalPosition": {
+          "x": 0.0,
+          "y": 0.0,
+          "z": 0.0
+        },
+        "m_LocalScale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        },
+        "m_Children": [
+          {
+            "m_FileID": 0,
+            "m_PathID": 5346
+          },
+          {
+            "m_FileID": 0,
+            "m_PathID": 8844
+          }
+        ],
+        "m_Father": {
+          "m_FileID": 0,
+          "m_PathID": 5530
+        }
+      }
+    },
+    {
+      "id": 13091,
+      "type": "GunAmmo",
+      "data": {
+        "m_GameObject": {
+          "m_FileID": 0,
+          "m_PathID": 4052
+        },
+        "m_Enabled": 1,
+        "m_Script": {
+          "m_FileID": 16777216,
+          "m_PathID": 26055016448
+        },
+        "m_Name": "",
+        "soundReloadInProgressLoop": {
+          "m_FileID": 0,
+          "m_PathID": 9638
+        },
+        "soundReloadComplete": {
+          "m_FileID": 0,
+          "m_PathID": 9636
+        },
+        "maxAmmo": 3,
+        "reloadTime": 2.0,
+        "reloadTimeMultiplier": 1.0,
+        "reloadTimeAdd": 0.0,
+        "reloadAnim": {
+          "m_FileID": 0,
+          "m_PathID": 12702
+        },
+        "cooldownRing": {
+          "m_FileID": 0,
+          "m_PathID": 11265
+        },
+        "populate": {
+          "m_FileID": 0,
+          "m_PathID": 11870
+        },
+        "ammoReg": 0.0
+      }
+    }
+  ],
+  "children": [
+    {
+      "id": 3790,
+      "name": "Ammo",
+      "active": true,
+      "components": [
+        {
+          "id": 5346,
+          "type": "Transform",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 3790
+            },
+            "m_LocalRotation": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0,
+              "w": 1.0
+            },
+            "m_LocalPosition": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "m_LocalScale": {
+              "x": 1.0,
+              "y": 1.0,
+              "z": 1.0
+            },
+            "m_Children": [],
+            "m_Father": {
+              "m_FileID": 0,
+              "m_PathID": 5652
+            }
+          }
+        }
+      ],
+      "children": []
+    },
+    {
+      "id": 2970,
+      "name": "Canvas",
+      "active": true,
+      "components": [
+        {
+          "id": 8844,
+          "type": "RectTransform",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2970
+            },
+            "m_LocalRotation": {
+              "x": 6.989271810198261e-07,
+              "y": -6.919187285348016e-07,
+              "z": 0.707105815410614,
+              "w": 0.7071077823638916
+            },
+            "m_LocalPosition": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "m_LocalScale": {
+              "x": 0.0018415844533592463,
+              "y": 0.0018415844533592463,
+              "z": 0.0018415844533592463
+            },
+            "m_Children": [
+              {
+                "m_FileID": 0,
+                "m_PathID": 8233
+              },
+              {
+                "m_FileID": 0,
+                "m_PathID": 8732
+              },
+              {
+                "m_FileID": 0,
+                "m_PathID": 8375
+              }
+            ],
+            "m_Father": {
+              "m_FileID": 0,
+              "m_PathID": 5652
+            },
+            "m_AnchorMin": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "m_AnchorMax": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "m_AnchoredPosition": {
+              "x": 0.0,
+              "y": 0.0
+            },
+            "m_SizeDelta": {
+              "x": 1920.0,
+              "y": 1080.0
+            },
+            "m_Pivot": {
+              "x": 0.5,
+              "y": 0.5
+            }
+          }
+        },
+        {
+          "id": 8017,
+          "type": "Canvas",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2970
+            },
+            "m_Enabled": 1,
+            "m_RenderMode": 2,
+            "m_Camera": {
+              "m_FileID": 0,
+              "m_PathID": 0
+            },
+            "m_PlaneDistance": 100.0,
+            "m_PixelPerfect": false,
+            "m_ReceivesEvents": true,
+            "m_OverrideSorting": false,
+            "m_OverridePixelPerfect": false,
+            "m_SortingBucketNormalizedSize": 0.0,
+            "m_VertexColorAlwaysGammaSpace": false,
+            "m_AdditionalShaderChannelsFlag": 0,
+            "m_UpdateRectTransformForStandalone": 0,
+            "m_SortingLayerID": 0,
+            "m_SortingOrder": 0,
+            "m_TargetDisplay": 0
+          }
+        },
+        {
+          "id": 11688,
+          "type": "CanvasScaler",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2970
+            },
+            "m_Enabled": 1,
+            "m_Script": {
+              "m_FileID": 16777216,
+              "m_PathID": 1677721600
+            },
+            "m_Name": "",
+            "m_UiScaleMode": 0,
+            "m_ReferencePixelsPerUnit": 100.0,
+            "m_ScaleFactor": 1.0,
+            "m_ReferenceResolution": {
+              "x": 800.0,
+              "y": 600.0
+            },
+            "m_ScreenMatchMode": 0,
+            "m_MatchWidthOrHeight": 0.0,
+            "m_PhysicalUnit": 3,
+            "m_FallbackScreenDPI": 96.0,
+            "m_DefaultSpriteDPI": 96.0,
+            "m_DynamicPixelsPerUnit": 1.0,
+            "m_PresetInfoIsWorld": 0
+          }
+        },
+        {
+          "id": 12009,
+          "type": "GraphicRaycaster",
+          "data": {
+            "m_GameObject": {
+              "m_FileID": 0,
+              "m_PathID": 2970
+            },
+            "m_Enabled": 1,
+            "m_Script": {
+              "m_FileID": 16777216,
+              "m_PathID": 30534533120
+            },
+            "m_Name": "",
+            "m_IgnoreReversedGraphics": 1,
+            "m_BlockingObjects": 0,
+            "m_BlockingMask": {
+              "m_Bits": 4294967295
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

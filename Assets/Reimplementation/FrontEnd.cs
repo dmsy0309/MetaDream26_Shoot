@@ -68,6 +68,8 @@ namespace Metadream.Shoot
         private string _replayPath = "";
         private string _replayMessage;
         private int _lookCategory;
+        private Vector2 _lookScroll;
+        private int _lookScrollCategory = -1, _lookScrollValue = -1;
         private int _lookTeam;
 
         private static GameFlow Flow => GameFlow.Instance;
@@ -635,7 +637,7 @@ namespace Metadream.Shoot
                 if (Clicked(tb)) { int k = t; _deferred = () => _lookTeam = k; }
             }
 
-            string[] titles = { "머리", "눈 / 표정", "장식 1", "입", "장식 2" };
+            string[] titles = { "머리 (기존)", "눈 / 표정", "장식 1", "입", "장식 2" };
             float x0 = W / 2 - 150;
             for (int c = 0; c < 5; c++)
             {
@@ -645,18 +647,41 @@ namespace Metadream.Shoot
                 if (Clicked(tab)) { int cat = c; _deferred = () => _lookCategory = cat; }
             }
             string[] names = LookNames(_lookCategory);
+            int currentValue = LookValue(look,_lookCategory);
+            if (_lookScrollCategory != _lookCategory || _lookScrollValue != currentValue)
+            {
+                _lookScrollCategory=_lookCategory;_lookScrollValue=currentValue;
+                _lookScroll.y=Mathf.Max(0,currentValue/7*92-92);
+            }
+            var viewport=new Rect(x0,266,880,242);
+            _lookScroll=GUI.BeginScrollView(viewport,_lookScroll,new Rect(0,0,850,Mathf.Ceil(names.Length/7f)*92));
             for (int i = 0; i < names.Length; i++)
             {
-                var chip = new Rect(x0 + i % 4 * 220, 280 + i / 4 * 64, 208, 56);
-                bool selected = LookValue(look,_lookCategory) == i;
-                Fill(chip, selected ? Color.white : new Color(1,1,1,0.12f));
-                Text(chip, names[i], Small, selected ? Palette.Ink : Color.white);
+                var chip = new Rect(i % 7 * 121, i / 7 * 92, 113, 84);
+                bool selected = currentValue == i;
+                Fill(chip, selected ? new Color(0.93f,0.67f,0.32f) : new Color(1,1,1,0.12f));
+                var item=OriginalCharacterArt.Resolve(_lookCategory,i);
+                if(item!=null)
+                {
+                    OriginalCharacterArt.DrawThumbnail(new Rect(chip.x+8,chip.y+2,97,60),item);
+                    Text(new Rect(chip.x,chip.y+61,chip.width,23),names[i],new GUIStyle(Tiny){fontSize=15},Color.white);
+                }
+                else Text(chip,names[i],new GUIStyle(Small){fontSize=19},selected?Palette.Ink:Color.white);
                 if (Clicked(chip)) { int v = i; _deferred = () => SetLookValue(_lookCategory,v); }
+            }
+            GUI.EndScrollView();
+            // Original creator places the selected face part by dragging it in the live portrait.
+            if (_lookCategory != 0 && box.Contains(Event.current.mousePosition) && Event.current.type == EventType.MouseDrag && Event.current.button == 0)
+            {
+                var delta=Event.current.delta*(3.3f/box.width/1.2f);delta.y=-delta.y;
+                var l=PlayerProfile.Look;
+                switch(_lookCategory){case 1:l.EyeOffset+=delta;break;case 2:l.AccessoryOffset+=delta;break;case 3:l.MouthOffset+=delta;break;case 4:l.Accessory2Offset+=delta;break;}
+                PlayerProfile.Look=l.Sanitized;Event.current.Use();
             }
             if (_lookCategory != 0)
             {
                 Vector2 offset = _lookCategory == 1 ? look.EyeOffset : _lookCategory == 2 ? look.AccessoryOffset : _lookCategory == 3 ? look.MouthOffset : look.Accessory2Offset;
-                Text(new Rect(x0,500,880,40), "위치 조절  ·  " + titles[_lookCategory], Mid, Color.white);
+                Text(new Rect(x0,500,880,40), "위치 조절  ·  " + titles[_lookCategory] + "  (미리보기에서 드래그)", Mid, Color.white);
                 Text(new Rect(x0,562,100,30), "좌우", Small, Color.white);
                 Text(new Rect(x0,622,100,30), "높이", Small, Color.white);
                 float ox = GUI.HorizontalSlider(new Rect(x0+120,575,640,25),offset.x,-0.25f,0.25f);

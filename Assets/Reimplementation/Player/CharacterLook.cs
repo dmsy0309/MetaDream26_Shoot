@@ -14,7 +14,7 @@ namespace Metadream.Shoot.Player
         public byte Hat, Expression, Accessory;
         public byte Mouth, Accessory2;
         public Vector2 EyeOffset, MouthOffset, AccessoryOffset, Accessory2Offset;
-        public static readonly string[] MouthNames = { "표정에 맞춤", "없음", "미소", "활짝", "놀람", "일자", "찡그림", "작은 입" };
+        public static readonly string[] MouthNames = OriginalCharacterArt.AppendNames(new[] { "표정에 맞춤", "없음", "미소", "활짝", "놀람", "일자", "찡그림", "작은 입" }, 3);
         public static Vector2 ClampOffset(Vector2 p) => new Vector2(Safe(p.x), Safe(p.y));
         private static float Safe(float n) => float.IsNaN(n) || float.IsInfinity(n) ? 0 : Mathf.Clamp(n, -0.25f, 0.25f);
         public void WriteDetails(BinaryWriter w)
@@ -31,8 +31,8 @@ namespace Metadream.Shoot.Player
         }
 
         public static readonly string[] HatNames = { "없음", "왕관", "고깔모자", "고양이 귀", "악마 뿔", "새싹", "리본", "천사 고리", "신사 모자", "더듬이" };
-        public static readonly string[] ExpressionNames = { "기본", "화남", "졸림", "놀람", "행복", "자신만만", "슬픔", "윙크" };
-        public static readonly string[] AccessoryNames = { "없음", "볼터치", "안경", "선글라스", "콧수염", "반창고", "외알 안경" };
+        public static readonly string[] ExpressionNames = OriginalCharacterArt.AppendNames(new[] { "기본", "화남", "졸림", "놀람", "행복", "자신만만", "슬픔", "윙크" }, 1);
+        public static readonly string[] AccessoryNames = OriginalCharacterArt.AppendNames(new[] { "없음", "볼터치", "안경", "선글라스", "콧수염", "반창고", "외알 안경" }, 2);
 
         public CharacterLook(int hat, int expression, int accessory)
         {

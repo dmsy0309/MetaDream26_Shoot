@@ -27,14 +27,10 @@ namespace Metadream.Shoot.Player
         private Rigidbody2D _rb;
         private CircleCollider2D _collider;
         private SpriteRenderer _body;
-        private SpriteRenderer _barrel;
-        private SpriteRenderer _barrelTip;
-        private SpriteRenderer _outline;
-        private SpriteRenderer _shine;
+        private CharacterModel _model;
         private CharacterFace _face;
         private SpriteRenderer _ring;
         private SpriteRenderer _cooldownRing;
-        private Transform _barrelPivot;
 
         private float _sinceGrounded;
         private float _sinceWallGrab = 10f;
@@ -204,40 +200,8 @@ namespace Metadream.Shoot.Player
         private void BuildVisuals()
         {
             _body = gameObject.AddComponent<SpriteRenderer>();
-            _body.sprite = SpriteFactory.Circle;
-            _body.sharedMaterial = SpriteFactory.Material;
-            _body.color = Color;
-            _body.sortingOrder = 10;
-
-            _barrelPivot = new GameObject("Barrel").transform;
-            _barrelPivot.SetParent(transform, false);
-            var barrel = new GameObject("BarrelSprite");
-            barrel.transform.SetParent(_barrelPivot, false);
-            barrel.transform.localPosition = new Vector3(0.55f, 0f, 0f);
-            barrel.transform.localScale = new Vector3(0.5f, 0.2f, 1f);
-            _barrel = barrel.AddComponent<SpriteRenderer>();
-            _barrel.sprite = SpriteFactory.Square;
-            _barrel.sharedMaterial = SpriteFactory.Material;
-            _barrel.color = Color.Lerp(Color, Color.black, 0.45f);
-            _barrel.sortingOrder = 11;
-            var tip = new GameObject("BarrelTip");
-            tip.transform.SetParent(_barrelPivot, false);
-            tip.transform.localPosition = new Vector3(0.82f, 0f, 0f);
-            tip.transform.localScale = new Vector3(0.08f, 0.26f, 1f);
-            _barrelTip = tip.AddComponent<SpriteRenderer>();
-            _barrelTip.sprite = SpriteFactory.Square;
-            _barrelTip.sharedMaterial = SpriteFactory.Material;
-            _barrelTip.color = Color.Lerp(Color, Color.black, 0.65f);
-            _barrelTip.sortingOrder = 12;
-
-            // Character model: dark outline, soft highlight and eyes that follow the aim.
-            _outline = MakeChildSprite("Outline", SpriteFactory.Circle, 1.14f, 9);
-            _outline.color = Color.Lerp(Color, Color.white, 0.6f);
-            _shine = MakeChildSprite("Shine", SpriteFactory.Circle, 0.34f, 11);
-            _shine.transform.localPosition = new Vector3(-0.17f, 0.2f, 0f);
-            _shine.color = new Color(1f, 1f, 1f, 0.32f);
-            // Eyes, expression and decorations (CharacterLook, chosen in the main menu).
-            _face = new CharacterFace(transform, Color);
+            _model = new CharacterModel(transform, Color, _body);
+            _face = _model.Face;
 
             _ring = MakeChildSprite("BlockRing", SpriteFactory.Ring, 1.9f, 15);
             _ring.color = new Color(1f, 1f, 1f, 0f);
@@ -343,6 +307,7 @@ namespace Metadream.Shoot.Player
             if (_body != null)
             {
                 foreach (var sr in GetComponentsInChildren<SpriteRenderer>(true)) sr.enabled = present;
+                _model.SetVisible(present);
             }
             _face?.SetVisible(present);
             if (_rb != null) _rb.simulated = present && !Puppet;
@@ -720,20 +685,14 @@ namespace Metadream.Shoot.Player
         private void UpdateVisuals()
         {
             if (_body == null || !_body.enabled) return;
-            float angle = Mathf.Atan2(AimDirection.y, AimDirection.x) * Mathf.Rad2Deg;
-            _barrelPivot.localRotation = Quaternion.Euler(0f, 0f, angle);
             float hp = MaxHealth > 0f ? Mathf.Clamp01(Health / MaxHealth) : 1f;
             float danger = hp < 0.3f ? (0.5f + 0.5f * Mathf.Sin(Time.time * 10f)) * (1f - hp / 0.3f) * 0.45f : 0f;
             Color baseColor = Color.Lerp(Color, new Color(1f, 0.15f, 0.1f), danger);
             if (IsSlowed) baseColor = Color.Lerp(baseColor, new Color(0.65f, 0.85f, 1f), 0.35f);
             if (IsPoisoned) baseColor = Color.Lerp(baseColor, new Color(0.45f, 0.85f, 0.25f), 0.3f);
             _body.color = Color.Lerp(baseColor, Color.white, _flash * 0.8f);
-            if (_outline != null)
-            {
-                _outline.color = Color.Lerp(Color.Lerp(Color, Color.white, 0.6f), Color.white, _flash * 0.5f);
-                _face.Tick(AimDirection, IsDead);
-                _face.TintCovers(_body.color);
-            }
+            _model.Tick(AimDirection, Velocity, IsGrounded, IsDead, Ammo.currentAmmo, Ammo.maxAmmo,
+                Ammo.isReloading, ReloadProgress, BlockReadyProgress, Block.IsBlocking, _body.color);
             float blockAlpha = Block.IsBlocking ? Mathf.Clamp01(1f - Block.sinceBlock / CombatRules.BlockWindow) : 0f;
             _ring.color = new Color(1f, 1f, 1f, blockAlpha);
             bool ready = BlockReadyProgress >= 1f;

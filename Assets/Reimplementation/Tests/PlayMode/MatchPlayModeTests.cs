@@ -84,7 +84,8 @@ namespace Metadream.Shoot.Tests
             Assert.Less(b.Health, hp, "unblocked projectile deals damage");
 
             Assert.IsTrue(b.TryBlock() || b.Block.IsReady(b.Stats.block.EffectiveCooldown) == false);
-            var p = Projectile.Spawn(a, new Vector2(4.5f, b.Position.y), Vector2.right, a.Stats.gun);
+            // The first hit applies knockback: start relative to the target's current position.
+            var p = Projectile.Spawn(a, b.Position - Vector2.right * 1.5f, Vector2.right, a.Stats.gun);
             float before = b.Health;
             yield return new WaitForSeconds(0.05f);
             Assert.AreEqual(before, b.Health, 1e-4f, "blocked projectile deals no damage");
