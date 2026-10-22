@@ -203,17 +203,17 @@ namespace Metadream.Shoot
         public void OpenLook()
         {
             CloseListener();
-            _lookCategory = 0;
+            _lookCategory = 1;
             _page = Page.Look;
         }
 
-        private static string[] LookNames(int category) => category == 0 ? CharacterLook.HatNames : category == 1 ? CharacterLook.ExpressionNames : category == 2 ? CharacterLook.AccessoryNames : category == 3 ? CharacterLook.MouthNames : CharacterLook.AccessoryNames;
+        private static string[] LookNames(int category) => category == 1 ? CharacterLook.ExpressionNames : category == 2 ? CharacterLook.AccessoryNames : category == 3 ? CharacterLook.MouthNames : CharacterLook.AccessoryNames;
         private static int LookOptionCount(int category) => LookNames(category).Length;
-        private static int LookValue(CharacterLook l, int category) => category == 0 ? l.Hat : category == 1 ? l.Expression : category == 2 ? l.Accessory : category == 3 ? l.Mouth : l.Accessory2;
+        private static int LookValue(CharacterLook l, int category) => (category == 1 ? l.Expression : category == 2 ? l.Accessory : category == 3 ? l.Mouth : l.Accessory2) - OriginalCharacterArt.Start(category);
         private static void SetLookValue(int category, int value)
         {
-            var l = PlayerProfile.Look; int n = LookOptionCount(category); byte v = (byte)((value % n + n) % n);
-            switch (category) { case 0: l.Hat = v; break; case 1: l.Expression = v; break; case 2: l.Accessory = v; break; case 3: l.Mouth = v; break; case 4: l.Accessory2 = v; break; }
+            var l = PlayerProfile.Look; int n = LookOptionCount(category); byte v = (byte)(OriginalCharacterArt.Start(category) + (value % n + n) % n);
+            switch (category) { case 1: l.Expression = v; break; case 2: l.Accessory = v; break; case 3: l.Mouth = v; break; case 4: l.Accessory2 = v; break; }
             PlayerProfile.Look = l;
         }
 
@@ -425,8 +425,8 @@ namespace Metadream.Shoot
                 {
                     bool lk = Down(kb, UnityEngine.InputSystem.Key.LeftArrow) || Down(kb, UnityEngine.InputSystem.Key.A) || padLeft;
                     bool rk = Down(kb, UnityEngine.InputSystem.Key.RightArrow) || Down(kb, UnityEngine.InputSystem.Key.D) || padRight;
-                    if (arrowUp || Down(kb, UnityEngine.InputSystem.Key.W)) _lookCategory = (_lookCategory + 4) % 5;
-                    if (arrowDown || Down(kb, UnityEngine.InputSystem.Key.S)) _lookCategory = (_lookCategory + 1) % 5;
+                    if (arrowUp || Down(kb, UnityEngine.InputSystem.Key.W)) _lookCategory = (_lookCategory + 2) % 4 + 1;
+                    if (arrowDown || Down(kb, UnityEngine.InputSystem.Key.S)) _lookCategory = _lookCategory % 4 + 1;
                     if (lk) SetLookValue(_lookCategory, LookValue(PlayerProfile.Look, _lookCategory) - 1);
                     if (rk) SetLookValue(_lookCategory, LookValue(PlayerProfile.Look, _lookCategory) + 1);
                     if (Down(kb, UnityEngine.InputSystem.Key.R)) RandomLook();
@@ -637,11 +637,11 @@ namespace Metadream.Shoot
                 if (Clicked(tb)) { int k = t; _deferred = () => _lookTeam = k; }
             }
 
-            string[] titles = { "머리 (기존)", "눈 / 표정", "장식 1", "입", "장식 2" };
+            string[] titles = { "", "눈", "장식 1", "입", "장식 2" };
             float x0 = W / 2 - 150;
-            for (int c = 0; c < 5; c++)
+            for (int c = 1; c <= 4; c++)
             {
-                var tab = new Rect(x0 + c * 180, 190, 168, 58);
+                var tab = new Rect(x0 + (c - 1) * 225, 190, 213, 58);
                 Fill(tab, c == _lookCategory ? Palette.PlayerOne : new Color(1,1,1,0.12f));
                 Text(tab, titles[c], Small, c == _lookCategory ? Palette.Ink : Color.white);
                 if (Clicked(tab)) { int cat = c; _deferred = () => _lookCategory = cat; }
@@ -660,11 +660,11 @@ namespace Metadream.Shoot
                 var chip = new Rect(i % 7 * 121, i / 7 * 92, 113, 84);
                 bool selected = currentValue == i;
                 Fill(chip, selected ? new Color(0.93f,0.67f,0.32f) : new Color(1,1,1,0.12f));
-                var item=OriginalCharacterArt.Resolve(_lookCategory,i);
+                var item=OriginalCharacterArt.Resolve(_lookCategory,OriginalCharacterArt.Start(_lookCategory)+i);
                 if(item!=null)
                 {
                     OriginalCharacterArt.DrawThumbnail(new Rect(chip.x+8,chip.y+2,97,60),item);
-                    Text(new Rect(chip.x,chip.y+61,chip.width,23),names[i],new GUIStyle(Tiny){fontSize=15},Color.white);
+                    Text(new Rect(chip.x,chip.y+61,chip.width,23),names[i],new GUIStyle(Tiny){fontSize=13},Color.white);
                 }
                 else Text(chip,names[i],new GUIStyle(Small){fontSize=19},selected?Palette.Ink:Color.white);
                 if (Clicked(chip)) { int v = i; _deferred = () => SetLookValue(_lookCategory,v); }
@@ -700,15 +700,6 @@ namespace Metadream.Shoot
                     PlayerProfile.Look = l;
                 }
             }
-            Text(new Rect(box.x,866,560,32), "얼굴 보관함  ·  클릭: 불러오기 / Shift+클릭: 저장", Tiny, Color.white);
-            for (int i=0;i<10;i++)
-            {
-                var cell = new Rect(box.x+i%5*112,910+i/5*52,102,44);
-                Fill(cell,PlayerProfile.HasPortrait(i)?new Color(1,0.65f,0.3f,0.5f):new Color(1,1,1,0.12f));
-                Text(cell,(i+1).ToString(),Small,Color.white);
-                if (Clicked(cell)) { int slot=i; bool save=Event.current.shift || !PlayerProfile.HasPortrait(i); _deferred=()=> { if(save) PlayerProfile.SavePortrait(slot); else PlayerProfile.LoadPortrait(slot); }; }
-            }
-
             var rnd = new Rect(x0, 790, 260, 62);
             Fill(rnd, new Color(1, 1, 1, 0.15f));
             Text(rnd, "무작위 (R)", Mid, Color.white);

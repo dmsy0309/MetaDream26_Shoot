@@ -38,19 +38,19 @@ namespace Metadream.Shoot.Tests
         public IEnumerator TimeLimitPicksTheHighlightedCardWhenItRunsOut()
         {
             yield return null;
-            Online.PlayerProfile.SessionLook = new CharacterLook(1, 3, 2);
+            Online.PlayerProfile.SessionLook = new CharacterLook(0, 76, 19);
             var flow = GameFlow.Instance;
             flow.StartMatch(GameMode.VersusCpu, new MatchSettings { pickTimeLimit = 2 }, 21);
             float deadline = Time.realtimeSinceStartup + 10f;
             while (!(flow.IsPicking && flow.Picker == flow.Fighters[0]) && Time.realtimeSinceStartup < deadline) yield return null;
             Assert.IsTrue(flow.IsPicking && flow.Picker == flow.Fighters[0], "P1 picks first");
-            Assert.AreEqual(new CharacterLook(1, 3, 2), flow.Fighters[0].Look, "the local player wears the profile look");
+            Assert.AreEqual(new CharacterLook(0, 76, 19), flow.Fighters[0].Look, "the local player wears the profile look");
             Assert.AreEqual(2, flow.PickTimeLimit);
             Assert.Greater(flow.PickTimeLeft, 1.5f);
             var s = new MatchSnapshot();
             flow.CaptureSnapshot(s);
             Assert.Greater(s.PickTimeLeft, 1.5f, "the timer is sent to clients and replays");
-            Assert.AreEqual(new CharacterLook(1, 3, 2), s.Looks[0]);
+            Assert.AreEqual(new CharacterLook(0, 76, 19), s.Looks[0]);
 
             Assert.IsTrue(flow.Reroll(flow.Offer.Count - 1), "reroll also moves the highlight to that card");
             Assert.AreEqual(flow.Offer.Count - 1, flow.OfferIndex);
@@ -80,16 +80,16 @@ namespace Metadream.Shoot.Tests
         public IEnumerator PreviewRendersTheChosenLook()
         {
             yield return null;
-            CharacterPreview.Show(new CharacterLook(8, 4, 3), Color.red, Vector2.right);
+            CharacterPreview.Show(new CharacterLook(0, 8, 25), Color.red, Vector2.right);
             yield return null;
             yield return null;
             Assert.IsNotNull(CharacterPreview.Texture);
             Assert.AreEqual(512, CharacterPreview.Texture.width);
-            var hat = GameObject.Find("HatCrown");
+            var hat = GameObject.Find("P_A_X10");
             Assert.IsNotNull(hat, "신사 모자 parts are built");
             CharacterPreview.Show(new CharacterLook(0, 0, 0), Color.red, Vector2.right);
             yield return null;
-            Assert.IsNull(GameObject.Find("HatCrown"), "changing the look rebuilds the parts");
+            Assert.IsNull(GameObject.Find("P_A_X10"), "changing the look rebuilds the parts");
         }
     }
 }

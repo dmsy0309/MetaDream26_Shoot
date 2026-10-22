@@ -33,8 +33,8 @@ namespace Metadream.Shoot.Tests
         public void SnapshotCarriesPickTimerAndLooksAndLobbyCarriesTheLimit()
         {
             var s = new MatchSnapshot { PickTimeLeft = 4.25f, PickTimeLimit = 15 };
-            s.Looks.Add(new CharacterLook(3, 1, 2));
-            s.Looks.Add(new CharacterLook(0, 7, 6));
+            s.Looks.Add(new CharacterLook(0, 76, 19));
+            s.Looks.Add(new CharacterLook(0, 92, 60));
             var ms = new MemoryStream();
             s.Write(new BinaryWriter(ms));
             ms.Position = 0;
@@ -43,7 +43,7 @@ namespace Metadream.Shoot.Tests
             Assert.AreEqual(4.25f, back.PickTimeLeft);
             Assert.AreEqual(15, back.PickTimeLimit);
             Assert.AreEqual(2, back.Looks.Count);
-            Assert.AreEqual(new CharacterLook(0, 7, 6), back.Looks[1]);
+            Assert.AreEqual(new CharacterLook(0, 92, 60), back.Looks[1]);
             Assert.AreEqual(10, Protocol.Version);
 
             var l = new LobbyInfo { PickTimeLimit = 30 };
@@ -74,12 +74,16 @@ namespace Metadream.Shoot.Tests
         [Test]
         public void LooksPackAndSanitize()
         {
-            var l = new CharacterLook(9, 7, 6);
+            var l = new CharacterLook(0, 76, 19);
             Assert.AreEqual(l, CharacterLook.Unpack(l.Pack()));
-            Assert.AreEqual(new CharacterLook(0, 0, 0), new CharacterLook(CharacterLook.HatNames.Length, CharacterLook.ExpressionNames.Length, CharacterLook.AccessoryNames.Length), "wraps around");
-            var bad = new CharacterLook { Hat = 200, Expression = 1, Accessory = 99 };
-            Assert.AreEqual(new CharacterLook(0, 1, 0), bad.Sanitized, "unknown options from newer versions fall back to 0");
-            Assert.AreEqual("고양이 귀 · 화남 · 안경", new CharacterLook(3, 1, 2).Describe());
+            var legacy = new CharacterLook { Hat = 9, Expression = 7, Accessory = 6, Mouth = 3, Accessory2 = 2 };
+            Assert.AreEqual(CharacterLook.Default, legacy.Sanitized);
+            var invalid = new CharacterLook { Hat = 200, Expression = 255, Accessory = 99, Mouth = 255 };
+            Assert.AreEqual(CharacterLook.Default, invalid.Sanitized);
+            var extracted = new CharacterLook(0, 92, 60) { Mouth = 65, Accessory2 = 59 };
+            Assert.AreEqual(extracted, extracted.Sanitized);
+            Assert.IsFalse(l.Describe().Contains("ROUNDS"));
+
         }
     }
 }

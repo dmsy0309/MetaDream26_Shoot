@@ -11,6 +11,7 @@ namespace Metadream.Shoot.Player
         public const int EyeStart = 8, MouthStart = 8, AccessoryStart = 7;
         public const float FaceScale = 0.16f * 1.05f;
         [Serializable] public sealed class Catalog { public Item[] eyes, mouths, accessories; public SpriteInfo[] sprites; public Node[] nodes; }
+        [Serializable] public sealed class LocalizedNames { public string[] eyes, mouths, accessories; }
         [Serializable] public sealed class Item { public int id, sprite, order; public string name; public float scale, healthBarUp; public Vector2 offset; public Color color; public Node node; }
         [Serializable] public sealed class SpriteInfo { public int id, width, height; public string name; public float ppu; public Vector2 pivot; }
         // Child indices keep Unity's serializer from recursively expanding the type beyond its depth limit.
@@ -19,24 +20,18 @@ namespace Metadream.Shoot.Player
         [Serializable] public sealed class Channel { public string property; public Key[] keys; }
         [Serializable] public sealed class Key { public float time, a, b, c, d; }
         private static Catalog _data;
+        private static LocalizedNames _names;
         private static readonly Dictionary<int, Sprite> Sprites = new Dictionary<int, Sprite>();
         public static Catalog Data => _data ?? (_data = JsonUtility.FromJson<Catalog>(Resources.Load<TextAsset>("CharacterArt/catalog").text));
+        public static LocalizedNames Names => _names ?? (_names = JsonUtility.FromJson<LocalizedNames>(Resources.Load<TextAsset>("CharacterArt/names-ko").text));
         public static Item[] Items(int category) => category == 1 ? Data.eyes : category == 3 ? Data.mouths : Data.accessories;
         public static int Start(int category) => category == 1 ? EyeStart : category == 3 ? MouthStart : AccessoryStart;
         public static Item Resolve(int category, int value)
         {
             if (category == 0) return null;
-            // Legacy neutral now uses the original neutral face; other saved legacy choices retain their identities.
-            int index = (category == 1 || category == 3) && value == 0 ? 0 : value - Start(category);
+            int index = value - Start(category);
             var items = Items(category);
             return index >= 0 && index < items.Length ? items[index] : null;
-        }
-        public static string[] AppendNames(string[] legacy, int category)
-        {
-            var items = Items(category); var all = new string[legacy.Length + items.Length];
-            Array.Copy(legacy, all, legacy.Length);
-            for (int i = 0; i < items.Length; i++) all[legacy.Length + i] = "ROUNDS " + (i + 1).ToString("00");
-            return all;
         }
         public static Sprite GetSprite(int id)
         {

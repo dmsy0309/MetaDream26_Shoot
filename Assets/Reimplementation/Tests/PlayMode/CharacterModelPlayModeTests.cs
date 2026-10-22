@@ -10,18 +10,19 @@ namespace Metadream.Shoot.Tests
     {
         private GameObject _root;
         [TearDown] public void Cleanup(){if(_root!=null)Object.Destroy(_root);CharacterPreview.Hide();}
-        [UnityTest] public IEnumerator RigTracksAmmoAndAimWithoutAddingPhysics()
+        [UnityTest] public IEnumerator RigTracksAimWithoutGunAmmoDisplayOrAddedPhysics()
         {
             _root=new GameObject("VisualRigTest");var rig=new CharacterModel(_root.transform,Color.red);
             rig.Tick(Vector2.right,Vector2.zero,true,false,3,3,false,1,1,false,Color.red,true);
             Assert.Greater(rig.GunHand.localPosition.x,0);Assert.Less(rig.ShieldHand.localPosition.x,0);
-            Assert.Greater(rig.AmmoPosition.y,rig.GunHand.position.y);
+            Assert.IsNull(_root.transform.Find("GunAmmo"));
             rig.Tick(Vector2.left,Vector2.up,false,false,1,7,true,.4f,.3f,false,Color.red,true);
-            Assert.AreEqual(1,rig.VisibleAmmo);Assert.AreEqual("1 / 7",_root.GetComponentInChildren<TextMesh>().text);
+            Assert.IsEmpty(_root.GetComponentsInChildren<TextMesh>(true));
+            Assert.IsEmpty(_root.GetComponentsInChildren<LineRenderer>(true));
             Assert.Less(rig.GunHand.localPosition.x,0);Assert.Greater(rig.ShieldHand.localPosition.x,0);
             Assert.IsEmpty(_root.GetComponentsInChildren<Collider2D>());Assert.IsEmpty(_root.GetComponentsInChildren<Rigidbody2D>());
             Assert.AreEqual(10,_root.transform.Find("LeftArm").GetComponentsInChildren<SpriteRenderer>().Length-11);
-            rig.SetVisible(false);Assert.IsFalse(_root.GetComponentInChildren<TextMesh>().GetComponent<MeshRenderer>().enabled);
+            rig.SetVisible(false);Assert.IsFalse(_root.transform.Find("P_E_Neutral").GetComponent<SpriteRenderer>().enabled);
             yield return null;
         }
         [UnityTest] public IEnumerator All197OriginalPartsInstantiateAndPreviewRenders()
@@ -45,16 +46,14 @@ namespace Metadream.Shoot.Tests
                 File.WriteAllBytes("Logs/character-previews/look-"+i+".png",image.EncodeToPNG());Object.Destroy(image);
             }
         }
-        [UnityTest] public IEnumerator PreviewAmmoRemainsInsideFrameWhenAimingUp()
+        [UnityTest] public IEnumerator PreviewHasNoGunAmmoVisuals()
         {
             CharacterPreview.Show(CharacterLook.Default,Color.yellow,Vector2.up);
             yield return null;yield return null;
             var preview=Object.FindFirstObjectByType<CharacterPreview>();
-            var camera=preview.GetComponentInChildren<Camera>();
-            var bounds=preview.GetComponentInChildren<TextMesh>().GetComponent<MeshRenderer>().bounds;
-            var lower=camera.WorldToViewportPoint(bounds.min);var upper=camera.WorldToViewportPoint(bounds.max);
-            Assert.That(lower.x,Is.InRange(0f,1f));Assert.That(lower.y,Is.InRange(0f,1f));
-            Assert.That(upper.x,Is.InRange(0f,1f));Assert.That(upper.y,Is.InRange(0f,1f));
+            Assert.IsEmpty(preview.GetComponentsInChildren<TextMesh>(true));
+            Assert.IsEmpty(preview.GetComponentsInChildren<LineRenderer>(true));
+            Assert.IsNull(preview.transform.Find("Model/GunAmmo"));
         }
     }
 }

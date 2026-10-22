@@ -2,7 +2,7 @@
     "id": "rounds_toxic_cloud",
     "title": "독구름",
     "subtitle": "TOXIC CLOUD",
-    "description": "맞은 적을 중독시키고 느리게 만든다. (원작: 착탄 지점에 독구름)",
+    "description": "맞은 적을 중독시키고 느리게 만든다.",
     "rarity": "Rare",
     "allowMultiple": true,
     "categories": [

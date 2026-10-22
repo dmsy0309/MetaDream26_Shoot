@@ -30,16 +30,16 @@ namespace Metadream.Shoot.Tests
         }
         [Test] public void NewFacePartsRoundTripAndOldReplayStillReads()
         {
-            var look=new CharacterLook(3,4,2){Mouth=3,Accessory2=1,EyeOffset=new Vector2(.2f,-.1f),MouthOffset=new Vector2(0,.15f)};
+            var look=new CharacterLook(0,76,19){Mouth=40,Accessory2=45,EyeOffset=new Vector2(.2f,-.1f),MouthOffset=new Vector2(0,.15f)};
             var s=new MatchSnapshot();s.Looks.Add(look);
             var ms=new MemoryStream();s.Write(new BinaryWriter(ms));var bytes=ms.ToArray();
             var copy=new MatchSnapshot();copy.Read(new BinaryReader(new MemoryStream(bytes)));
             Assert.AreEqual(look,copy.Looks[0]);
             // Details are appended after the exact v9 layout, 34 bytes per face.
             var old=new MatchSnapshot();old.Read(new BinaryReader(new MemoryStream(bytes,0,bytes.Length-34)));
-            Assert.AreEqual(new CharacterLook(3,4,2),old.Looks[0]);
+            Assert.AreEqual(new CharacterLook(0,76,19),old.Looks[0]);
             look.EyeOffset=new Vector2(float.NaN,999);look.Mouth=255;
-            Assert.AreEqual(new Vector2(0,.25f),look.Sanitized.EyeOffset);Assert.AreEqual(0,look.Sanitized.Mouth);
+            Assert.AreEqual(new Vector2(0,.25f),look.Sanitized.EyeOffset);Assert.AreEqual(OriginalCharacterArt.MouthStart,look.Sanitized.Mouth);
         }
         [Test] public void HeldJumpHasOriginalShortBoostWindow()
         {

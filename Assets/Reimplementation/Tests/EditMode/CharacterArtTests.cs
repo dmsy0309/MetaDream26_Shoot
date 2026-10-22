@@ -7,15 +7,34 @@ namespace Metadream.Shoot.Tests
 {
     public class CharacterArtTests
     {
-        [Test] public void CompleteOriginalCatalogAndLegacyIndicesArePreserved()
+        [Test] public void CompleteOriginalCatalogHasKoreanNamesAndStableExtractedIds()
         {
             var d=OriginalCharacterArt.Data;
             Assert.AreEqual(85,d.eyes.Length);Assert.AreEqual(58,d.mouths.Length);Assert.AreEqual(54,d.accessories.Length);
             Assert.AreEqual(246,d.sprites.Length);
             Assert.AreEqual(162,d.nodes.Length);
             foreach(var node in d.nodes)foreach(var child in node.children)Assert.That(child,Is.InRange(0,d.nodes.Length-1));
-            Assert.AreEqual("화남",CharacterLook.ExpressionNames[1]);Assert.AreEqual("안경",CharacterLook.AccessoryNames[2]);
-            Assert.AreEqual("왕관",CharacterLook.HatNames[1]);
+            Assert.AreEqual(85,CharacterLook.ExpressionNames.Length);Assert.AreEqual(58,CharacterLook.MouthNames.Length);Assert.AreEqual(54,CharacterLook.AccessoryNames.Length);
+            foreach(var names in new[]{CharacterLook.ExpressionNames,CharacterLook.MouthNames,CharacterLook.AccessoryNames})
+            {
+                var unique=new System.Collections.Generic.HashSet<string>();
+                foreach(var name in names)
+                {
+                    Assert.IsTrue(unique.Add(name),name);
+                    Assert.IsTrue(System.Text.RegularExpressions.Regex.IsMatch(name,@"[\uAC00-\uD7A3]"),name);
+                    Assert.IsFalse(name.Contains("ROUNDS"));
+                }
+            }
+            Assert.IsNull(OriginalCharacterArt.Resolve(1,1));
+            for(int i=0;i<100;i++)
+            {
+                var look=CharacterLook.Random(new System.Random(i));
+                Assert.AreEqual(0,look.Hat);Assert.AreEqual(look,look.Sanitized);
+                Assert.IsNotNull(OriginalCharacterArt.Resolve(1,look.Expression));
+                Assert.IsNotNull(OriginalCharacterArt.Resolve(3,look.Mouth));
+                Assert.IsNotNull(OriginalCharacterArt.Resolve(2,look.Accessory));
+                Assert.IsNotNull(OriginalCharacterArt.Resolve(4,look.Accessory2));
+            }
             foreach(var info in d.sprites)
             {
                 var s=OriginalCharacterArt.GetSprite(info.id);

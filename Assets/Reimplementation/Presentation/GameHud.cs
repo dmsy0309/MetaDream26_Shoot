@@ -485,13 +485,6 @@ namespace Metadream.Shoot.Presentation
             Fill(band, rc);
             Fill(new Rect(band.x, band.yMax - 6, band.width, 6), Color.Lerp(rc, Color.black, 0.25f));
             Text(new Rect(band.x + 14, band.y, 120, band.height), RarityLabel(card.Rarity), new GUIStyle(Tiny) { fontStyle = FontStyle.Bold, fontSize = 20 }, Palette.Ink);
-            bool original = System.Array.IndexOf(card.Categories ?? new string[0], "rounds") >= 0;
-            if (original)
-            {
-                var badge = new Rect(band.xMax - 104, band.y + 9, 92, 26);
-                Fill(badge, new Color(0.1f, 0.1f, 0.12f, 0.85f));
-                Text(badge, "ROUNDS", new GUIStyle(Tiny) { alignment = TextAnchor.MiddleCenter, fontSize = 15, fontStyle = FontStyle.Bold }, Color.white);
-            }
             // art area (CardArt: 260×112 rectangle, emblem circle 96 Ø in its centre). Docs/CARD_ART.md
             var art = new Rect(inner.x + CardArt.ArtInsetX, band.yMax + CardArt.ArtGapY, inner.width - 2f * CardArt.ArtInsetX, CardArt.ArtHeight);
             var image = CardArt.Get(card);
