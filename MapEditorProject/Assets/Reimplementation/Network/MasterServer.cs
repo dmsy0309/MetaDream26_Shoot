@@ -70,7 +70,7 @@ namespace Metadream.Shoot.Network
         public bool Full => maxPlayers > 0 && players >= maxPlayers;
 
         public string Label => (dedicated ? "[서버] " : "[방] ") + name + "  ·  " + teamSize + "대" + teamSize + "  ·  " + players + "/" + maxPlayers
-                               + (inMatch ? "  ·  게임 중" : "") + (Compatible ? "" : "  ·  버전 다름 v" + version) + "  ·  " + address + ":" + port;
+                               + (inMatch ? "  ·  게임 중" : "") + (Compatible ? "" : "  ·  버전 다름 v" + version) + "  ·  포트 " + port;
     }
 
     [Serializable]

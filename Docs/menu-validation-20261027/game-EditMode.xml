@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="87" result="Passed" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.7490512">
+  <test-suite type="TestSuite" id="1000" name="Metadream Shoot" fullname="Metadream Shoot" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.749051" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1105" name="Metadream.Shoot.Tests.EditMode.dll" fullname="~/UnityProjects/Metadream26_Shoot 복사본/Library/ScriptAssemblies/Metadream.Shoot.Tests.EditMode.dll" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.741161" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="3255" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1106" name="Metadream" fullname="Metadream" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.740202" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1107" name="Shoot" fullname="Metadream.Shoot" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.739550" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestSuite" id="1108" name="Tests" fullname="Metadream.Shoot.Tests" runstate="Runnable" testcasecount="87" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.738753" total="87" passed="87" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-suite type="TestFixture" id="1001" name="CardArtTests" fullname="Metadream.Shoot.Tests.CardArtTests" classname="Metadream.Shoot.Tests.CardArtTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.145411" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1002" name="ArtAreaSpecMatchesTheCardFace" fullname="Metadream.Shoot.Tests.CardArtTests.ArtAreaSpecMatchesTheCardFace" methodname="ArtAreaSpecMatchesTheCardFace" classname="Metadream.Shoot.Tests.CardArtTests" runstate="Runnable" seed="461357603" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.087718" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1004" name="ExternalImagesLoadByCardIdOrImageNameAndMissingOnesWarn" fullname="Metadream.Shoot.Tests.CardArtTests.ExternalImagesLoadByCardIdOrImageNameAndMissingOnesWarn" methodname="ExternalImagesLoadByCardIdOrImageNameAndMissingOnesWarn" classname="Metadream.Shoot.Tests.CardArtTests" runstate="Runnable" seed="1984533286" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.036639" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 93 cards, 46 maps, hash 9d3838703da8, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_cardart_8994cf4c6fae4f08bde6ef750da533dd, 0 errors, 4 warnings
+[Content] 93 cards, 46 maps, hash 9d3838703da8, external /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_cardart_8994cf4c6fae4f08bde6ef750da533dd, 0 errors, 4 warnings
+[Content] Warning /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_cardart_8994cf4c6fae4f08bde6ef750da533dd/Cards/art_missing.json: image 'no_such_art' not found (Content/CardArt/no_such_art.png or Resources/Content/CardArt): the card shows its letter emblem
+[Content] Warning /var/folders/x7/clgkqrx934g9__bfwbb4yf480000gn/T/md_cardart_8994cf4c6fae4f08bde6ef750da533dd/Cards/art_missing.json: image 'no_such_art' not found (Content/CardArt/no_such_art.png or Resources/Content/CardArt): the card shows its letter emblem
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1003" name="ImageNamesCannotLeaveTheCardArtFolder" fullname="Metadream.Shoot.Tests.CardArtTests.ImageNamesCannotLeaveTheCardArtFolder" methodname="ImageNamesCannotLeaveTheCardArtFolder" classname="Metadream.Shoot.Tests.CardArtTests" runstate="Runnable" seed="1291256262" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.009674" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1005" name="CardRulesTests" fullname="Metadream.Shoot.Tests.CardRulesTests" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.007658" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1012" name="AmmoClampedToOneAndNinety" fullname="Metadream.Shoot.Tests.CardRulesTests.AmmoClampedToOneAndNinety" methodname="AmmoClampedToOneAndNinety" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="1854450105" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000694" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1014" name="ApplicationOrderMatters" fullname="Metadream.Shoot.Tests.CardRulesTests.ApplicationOrderMatters" methodname="ApplicationOrderMatters" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="1778473193" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000227" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1011" name="CatalogIdsAreUnique" fullname="Metadream.Shoot.Tests.CardRulesTests.CatalogIdsAreUnique" methodname="CatalogIdsAreUnique" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="633978008" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001868" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1008" name="DenominatorIsSumOfCandidateWeights" fullname="Metadream.Shoot.Tests.CardRulesTests.DenominatorIsSumOfCandidateWeights" methodname="DenominatorIsSumOfCandidateWeights" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="1521443807" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000518" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1009" name="EligibilityRules" fullname="Metadream.Shoot.Tests.CardRulesTests.EligibilityRules" methodname="EligibilityRules" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="803525223" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000455" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1015" name="MassAndSizeFromHealth" fullname="Metadream.Shoot.Tests.CardRulesTests.MassAndSizeFromHealth" methodname="MassAndSizeFromHealth" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="357039054" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000128" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1013" name="MultiProjectileDamageCorrection" fullname="Metadream.Shoot.Tests.CardRulesTests.MultiProjectileDamageCorrection" methodname="MultiProjectileDamageCorrection" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="67603854" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000070" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1010" name="OfferIsUniqueAndShrinksWhenPoolExhausted" fullname="Metadream.Shoot.Tests.CardRulesTests.OfferIsUniqueAndShrinksWhenPoolExhausted" methodname="OfferIsUniqueAndShrinksWhenPoolExhausted" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="568846140" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000862" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1007" name="WeightedPickCumulativeBoundaries" fullname="Metadream.Shoot.Tests.CardRulesTests.WeightedPickCumulativeBoundaries" methodname="WeightedPickCumulativeBoundaries" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="930169558" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000198" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1006" name="WeightsArePerCard" fullname="Metadream.Shoot.Tests.CardRulesTests.WeightsArePerCard" methodname="WeightsArePerCard" classname="Metadream.Shoot.Tests.CardRulesTests" runstate="Runnable" seed="2019906788" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000077" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1016" name="CharacterArtTests" fullname="Metadream.Shoot.Tests.CharacterArtTests" classname="Metadream.Shoot.Tests.CharacterArtTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.352879" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1017" name="CompleteOriginalCatalogHasKoreanNamesAndStableExtractedIds" fullname="Metadream.Shoot.Tests.CharacterArtTests.CompleteOriginalCatalogHasKoreanNamesAndStableExtractedIds" methodname="CompleteOriginalCatalogHasKoreanNamesAndStableExtractedIds" classname="Metadream.Shoot.Tests.CharacterArtTests" runstate="Runnable" seed="1807834814" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.347457" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1018" name="LastOriginalPartsAndOffsetsRoundTripInExistingSnapshot" fullname="Metadream.Shoot.Tests.CharacterArtTests.LastOriginalPartsAndOffsetsRoundTripInExistingSnapshot" methodname="LastOriginalPartsAndOffsetsRoundTripInExistingSnapshot" classname="Metadream.Shoot.Tests.CharacterArtTests" runstate="Runnable" seed="1376771635" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.004242" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1019" name="OriginalAnimationCoefficientsInterpolateAndSwitchAtKeyBoundary" fullname="Metadream.Shoot.Tests.CharacterArtTests.OriginalAnimationCoefficientsInterpolateAndSwitchAtKeyBoundary" methodname="OriginalAnimationCoefficientsInterpolateAndSwitchAtKeyBoundary" classname="Metadream.Shoot.Tests.CharacterArtTests" runstate="Runnable" seed="248978899" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000306" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1020" name="CombatRulesTests" fullname="Metadream.Shoot.Tests.CombatRulesTests" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.005194" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1026" name="AmmoConsumesPerProjectileAndReloads" fullname="Metadream.Shoot.Tests.CombatRulesTests.AmmoConsumesPerProjectileAndReloads" methodname="AmmoConsumesPerProjectileAndReloads" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="2110802913" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000278" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1025" name="AttackGateAndCount" fullname="Metadream.Shoot.Tests.CombatRulesTests.AttackGateAndCount" methodname="AttackGateAndCount" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="1764591286" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000220" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1022" name="BlockCooldownComposition" fullname="Metadream.Shoot.Tests.CombatRulesTests.BlockCooldownComposition" methodname="BlockCooldownComposition" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="191416547" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000061" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="BlockStateCooldownAndWindow" fullname="Metadream.Shoot.Tests.CombatRulesTests.BlockStateCooldownAndWindow" methodname="BlockStateCooldownAndWindow" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="1139507807" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000160" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1021" name="BlockWindowIsStrictlyBelowPointThree" fullname="Metadream.Shoot.Tests.CombatRulesTests.BlockWindowIsStrictlyBelowPointThree" methodname="BlockWindowIsStrictlyBelowPointThree" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="266477301" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000060" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1024" name="DeathBranchIsStrictlyBelowZero" fullname="Metadream.Shoot.Tests.CombatRulesTests.DeathBranchIsStrictlyBelowZero" methodname="DeathBranchIsStrictlyBelowZero" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="633668218" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000175" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1029" name="MotionFormulas" fullname="Metadream.Shoot.Tests.CombatRulesTests.MotionFormulas" methodname="MotionFormulas" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="1593251917" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000638" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1027" name="PartialMagazineAutoRefillsAfterReloadTime" fullname="Metadream.Shoot.Tests.CombatRulesTests.PartialMagazineAutoRefillsAfterReloadTime" methodname="PartialMagazineAutoRefillsAfterReloadTime" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="248215040" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000388" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1023" name="ReloadTimeComposition" fullname="Metadream.Shoot.Tests.CombatRulesTests.ReloadTimeComposition" methodname="ReloadTimeComposition" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="280124507" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000134" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1030" name="UpwardsCompensationIgnoresHeight" fullname="Metadream.Shoot.Tests.CombatRulesTests.UpwardsCompensationIgnoresHeight" methodname="UpwardsCompensationIgnoresHeight" classname="Metadream.Shoot.Tests.CombatRulesTests" runstate="Runnable" seed="759406080" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000242" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1031" name="ContentTests" fullname="Metadream.Shoot.Tests.ContentTests" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.028259" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1034" name="BrokenCardIsRejectedWithReadableErrors" fullname="Metadream.Shoot.Tests.ContentTests.BrokenCardIsRejectedWithReadableErrors" methodname="BrokenCardIsRejectedWithReadableErrors" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="2133273805" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001001" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1036" name="BrokenMapIsRejected" fullname="Metadream.Shoot.Tests.ContentTests.BrokenMapIsRejected" methodname="BrokenMapIsRejected" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="2040354739" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000350" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="BuiltinContentLoadsWithoutErrors" fullname="Metadream.Shoot.Tests.ContentTests.BuiltinContentLoadsWithoutErrors" methodname="BuiltinContentLoadsWithoutErrors" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="362581344" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.012229" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1035" name="CardWithEffectParses" fullname="Metadream.Shoot.Tests.ContentTests.CardWithEffectParses" methodname="CardWithEffectParses" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="2092814831" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000264" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1033" name="EffectRegistryDiscoversBuiltinEffects" fullname="Metadream.Shoot.Tests.ContentTests.EffectRegistryDiscoversBuiltinEffects" methodname="EffectRegistryDiscoversBuiltinEffects" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="2073366341" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000152" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1039" name="MasterServerPacketsRoundTrip" fullname="Metadream.Shoot.Tests.ContentTests.MasterServerPacketsRoundTrip" methodname="MasterServerPacketsRoundTrip" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="1929910052" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000753" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1037" name="PoolsFilterMapsAndCards" fullname="Metadream.Shoot.Tests.ContentTests.PoolsFilterMapsAndCards" methodname="PoolsFilterMapsAndCards" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="452763883" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000551" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1038" name="ServerRulesAreClampedCopiedAndValidated" fullname="Metadream.Shoot.Tests.ContentTests.ServerRulesAreClampedCopiedAndValidated" methodname="ServerRulesAreClampedCopiedAndValidated" classname="Metadream.Shoot.Tests.ContentTests" runstate="Runnable" seed="2100415734" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000831" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1040" name="GimmickTests" fullname="Metadream.Shoot.Tests.GimmickTests" classname="Metadream.Shoot.Tests.GimmickTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.012296" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1041" name="AllGimmickEffectsAreRegistered" fullname="Metadream.Shoot.Tests.GimmickTests.AllGimmickEffectsAreRegistered" methodname="AllGimmickEffectsAreRegistered" classname="Metadream.Shoot.Tests.GimmickTests" runstate="Runnable" seed="1349782427" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000210" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1043" name="MapGimmicksParseAndValidate" fullname="Metadream.Shoot.Tests.GimmickTests.MapGimmicksParseAndValidate" methodname="MapGimmicksParseAndValidate" classname="Metadream.Shoot.Tests.GimmickTests" runstate="Runnable" seed="48401680" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001272" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1042" name="OriginalRoundsContentIsLoaded" fullname="Metadream.Shoot.Tests.GimmickTests.OriginalRoundsContentIsLoaded" methodname="OriginalRoundsContentIsLoaded" classname="Metadream.Shoot.Tests.GimmickTests" runstate="Runnable" seed="434035007" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.009743" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1044" name="RotatedBlockContainsUsesRotation" fullname="Metadream.Shoot.Tests.GimmickTests.RotatedBlockContainsUsesRotation" methodname="RotatedBlockContainsUsesRotation" classname="Metadream.Shoot.Tests.GimmickTests" runstate="Runnable" seed="1401117207" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000165" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1045" name="MapScriptTests" fullname="Metadream.Shoot.Tests.MapScriptTests" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.021042" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1050" name="ExampleScriptMapsLoad" fullname="Metadream.Shoot.Tests.MapScriptTests.ExampleScriptMapsLoad" methodname="ExampleScriptMapsLoad" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" seed="176354816" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.016085" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] 91 cards, 46 maps, hash 73ff3bf6ad97, 0 errors, 3 warnings
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_36.json: movers[6] is completely outside the arena (±35.56, ±20)
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[0] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+[Content] Warning builtin Maps/rounds_46.json: spawns[1] has no solid below it: players will fall off the map
+]]></output>
+              </test-case>
+              <test-case id="1048" name="NamesAndBehaviorsAreValidated" fullname="Metadream.Shoot.Tests.MapScriptTests.NamesAndBehaviorsAreValidated" methodname="NamesAndBehaviorsAreValidated" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" seed="1448437758" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000826" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1049" name="SnapshotCarriesNamedObjectsAndHud" fullname="Metadream.Shoot.Tests.MapScriptTests.SnapshotCarriesNamedObjectsAndHud" methodname="SnapshotCarriesNamedObjectsAndHud" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" seed="1117389454" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000586" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1047" name="SyntaxErrorsReportLineAndText" fullname="Metadream.Shoot.Tests.MapScriptTests.SyntaxErrorsReportLineAndText" methodname="SyntaxErrorsReportLineAndText" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" seed="648585441" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001316" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1046" name="ValidScriptParses" fullname="Metadream.Shoot.Tests.MapScriptTests.ValidScriptParses" methodname="ValidScriptParses" classname="Metadream.Shoot.Tests.MapScriptTests" runstate="Runnable" seed="92728908" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000982" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1051" name="MatchRulesTests" fullname="Metadream.Shoot.Tests.MatchRulesTests" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.005426" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1053" name="CannotStartBelowPlayersNeeded" fullname="Metadream.Shoot.Tests.MatchRulesTests.CannotStartBelowPlayersNeeded" methodname="CannotStartBelowPlayersNeeded" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="2146896723" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000942" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1052" name="ConstructorValuesMatchObservedDefaults" fullname="Metadream.Shoot.Tests.MatchRulesTests.ConstructorValuesMatchObservedDefaults" methodname="ConstructorValuesMatchObservedDefaults" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="1748738164" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000139" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1058" name="DuplicateDeathReportsDoNotDoubleCount" fullname="Metadream.Shoot.Tests.MatchRulesTests.DuplicateDeathReportsDoNotDoubleCount" methodname="DuplicateDeathReportsDoNotDoubleCount" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="1431604227" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001003" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1055" name="FirstPointIsPointTransitionWithoutCardPick" fullname="Metadream.Shoot.Tests.MatchRulesTests.FirstPointIsPointTransitionWithoutCardPick" methodname="FirstPointIsPointTransitionWithoutCardPick" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="628233531" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000597" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1057" name="MatchEndsExactlyOnceAtRoundsToWin" fullname="Metadream.Shoot.Tests.MatchRulesTests.MatchEndsExactlyOnceAtRoundsToWin" methodname="MatchEndsExactlyOnceAtRoundsToWin" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="656134353" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000193" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1060" name="RematchResetsScore" fullname="Metadream.Shoot.Tests.MatchRulesTests.RematchResetsScore" methodname="RematchResetsScore" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="920727633" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000129" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1056" name="SecondPointWinsRoundResetsPointsAndOnlyLoserPicks" fullname="Metadream.Shoot.Tests.MatchRulesTests.SecondPointWinsRoundResetsPointsAndOnlyLoserPicks" methodname="SecondPointWinsRoundResetsPointsAndOnlyLoserPicks" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="582558510" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000249" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1059" name="SeveralTeamsAliveIsIgnoredAndNoTeamIsDraw" fullname="Metadream.Shoot.Tests.MatchRulesTests.SeveralTeamsAliveIsIgnoredAndNoTeamIsDraw" methodname="SeveralTeamsAliveIsIgnoredAndNoTeamIsDraw" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="32457067" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000236" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1054" name="StartGivesEveryPlayerOneInitialPickInOrder" fullname="Metadream.Shoot.Tests.MatchRulesTests.StartGivesEveryPlayerOneInitialPickInOrder" methodname="StartGivesEveryPlayerOneInitialPickInOrder" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="883425258" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000125" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1061" name="TwoVersusTwoScoresPerTeamAndWholeLosingTeamPicks" fullname="Metadream.Shoot.Tests.MatchRulesTests.TwoVersusTwoScoresPerTeamAndWholeLosingTeamPicks" methodname="TwoVersusTwoScoresPerTeamAndWholeLosingTeamPicks" classname="Metadream.Shoot.Tests.MatchRulesTests" runstate="Runnable" seed="1400598516" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000203" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1062" name="NetworkTests" fullname="Metadream.Shoot.Tests.NetworkTests" classname="Metadream.Shoot.Tests.NetworkTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.005116" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1064" name="LocalTransportDeliversOnPollAndDedupesEvents" fullname="Metadream.Shoot.Tests.NetworkTests.LocalTransportDeliversOnPollAndDedupesEvents" methodname="LocalTransportDeliversOnPollAndDedupesEvents" classname="Metadream.Shoot.Tests.NetworkTests" runstate="Runnable" seed="802304036" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.003475" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1063" name="PlayerPackageRoundTripsInObservedOrder" fullname="Metadream.Shoot.Tests.NetworkTests.PlayerPackageRoundTripsInObservedOrder" methodname="PlayerPackageRoundTripsInObservedOrder" classname="Metadream.Shoot.Tests.NetworkTests" runstate="Runnable" seed="1241951098" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000947" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1065" name="OnlineProtocolTests" fullname="Metadream.Shoot.Tests.OnlineProtocolTests" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.061430" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1068" name="FramesSurviveArbitraryChunking" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.FramesSurviveArbitraryChunking" methodname="FramesSurviveArbitraryChunking" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="2124959628" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001096" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1069" name="InputFrameRoundTripsAndPressesAccumulate" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.InputFrameRoundTripsAndPressesAccumulate" methodname="InputFrameRoundTripsAndPressesAccumulate" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="2052392963" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000899" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1067" name="JoinTargetsAcceptCodeIpAndHostPort" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.JoinTargetsAcceptCodeIpAndHostPort" methodname="JoinTargetsAcceptCodeIpAndHostPort" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="2108117245" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000783" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1071" name="LobbyRoundTrips" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.LobbyRoundTrips" methodname="LobbyRoundTrips" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="814634114" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001137" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1066" name="RoomCodeRoundTrips" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.RoomCodeRoundTrips" methodname="RoomCodeRoundTrips" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="680126272" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000220" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1070" name="SnapshotRoundTrips" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.SnapshotRoundTrips" methodname="SnapshotRoundTrips" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="644228520" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.002175" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1072" name="TcpLoopbackConnectExchangeAndDisconnect" fullname="Metadream.Shoot.Tests.OnlineProtocolTests.TcpLoopbackConnectExchangeAndDisconnect" methodname="TcpLoopbackConnectExchangeAndDisconnect" classname="Metadream.Shoot.Tests.OnlineProtocolTests" runstate="Runnable" seed="370147352" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.053642" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1077" name="ParityAndChatTests" fullname="Metadream.Shoot.Tests.ParityAndChatTests" classname="Metadream.Shoot.Tests.ParityAndChatTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.004115" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1078" name="ChatIsBoundedPrintableAndPreservesKorean" fullname="Metadream.Shoot.Tests.ParityAndChatTests.ChatIsBoundedPrintableAndPreservesKorean" methodname="ChatIsBoundedPrintableAndPreservesKorean" classname="Metadream.Shoot.Tests.ParityAndChatTests" runstate="Runnable" seed="1529603285" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001714" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1081" name="HeldJumpHasOriginalShortBoostWindow" fullname="Metadream.Shoot.Tests.ParityAndChatTests.HeldJumpHasOriginalShortBoostWindow" methodname="HeldJumpHasOriginalShortBoostWindow" classname="Metadream.Shoot.Tests.ParityAndChatTests" runstate="Runnable" seed="724115002" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000369" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1080" name="NewFacePartsRoundTripAndOldReplayStillReads" fullname="Metadream.Shoot.Tests.ParityAndChatTests.NewFacePartsRoundTripAndOldReplayStillReads" methodname="NewFacePartsRoundTripAndOldReplayStillReads" classname="Metadream.Shoot.Tests.ParityAndChatTests" runstate="Runnable" seed="1359774242" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000463" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1079" name="PointerSelectionSurvivesNetworkAccumulationExactlyOnce" fullname="Metadream.Shoot.Tests.ParityAndChatTests.PointerSelectionSurvivesNetworkAccumulationExactlyOnce" methodname="PointerSelectionSurvivesNetworkAccumulationExactlyOnce" classname="Metadream.Shoot.Tests.ParityAndChatTests" runstate="Runnable" seed="1206117242" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000273" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1082" name="PickTimerAndLookTests" fullname="Metadream.Shoot.Tests.PickTimerAndLookTests" classname="Metadream.Shoot.Tests.PickTimerAndLookTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.002141" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1083" name="DefaultsGiveMoreHealthAndSlightlyWeakerBullets" fullname="Metadream.Shoot.Tests.PickTimerAndLookTests.DefaultsGiveMoreHealthAndSlightlyWeakerBullets" methodname="DefaultsGiveMoreHealthAndSlightlyWeakerBullets" classname="Metadream.Shoot.Tests.PickTimerAndLookTests" runstate="Runnable" seed="703080090" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000282" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1086" name="LooksPackAndSanitize" fullname="Metadream.Shoot.Tests.PickTimerAndLookTests.LooksPackAndSanitize" methodname="LooksPackAndSanitize" classname="Metadream.Shoot.Tests.PickTimerAndLookTests" runstate="Runnable" seed="1649152807" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000344" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1084" name="SnapshotCarriesPickTimerAndLooksAndLobbyCarriesTheLimit" fullname="Metadream.Shoot.Tests.PickTimerAndLookTests.SnapshotCarriesPickTimerAndLooksAndLobbyCarriesTheLimit" methodname="SnapshotCarriesPickTimerAndLooksAndLobbyCarriesTheLimit" classname="Metadream.Shoot.Tests.PickTimerAndLookTests" runstate="Runnable" seed="1964136345" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000321" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1085" name="TimerBlinksRedEveryHalfSecondInTheLastFiveSeconds" fullname="Metadream.Shoot.Tests.PickTimerAndLookTests.TimerBlinksRedEveryHalfSecondInTheLastFiveSeconds" methodname="TimerBlinksRedEveryHalfSecondInTheLastFiveSeconds" classname="Metadream.Shoot.Tests.PickTimerAndLookTests" runstate="Runnable" seed="1265131129" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000451" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1087" name="ReplayAndProfileTests" fullname="Metadream.Shoot.Tests.ReplayAndProfileTests" classname="Metadream.Shoot.Tests.ReplayAndProfileTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.017904" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1089" name="GarbageIsNotAReplay" fullname="Metadream.Shoot.Tests.ReplayAndProfileTests.GarbageIsNotAReplay" methodname="GarbageIsNotAReplay" classname="Metadream.Shoot.Tests.ReplayAndProfileTests" runstate="Runnable" seed="1300569781" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.011926" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1090" name="NicknamesAreSanitized" fullname="Metadream.Shoot.Tests.ReplayAndProfileTests.NicknamesAreSanitized" methodname="NicknamesAreSanitized" classname="Metadream.Shoot.Tests.ReplayAndProfileTests" runstate="Runnable" seed="393981691" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000312" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1088" name="ReplayFileRoundTripsMetaAndFrames" fullname="Metadream.Shoot.Tests.ReplayAndProfileTests.ReplayFileRoundTripsMetaAndFrames" methodname="ReplayFileRoundTripsMetaAndFrames" classname="Metadream.Shoot.Tests.ReplayAndProfileTests" runstate="Runnable" seed="774607719" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.004761" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1091" name="RerollTests" fullname="Metadream.Shoot.Tests.RerollTests" classname="Metadream.Shoot.Tests.RerollTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001343" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1092" name="DefaultsAreThreeAtStartAndZeroPerRound" fullname="Metadream.Shoot.Tests.RerollTests.DefaultsAreThreeAtStartAndZeroPerRound" methodname="DefaultsAreThreeAtStartAndZeroPerRound" classname="Metadream.Shoot.Tests.RerollTests" runstate="Runnable" seed="2107940743" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000131" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1093" name="RerollTravelsInInputPacketsAndIsLatched" fullname="Metadream.Shoot.Tests.RerollTests.RerollTravelsInInputPacketsAndIsLatched" methodname="RerollTravelsInInputPacketsAndIsLatched" classname="Metadream.Shoot.Tests.RerollTests" runstate="Runnable" seed="337973926" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000251" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1094" name="SnapshotCarriesPickerRerollsAndOldDataStillReads" fullname="Metadream.Shoot.Tests.RerollTests.SnapshotCarriesPickerRerollsAndOldDataStillReads" methodname="SnapshotCarriesPickerRerollsAndOldDataStillReads" classname="Metadream.Shoot.Tests.RerollTests" runstate="Runnable" seed="1558789515" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000318" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1073" name="ServerConfigTests" fullname="Metadream.Shoot.Tests.ServerConfigTests" classname="Metadream.Shoot.Tests.ServerConfigTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.003073" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1075" name="CommandLineOverridesConfig" fullname="Metadream.Shoot.Tests.ServerConfigTests.CommandLineOverridesConfig" methodname="CommandLineOverridesConfig" classname="Metadream.Shoot.Tests.ServerConfigTests" runstate="Runnable" seed="477918807" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000737" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1074" name="DefaultsMatchShippedServerJson" fullname="Metadream.Shoot.Tests.ServerConfigTests.DefaultsMatchShippedServerJson" methodname="DefaultsMatchShippedServerJson" classname="Metadream.Shoot.Tests.ServerConfigTests" runstate="Runnable" seed="1283400466" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000663" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1076" name="MissingOrBrokenConfigFallsBackToDefaults" fullname="Metadream.Shoot.Tests.ServerConfigTests.MissingOrBrokenConfigFallsBackToDefaults" methodname="MissingOrBrokenConfigFallsBackToDefaults" classname="Metadream.Shoot.Tests.ServerConfigTests" runstate="Runnable" seed="1419871098" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000816" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1095" name="SoundAndCheatTests" fullname="Metadream.Shoot.Tests.SoundAndCheatTests" classname="Metadream.Shoot.Tests.SoundAndCheatTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.043297" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1098" name="CardSearchMatchesKoreanEnglishAndId" fullname="Metadream.Shoot.Tests.SoundAndCheatTests.CardSearchMatchesKoreanEnglishAndId" methodname="CardSearchMatchesKoreanEnglishAndId" classname="Metadream.Shoot.Tests.SoundAndCheatTests" runstate="Runnable" seed="1617366989" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001777" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1096" name="EverySoundUsedByTheGameIsDefinedAndSynthesizes" fullname="Metadream.Shoot.Tests.SoundAndCheatTests.EverySoundUsedByTheGameIsDefinedAndSynthesizes" methodname="EverySoundUsedByTheGameIsDefinedAndSynthesizes" classname="Metadream.Shoot.Tests.SoundAndCheatTests" runstate="Runnable" seed="960461573" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.038681" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1097" name="WavReaderReads16BitPcm" fullname="Metadream.Shoot.Tests.SoundAndCheatTests.WavReaderReads16BitPcm" methodname="WavReaderReads16BitPcm" classname="Metadream.Shoot.Tests.SoundAndCheatTests" runstate="Runnable" seed="1473177203" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.001866" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="TestFixture" id="1099" name="TeamSpawnTests" fullname="Metadream.Shoot.Tests.TeamSpawnTests" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" testcasecount="5" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.015501" total="5" passed="5" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1101" name="FourSpawnsGiveEachTeammateItsOwnSpawn" fullname="Metadream.Shoot.Tests.TeamSpawnTests.FourSpawnsGiveEachTeammateItsOwnSpawn" methodname="FourSpawnsGiveEachTeammateItsOwnSpawn" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" seed="1167489366" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.012455" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1104" name="MoreThanFourSpawnsWarns" fullname="Metadream.Shoot.Tests.TeamSpawnTests.MoreThanFourSpawnsWarns" methodname="MoreThanFourSpawnsWarns" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" seed="712316623" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000294" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1103" name="SpawnPointFollowsTheMapOffset" fullname="Metadream.Shoot.Tests.TeamSpawnTests.SpawnPointFollowsTheMapOffset" methodname="SpawnPointFollowsTheMapOffset" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" seed="1520226840" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000471" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1102" name="ThreeSpawnsOnlyMoveOrangeTwo" fullname="Metadream.Shoot.Tests.TeamSpawnTests.ThreeSpawnsOnlyMoveOrangeTwo" methodname="ThreeSpawnsOnlyMoveOrangeTwo" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" seed="391704533" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000458" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1100" name="TwoSpawnsKeepTheOldRule" fullname="Metadream.Shoot.Tests.TeamSpawnTests.TwoSpawnsKeepTheOldRule" methodname="TwoSpawnsKeepTheOldRule" classname="Metadream.Shoot.Tests.TeamSpawnTests" runstate="Runnable" seed="199840131" result="Passed" start-time="2026-10-27 14:14:42Z" end-time="2026-10-27 14:14:42Z" duration="0.000408" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+                <output><![CDATA[Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot/TestResults.xml
+Saving results to: ~/Library/Application Support/Metadream/Metadream Shoot/TestResults.xml
+]]></output>
+              </test-case>
+            </test-suite>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-27",
+  "unity": "6000.6.6f1",
+  "baseline": "0c4037e",
+  "runtime_commit": "cfc5fe1",
+  "tests": [
+    {
+      "file": "Docs/menu-validation-20261027/game-EditMode.xml",
+      "result": "Passed",
+      "total": "87",
+      "passed": "87",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/menu-validation-20261027/game-PlayMode.xml",
+      "result": "Passed",
+      "total": "20",
+      "passed": "20",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/menu-validation-20261027/editor-EditMode.xml",
+      "result": "Passed",
+      "total": "29",
+      "passed": "29",
+      "failed": "0",
+      "skipped": "0"
+    },
+    {
+      "file": "Docs/menu-validation-20261027/editor-PlayMode.xml",
+      "result": "Passed",
+      "total": "9",
+      "passed": "9",
+      "failed": "0",
+      "skipped": "0"
+    }
+  ],
+  "builds": [
+    {
+      "log": "Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX subtarget=Player result=Succeeded size=501643443 errors=0 path=Builds/macOS/MetadreamShoot.app",
+      "sha256": "6a941bce9405dabc33f7221efab6379d793adcc23cc404ea2d7d1ec230ca5d59"
+    },
+    {
+      "log": "Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Player result=Succeeded size=528485053 errors=0 path=Builds/Windows/MetadreamShoot/MetadreamShoot.exe",
+      "sha256": "181e4d1530c27bfdd2e6614b0f4bb32d0ca38d437f763a2f4efd8a4c516d3f6c"
+    },
+    {
+      "log": "Logs/release-BuildServerLinux.log",
+      "summary": "[Build] target=StandaloneLinux64 subtarget=Server result=Succeeded size=1074604452 errors=0 path=Builds/Server/Linux/MetadreamShootServer/MetadreamShootServer.x86_64",
+      "sha256": "1a63c65ef48044cd9a23b5ae67521d95aa6d03fcff09bbafc4e18d2ddaab80e3"
+    },
+    {
+      "log": "Logs/release-BuildServerWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 subtarget=Server result=Succeeded size=102328099 errors=0 path=Builds/Server/Windows/MetadreamShootServer/MetadreamShootServer.exe",
+      "sha256": "bd637005b9fd4200038adbdb95d3e65a5d4552ffecee4d1f8dacc084e42a1bab"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildMac.log",
+      "summary": "[Build] target=StandaloneOSX result=Succeeded size=501808296 errors=0 warnings=3 path=Builds/macOS/MetadreamShootMapMaker.app",
+      "sha256": "76b41b3331b016a4f041b7e270a77722d73b7408b2e64757b4c0c58664919ed4"
+    },
+    {
+      "log": "MapEditorProject/Logs/release-BuildWindows.log",
+      "summary": "[Build] target=StandaloneWindows64 result=Succeeded size=528651845 errors=0 warnings=3 path=Builds/Windows/MetadreamShootMapMaker/MetadreamShootMapMaker.exe",
+      "sha256": "ed3a8084cb19c89820c9407cbe6c9c691aae5585afd94aad5a8ac8e9259da702"
+    }
+  ],
+  "install": [
+    {
+      "installed": "~/Applications/MetadreamShoot.app",
+      "verifiedFiles": 205,
+      "runtimeCommit": "cfc5fe1"
+    },
+    {
+      "installed": "~/Applications/MetadreamShootMapMaker.app",
+      "verifiedFiles": 204,
+      "runtimeCommit": "cfc5fe1"
+    }
+  ],
+  "recovery": {
+    "folder": ".Recovery/menu-before-0c4037e",
+    "trackedFiles": 2252,
+    "changedSourceMatchesBaseline": true,
+    "tagMatchesBaseline": true
+  },
+  "runtime_checks": [
+    {
+      "log": "Logs/menu-installed-title.log",
+      "assertions": [
+        "[UI] capture"
+      ],
+      "sha256": "37560fdeb958fd3a5f456654fca82103490dc9bea9a305f582a252deb7a02cc9"
+    },
+    {
+      "log": "Logs/menu-installed-join.log",
+      "assertions": [
+        "[UI] capture"
+      ],
+      "sha256": "41df764c9095f6daf6433bfe6c1de0865e49681f7598be4c8993373296c96a10"
+    },
+    {
+      "log": "Logs/menu-installed-editor.log",
+      "assertions": [
+        "[SelfTest] result PASS",
+        "builtin round trip 46/46"
+      ],
+      "sha256": "e5297e22f915d2a4fb49f336c41860d0a2feeb5adda472be207e247686789662"
+    },
+    {
+      "log": "Logs/menu-server-18890.log",
+      "assertions": [
+        "joined slot 0",
+        "joined slot 1"
+      ],
+      "sha256": "9642e898208c4139c66129a29a4756b62a0f578b65cee440b1b468cf7dde12d7"
+    }
+  ],
+  "chat": [
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    },
+    {
+      "sender": "검증A",
+      "text": "안녕하세요 <b>텍스트</b>",
+      "slot": 0,
+      "received": true
+    }
+  ],
+  "visual_checks": {
+    "title": "Main caption and right-hand menu hints absent",
+    "join": "MenuMaster: port 18890; LAN MenuLAN: port 18891; no endpoint IPs in either row"
+  },
+  "content_hash": "73ff3bf6ad97",
+  "cross_build_only": [
+    "Windows game",
+    "Windows dedicated server",
+    "Linux dedicated server",
+    "Windows map editor"
+  ]
+}
