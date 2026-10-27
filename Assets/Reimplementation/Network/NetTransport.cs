@@ -321,7 +321,7 @@ namespace Metadream.Shoot.Network
         public bool InMatch;
         public float LastSeen;
 
-        public string Label => Name + "  ·  " + TeamSize + "대" + TeamSize + "  ·  " + Players + "/" + MaxPlayers + (InMatch ? "  ·  게임 중" : "") + "  ·  " + Host + ":" + Port;
+        public string Label => Name + "  ·  " + TeamSize + "대" + TeamSize + "  ·  " + Players + "/" + MaxPlayers + (InMatch ? "  ·  게임 중" : "") + "  ·  포트 " + Port;
     }
 
     /// <summary>LAN room discovery over UDP broadcast (port 47777). Text payload, one datagram per second.</summary>

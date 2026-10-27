@@ -30,7 +30,6 @@ namespace Metadream.Shoot
         private struct Item
         {
             public string Label;
-            public string Hint;
             public Action Run;
         }
 
@@ -79,18 +78,18 @@ namespace Metadream.Shoot
             Instance = this;
             _baseItems = new[]
             {
-                new Item { Label = "튜토리얼", Hint = "이동 · 점프 · 사격 · 방어 · 카드 · 규칙 배우기", Run = StartTutorial },
-                new Item { Label = "CPU와 대전", Hint = "1대1", Run = () => Flow.StartMatch(GameMode.VersusCpu) },
-                new Item { Label = "CPU 관전 1대1", Hint = "데모", Run = () => Flow.StartMatch(GameMode.CpuDemo) },
-                new Item { Label = "CPU 관전 2대2", Hint = "데모", Run = () => Flow.StartMatch(GameMode.CpuDemoTeams) },
-                new Item { Label = "방 만들기", Hint = "온라인 1대1 / 2대2 호스트", Run = () => AskNickname(HostRoom) },
-                new Item { Label = "방 참가", Hint = "서버 목록 · 같은 네트워크의 방 · 방 코드 · IP", Run = () => AskNickname(OpenJoin) },
-                new Item { Label = "캐릭터 꾸미기", Hint = "머리 장식 · 표정 · 얼굴 장식", Run = OpenLook },
-                new Item { Label = "설정", Hint = "디버그 모드 · 전체 화면 · 서버 목록", Run = OpenSettings },
-                new Item { Label = "게임 종료", Hint = "", Run = QuitGame },
+                new Item { Label = "튜토리얼", Run = StartTutorial },
+                new Item { Label = "CPU와 대전", Run = () => Flow.StartMatch(GameMode.VersusCpu) },
+                new Item { Label = "CPU 관전 1대1", Run = () => Flow.StartMatch(GameMode.CpuDemo) },
+                new Item { Label = "CPU 관전 2대2", Run = () => Flow.StartMatch(GameMode.CpuDemoTeams) },
+                new Item { Label = "방 만들기", Run = () => AskNickname(HostRoom) },
+                new Item { Label = "방 참가", Run = () => AskNickname(OpenJoin) },
+                new Item { Label = "캐릭터 꾸미기", Run = OpenLook },
+                new Item { Label = "설정", Run = OpenSettings },
+                new Item { Label = "게임 종료", Run = QuitGame },
             };
             var list = new List<Item>(_baseItems);
-            list.Insert(7, new Item { Label = "리플레이", Hint = "디버그 모드 · 저장된 게임 재생 · 불러오기", Run = OpenReplaysPage });
+            list.Insert(7, new Item { Label = "리플레이", Run = OpenReplaysPage });
             _debugItems = list.ToArray();
             _items = _baseItems;
         }
@@ -771,17 +770,14 @@ namespace Metadream.Shoot
         {
             RefreshItems();
             Shadowed(new Rect(0, 90, W, 120), "METADREAM SHOOT", Title, Palette.PlayerOne);
-            Text(new Rect(0, 212, W, 40), "1대1 · 2대2 카드 슈터 · ROUNDS 정적 분석 기반 재구현", Small, new Color(1, 1, 1, 0.75f));
             float step = _items.Length > 9 ? 52f : _items.Length > 8 ? 57f : 64f;
             for (int i = 0; i < _items.Length; i++)
             {
                 bool sel = i == _index;
                 var r = new Rect(W / 2 - 380, 262 + i * step, 760, step - 8);
                 Fill(r, sel ? new Color(1, 1, 1, 0.95f) : new Color(1, 1, 1, 0.12f));
-                // Label and hint get separate columns so wide fonts never overlap.
-                Text(new Rect(r.x + 30, r.y, 290, r.height), (i + 1) + ".  " + _items[i].Label, new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft }, sel ? Palette.Ink : Color.white);
-                string hint = i == 0 && !TutorialController.Completed ? "처음이라면 여기부터! 조작과 규칙 배우기" : _items[i].Hint;
-                Text(new Rect(r.x + 330, r.y, r.width - 354, r.height), hint, new GUIStyle(Small) { alignment = TextAnchor.MiddleRight, fontSize = 22, clipping = TextClipping.Clip }, sel ? new Color(0, 0, 0, 0.55f) : new Color(1, 1, 1, 0.5f));
+                // Menu labels use the full row width.
+                Text(new Rect(r.x + 30, r.y, r.width - 60, r.height), (i + 1) + ".  " + _items[i].Label, new GUIStyle(Mid) { alignment = TextAnchor.MiddleLeft }, sel ? Palette.Ink : Color.white);
                 if (Clicked(r)) { _index = i; int k = i; _deferred = () => _items[k].Run(); }
             }
             Text(new Rect(0, 790, W, 30), "↑/↓ 또는 W/S · Enter/Space 선택 · 숫자 1–" + Mathf.Min(9, _items.Length) + " 바로 선택 · 마우스 클릭", Small, new Color(1, 1, 1, 0.65f));
