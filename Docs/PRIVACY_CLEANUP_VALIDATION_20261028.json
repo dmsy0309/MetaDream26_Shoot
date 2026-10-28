@@ -48,5 +48,17 @@
     "Original paths and deployment addresses in retained evidence are anonymized.",
     "No player packages or deployed services were rebuilt or replaced.",
     "Screenshots and original recovery materials remain local and ignored by Git."
-  ]
+  ],
+  "historySanitization": {
+    "rewrittenCommits": 26,
+    "uniqueBlobsChecked": 1501,
+    "originalPrivateIdentifierMatches": 0,
+    "screenshotHistoryPaths": 0,
+    "sourceTreePreserved": true
+  },
+  "secretScan": {
+    "tool": "Gitleaks 8.30.1",
+    "confirmedSecrets": 0,
+    "reviewedFalsePositives": 4
+  }
 }
