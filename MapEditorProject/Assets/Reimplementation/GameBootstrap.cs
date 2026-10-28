@@ -39,7 +39,7 @@ namespace Metadream.Shoot
             var args = Environment.GetCommandLineArgs();
             string content = StringArg(args, "-content");
             if (content != null) Content.ContentDatabase.ExternalDirectory = content;
-            string master = StringArg(args, "-master");
+            string master = StringArg(args, "-master") ?? Environment.GetEnvironmentVariable("METADREAM_MASTER_HOST");
             if (master != null)
             {
                 int colon = master.LastIndexOf(':');
@@ -80,7 +80,6 @@ namespace Metadream.Shoot
         private void Start()
         {
             var args = Environment.GetCommandLineArgs();
-            Replay.ReplayUploader.RetryPending();
             if (IsServer)
             {
                 DedicatedServer.Launch(args);

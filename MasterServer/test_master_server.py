@@ -62,6 +62,34 @@ def free_port(kind):
 
 
 class LiveTest(unittest.TestCase):
+    def test_upload_disabled_without_configured_key(self):
+        udp, http = free_port(socket.SOCK_DGRAM), free_port(socket.SOCK_STREAM)
+        with tempfile.TemporaryDirectory() as tmp:
+            child_env = dict(os.environ, METADREAM_REPLAY_UPLOAD_KEY="")
+            proc = subprocess.Popen([sys.executable, str(Path(__file__).parent / "master_server.py"),
+                                     "--host", "127.0.0.1", "--port", str(udp), "--http-port", str(http),
+                                     "--replay-dir", os.path.join(tmp, "replays")], env=child_env)
+            try:
+                base = "http://127.0.0.1:%d" % http
+                for attempt in range(40):
+                    try:
+                        with urllib.request.urlopen(base + "/health", timeout=0.2) as response:
+                            self.assertEqual(response.status, 200)
+                        break
+                    except urllib.error.URLError:
+                        if attempt == 39: raise
+                        time.sleep(0.05)
+                for supplied_key in ("", ms.secrets.token_urlsafe(24)):
+                    req = urllib.request.Request(base + "/replays", data=gzip.compress(b"MDREPLAY"), method="POST",
+                                                 headers={"X-Metadream-Key": supplied_key})
+                    with self.assertRaises(urllib.error.HTTPError) as rejected:
+                        urllib.request.urlopen(req, timeout=2)
+                    self.assertEqual(rejected.exception.code, 403)
+                self.assertEqual(list(Path(tmp, "replays").glob("*.mdreplay")), [])
+            finally:
+                proc.terminate()
+                proc.wait(5)
+
     def test_round_trip(self):
         udp, http = free_port(socket.SOCK_DGRAM), free_port(socket.SOCK_STREAM)
         tmp = tempfile.mkdtemp()
@@ -93,7 +121,7 @@ class LiveTest(unittest.TestCase):
             rid = json.loads(urllib.request.urlopen(req, timeout=2).read())["id"]
             with self.assertRaises(urllib.error.HTTPError):  # not tailnet, no token
                 urllib.request.urlopen("http://127.0.0.1:%d/replays" % http, timeout=2)
-            token = open(os.path.join(tmp, "admin_token.txt")).read().strip()
+            token = Path(tmp, "admin_token.txt").read_text().strip()
             found = json.loads(urllib.request.urlopen("http://127.0.0.1:%d/replays?q=%s&token=%s" % (http, urllib.parse.quote("철수"), token), timeout=2).read())
             self.assertEqual(found["replays"][0]["id"], rid)
             self.assertEqual(found["replays"][0]["meta"]["players"][0]["device"], "LAB-PC-07")
@@ -103,6 +131,7 @@ class LiveTest(unittest.TestCase):
             with self.assertRaises(urllib.error.HTTPError):
                 urllib.request.urlopen(bad, timeout=2)
         finally:
+            if "c" in locals(): c.close()
             proc.terminate()
             proc.wait(5)
 

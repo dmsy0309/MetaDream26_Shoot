@@ -1,9 +1,9 @@
 {
     "sourceProject": "..",
-    "sourceCommit": "cfc5fe1881ec3eb70495c93f352c2dbcc92ef3d8",
-    "syncedAt": "2026-10-27 23:14",
+    "sourceCommit": "8e5633442939d1944a2d4bcda3c4324025259060",
+    "syncedAt": "2026-10-28 21:53",
     "unityVersion": "6000.6.6f1",
     "fileCount": 926,
-    "runtimeSha256": "725fa808334c563484a713bbdad61b2f7a033221cfd00da237ad239f83457381",
+    "runtimeSha256": "c5a85106e0fb0b475fc2eb3a5840df49fd1e84f99f97bc16fd91b0d3a655bd9b",
     "settingsSha256": "6284a5b3d159adebf6f9721c1f43db72beafeb997a7c138b77e433fdcec768db"
 }

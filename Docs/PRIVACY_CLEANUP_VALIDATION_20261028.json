@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-28",
+  "unityVersion": "6000.6.6f1",
+  "unityTests": [
+    {
+      "project": "game",
+      "mode": "EditMode",
+      "total": 96,
+      "passed": 96,
+      "failed": 0,
+      "compilerErrors": 0
+    },
+    {
+      "project": "game",
+      "mode": "PlayMode",
+      "total": 20,
+      "passed": 20,
+      "failed": 0,
+      "compilerErrors": 0
+    },
+    {
+      "project": "editor",
+      "mode": "EditMode",
+      "total": 29,
+      "passed": 29,
+      "failed": 0,
+      "compilerErrors": 0
+    },
+    {
+      "project": "editor",
+      "mode": "PlayMode",
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "compilerErrors": 0
+    }
+  ],
+  "unityTotal": 154,
+  "masterServerTests": {
+    "total": 6,
+    "passed": 6
+  },
+  "runtimeSha256": "c5a85106e0fb0b475fc2eb3a5840df49fd1e84f99f97bc16fd91b0d3a655bd9b",
+  "runtimeFiles": 926,
+  "protocolVersion": 10,
+  "wireFormatChanged": false,
+  "notes": [
+    "Original paths and deployment addresses in retained evidence are anonymized.",
+    "No player packages or deployed services were rebuilt or replaced.",
+    "Screenshots and original recovery materials remain local and ignored by Git."
+  ]
+}

@@ -21,13 +21,8 @@ namespace Metadream.Shoot.Replay
 
         public static ReplayDevice Current(bool dedicated)
         {
-            var d = new ReplayDevice { role = dedicated ? "dedicated" : "host" };
-            try { d.machineName = Online.PlayerProfile.DeviceName; } catch (Exception) { }
-            try { d.userName = Environment.UserName; } catch (Exception) { }
-            try { d.os = SystemInfo.operatingSystem; } catch (Exception) { }
-            try { d.deviceId = SystemInfo.deviceUniqueIdentifier; } catch (Exception) { }
-            try { d.localIp = LocalAddress.GetLanIPv4().ToString(); } catch (Exception) { }
-            return d;
+            // Retain fields for old replay compatibility, but do not collect device/account information.
+            return new ReplayDevice { role = dedicated ? "dedicated" : "host" };
         }
     }
 
@@ -62,6 +57,19 @@ namespace Metadream.Shoot.Replay
         public string score = "";
         public ReplayDevice device = new ReplayDevice();
         public ReplayPlayerInfo[] players = new ReplayPlayerInfo[0];
+
+        /// <summary>Remove host and peer device details, including metadata from older clients/replays.</summary>
+        public void ClearDeviceDetails()
+        {
+            device = ReplayDevice.Current(dedicated);
+            if (players == null) return;
+            foreach (var player in players)
+            {
+                if (player == null) continue;
+                player.device = "";
+                player.address = "";
+            }
+        }
 
         public string PlayersLabel
         {
@@ -251,6 +259,7 @@ namespace Metadream.Shoot.Replay
             Meta.score = score ?? "";
             try
             {
+                Meta.ClearDeviceDetails();
                 Directory.CreateDirectory(ReplayStore.Folder);
                 string path = Path.Combine(ReplayStore.Folder, Meta.id + "_" + ReplayStore.SafeName(Meta.roomName) + ReplayFile.Extension);
                 using (var fs = File.Create(path)) ReplayFile.Write(fs, Meta, _frames);
