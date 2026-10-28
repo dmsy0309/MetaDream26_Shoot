@@ -1,3 +1,4 @@
+import os
 """Read-only extraction of the supplied ROUNDS character catalog and sprite geometry.
 Requires UnityPy 1.25.4 and TypeTreeGeneratorAPI 0.0.10. No game code is executed.
 """
@@ -6,7 +7,7 @@ from pathlib import Path
 from PIL import Image,ImageDraw
 from UnityPy.helpers.TypeTreeGenerator import TypeTreeGenerator
 ROOT=Path(__file__).resolve().parents[2]
-SOURCE=Path('~/Library/Application Support/Steam/steamapps/common/ROUNDS/ROUNDS.app/Contents/Resources/Data')
+SOURCE=Path(os.environ.get('ROUNDS_DATA', str(Path.home() / 'Library/Application Support/Steam/steamapps/common/ROUNDS/ROUNDS.app/Contents/Resources/Data')))
 OUT=ROOT/'Assets/Reimplementation/Resources/CharacterArt';OUT.mkdir(parents=True,exist_ok=True)
 gen=TypeTreeGenerator('2022.3.34f1');gen.load_local_dll_folder(str(SOURCE/'Managed'))
 env=UnityPy.load(str(SOURCE/'sharedassets0.assets'));env.typetree_generator=gen;f=list(env.files.values())[0]
@@ -74,7 +75,7 @@ def flatten(n):
 for kind in ['eyes','mouths','accessories']:
  for item in catalog[kind]:flatten(item['node'])
 (OUT/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2)+'\n')
-evidence={'source':str(SOURCE),'files':{n:hashlib.sha256((SOURCE/n).read_bytes()).hexdigest() for n in ['sharedassets0.assets','level0','Managed/Assembly-CSharp.dll']},'counts':{k:len(catalog[k]) for k in ['eyes','mouths','accessories']},'sprite_count':len(exported),'method':'Native MonoBehaviour header resolves script/game object; generated type tree fields follow byte 32. Original trimmed sprite restored in its original rectangle with textureRectOffset; original pivot and pixels-per-unit retained.'}
+evidence={'source':'${ROUNDS_DATA}','files':{n:hashlib.sha256((SOURCE/n).read_bytes()).hexdigest() for n in ['sharedassets0.assets','level0','Managed/Assembly-CSharp.dll']},'counts':{k:len(catalog[k]) for k in ['eyes','mouths','accessories']},'sprite_count':len(exported),'method':'Native MonoBehaviour header resolves script/game object; generated type tree fields follow byte 32. Original trimmed sprite restored in its original rectangle with textureRectOffset; original pivot and pixels-per-unit retained.'}
 (ROOT/'ReverseAnalysis/evidence/character-art-extraction.json').write_text(json.dumps(evidence,indent=2)+'\n')
 for kind in ['eyes','mouths','accessories']:
  sheet=Image.new('RGB',(1000,((len(catalog[kind])+9)//10)*112),(100,105,115));draw=ImageDraw.Draw(sheet)

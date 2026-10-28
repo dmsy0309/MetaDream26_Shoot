@@ -48,7 +48,7 @@ namespace Metadream.MapEditor.EditorTools
             string env = Environment.GetEnvironmentVariable("METADREAM_GAME_PROJECT");
             if (!string.IsNullOrEmpty(env)) return Path.GetFullPath(env);
             string fromInfo = File.Exists(InfoPath) ? JsonUtility.FromJson<GameRuntimeInfo>(File.ReadAllText(InfoPath))?.sourceProject : null;
-            return string.IsNullOrEmpty(fromInfo) ? null : fromInfo;
+            return string.IsNullOrEmpty(fromInfo) ? null : Path.GetFullPath(Path.Combine(EditorRoot, fromInfo));
         }
 
         /// <summary>Relative path ('/' separators) → absolute path of every runtime file in a project.</summary>
@@ -265,7 +265,7 @@ namespace Metadream.MapEditor.EditorTools
             var files = RuntimeFiles(EditorRoot);
             var info = new GameRuntimeInfo
             {
-                sourceProject = gameProject ?? "",
+                sourceProject = gameProject != null ? Path.GetRelativePath(EditorRoot, gameProject).Replace('\\', '/') : "",
                 sourceCommit = gameProject != null ? ReadCommit(gameProject) : "",
                 syncedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
                 unityVersion = Application.unityVersion,

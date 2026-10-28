@@ -1,7 +1,8 @@
+import os
 import UnityPy,json,hashlib
 from pathlib import Path
 from UnityPy.helpers.TypeTreeGenerator import TypeTreeGenerator
-root=Path('~/Library/Application Support/Steam/steamapps/common/ROUNDS/ROUNDS.app/Contents/Resources/Data')
+root=Path(os.environ.get('ROUNDS_DATA', str(Path.home() / 'Library/Application Support/Steam/steamapps/common/ROUNDS/ROUNDS.app/Contents/Resources/Data')))
 gen=TypeTreeGenerator('2022.3.34f1');gen.load_local_dll_folder(str(root/'Managed'));out=[]
 for path in list(root.glob('*.assets'))+[root/'level0']:
  env=UnityPy.load(str(path));env.typetree_generator=gen

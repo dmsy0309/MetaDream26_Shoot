@@ -65,9 +65,11 @@ class LiveTest(unittest.TestCase):
     def test_round_trip(self):
         udp, http = free_port(socket.SOCK_DGRAM), free_port(socket.SOCK_STREAM)
         tmp = tempfile.mkdtemp()
+        upload_key = ms.secrets.token_urlsafe(24)
+        child_env = dict(os.environ, METADREAM_REPLAY_UPLOAD_KEY=upload_key)
         proc = subprocess.Popen([sys.executable, str(Path(__file__).parent / "master_server.py"),
                                  "--host", "127.0.0.1", "--port", str(udp), "--http-port", str(http),
-                                 "--replay-dir", os.path.join(tmp, "replays")])
+                                 "--replay-dir", os.path.join(tmp, "replays")], env=child_env)
         try:
             time.sleep(0.8)
             c = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -86,7 +88,7 @@ class LiveTest(unittest.TestCase):
             # replay upload + listing
             meta = {"players": [{"nickname": "김철수", "device": "LAB-PC-07"}], "device": {"machineName": "LAB-PC-01"}}
             req = urllib.request.Request("http://127.0.0.1:%d/replays" % http, data=gzip.compress(b"MDREPLAY"), method="POST",
-                                         headers={"X-Metadream-Key": ms.UPLOAD_KEY,
+                                         headers={"X-Metadream-Key": upload_key,
                                                   "X-Metadream-Meta": base64.b64encode(json.dumps(meta).encode()).decode()})
             rid = json.loads(urllib.request.urlopen(req, timeout=2).read())["id"]
             with self.assertRaises(urllib.error.HTTPError):  # not tailnet, no token

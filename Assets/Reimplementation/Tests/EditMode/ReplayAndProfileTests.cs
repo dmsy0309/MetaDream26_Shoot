@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using NUnit.Framework;
 using Metadream.Shoot.Network;
@@ -8,6 +9,83 @@ namespace Metadream.Shoot.Tests
 {
     public class ReplayAndProfileTests
     {
+        [Test]
+        public void RecordingDoesNotCollectDeviceIdentity()
+        {
+            var device = ReplayDevice.Current(true);
+            Assert.AreEqual("dedicated", device.role);
+            Assert.AreEqual("", device.machineName);
+            Assert.AreEqual("", device.userName);
+            Assert.AreEqual("", device.os);
+            Assert.AreEqual("", device.deviceId);
+            Assert.AreEqual("", device.localIp);
+            StringAssert.StartsWith("session-", PlayerProfile.DeviceName);
+            Assert.AreEqual(PlayerProfile.DeviceName, PlayerProfile.DeviceName, "reconnect identity lasts for this process");
+        }
+
+        [Test]
+        public void UploadRewritesLegacyMetadataWithoutChangingGameplayFrames()
+        {
+            var meta = new ReplayMeta
+            {
+                roomName = "Test room",
+                device = new ReplayDevice { machineName = "PRIVATE-PC", userName = "private-user", deviceId = "private-device", localIp = "192.168.1.9" },
+                players = new[] { new ReplayPlayerInfo { nickname = "Player", device = "PRIVATE-PEER", address = "192.168.1.8" } }
+            };
+            var frames = new[] { new ReplayFrame { Time = 1f, Data = new byte[] { 1, 2, 3 } } };
+            using (var original = new MemoryStream())
+            {
+                ReplayFile.Write(original, meta, frames);
+                byte[] body = ReplayUploader.PrepareUpload(original.ToArray(), out var header);
+                using (var sanitized = new MemoryStream(body))
+                {
+                    var replay = ReplayFile.Read(sanitized);
+                    Assert.AreEqual("", header.device.userName);
+                    Assert.AreEqual("", replay.Meta.device.machineName);
+                    Assert.AreEqual("", replay.Meta.device.deviceId);
+                    Assert.AreEqual("", replay.Meta.device.localIp);
+                    Assert.AreEqual("", replay.Meta.players[0].device);
+                    Assert.AreEqual("", replay.Meta.players[0].address);
+                    Assert.AreEqual("Player", replay.Meta.players[0].nickname);
+                    Assert.AreEqual("Test room", replay.Meta.roomName);
+                    CollectionAssert.AreEqual(frames[0].Data, replay.Frames[0].Data);
+                    Assert.AreEqual(1f, replay.Frames[0].Time);
+                }
+                Assert.AreEqual("private-user", meta.device.userName, "existing local replay is not changed");
+            }
+        }
+
+        [TestCase(null, null, null, false)]
+        [TestCase(null, "https://replays.example.invalid", "test-only", false)]
+        [TestCase("1", "http://replays.example.invalid", "test-only", false)]
+        [TestCase("1", "https://user:pass@replays.example.invalid", "test-only", false)]
+        [TestCase("1", "https://replays.example.invalid?token=test-only", "test-only", false)]
+        [TestCase("1", "https://replays.example.invalid", null, false)]
+        [TestCase("1", "https://replays.example.invalid", "test-only", true)]
+        public void UploadRequiresConsentHttpsAndConfiguredKey(string consent, string url, string key, bool expected)
+        {
+            string[] names = { "METADREAM_REPLAY_UPLOAD", "METADREAM_REPLAY_UPLOAD_URL", "METADREAM_REPLAY_UPLOAD_KEY" };
+            string[] before = Array.ConvertAll(names, Environment.GetEnvironmentVariable);
+            try
+            {
+                Environment.SetEnvironmentVariable(names[0], consent);
+                Environment.SetEnvironmentVariable(names[1], url);
+                Environment.SetEnvironmentVariable(names[2], key);
+                Assert.AreEqual(expected, ReplayUploader.Enabled);
+                if (!expected)
+                {
+                    int uploaded = ReplayUploader.Uploaded;
+                    ReplayUploader.Upload("missing-replay-file", new ReplayMeta());
+                    Assert.AreEqual(uploaded, ReplayUploader.Uploaded);
+                    StringAssert.Contains("꺼짐", ReplayUploader.LastResult);
+                }
+            }
+            finally
+            {
+                for (int i = 0; i < names.Length; i++) Environment.SetEnvironmentVariable(names[i], before[i]);
+            }
+        }
+
         [Test]
         public void ReplayFileRoundTripsMetaAndFrames()
         {

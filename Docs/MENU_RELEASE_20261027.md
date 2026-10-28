@@ -32,6 +32,6 @@
 | Linux 서버 | `Builds/Server/Linux/MetadreamShootServer/` | `Builds/Server/MetadreamShootServer-Linux-x64.tar.gz` |
 | Windows 맵 에디터 | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker/` | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker-Windows-x64.zip` |
 
-![정리한 메인 화면](screenshots/menu-20261027/title/capture-6s.png)
+검증 캡처는 개인정보 보호를 위해 로컬에만 보관합니다.
 
-![포트만 표시하는 메인·LAN 서버 목록](screenshots/menu-20261027/join/capture-8s.png)
+검증 캡처는 개인정보 보호를 위해 로컬에만 보관합니다.

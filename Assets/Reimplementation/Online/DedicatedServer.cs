@@ -34,7 +34,7 @@ namespace Metadream.Shoot.Online
         public float statusInterval = 30f;
         /// <summary>Register with the main hosting server so the room shows up in every client's server list.</summary>
         public bool masterServer = true;
-        public string masterHost = MasterServerEndpoint.DefaultHost;
+        public string masterHost = Environment.GetEnvironmentVariable("METADREAM_MASTER_HOST") ?? MasterServerEndpoint.DefaultHost;
         public int masterPort = MasterServerEndpoint.DefaultPort;
         /// <summary>Address players should use (e.g. public IP or DNS). Empty = what the master sees.</summary>
         public string publicAddress = "";
@@ -44,8 +44,8 @@ namespace Metadream.Shoot.Online
         public bool debugLog;
         /// <summary>Save every game as Replays/*.mdreplay next to the server executable.</summary>
         public bool saveReplays = true;
-        /// <summary>Send saved replays (with device and nicknames) to the main hosting server.</summary>
-        public bool uploadReplays = true;
+        /// <summary>Opt-in replay upload; also requires explicit HTTPS endpoint and upload credentials.</summary>
+        public bool uploadReplays = false;
         /// <summary>Default game settings used for every match on this server.</summary>
         public MatchSettings rules = new MatchSettings();
 
@@ -231,7 +231,7 @@ namespace Metadream.Shoot.Online
             c.statusInterval = FloatArg(args, "-status", c.statusInterval);
             c.publicAddress = StringArg(args, "-public") ?? c.publicAddress;
             c.contentDir = StringArg(args, "-content") ?? c.contentDir;
-            string master = StringArg(args, "-master");
+            string master = StringArg(args, "-master") ?? Environment.GetEnvironmentVariable("METADREAM_MASTER_HOST");
             if (master != null)
             {
                 int colon = master.LastIndexOf(':');

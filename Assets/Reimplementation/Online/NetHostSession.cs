@@ -26,7 +26,7 @@ namespace Metadream.Shoot.Online
         /// <summary>Record every game as Replays/*.mdreplay on this machine.</summary>
         public bool SaveReplays = true;
         /// <summary>Send saved replays to the main hosting server.</summary>
-        public bool UploadReplays = true;
+        public bool UploadReplays = Replay.ReplayUploader.Enabled;
         public MatchSettings Settings = new MatchSettings();
     }
 
@@ -312,8 +312,8 @@ namespace Metadream.Shoot.Online
             team = slot % 2,
             nickname = _names[slot] ?? "",
             kind = _kinds[slot] == SlotKind.Host ? "host" : _kinds[slot] == SlotKind.Remote ? "remote" : "cpu",
-            device = _kinds[slot] == SlotKind.Cpu ? "" : _devices[slot] ?? "",
-            address = _kinds[slot] == SlotKind.Cpu ? "" : _addresses[slot] ?? ""
+            device = "",
+            address = ""
         };
 
         private void FinishRecording()
@@ -390,7 +390,7 @@ namespace Metadream.Shoot.Online
             if (InMatch)
             {
                 if (!_options.AllowMidJoin) { Reject(peer, "이미 게임이 진행 중입니다"); return; }
-                // A player who left may come back from the same computer and gets their own fighter back.
+                // A player who left may reconnect within the same process using their anonymous session alias.
                 for (int i = first; i < SlotCount; i++)
                 {
                     if (_kinds[i] != SlotKind.Disconnected || !string.Equals(_devices[i], device, StringComparison.OrdinalIgnoreCase)) continue;

@@ -270,5 +270,5 @@ unity build . --target StandaloneWindows64   --execute-method Metadream.Shoot.Ed
 - `JsonUtility`는 주석, 딕셔너리, 최상위 배열, `null` 기본값을 지원하지 않습니다. 오타 난 키는 **조용히 무시**되므로 값이 안 바뀌면 키 철자를 먼저 의심합니다.
 - 카드 순서(네트워크 번호)는 id 정렬 순서입니다. id를 바꾸면 번호가 바뀌므로 클라이언트/서버를 함께 배포합니다.
 - 튜토리얼(`Tutorial/TutorialController.cs`)은 `training` 맵에 의존하고, 카드 단계에서는 전체 카드 풀에서 3장을 제시합니다. `training`의 지형/스폰을 바꾸면 튜토리얼을 직접 한 번 해 봅니다 (`-tutorial` 인자로 바로 시작).
-- 마스터 서버 주소는 `Network/MasterServer.cs`의 `MasterServerEndpoint.DefaultHost`(공인 IP 203.0.113.10:47800)에 하드코딩되어 있습니다. 서비스 코드는 `MasterServer/` 폴더입니다.
+- 마스터 서버 기본 주소는 로컬 `127.0.0.1:47800`입니다. 실제 주소는 `-master host:port`, `METADREAM_MASTER_HOST`, 또는 서버의 로컬 JSON 설정으로 지정합니다. 서비스 코드는 `MasterServer/` 폴더입니다. 개인정보 및 리플레이 전송 설정은 `Docs/PRIVACY.md`를 따릅니다.
 

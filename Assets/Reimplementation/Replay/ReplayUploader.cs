@@ -4,23 +4,15 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
-using Metadream.Shoot.Network;
 
 namespace Metadream.Shoot.Replay
 {
-    /// <summary>
-    /// Sends finished replays to the main hosting server (POST /replays). Tries the tailnet address first, then the
-    /// public HTTPS address (for PCs outside the tailnet, e.g. school computers). Failed uploads leave a ".pending"
-    /// marker next to the file and are retried on the next launch.
-    /// </summary>
+    /// <summary>Explicitly opted-in HTTPS replay uploads. Existing pending files are never retried automatically.</summary>
     public static class ReplayUploader
     {
-        public const string Key = "metadream-shoot-replay-v1";
-        public const int HttpPort = 47801;
-        /// <summary>Public (outside tailnet) base URL of the main hosting server HTTP service.</summary>
-        /// <summary>Tailscale Funnel on the hosting server (HTTPS 10000 -> 127.0.0.1:47801).</summary>
-        public const string PublicUrl = "https://replays.example.invalid:10000";
-        public const string PendingSuffix = ".pending";
+        public static string Key => Environment.GetEnvironmentVariable("METADREAM_REPLAY_UPLOAD_KEY") ?? "";
+        public static bool Enabled => Environment.GetEnvironmentVariable("METADREAM_REPLAY_UPLOAD") == "1"
+                                      && !string.IsNullOrWhiteSpace(Key) && Endpoints().Count > 0;
 
         public static int Uploaded { get; private set; }
         public static int Failed { get; private set; }
@@ -28,23 +20,40 @@ namespace Metadream.Shoot.Replay
 
         public static List<string> Endpoints()
         {
-            // Hardcoded public IP of the main hosting server (same host as the server list); no tailnet address.
-            return new List<string> { "http://" + MasterServerEndpoint.Host + ":" + HttpPort };
+            var endpoints = new List<string>();
+            string configured = Environment.GetEnvironmentVariable("METADREAM_REPLAY_UPLOAD_URL");
+            if (Uri.TryCreate(configured, UriKind.Absolute, out var uri)
+                && uri.Scheme == Uri.UriSchemeHttps && !string.IsNullOrEmpty(uri.Host)
+                && string.IsNullOrEmpty(uri.UserInfo) && string.IsNullOrEmpty(uri.Query)
+                && string.IsNullOrEmpty(uri.Fragment)) endpoints.Add(uri.AbsoluteUri.TrimEnd('/'));
+            return endpoints;
+        }
+
+        /// <summary>Scrub old host/peer identity fields from both the compressed body and its header metadata.</summary>
+        public static byte[] PrepareUpload(byte[] savedReplay, out ReplayMeta meta)
+        {
+            using (var input = new MemoryStream(savedReplay))
+            using (var output = new MemoryStream())
+            {
+                var replay = ReplayFile.Read(input);
+                meta = replay.Meta;
+                meta.ClearDeviceDetails();
+                ReplayFile.Write(output, meta, replay.Frames);
+                return output.ToArray();
+            }
         }
 
         public static void Upload(string path, ReplayMeta meta)
         {
-            try { File.WriteAllText(path + PendingSuffix, JsonUtility.ToJson(meta)); } catch (Exception) { }
-            Send(path, meta, Endpoints(), 0);
-        }
-
-        private static void Send(string path, ReplayMeta meta, List<string> endpoints, int attempt)
-        {
+            if (!Enabled)
+            {
+                LastResult = "리플레이 업로드 꺼짐 (명시적 동의와 HTTPS 설정 필요)";
+                return;
+            }
             byte[] body;
-            try { body = File.ReadAllBytes(path); }
-            catch (Exception e) { LastResult = "읽기 실패: " + e.Message; return; }
-            string url = endpoints[attempt] + "/replays";
-            var req = new UnityWebRequest(url, "POST")
+            try { body = PrepareUpload(File.ReadAllBytes(path), out meta); }
+            catch (Exception) { LastResult = "리플레이를 안전하게 준비할 수 없습니다"; return; }
+            var req = new UnityWebRequest(Endpoints()[0] + "/replays", "POST")
             {
                 uploadHandler = new UploadHandlerRaw(body),
                 downloadHandler = new DownloadHandlerBuffer(),
@@ -56,49 +65,18 @@ namespace Metadream.Shoot.Replay
             req.SendWebRequest().completed += _ =>
             {
                 bool ok = req.result == UnityWebRequest.Result.Success;
-                string answer = req.downloadHandler != null ? req.downloadHandler.text : "";
-                string error = req.error;
                 req.Dispose();
                 if (ok)
                 {
                     Uploaded++;
-                    LastResult = "업로드 완료 " + url;
-                    try { File.Delete(path + PendingSuffix); } catch (Exception) { }
-                    Debug.Log("[Replay] uploaded " + Path.GetFileName(path) + " -> " + url + " " + answer);
-                }
-                else if (attempt + 1 < endpoints.Count)
-                {
-                    Debug.LogWarning("[Replay] upload to " + url + " failed (" + error + "), trying " + endpoints[attempt + 1]);
-                    Send(path, meta, endpoints, attempt + 1);
+                    LastResult = "리플레이 업로드 완료";
                 }
                 else
                 {
                     Failed++;
-                    LastResult = "업로드 실패: " + error;
-                    Debug.LogWarning("[Replay] upload failed (" + error + "); will retry on next launch: " + Path.GetFileName(path));
+                    LastResult = "리플레이 업로드 실패 (자동 재전송 없음)";
                 }
             };
-        }
-
-        /// <summary>Retries uploads that failed in an earlier session.</summary>
-        public static void RetryPending()
-        {
-            try
-            {
-                if (!Directory.Exists(ReplayStore.Folder)) return;
-                foreach (var marker in Directory.GetFiles(ReplayStore.Folder, "*" + PendingSuffix))
-                {
-                    string path = marker.Substring(0, marker.Length - PendingSuffix.Length);
-                    if (!File.Exists(path)) { File.Delete(marker); continue; }
-                    var meta = JsonUtility.FromJson<ReplayMeta>(File.ReadAllText(marker));
-                    Debug.Log("[Replay] retrying upload " + Path.GetFileName(path));
-                    Send(path, meta, Endpoints(), 0);
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning("[Replay] retry failed: " + e.Message);
-            }
         }
     }
 }

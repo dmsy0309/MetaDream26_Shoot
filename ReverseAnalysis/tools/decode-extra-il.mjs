@@ -1,10 +1,15 @@
+import { homedir } from 'node:os';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
+const reaRoot = process.env.REA_MODULE_ROOT ?? join(homedir(), '.local/lib/node_modules/rea-agents');
 // Supplementary read-only decoder (reuses REA's installed CIL decoder over evidence E02).
 // Usage: node ReverseAnalysis/tools/decode-extra-il.mjs <TypeName> [...]
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-import { decodeInstructions } from '~/.local/lib/node_modules/rea-agents/dist/dotnet/ManagedMemberInstructionDecoder.js';
+const { decodeInstructions } = await import(pathToFileURL(join(reaRoot, 'dist/dotnet/ManagedMemberInstructionDecoder.js')).href);
 
-const bundlePath = '~/Documents/ChatGPT/REA/rounds-analysis/evidence/rea-evidence.json';
+const bundlePath = process.env.REA_EVIDENCE_BUNDLE;
+if (!bundlePath) throw new Error('Set REA_EVIDENCE_BUNDLE to your local evidence JSON');
 const bundle = JSON.parse(fs.readFileSync(bundlePath));
 const parent = bundle.records.find(r => r.operation === 'inspect_managed_members');
 const data = parent.normalized_result;

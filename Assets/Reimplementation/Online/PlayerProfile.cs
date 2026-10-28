@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Metadream.Shoot.Online
 {
-    /// <summary>Player nickname (PlayerPrefs) and the device name sent to hosts and stored in replays.</summary>
+    /// <summary>Player nickname and a random connection-session alias, never the OS account or machine name.</summary>
     public static class PlayerProfile
     {
         public const int MaxLength = 12;
@@ -77,19 +77,9 @@ namespace Metadream.Shoot.Online
             return s.Length == 0 ? null : s;
         }
 
-        /// <summary>Computer name (e.g. school PC "LAB-PC-07"), used to find players later.</summary>
-        public static string DeviceName
-        {
-            get
-            {
-                try
-                {
-                    string m = Environment.MachineName;
-                    if (!string.IsNullOrWhiteSpace(m)) return m.Length > 40 ? m.Substring(0, 40) : m;
-                }
-                catch (Exception) { }
-                return SystemInfo.deviceName ?? "unknown";
-            }
-        }
+        private static readonly string SessionDevice = "session-" + Guid.NewGuid().ToString("N");
+
+        /// <summary>Stable only for this process, so reconnects work without identifying the computer.</summary>
+        public static string DeviceName => SessionDevice;
     }
 }

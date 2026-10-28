@@ -122,7 +122,7 @@ namespace Metadream.Shoot.Tests
             Assert.IsTrue(e.Compatible);
             StringAssert.Contains("1/2", e.Label);
             Assert.IsNull(MasterServerClient.Decode("garbage"));
-            Assert.AreEqual("203.0.113.10", MasterServerEndpoint.DefaultHost);
+            Assert.AreEqual("127.0.0.1", MasterServerEndpoint.DefaultHost);
         }
     }
 }

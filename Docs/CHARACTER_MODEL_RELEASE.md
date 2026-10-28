@@ -50,6 +50,6 @@
 | Linux 서버 | `Builds/Server/Linux/MetadreamShootServer/` | `Builds/Server/MetadreamShootServer-Linux-x64.tar.gz` |
 | Windows 맵 에디터 | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker/` | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker-Windows-x64.zip` |
 
-![복원한 캐릭터 미리보기](screenshots/character-previews/look-1.png)
+검증 캡처는 개인정보 보호를 위해 로컬에만 보관합니다.
 
 설치본 화면은 `Docs/screenshots/character-installed-look/`, `character-installed-battle/`, `character-installed-editor/`, `character-editor-playtest/`에 있다.

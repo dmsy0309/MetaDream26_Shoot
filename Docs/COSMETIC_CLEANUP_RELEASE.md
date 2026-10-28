@@ -43,6 +43,6 @@
 | Linux 서버 | `Builds/Server/Linux/MetadreamShootServer/` | `Builds/Server/MetadreamShootServer-Linux-x64.tar.gz` |
 | Windows 맵 에디터 | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker/` | `MapEditorProject/Builds/Windows/MetadreamShootMapMaker-Windows-x64.zip` |
 
-![한글 꾸미기와 표시 정리](screenshots/cosmetic-look/capture-6s.png)
+검증 캡처는 개인정보 보호를 위해 로컬에만 보관합니다.
 
-![카드 배지와 설명 정리](screenshots/cosmetic-card/capture-6s.png)
+검증 캡처는 개인정보 보호를 위해 로컬에만 보관합니다.

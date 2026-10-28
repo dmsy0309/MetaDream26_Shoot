@@ -9,7 +9,7 @@
 |---|---|
 | Linux | x86-64, glibc 기반 배포판 (Ubuntu 22.04 컨테이너에서 확인). IL2CPP 네이티브 빌드라 Mono/.NET 설치 불필요 |
 | Windows | Windows 10/11 x64. 콘솔 프로그램으로 실행됨 |
-| 공통 | 메모리 약 300MB, CPU 1코어 (60fps 시뮬레이션 기준), TCP 7777 인바운드, 메인 호스팅 서버(203.0.113.10, UDP 47800 / HTTP 47801)로 나가는 통신 |
+| 공통 | 메모리 약 300MB, CPU 1코어 (60fps 시뮬레이션 기준), TCP 7777 인바운드, 설정한 메인 서버(UDP 47800)로 나가는 통신; 리플레이 전송은 별도 동의·HTTPS 설정 필요 |
 
 게임 클라이언트와 서버는 같은 빌드(프로토콜 v3)이고, 카드/맵 콘텐츠도 같아야 합니다(콘텐츠 해시 비교).
 
@@ -69,12 +69,12 @@ cd MetadreamShootServer
 | `targetFrameRate` | 60 | 서버 시뮬레이션 프레임 상한 (CPU 사용량 조절) |
 | `statusInterval` | 30 | 상태 로그 주기(초), 0이면 끔 |
 | `masterServer` | true | 메인 호스팅 서버에 5초마다 IP·포트·접속 인원·최대 인원을 보내 모든 클라이언트의 서버 목록에 표시 |
-| `masterHost` / `masterPort` | "203.0.113.10" / 47800 | 메인 호스팅 서버 주소(공인 IP, 보통 바꾸지 않음). 리플레이도 같은 주소의 HTTP 47801로 보냄 |
+| `masterHost` / `masterPort` | "127.0.0.1" / 47800 | 로컬 기본값. 운영 주소는 로컬 설정 또는 `-master host:port`로 지정 |
 | `publicAddress` | "" | 플레이어가 접속할 주소를 직접 지정 (공인 IP·도메인). 비우면 메인 서버가 본 주소(Tailnet 100.x 등) |
 | `contentDir` | "" | 추가 카드/맵 JSON 폴더 (상대 경로는 server.json 기준). 비우면 실행 파일 옆 `Content` 폴더(있을 때) |
 | `debugLog` | false | 능력(효과) 발동 등 상세 로그 |
 | `saveReplays` | true | 게임마다 리플레이를 실행 파일 옆 `Replays/*.mdreplay`로 저장 |
-| `uploadReplays` | true | 저장한 리플레이를 생성 기기·참가자 닉네임·참가자 PC 이름과 함께 메인 호스팅 서버로 전송 (실패하면 다음 실행 때 재시도) |
+| `uploadReplays` | false | 명시적 동의·HTTPS URL·별도 키가 설정된 경우에만 기기 정보를 제거한 리플레이 전송. 자동 재전송 없음 |
 | `rules.pointsToWinRound` / `rules.roundsToWinGame` | 2 / 5 | 2포인트 = 1라운드, 5라운드 선승 |
 | `rules.cardsPerPick` | 5 | 카드 선택 화면에 보이는 카드 수 (1~10) |
 | `rules.rerollsAtStart` | 3 | 게임 시작 시 플레이어마다 주는 카드 새로고침 횟수 (0~20) |

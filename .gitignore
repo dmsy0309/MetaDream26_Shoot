@@ -44,3 +44,20 @@ mono_crash.*
 
 **/Assets/Resources/PerformanceTestRun*.json
 **/Assets/Resources/PerformanceTestRun*.json.meta
+
+# Private local settings, captures, credentials and replay upload queues
+.env
+.env.*
+!.env.example
+*.local.json
+*.local.env
+*.pending
+*.mdreplay
+/Docs/screenshots/
+**/admin_token.txt
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks

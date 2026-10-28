@@ -4,7 +4,7 @@
 #   ./deploy.sh            copy + self-test + start a test instance check
 #   ./deploy.sh --hermes   ... and hand HERMES_TASK.md to hermes (gpt-6.1-sol, reasoning high, --yolo)
 set -euo pipefail
-TARGET="${MD_MASTER_SSH:-deploy-user@100.64.0.10}"
+TARGET="${MD_MASTER_SSH:?Set MD_MASTER_SSH to your SSH deployment target}"
 REMOTE_DIR="metadream-master"
 HERMES_MODEL="${MD_HERMES_MODEL:-gpt-6.1-sol}"
 cd "$(dirname "$0")"

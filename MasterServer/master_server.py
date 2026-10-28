@@ -42,7 +42,7 @@ MAX_PACKET = 4096
 MAX_SERVERS = 512
 MAX_REPLY_SERVERS = 64
 STR_LIMITS = {"name": 48, "code": 24, "ip": 64, "contentHash": 80}
-UPLOAD_KEY = "metadream-shoot-replay-v1"  # same constant as ReplayUploader.Key in the game
+UPLOAD_KEY = os.environ.get("METADREAM_REPLAY_UPLOAD_KEY", "")
 MAX_REPLAY_BYTES = 64 * 1024 * 1024
 TAILNET = ipaddress.ip_network("100.64.0.0/10")
 
@@ -306,7 +306,7 @@ def make_http_handler_with(registry, replays):
             if replays is None or path != "/replays":
                 self._json(404, {"error": "not found"})
                 return
-            if self.headers.get("X-Metadream-Key") != UPLOAD_KEY:
+            if not UPLOAD_KEY or not secrets.compare_digest(self.headers.get("X-Metadream-Key", ""), UPLOAD_KEY):
                 self._json(403, {"error": "bad key"})
                 return
             try:

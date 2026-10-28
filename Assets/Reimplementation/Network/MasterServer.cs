@@ -8,14 +8,13 @@ using UnityEngine;
 namespace Metadream.Shoot.Network
 {
     /// <summary>
-    /// Main hosting (master) server endpoint. Hardcoded on purpose: every client and every server talks to
-    /// this address. The dedicated-server config may override it (masterServer.host / port) for testing.
+    /// Main hosting endpoint. Use -master, METADREAM_MASTER_HOST, or server.json for deployment.
     /// Service source: MasterServer/master_server.py (UDP JSON, see Docs/MASTER_SERVER.md).
     /// </summary>
     public static class MasterServerEndpoint
     {
-        /// <summary>Public IP of the main hosting server (not the tailnet address), so PCs outside the tailnet work too.</summary>
-        public const string DefaultHost = "203.0.113.10";
+        /// <summary>Safe local default; personal deployment addresses are never embedded in source.</summary>
+        public const string DefaultHost = "127.0.0.1";
         public const int DefaultPort = 47800;
         public const float HeartbeatInterval = 5f;
         public const float QueryInterval = 3f;

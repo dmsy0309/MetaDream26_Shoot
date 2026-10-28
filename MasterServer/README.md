@@ -8,7 +8,7 @@ Python 3 표준 라이브러리만 사용하므로 pip 설치가 필요 없습�
 | 47800 | UDP | 게임 패킷 (JSON 한 개 = 데이터그램 한 개) |
 | 47801 | HTTP | `GET /health` (Uptime Kuma), `GET /servers` (목록 확인용) |
 
-게임에 하드코딩된 주소: **공인 IP** `203.0.113.10:47800` (UDP, 서버 목록)과 `203.0.113.10:47801` (HTTP, 리플레이 업로드). `Assets/Reimplementation/Network/MasterServer.cs` 의 `MasterServerEndpoint.DefaultHost`. tailnet 주소(100.64.0.10)는 쓰지 않으므로 공유기의 포트 포워딩(UDP 47800, TCP 47801)이 유지돼야 합니다.
+게임의 기본 주소는 `127.0.0.1:47800`입니다. 운영 주소는 `-master host:port` 또는 `METADREAM_MASTER_HOST`로 지정합니다. 전용 서버는 로컬 `server.json`의 `masterHost`/`masterPort`도 지원합니다. 실제 IP·SSH 계정·Tailscale 호스트명은 Git에 넣지 않습니다. 배포할 때 `MD_MASTER_SSH` 환경변수로 SSH 대상을 지정합니다.
 
 ## 패킷
 
@@ -36,11 +36,13 @@ Python 3 표준 라이브러리만 사용하므로 pip 설치가 필요 없습�
 
 ## 리플레이 수신
 
-- 게임의 방장/전용 서버가 게임마다 `POST /replays`로 보냅니다. 헤더 `X-Metadream-Key`(게임에 고정된 키), `X-Metadream-Meta`(base64 JSON: 생성 기기 이름·사용자·OS·기기 ID·IP, 방 이름, 참가자 닉네임·참가자 PC 이름·주소, 점수). 본문은 .mdreplay(gzip, 최대 64MB).
-- 저장: `~/metadream-master/replays/<id>.mdreplay` + `replays/index.jsonl` (한 줄에 한 업로드, 보낸 IP 포함).
-- 찾기: 브라우저에서 `http://100.64.0.10:47801/replays.html?q=닉네임` (닉네임·PC 이름·방 이름 검색, 다운로드 링크). JSON은 `/replays?q=`.
-- 목록/다운로드는 tailnet(100.64.0.0/10)에서만 열리고, 그 밖에서는 `?token=`(서버의 `~/metadream-master/admin_token.txt`)이 필요합니다. 업로드는 키만 맞으면 받습니다.
-- tailnet 밖(학교 PC 등): 게임은 tailnet 주소가 실패하면 `https://replays.example.invalid:10000` (Tailscale Funnel → 127.0.0.1:47801)로 보냅니다. Funnel 활성화: 서버에서 `sudo tailscale funnel --bg --https=10000 --yes http://127.0.0.1:47801`.
+- 자동 업로드는 기본으로 꺼져 있습니다. 호스트에서 명시적으로 `METADREAM_REPLAY_UPLOAD=1`, HTTPS 주소 `METADREAM_REPLAY_UPLOAD_URL`, `METADREAM_REPLAY_UPLOAD_KEY`를 모두 설정해야 합니다. 전용 서버는 로컬 설정의 `uploadReplays`도 `true`여야 합니다.
+- 서버에도 같은 `METADREAM_REPLAY_UPLOAD_KEY`를 환경변수/로컬 서비스 설정으로 지정합니다. 미설정이면 업로드를 거절합니다. 고정 공용 키는 제공하지 않습니다.
+- HTTPS 리버스 프록시를 통해 `/replays`를 이 서비스의 로컬 HTTP 포트로 연결합니다. 클라이언트는 HTTP 전송이나 자동 재전송을 하지 않습니다.
+- 전송 메타데이터는 방 이름·참가자가 직접 입력한 닉네임·게임 결과를 포함합니다. 컴퓨터 이름·OS 사용자명·기기 ID·내부 주소는 기록/업로드하지 않습니다. 예전 리플레이를 명시적으로 전송해도 기기 정보는 본문과 헤더에서 제거합니다.
+- 저장: `~/metadream-master/replays/<id>.mdreplay` + `replays/index.jsonl`. 서버는 연결 처리에 필요한 송신 IP를 알 수 있으며, 수신 기록에는 송신 IP가 남으므로 접근·보존 정책을 운영자가 관리해야 합니다.
+- 목록/다운로드는 기존 tailnet 접근 조건 또는 런타임 생성 `admin_token.txt`가 필요합니다. 이 토큰과 실제 리플레이는 Git에서 제외합니다. 개인 주소가 든 목록 URL은 로컬 운영 문서에만 보관합니다.
+- 기존 서버의 저장 데이터를 이번 소스 변경이 자동으로 삭제하지는 않습니다. 자세한 범위는 `Docs/PRIVACY.md`를 참고합니다.
 
 ## 설치 (서버에서)
 
